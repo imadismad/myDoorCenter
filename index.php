@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test PHP Page</title>
+    <title>Interactive PHP and HTML</title>
 </head>
 <body>
-    <h1>Hello from PHP!</h1>
-    <p>This is a test PHP page.</p>
-
+    <h1>Interactive PHP and HTML</h1>
+    
     <?php
-    // You can add PHP code here
-    echo "This is PHP code running on your Azure Web App.";
+    // Check if the form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name = $_POST["name"];
+        // Generate a personalized greeting
+        $greeting = "Hello, " . $name . "!";
+        echo "<p>" . $greeting . "</p>";
+    }
     ?>
+    
+    <form method="POST">
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" name="name" required>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
