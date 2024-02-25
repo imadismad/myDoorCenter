@@ -1,0 +1,148 @@
+/* Reset styles for list */
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Centering the header content */
+.header {
+    text-align: center;
+}
+
+.main-navigation {
+    display: flex;
+    justify-content: center; /* Center the navigation menu */
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main-navigation ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.main-navigation .menu-item {
+    position: relative;
+    padding: 10px;
+    white-space: nowrap; /* Prevents items from wrapping */
+}
+
+/* Styles for dropdown links */
+.main-navigation a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 0 15px;
+}
+
+/* Adjusted submenu width and centered alignment */
+.dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Center submenu below its parent */
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    min-width: 220px; /* Adjust based on your content */
+    padding: 12px 16px;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    z-index: 1;
+}
+
+/* Show dropdown content on hover */
+.menu-item:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Additional styling for search and login */
+.search-bar, .login-area {
+    margin: 0 20px;
+}
+
+.search-bar input[type="text"], .login-area a {
+    padding: 5px;
+}
+
+.login-area a {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+}
+
+/* Example CSS for buttons */
+button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+/* Main navigation styling */
+.main-navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-navigation ul li {
+    margin-bottom: 10px; /* Space between each menu item */
+}
+
+.main-navigation ul li a {
+    display: block; /* Ensures each link is on a new line */
+    padding: 50px;
+    text-decoration: none;
+    color: #333;
+    background-color: white;
+    border: none;
+}
+
+.main-navigation ul li a:hover {
+    background-color: #ddd;
+}
+
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Main navigation styling */
+.main-navigation2 ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-navigation2 ul li a {
+    display: block; /* Ensures each link is on a new line */
+    padding: 50px;
+    text-decoration: none;
+    color: #333;
+    background-color: white;
+    border: none;
+}
+
+.main-navigation2 ul li a:hover {
+    background-color: #ddd;
+}
