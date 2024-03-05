@@ -49,51 +49,6 @@
             <label for="postal">Code postal:</label>
             <input type="text" name="postal" id="postal" required>
         </div>
-
-        <!--info bancaire-->
-
-        <div id="info_bancaire" class="bancaire">
-            <h3>Informations bancaires:</h3>
-
-            <label for="cc-num">Carte de crédit:</label>
-            <input type="text" name="cc-num" id="cc-num" placeholder="Carte de crédit" required> <br>
-
-            <div class="mois">
-                <select name="mois" id="mois">Mois
-                    <option value="" class="placeholder">Mois</option>
-                    <option value="Janvier">Janvier</option>
-                    <option value="Février">Février</option>
-                    <option value="Mars">Mars</option>
-                    <option value="Avril">Avril</option>
-                    <option value="Mai">Mai</option>
-                    <option value="Juin">Juin</option>
-                    <option value="Juillet">Juillet</option>
-                    <option value="Août">Août</option>
-                    <option value="Septembre">Septembre</option>
-                    <option value="Octobre">Octobre</option>
-                    <option value="Novembre">Novembre</option>
-                    <option value="Décembre">Décembre</option>
-                </select>
-            </div>
-
-            <div class="annee">
-                <select name="annee">
-                    <script type="text/javascript">
-                        for (let i = 2017; i <= 2035; i++) {
-                            document.write("<option value=" + i + ">" + i + "</option>");
-                        }
-                    </script>
-                </select>
-            </div>
-
-
-            <div class="cvv-input">
-                <input type="text" placeholder="CVV" required>
-            </div>
-            <div class="cvv-details">
-                <p>3 ou 4 chiffres que l'on trouve habituellement <br> sur la bande de signature</p>
-            </div>
-        </div>
         </div>
         <!--TODO à sécuriser-->
         <!--Info sensible-->
@@ -103,7 +58,7 @@
             <label for="mdp">Mot de passe:</label>
             <input type="password" name="password" id="password" minlength="8" required><br>
 
-            <label for="confirmation_mdp">Confirmation Mot de passe</label>
+            <label for="confirmation_password">Confirmation Mot de passe</label>
             <input type="password" name="confirmation_password" id="confirmation_password" required><br>
 
             <label for="submit">Vérifier les informations:</label>

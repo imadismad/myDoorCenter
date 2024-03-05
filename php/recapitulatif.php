@@ -27,15 +27,6 @@
                 <li>Code postal: <?php echo $_POST["postal"]; ?></li>
             </ul>
         </div>
-        <div id="info_bancaire" class="bancaire">
-            <ul>
-                <!-- Info à encrypter -->
-                <li>Numéro carte de crédit: <?php echo $_POST["cc-num"]; ?></li> 
-                <li>Mois: <?php echo $_POST["mois"]; ?></li>
-                <li>Année: <?php echo $_POST["annee"]; ?></li>
-            </ul>
-        </div>
-
         <?php
             if (isset($_POST["confirmation"])){
                 header("Location: ../html/connexion.html");
