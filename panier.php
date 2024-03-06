@@ -23,6 +23,6 @@
         </tbody>
     </table>
 
-    <label for="">Code promo : <input type="text" name="" id=""></label>
+    <label>Code promo : <input type="text" name="codePromo"></label>
 </body>
 </html>
