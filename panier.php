@@ -8,21 +8,25 @@
 </head>
 <body>
     <h1>Panier</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Quantité</th>
-                <th>Prix unitaire HT</th>
-                <th>TVA (20%)</th>
-                <th>Prix total TTC</th>
-            </tr>
-        </thead>
-        <tbody id="cartTable">
+    <form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire HT</th>
+                    <th>TVA (20%)</th>
+                    <th>Prix total TTC</th>
+                </tr>
+            </thead>
+            <tbody id="cartTable">
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <label>Code promo : <input type="text" name="codePromo"></label>
+        <label>Code promo : <input type="text" name="codePromo"></label><br />
+
+        <input type="button" value="Commander">
+    </form>
 </body>
 </html>
