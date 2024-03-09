@@ -4,7 +4,7 @@ function insererDonnees($table, $donnees) {
     // Informations de connexion Azure SQL Server
     $serveur = "localhost";
     $utilisateur = "root";
-    $motdepasse = "ohweJoot7quu";
+    $motdepasse = "xxxxx;
     $basededonnees = "DW";
 
     // Connexion à la base de données
