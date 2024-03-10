@@ -76,6 +76,12 @@ class unit_functionsSQL extends PHPUnit\Framework\TestCase {
 
 
     }
+
+    public function clean(){
+        supprimerLigne("Produit", "id", 100);
+        supprimerLigne("Produit", "id", 200);
+        supprimerLigne("Produit", "id", 300);
+    }
 }
 
 ?>
