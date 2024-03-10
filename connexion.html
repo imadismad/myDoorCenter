@@ -9,7 +9,13 @@
     <!-- TODO page de co -->
     <div class="container">
         <h2>connexion</h2>
-        <form action="connexion/connexion.php" method="post"></form>
+        <form action="BDD/connexion.php" method="post">
+            <label for="mail">Mail:</label>
+            <input type="mail" name="mail" id="mail" placeholder="Votre mail"><br>
+            <label for="mdp">Mot de passe:</label>
+            <input type="password" name="mdp" id="mdp" placeholder="Mot de passe">
+            <input type="submit" value="Connexion">
+        </form>
     </div>
 </body>
 </html>
