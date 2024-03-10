@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription Compte</title>
+    <script src=""></script>
 </head>
 
 <body>
-    <form action="../php/recapitulatif.php" method="post">
+    <form action="connexion/recapitulatif.php" method="post">
 
         <!--info sur la personne-->
         <h3>Information personnelle:</h3>
         <div id="info_perso" class="perso">
             <label for="sex">Sexe:</label>
-            <select name="sex" id="sex" class="placeholder">
+            <select name="sex" id="sex" class="placeholder" required>
                 <option value="">Genre</option>
                 <option value="homme">Mr.</option>
                 <option value="femme">Mme.</option>
@@ -31,9 +32,25 @@
 
             <label for="naissance">Date de naissance:</label>
             <input type="date" name="naissance" id="naissance" required><br>
+            <span id="messageAge" class="error"></span><br>
+
+            <label for="pays">Pays:</label>
+            <select id="pays">
+                <option value="France">France: +33</option>
+                <option value="États-Unis">États-Unis: +1</option>
+                <option value="Royaume-Uni">Royaume-Uni: +44</option>
+                <option value="Allemagne">Allemagne: +49</option>
+                <option value="Espagne">Espagne: +34</option>
+                <option value="Italie">Italie: +39</option>
+                <option value="Canada">Canada: +1</option>
+                <option value="Australie">Australie: +61</option>
+                <option value="Japon">Japon: +81</option>
+                <option value="Brésil">Brésil: +55</option>
+            </select>
 
             <label for="tel">Numéro téléphone:</label>
-            <input type="tel" name="tel" id="tel" placeholder="Numéro de téléphone" required><br>
+            <input type="tel" name="tel" id="tel" placeholder="ex: +33712345678" minlength="3" maxlength="12" required><br>
+            <span id="messageErrorTel" class="error"></span><br>
         </div>
 
         <!--info livraison-->
@@ -47,7 +64,8 @@
             <input type="text" name="rue" id="rue" placeholder="Rue" required><br>
 
             <label for="postal">Code postal:</label>
-            <input type="text" name="postal" id="postal" required>
+            <input type="text" name="postal" id="postal" placeholder="Code postal" required>
+
         </div>
         </div>
         <!--TODO à sécuriser-->
@@ -55,7 +73,7 @@
         <div id="sensible" class="section4">
             <h3>Information confidentiels:</h3>
 
-            <label for="mdp">Mot de passe:</label>
+            <label for="password">Mot de passe:</label>
             <input type="password" name="password" id="password" minlength="8" required><br>
 
             <label for="confirmation_password">Confirmation Mot de passe</label>
@@ -64,12 +82,12 @@
             <label for="submit">Vérifier les informations:</label>
             <button type="submit" name="submit" id="submit" value="submit">Créer votre compte</button><br>
         </div>
-
     </form>
+    <script src="connexionJS/creationCompte.js"></script>
 </body>
 
 </html>
 <!--TODO 1) Faire la page de création de compte basique
     2) Rediriger vers une page de confirmation des informations
-    3) Rediriger vers l'acceuil
+    3) Rediriger vers l'acceuil 
 -->

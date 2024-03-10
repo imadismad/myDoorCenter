@@ -29,12 +29,12 @@
         </div>
         <?php
             if (isset($_POST["confirmation"])){
-                header("Location: ../html/connexion.html");
+                header("Location: ../connexion.html");
                 exit;
             }
             elseif (isset($_POST["reedition"])){
                 $_POST = []; // Bad practice
-                header("Location: ../html/creationCompte.html");
+                header("Location: ../creationCompte.html");
                 exit;
             }
         ?>
