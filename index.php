@@ -4,7 +4,7 @@
     <title>Interactive PHP and HTML</title>
 </head>
 <body>
-    <h1>Interactive PHP and HTML</h1>
+    <h1>Interactive PHP and HTML : Théo tu ne sers a rien :) ❤️ </h1>
     
     <?php
     // Check if the form is submitted
