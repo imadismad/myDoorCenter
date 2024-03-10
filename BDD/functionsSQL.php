@@ -4,7 +4,7 @@ function insererDonnees($table, $donnees) {
     // Informations de connexion Azure SQL Server
     $serveur = "localhost";
     $utilisateur = "root";
-    $motdepasse = "xxxxx;
+    $motdepasse = "XXXXX";
     $basededonnees = "DW";
 
     // Connexion à la base de données
@@ -42,7 +42,7 @@ function supprimerLigne($table, $champReference, $valeurReference) {
     // Informations de connexion à la base de données
     $serveur = "localhost";
     $utilisateur = "root";
-    $motdepasse = "ohweJoot7quu";
+    $motdepasse = "XXXXX";
     $basededonnees = "DW";
 
     // Connexion à la base de données
@@ -75,7 +75,7 @@ function recupererDonneesParValeur($table, $champ, $valeur) {
     // Informations de connexion à la base de données
     $serveur = "localhost";
     $utilisateur = "root";
-    $motdepasse = "ohweJoot7quu";
+    $motdepasse = "XXXXX";
     $basededonnees = "DW";
 
     // Connexion à la base de données
