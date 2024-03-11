@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDoorCenter</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome/all.min.css" rel="stylesheet">
+    <link href="css/index/style.css" rel="stylesheet">
+
+    <script src="js/index/sidebar.js"></script>
+</head>
+<body>
+    <div class="overlay"></div>
+    <header class="container-fluid fixed-top">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <img src="porte.png" alt="Logo" height="100">
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Recherche...">
+            </div>
+            <div class="col-md-4 text-right">
+                <span>01 23 45 67 89</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 align-center">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item dropdown">
+                        <!-- <a class="nav-link nav-link-top" href="#">Portes</a> -->
+                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Portes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Blindées</a>
+                            <a class="dropdown-item" href="#">Extérieur</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-top" href="#">Blocs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-top" href="#">Poignées</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-fluid">
+        <div class="row">
+            <div class="sidebar-small">
+                <button type="button" id="expandSidebarBtn" aria-label="Expand Sidebar">
+                    <i class="fas fa-arrow-right"></i> 
+                </button>
+            </div>
+            <div class="col-md-2 sidebar-large collapse overlay-sidebar" id="sidebarCollapse">
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <ul class="nav flex-column">
+                    <li class="nav-item rounded">
+                        <a class="nav-link active" href="#">Portes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blocs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Poignées</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-12 content text-center">
+                <h1>Bienvenue sur MyDoorCenter</h1>
+                <h2>Vous avez frappé à la bonne porte !</h2>
+                <div class="text-box">
+                    BLABLABLA
+                    <div class="inner-text">
+                        BLEUBLEUBLEU
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span>&copy; 2024 MyDoorCenter</span>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<!-- <script>
+    $(document).ready(function(){
+    $('#sidebarCollapse').on('shown.bs.collapse', function () {
+        $('.overlay').show();
+    });
+
+    $('#sidebarCollapse').on('hidden.bs.collapse', function () {
+        $('.overlay').hide();
+    });
+});
+
+$(document).ready(function(){
+    $('.overlay-sidebar .close').click(function(){
+        $('#sidebarCollapse').collapse('hide');
+        $('.overlay').hide();
+    });
+});
+$(document).ready(function(){
+    $('.sidebar-small').click(function(){
+        $('.sidebar-large').toggleClass('show');
+        if ($('.sidebar-large').hasClass('show')) {
+            $('.overlay').show();
+            $('.sidebar-large').css('left', '0');
+        } else {
+            $('.overlay').hide();
+            $('.sidebar-large').css('left', '-200px');
+        }
+    });
+});
+</script> -->
+</html>

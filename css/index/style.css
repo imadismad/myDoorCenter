@@ -1,0 +1,167 @@
+body {
+    padding-top: 100px; 
+    background-color: #eee;
+}
+
+header {
+    background-color: #eee;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+
+.nav-tabs {
+    padding: 5px;
+    margin-top: 5px;
+    background-color: #172a2b;
+    justify-content: center; 
+    width: 100%;
+}
+
+.navbar {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.nav-link {
+    color: #fff;
+    background-color: #172a2b;
+    font-size: large;
+    font-weight: bold;
+    
+}
+
+.nav-link-top {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.nav-link.active {
+    background-color: #437e80;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #eee;
+}
+
+.content {
+    background-color: #fff;
+    color: #172a2b;
+    height: 100vh;
+}
+
+.text-box {
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    background-color: #437e80;
+}
+
+.inner-text {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.footer {
+    background-color: #172a2b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+.overlay-sidebar {
+    position: fixed; 
+    top: 0;        
+    left: 0;      
+    width: 200px;  
+    z-index: 1030; 
+    height: 100%; 
+    overflow-y: auto; 
+    background-color: #eee; 
+    transition: left 0.0s;
+}
+
+.collapse {
+    left: -200px;
+}
+
+.collapse.show {
+    left: 0;
+}
+
+.overlay {
+    display: none; 
+    position: fixed;
+    width: 100%; 
+    height: 100%; 
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1029;
+}
+
+.overlay-sidebar .close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #000;
+}
+
+.sidebar-small {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 100%;
+    background-color: #eee;
+    z-index: 1040;
+}
+
+.sidebar-large {
+    position: fixed;
+    left: -200px; 
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #ddd;
+    z-index: 1040;
+    transition: left 0.0s;
+    padding-top: 60px;
+}
+
+#expandSidebarBtn {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border: none;
+    background: none;
+    font-size: 16px; 
+    cursor: pointer;
+}
+
+.flexcolumn {
+    padding-top: 50px;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar-small {
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
