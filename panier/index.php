@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Panier</h1>
-    <form>
+    <form action="panier/commande.php">
         <table>
             <thead>
                 <tr>
@@ -26,7 +26,7 @@
 
         <label>Code promo : <input type="text" name="codePromo"></label><br />
 
-        <input type="button" value="Commander">
+        <input type="submit" value="Commander">
     </form>
 </body>
 </html>

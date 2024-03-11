@@ -1,0 +1,10 @@
+.info-perso {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+}
+
+input {
+    padding: 4px;
+    margin-bottom: 16px;
+}
