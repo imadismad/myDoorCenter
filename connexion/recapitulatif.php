@@ -28,20 +28,20 @@
             </ul>
         </div>
         <?php
-            if (isset($_POST["confirmation"])){
-                header("Location: ../connexion.html");
+            if (isset($_POST["Confirmation"])){
+                //header("Location: ../connexion.html");
+                echo $_POST["nom"];
                 exit;
             }
             elseif (isset($_POST["reedition"])){
-                $_POST = []; // Bad practice
                 header("Location: ../creationCompte.html");
                 exit;
             }
         ?>
-
+        
+        <a href="../connexion.html"><input type="submit" name="confirmation" id="confirmation" value="Confirmation"></a> 
         <form method="post">
             <!-- A confirmer pour la base donnée  et doit permettre la redirection vers connect -->
-            <input type="submit" name="confirmation" id="confirmation" value="Confirmation"> 
             <input type="submit" name="reedition" id="reedition" value="Réedition">
         </form>
     </div>
