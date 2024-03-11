@@ -14,6 +14,7 @@ CREATE TABLE Produit (
 
 CREATE TABLE Client (
     id INT PRIMARY KEY,
+    genre VARCHAR(100),
     nom VARCHAR(100),
     prenom VARCHAR(100),
     rue VARCHAR(255),
@@ -23,6 +24,7 @@ CREATE TABLE Client (
     mail VARCHAR(255),
     telephone VARCHAR(20),
     mdp VARCHAR(255)
+    naissance DATE,
 );
 
 CREATE TABLE Commande (

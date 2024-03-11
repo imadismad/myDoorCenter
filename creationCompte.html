@@ -10,7 +10,7 @@
 
 <body>
     <div class="container">
-        <form action="connexion/recapitulatif.php" method="post">
+        <form action="BDD/connexion.php" method="post">
 
             <!--info sur la personne-->
             <h3>Information personnelle:</h3>
@@ -36,7 +36,7 @@
                 <span id="messageAge" class="error"></span><br>
 
                 <label for="pays">Pays:</label>
-                <select id="pays">
+                <select name="pays" id="pays">
                     <option value="France">France: +33</option>
                     <option value="États-Unis">États-Unis: +1</option>
                     <option value="Royaume-Uni">Royaume-Uni: +44</option>
@@ -78,11 +78,11 @@
         <label for="password">Mot de passe:</label>
         <input type="password" name="password" id="password" minlength="8" required><br>
 
-        <label for="confirmation_password">Confirmation Mot de passe</label>
-        <input type="password" name="confirmation_password" id="confirmation_password" required><br>
-
         <label for="submit">Vérifier les informations:</label>
         <button type="submit" name="submit" id="submit" value="submit">Créer votre compte</button><br>
+
+        <label for="connexion">Connexion</label>
+        <a href="connexion.html"><input type="button" name="connexion" value="connexion"></a>
     </div>
     </form>
     </div>
