@@ -1,10 +1,10 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Interactive PHP and HTML</title>
 </head>
 <body>
-    <?php session_start();?>
     <h1>Interactive PHP and HTML : Théo tu ne sers a rien :) ❤️ </h1>
     
     <?php
@@ -15,6 +15,9 @@
         $greeting = "Hello, " . $name . "!";
         echo "<p>" . $greeting . "</p>";
     }
+
+    $name2 = $_SESSION["nom"];
+    echo "<p>" . $name2 . "</p>";
     ?>
     
     <form method="POST">
