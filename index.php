@@ -4,12 +4,13 @@
     <title>Interactive PHP and HTML</title>
 </head>
 <body>
+    <?php session_start();?>
     <h1>Interactive PHP and HTML : Théo tu ne sers a rien :) ❤️ </h1>
     
     <?php
     // Check if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST["name"];
+        $name = $_POST["name"]; 
         // Generate a personalized greeting
         $greeting = "Hello, " . $name . "!";
         echo "<p>" . $greeting . "</p>";
