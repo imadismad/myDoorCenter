@@ -1,10 +1,11 @@
 <!-- Faire la connexion en bdd et initialiser et recup les infos pour initialiser les infos puis rediriger vers une page-->
 <?php
+include_once("config.php");
 
-$serveur = "localhost";
-$utilisateur = "root";
-$motdepasse = "XXXX";
-$basededonnees = "DW";
+$serveur = SQL_SERVER;
+$utilisateur = SQL_USER;
+$motdepasse = SQL_PASSWORD;
+$basededonnees = SQL_BDD_NAME;
 
 // Connexion à la base de données
 $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
