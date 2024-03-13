@@ -106,7 +106,7 @@ class Cart {
         this.updateSessionStorage();
     }
 
-    getItemInCart() {
+    getNumberOfItem() {
         return this.#cart.length;
     }
 

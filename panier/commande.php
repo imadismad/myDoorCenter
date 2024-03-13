@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/panier/commande.js"></script>
     <title>Commande</title>
     <link rel="stylesheet" href="/css/panier/commande.css">
 </head>
@@ -37,9 +38,20 @@
             <li><input type="radio" name=""></li>
             <li><input type="radio" name=""></li>
         </ul>
+        <div class="point-relay">
+            <div>
+                <label for="pt-relay-code-postal">Code postal</label>
+                <input type="text" id="pt-relay-code-postal">
+                <ul id="pt-relay-postal-ul"></ul>
+            </div>
+            <div>
+                <label for="pt-relay-nom-ville">Ville</label>
+                <input type="text" id="pt-relay-nom-ville">
+                <ul id="pt-relay-ville-ul"></ul>
+            </div>
+        </div>
     </div>
     <div class="moyenn-payement">
-
     </div>
 </body>
 </html>

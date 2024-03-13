@@ -1,9 +1,9 @@
-import currentCart from "./lib/cart.js";
-import { TAXE } from "./lib/const.js";
+import currentCart from "../lib/cart.js";
+import { TAXE } from "../lib/const.js";
 
 const tbody = document.getElementById("cartTable");
 
-if (currentCart.getItemInCart() === 0) {
+if (currentCart.getNumberOfItem() === 0) {
     currentCart.addItem(0, 10);
     currentCart.addItem(1, 7);
 } 

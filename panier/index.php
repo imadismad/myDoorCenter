@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="js/panier.js"></script>
+    <script type="module" src="js/panier/index.js"></script>
     <title>Panier</title>
 </head>
 <body>
     <h1>Panier</h1>
-    <form action="panier/commande.php">
+    <form action="/panier/commande.php">
         <table>
             <thead>
                 <tr>
