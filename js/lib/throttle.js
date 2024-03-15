@@ -1,6 +1,5 @@
 //  Throttling Function
 const throttleFunction = (func, delay) => {
- 
     // Previously called time of the function
     let prev = 0;
     return (...args) => {
@@ -27,11 +26,4 @@ const throttleFunction = (func, delay) => {
     }
 }
 
-export default (url, time) => {
-    let reponse;
-    throttleFunction(() => {
-        reponse = fetch(url);
-    }, time);
-
-    return reponse;
-}
+export default throttleFunction;

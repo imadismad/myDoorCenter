@@ -1,4 +1,5 @@
-.info-perso {
+.info-perso,
+.livraison {
     display: flex;
     width: 30%;
     flex-direction: column;
@@ -6,5 +7,44 @@
 
 input {
     padding: 4px;
-    margin-bottom: 16px;
+}
+
+.autocomplet-input {
+    position: sticky;
+
+    & > ul.absolute-ul {
+        visibility: hidden;
+        top: 100%;
+        position: absolute;
+        background-color: greenyellow;
+        margin: 0;
+        padding: 8px;
+        list-style-type: none;
+    }
+
+    & li:hover {
+        background-color: green;
+        cursor: pointer;
+    }
+}
+
+.header-point-relay {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+
+    & > .autocomplet-input {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+}
+
+.autocomplet-input:focus-within > ul.absolute-ul,
+ul.absolute-ul:focus-within {
+    visibility: visible;
+}
+
+ul.absolute-ul:empty {
+    visibility: hidden !important;
 }

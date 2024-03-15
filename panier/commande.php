@@ -35,19 +35,22 @@
     <h1>Livraison</h1>
     <div class="livraison">
         <ul>
-            <li><input type="radio" name=""></li>
-            <li><input type="radio" name=""></li>
+            <li><input type="radio" name="delivery-mode"></li>
+            <li><input type="radio" name="delivery-mode"></li>
         </ul>
         <div class="point-relay">
-            <div>
-                <label for="pt-relay-code-postal">Code postal</label>
-                <input type="text" id="pt-relay-code-postal">
-                <ul id="pt-relay-postal-ul"></ul>
-            </div>
-            <div>
-                <label for="pt-relay-nom-ville">Ville</label>
-                <input type="text" id="pt-relay-nom-ville">
-                <ul id="pt-relay-ville-ul"></ul>
+            <div class="header-point-relay">
+                <div class="autocomplet-input">
+                    <label for="pt-relay-code-postal">Code postal</label>
+                    <input type="text" id="pt-relay-code-postal">
+                    <ul id="pt-relay-postal-ul" class="absolute-ul"></ul>
+                </div>
+
+                <div class="autocomplet-input">
+                    <label for="pt-relay-nom-ville">Ville</label>
+                    <input type="text" id="pt-relay-nom-ville">
+                    <ul id="pt-relay-ville-ul" class="absolute-ul"></ul>
+                </div>
             </div>
         </div>
     </div>
