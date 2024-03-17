@@ -16,20 +16,21 @@
     <header class="container-fluid fixed-top">
         <div class="row header-top align-items-center">
             <div class="col-md-1 sidebar-small">
-                <button class="btn btn-light bi bi-list" style="font-size: 2rem; color: black;"></button>
+                <button title="Menu" class="btn btn-light bi bi-list" style="font-size: 2rem; color: black;"></button>
             </div>
             <div class="col-md-3">
                 <img src="images/logo.png" alt="Logo" height="100">
             </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="Recherche...">
+            <div class="col-md-4 d-flex">
+                <label title="Rechercher" for="search"><button class="btn btn-light bi bi-search" style="font-size: 1rem; color: black;"></button></label>
+                <input type="text" name="search" class="form-control" placeholder="Recherche...">
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-2">
-                <span><b>01 23 45 67 89</b></span>
+                <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
             </div>
             <div class="col-md-1">
-                <button class="btn btn-light bi bi-person-circle" style="font-size: 2rem; color: black;"></button>
+                <button title="Espace client" class="btn btn-light bi bi-person-circle" style="font-size: 2rem; color: black;"></button>
             </div>
         </div>
         <div class="row">
@@ -41,14 +42,29 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Blindées</a>
-                            <a class="dropdown-item" href="#">Extérieur</a>
+                            <a class="dropdown-item" href="#">Intérieures</a>
+                            <a class="dropdown-item" href="#">Extérieures</a>
+                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
+                            <a class="dropdown-item" href="#">Personnalisées</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Blocs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Blindés</a>
+                            <a class="dropdown-item" href="#">Intérieurs</a>
+                            <a class="dropdown-item" href="#">Extérieurs</a>
+                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
+                            <a class="dropdown-item" href="#">Personnalisés</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-top" href="#">Blocs</a>
+                        <a class="nav-link nav-link-top" href="#">Poignées</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-top" href="#">Poignées</a>
+                        <a class="nav-link nav-link-top" href="#">Accessoires</a>
                     </li>
                 </ul>
             </div>
@@ -75,12 +91,43 @@
                 </ul>
             </div>
             <div class="col-md-12 content text-center">
-                <h1>Bienvenue sur MyDoorCenter</h1>
-                <h2>Vous avez frappé à la bonne porte !</h2>
+                <h1 class="display-1"><b>Bienvenue sur MyDoorCenter</b></h1>
+                <h6 class="display-6">Vous avez frappé à la bonne porte !</h6>
+                <img src="images/fresqueworker.png" alt="Logo" width="100%">
                 <div class="text-box">
-                    BLABLABLA
+                    <h5 class="display-5" style="color: white;">Avec notre large sélection, tous les projets sont à portée de main !</h5>
                     <div class="inner-text">
-                        BLEUBLEUBLEU
+                        <div class="container">
+                            <div class="row">
+                              <!-- Encadré 1 -->
+                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="card">
+                                  <img src="chemin/vers/image1.jpg" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <p class="card-text">Texte sous l'image 1</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Encadré 2 -->
+                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="card">
+                                  <img src="chemin/vers/image2.jpg" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <p class="card-text">Texte sous l'image 2</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Encadré 3 -->
+                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="card">
+                                  <img src="chemin/vers/image3.jpg" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <p class="card-text">Texte sous l'image 3</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
