@@ -79,17 +79,30 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <ul class="nav flex-column">
-                    <li class="nav-item rounded">
-                        <a class="nav-link active" href="#">Portes</a>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-bs-toggle="collapse" data-bs-target="#porteSubmenu">Portes</a>
+                        <ul class="collapse list-unstyled" id="porteSubmenu">
+                            <li><a class="nav-link" href="#">Porte 1</a></li>
+                            <li><a class="nav-link" href="#">Porte 2</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Blocs</a>
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#blocSubmenu">Blocs</a>
+                        <ul class="collapse list-unstyled" id="blocSubmenu">
+                            <li><a class="nav-link" href="#">Bloc 1</a></li>
+                            <li><a class="nav-link" href="#">Bloc 2</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Poignées</a>
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#poigneeSubmenu">Poignées</a>
+                        <ul class="collapse list-unstyled" id="poigneeSubmenu">
+                            <li><a class="nav-link" href="#">Poignée 1</a></li>
+                            <li><a class="nav-link" href="#">Poignée 2</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
+            
             <div class="col-md-12 content text-center">
                 <h1 class="welcome-title border rounded display-1"><b>Bienvenue sur MyDoorCenter</b></h1>
                 <div class="position-relative text-center">
@@ -185,7 +198,8 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="js/index/sidebar.js"></script>
 </body>
 </html>
