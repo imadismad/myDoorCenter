@@ -49,6 +49,11 @@ header {
     background-color: #437e80;
 }
 
+.welcome-title {
+    margin: 1%;
+    padding: 1%;
+}
+
 /* Sidebar */
 .sidebar,
 .sidebar-large,
@@ -94,14 +99,15 @@ header {
 .content {
     background-color: #fff;
     color: #172a2b;
-    height: 100vh;
+    height: 100%;
 }
 
 .text-box {
     padding: 20px;
     margin: 20px 0;
     border-radius: 5px;
-    background-color: #437e80;
+    background-color: white;
+    color: #437e80;
 }
 
 .inner-text {
@@ -137,3 +143,9 @@ header {
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
 }
+
+.div-transparent {
+    background-color: rgba(67, 126, 128, 0.7); /* Blanc avec 50% de transparence */
+    color: #fff; /* Couleur du texte */
+    padding: 20px; /* Espacement intérieur */
+  }
