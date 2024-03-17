@@ -75,7 +75,7 @@ header {
     top: 0;
     width: 200px;
     z-index: 1040;
-    transition: left 0.0s; /* Adjusted for smooth transition */
+    transition: left 0.0s;
     padding-top: 60px;
 }
 
