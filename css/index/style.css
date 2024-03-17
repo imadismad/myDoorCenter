@@ -1,14 +1,28 @@
+/* Structure Globale */
 body {
-    padding-top: 100px; 
+    padding-top: 13%; 
     background-color: #eee;
 }
 
+.container {
+    display: flex;
+}
+
+.flexcolumn {
+    padding-top: 50px;
+}
+
+/* En-tête */
 header {
     background-color: #eee;
     margin-right: 0;
     margin-left: 0;
 }
 
+.header-top {
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
 
 .nav-tabs {
     padding: 5px;
@@ -18,17 +32,12 @@ header {
     width: 100%;
 }
 
+.nav-link,
 .navbar {
-    margin-right: 0;
-    margin-left: 0;
-}
-
-.nav-link {
     color: #fff;
     background-color: #172a2b;
     font-size: large;
     font-weight: bold;
-    
 }
 
 .nav-link-top {
@@ -40,11 +49,48 @@ header {
     background-color: #437e80;
 }
 
-.sidebar {
+/* Sidebar */
+.sidebar,
+.sidebar-large,
+.overlay-sidebar {
     height: 100vh;
     background-color: #eee;
 }
 
+.sidebar-small,
+#expandSidebarBtn {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.sidebar-large {
+    position: fixed;
+    left: -200px;
+    top: 0;
+    width: 200px;
+    z-index: 1040;
+    transition: left 0.0s; /* Adjusted for smooth transition */
+    padding-top: 60px;
+}
+
+.collapse {
+    left: -200px;
+}
+
+.collapse.show {
+    left: 0;
+}
+
+.overlay-sidebar .close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #000;
+}
+
+/* Contenu Principal */
 .content {
     background-color: #fff;
     color: #172a2b;
@@ -64,32 +110,15 @@ header {
     border-radius: 5px;
 }
 
+/* Pied de page */
 .footer {
     background-color: #172a2b;
     color: white;
     text-align: center;
     padding: 10px;
 }
-.overlay-sidebar {
-    position: fixed; 
-    top: 0;        
-    left: 0;      
-    width: 200px;  
-    z-index: 1030; 
-    height: 100%; 
-    overflow-y: auto; 
-    background-color: #eee; 
-    transition: left 0.0s;
-}
 
-.collapse {
-    left: -200px;
-}
-
-.collapse.show {
-    left: 0;
-}
-
+/* Divers */
 .overlay {
     display: none; 
     position: fixed;
@@ -99,63 +128,6 @@ header {
     left: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1029;
-}
-
-.overlay-sidebar .close {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    font-size: 1.5rem;
-    line-height: 1.5;
-    color: #000;
-}
-
-.sidebar-small {
-    position: relative;
-    left: 0;
-    top: 0;
-    width: 25px;
-    height: 100%;
-    background-color: #eee;
-    z-index: 1040;
-}
-
-.sidebar-large {
-    position: fixed;
-    left: -200px; 
-    top: 0;
-    width: 200px;
-    height: 100%;
-    background-color: #ddd;
-    z-index: 1040;
-    transition: left 0.0s;
-    padding-top: 60px;
-}
-
-#expandSidebarBtn {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    border: none;
-    background: none;
-    font-size: 16px; 
-    cursor: pointer;
-}
-
-.flexcolumn {
-    padding-top: 50px;
-}
-
-.container {
-    display: flex;
-}
-
-.sidebar-small {
-    flex-shrink: 0;
-}
-
-.main-content {
-    flex-grow: 1;
 }
 
 .dropdown-menu {
