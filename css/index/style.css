@@ -79,6 +79,11 @@ header {
     padding-top: 60px;
 }
 
+.sidebar-subitem {
+    background-color: #fff;
+    color: #172a2b;
+}
+
 .collapse {
     left: -200px;
 }
@@ -149,3 +154,8 @@ header {
     color: #fff; /* Couleur du texte */
     padding: 20px; /* Espacement intérieur */
   }
+
+.blue-button {
+    color:#fff;
+    background-color: #437e80;
+}
