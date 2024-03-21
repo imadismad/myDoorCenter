@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,14 @@
     <?php
     // Check if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST["name"];
+        $name = $_POST["name"]; 
         // Generate a personalized greeting
         $greeting = "Hello, " . $name . "!";
         echo "<p>" . $greeting . "</p>";
     }
+
+    $name2 = $_SESSION["nom"];
+    echo "<p>" . $name2 . "</p>";
     ?>
     
     <form method="POST">

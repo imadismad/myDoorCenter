@@ -1,11 +1,12 @@
 <?php
+include("config.php");
 
 function insererDonnees($table, $donnees) {
     // Informations de connexion Azure SQL Server
-    $serveur = "localhost";
-    $utilisateur = "root";
-    $motdepasse = "XXXXX";
-    $basededonnees = "DW";
+    $serveur = SQL_SERVER;
+    $utilisateur = SQL_USER;
+    $motdepasse = SQL_PASSWORD;
+    $basededonnees = SQL_BDD_NAME;
 
     // Connexion à la base de données
     $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
@@ -40,10 +41,10 @@ function insererDonnees($table, $donnees) {
 
 function supprimerLigne($table, $champReference, $valeurReference) {
     // Informations de connexion à la base de données
-    $serveur = "localhost";
-    $utilisateur = "root";
-    $motdepasse = "XXXXX";
-    $basededonnees = "DW";
+    $serveur = SQL_SERVER;
+    $utilisateur = SQL_USER;
+    $motdepasse = SQL_PASSWORD;
+    $basededonnees = SQL_BDD_NAME;
 
     // Connexion à la base de données
     $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
@@ -73,10 +74,10 @@ function supprimerLigne($table, $champReference, $valeurReference) {
 
 function recupererDonneesParValeur($table, $champ, $valeur) {
     // Informations de connexion à la base de données
-    $serveur = "localhost";
-    $utilisateur = "root";
-    $motdepasse = "XXXXX";
-    $basededonnees = "DW";
+    $serveur = SQL_SERVER;
+    $utilisateur = SQL_USER;
+    $motdepasse = SQL_PASSWORD;
+    $basededonnees = SQL_BDD_NAME;
 
     // Connexion à la base de données
     $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
