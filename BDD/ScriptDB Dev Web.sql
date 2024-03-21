@@ -1,3 +1,7 @@
+CREATE USER 'TestBDD'@'localhost' IDENTIFIED BY '';
+GRANT ALL PRIVILEGES ON DW.* TO 'TestBDD'@'localhost';
+FLUSH PRIVILEGES;
+
 DROP DATABASE IF EXISTS DW; -- Crée table si elle n'existe pas
 CREATE DATABASE DW;
 USE DW;
@@ -23,8 +27,8 @@ CREATE TABLE Client (
     pays VARCHAR(100),
     mail VARCHAR(255),
     telephone VARCHAR(20),
-    mdp VARCHAR(255)
-    naissance DATE,
+    mdp VARCHAR(255),
+    naissance DATE
 );
 
 CREATE TABLE Commande (
