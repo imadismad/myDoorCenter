@@ -1,3 +1,4 @@
+DROP USER IF EXISTS 'TestBDD'@'localhost';
 CREATE USER 'TestBDD'@'localhost' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON DW.* TO 'TestBDD'@'localhost';
 FLUSH PRIVILEGES;
@@ -7,17 +8,17 @@ CREATE DATABASE DW;
 USE DW;
 
 CREATE TABLE Produit (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
     type VARCHAR(100),
     prixUnitaire DECIMAL(10, 2),
-    lienPage VARCHAR(255),
+    lienPage VARCHAR(255) UNIQUE,
     description TEXT,
     nomImage VARCHAR(255)
 );
 
 CREATE TABLE Client (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     genre VARCHAR(100),
     nom VARCHAR(100),
     prenom VARCHAR(100),
@@ -25,14 +26,14 @@ CREATE TABLE Client (
     CP VARCHAR(10),
     ville VARCHAR(100),
     pays VARCHAR(100),
-    mail VARCHAR(255),
-    telephone VARCHAR(20),
+    mail VARCHAR(255) UNIQUE,
+    telephone VARCHAR(20) UNIQUE,
     mdp VARCHAR(255),
     naissance DATE
 );
 
 CREATE TABLE Commande (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     date DATE,
     modePaiement VARCHAR(100),
     numFacture VARCHAR(50),
@@ -41,7 +42,7 @@ CREATE TABLE Commande (
 );
 
 CREATE TABLE Materiau (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100),
     densite DECIMAL(10, 2),
     masseVolumique DECIMAL(10, 2),
@@ -49,7 +50,7 @@ CREATE TABLE Materiau (
 );
 
 CREATE TABLE Entrepot (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100),
     latitude DECIMAL(9, 6),
     longitude DECIMAL(9, 6),
@@ -61,7 +62,7 @@ CREATE TABLE Entrepot (
 );
 
 CREATE TABLE Porte (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     idProduit INT,
     idEntrepot INT,
     FOREIGN KEY (idProduit) REFERENCES Produit(id),
@@ -69,7 +70,7 @@ CREATE TABLE Porte (
 );
 
 CREATE TABLE Livraison (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     arriveeEstimee DATETIME,
     distance DECIMAL(10, 2),
     nbPointsArrets INT,
