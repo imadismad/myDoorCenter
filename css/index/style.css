@@ -54,6 +54,30 @@ header {
     padding: 1%;
 }
 
+/* En-tête réduit */
+.header-reduced {
+    padding: 0.5rem 0.5rem;
+    transition: all 0.5s ease;
+  }
+  
+  .header-reduced img {
+    height: 50px; /* Réduit la taille du logo */
+  }
+  
+  .header-reduced .form-control {
+    height: 30px; /* Réduit la hauteur de la barre de recherche */
+    font-size: 14px; /* Réduit la taille de la police dans la barre de recherche */
+  }
+  
+  .header-reduced .bi {
+    font-size: 1rem; /* Réduit la taille des icônes Bootstrap */
+  }
+  
+  .header-reduced .nav-tabs {
+    display: none; /* Cache la barre de navigation dans l'entête réduit */
+  }
+  
+
 /* Sidebar */
 .sidebar,
 .sidebar-large,
