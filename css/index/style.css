@@ -75,8 +75,13 @@ header {
     top: 0;
     width: 200px;
     z-index: 1040;
-    transition: left 0.0s; /* Adjusted for smooth transition */
+    transition: left 0.0s;
     padding-top: 60px;
+}
+
+.sidebar-subitem {
+    background-color: #fff;
+    color: #172a2b;
 }
 
 .collapse {
@@ -149,3 +154,14 @@ header {
     color: #fff; /* Couleur du texte */
     padding: 20px; /* Espacement intérieur */
   }
+
+  .div-transparent-dark {
+    background-color: rgba(17, 42, 43, 0.7); /* Blanc avec 50% de transparence */
+    color: #fff; /* Couleur du texte */
+    padding: 20px; /* Espacement intérieur */
+  }
+
+.blue-button {
+    color:#fff;
+    background-color: #437e80;
+}
