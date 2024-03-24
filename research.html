@@ -111,7 +111,7 @@
               </div>
       
               <div class="row">
-                  <div class="col-md-3 bg-light">
+                  <div class="col-md-3 bg-light rounded">
       
                       <h3>Catégories</h3>
                       <div class="form-check">
@@ -134,19 +134,19 @@
       
                       <h3>Plus de Filtres</h3>
                       <div class="form-group">
-                        <label class="FilterCategory">Prix minimal
+                        <label class="filterCategory rounded">Prix minimal
                             <input type="range" name="price" id="priceRangeMin" min="0" max="5000" value="0">
                             <input type="number" id="priceNumberMin" min="0" max="5000" value="0">
                             <span id="priceValueMin">0</span>€
                         </label>
 
-                        <label class="FilterCategory">Prix maximal
+                        <label class="filterCategory rounded">Prix maximal
                           <input type="range" name="price" id="priceRangeMax" min="0" max="5000" value="5000">
                           <input type="number" id="priceNumberMax" min="0" max="5000" value="5000">
                           <span id="priceValueMax">5000</span>€
                         </label>
                           <br>
-                          <label class="FilterCategory">Matériaux
+                          <label class="filterCategory rounded">Matériaux
                               <select name="material">
                                   <option value="">Sélectionner</option>
                                   <option value="bois">Bois</option>
@@ -155,9 +155,9 @@
                               </select>
                           </label>
                           <br>
-                          <label class="FilterCategory"><input type="checkbox" name="recent_article"> Article récent</label>
+                          <label class="filterCategory rounded"><input type="checkbox" name="recent_article"> Article récent</label>
                           <br>
-                          <label class="FilterCategory">Note des clients
+                          <label class="filterCategory rounded">Note des clients
                               <select name="rating">
                                   <option value="">Sélectionner</option>
                                   <option value="1">★☆☆☆☆</option>
@@ -168,7 +168,7 @@
                               </select>
                           </label>
                           <br>
-                          <label class="FilterCategory">Couleurs disponibles
+                          <label class="filterCategory rounded">Couleurs disponibles
                               <select name="color">
                                   <option value="">Sélectionner</option>
                                   <option value="blanc">Blanc</option>
@@ -177,6 +177,8 @@
                               </select>
                           </label>
                       </div>
+                      <hr>
+                      <button type="submit" class="btn btn-primary">Rechercher</button>
                   </div>
       
                   <div class="col-md-9">
@@ -229,10 +231,12 @@
 
                     </div>
                   </div>
+                  
                   </div>
+                  
               </div>
       
-              <button type="submit" class="btn btn-primary">Rechercher</button>
+              
           </form>
         </div>
     </main>

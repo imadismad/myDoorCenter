@@ -195,5 +195,7 @@ header {
 /* Filters */
 
 .filterCategory {
-    margin-top: 10%;
+    margin-top: 5%;
+    padding: 2%;
+    border: solid #aaaaaa 1px;
 }
