@@ -1,3 +1,8 @@
+SET GLOBAL validate_password.policy = 0;
+SET GLOBAL validate_password.number_count = 0;
+SET GLOBAL validate_password.special_char_count = 0;
+SET GLOBAL validate_password.mixed_case_count = 0;
+SET GLOBAL validate_password.length = 0;
 DROP USER IF EXISTS 'TestBDD'@'localhost';
 CREATE USER 'TestBDD'@'localhost' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON DW.* TO 'TestBDD'@'localhost';
