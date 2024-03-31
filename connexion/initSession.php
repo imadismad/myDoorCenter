@@ -37,6 +37,7 @@ if (isset($_POST["submit"])) {
         $_SESSION["CP"] = $row["CP"];
         $_SESSION["tel"] = $row["telephone"];
         $_SESSION["naissance"] = $row["naissance"];
+        $_SESSION["rue"] = $row["rue"];
         header("Location: ../index.php");
     }
 }

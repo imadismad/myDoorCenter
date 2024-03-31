@@ -23,15 +23,12 @@ setcookie($cookie_name, $_SESSION[$cookie_name], time() + 60 * 60 * 24, "/");
         ?>
     </p>
 
-
-
     <form method="POST">
         <label for="name">Enter your name:</label>
         <input type="text" id="name" name="name" required>
         <input type="submit" value="Submit">
     </form>
-    <a href="BDD/deconnexion.php"><button type="submit" name="submit" value="deconnexion">Déconnexion</button></a>
-    <a href="index.html">Aller à la page d'acceuil</a>
+    <a href="index.html">Aller à la page principale</a>
 </body>
 
 </html>
