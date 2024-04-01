@@ -38,31 +38,8 @@ if (isset($_POST["submit"])) {
         $_SESSION["tel"] = $row["telephone"];
         $_SESSION["naissance"] = $row["naissance"];
         $_SESSION["rue"] = $row["rue"];
+        $_SESSION["pays"] = $row["pays"];
         header("Location: ../index.php");
     }
 }
-
-
-// foreach ($res as $row) {
-//     if ( $mail == $row['mail'] && password_verify($motdepasse, $row['mdp'])) {
-//         $_SESSION["id"] = $row["id"]; 
-//         $_SESSION["nom"] = $row["nom"];
-//         $_SESSION["prenom"] = $row["prenom"];
-//         $_SESSION["mail"] = $row["mail"];
-//         $_SESSION["ville"] = $row["ville"];
-//         $_SESSION["genre"] = $row["genre"];
-//         $_SESSION["CP"] = $row["CP"];
-//         $_SESSION["tel"] = $row["telephone"];
-//         $_SESSION["naissance"] = $row["naissance"];
-//         $trouve = true;
-//         break;
-//     }
-// }
-// if ($trouve==true) {
-//     header("Location: ../index.php");
-// }
-// else{
-//     header("Location: ../creationCompte.html");
-//     exit;    
-// }
 ?>

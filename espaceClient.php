@@ -40,7 +40,7 @@ if (!isset($_COOKIE["prenom"])) {
 
     <div class="client">
         <ul>
-            <li><a href="majClient.html">Modifiez les informations</a></li>
+            <li><a href="majClient.php">Modifiez les informations</a></li>
             <li><a href="#">Vos commandes</a></li>
             <li><a href="#">Vos dernier achat</a></li>
         </ul>
