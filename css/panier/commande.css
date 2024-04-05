@@ -1,12 +1,32 @@
 .info-perso,
 .livraison {
     display: flex;
-    width: 30%;
+    width: 70%;
     flex-direction: column;
+}
+
+.home,
+.info-perso > div,
+.home > div:not(.home-check-div) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 input {
     padding: 4px;
+}
+
+.livraison ul {
+    list-style-type: none;
+}
+
+.home-check-div {
+    padding: 8px 16px;
+    font-weight: bold;
+    border: 1px solid black;
+    width: fit-content;
+    align-self: center;
 }
 
 .autocomplet-input {
@@ -19,7 +39,6 @@ input {
         background-color: greenyellow;
         margin: 0;
         padding: 8px;
-        list-style-type: none;
     }
 
     & li:hover {
@@ -28,7 +47,7 @@ input {
     }
 }
 
-.header-point-relay {
+#header-point-relay {
     display: flex;
     gap: 8px;
     width: 100%;
@@ -38,6 +57,40 @@ input {
         flex-direction: column;
         flex-grow: 1;
     }
+}
+
+#point-relay-result {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 500px;
+}
+
+#point-relay-result > ul {
+    grid-column: 1 / 2;
+    overflow-y: auto;
+    height: 300px;
+
+    & > li:nth-child(even) {
+        background-color: gainsboro;
+    }
+
+    & > li.active {
+        background-color: gray;
+    }
+
+    & div.name {
+        font-weight: bold;
+    }
+
+    & div.openTime {
+        font-size: 14px;
+        font-weight: lighter;
+    }
+}
+
+#map {
+    grid-column: 2 / 3;
+    height: 300px;
 }
 
 .autocomplet-input:focus-within > ul.absolute-ul,
