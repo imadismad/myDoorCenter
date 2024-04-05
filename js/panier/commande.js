@@ -14,7 +14,7 @@ ptRelay.addEventListener("input", limite(async () => {
     let currentText = ptRelay.value;
 
     if (currentText.length > 2) {
-        const URL = "/api/searchCity.php?q=" + currentText;
+        const URL = "/api/searchCity.php?q=" + encodeURIComponent(currentText.replaceAll(" ", "+"));
         
         fetch(URL).then(async (response) => {
             if (response.ok) {
