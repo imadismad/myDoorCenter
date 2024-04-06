@@ -21,9 +21,10 @@ ptRelay.addEventListener("input", limite(async () => {
                 const data = await response.json();
 
                 data.features.forEach((result, index) => {
-                    const li = document.createElement("li");
+                    const li = document.createElement("button");
                     li.textContent = `${result.properties.label}`;
                     li.tabIndex = -1;
+                    li.classList.add("dropdown-item", "list-group-item-action");
                     li.addEventListener("click", () => {
                         updateInputText(result.properties.label)
 
@@ -43,7 +44,7 @@ ptRelay.addEventListener("input", limite(async () => {
 }, 500));
 
 const updateHome = () => {
-    document.querySelectorAll(".home > div:not(.home-check-div) > input").forEach((child) => {
+    document.querySelectorAll(".home > div:not(#sameAsFactInp) > input").forEach((child) => {
         child.disabled = document.getElementById("same-as-bill").checked;
     });
 }
@@ -52,16 +53,16 @@ updateHome();
 
 
 document.getElementById("ptRelayInput").addEventListener("change", (event) => {
-    document.querySelector(".point-relay").hidden = !event.target.checked;
+    document.querySelector("#point-relay").hidden = !event.target.checked;
     document.querySelector(".home").hidden = event.target.checked;
 });
 
 document.getElementById("domicilInput").addEventListener("change", (event) => {
     document.querySelector(".home").hidden = !event.target.checked;
-    document.querySelector(".point-relay").hidden = event.target.checked;
+    document.querySelector("#point-relay").hidden = event.target.checked;
 });
 
-document.querySelector(".point-relay").hidden = !document.getElementById("ptRelayInput").checked;
+document.querySelector("#point-relay").hidden = !document.getElementById("ptRelayInput").checked;
 document.querySelector(".home").hidden = !document.getElementById("domicilInput").checked;
 
 window.onload = () => {
