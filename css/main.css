@@ -1,0 +1,175 @@
+/* Structure Globale */
+
+body {
+    padding-top: 13%; 
+    background-color: #eee;
+}
+
+.container {
+    display: flex;
+}
+
+.flexcolumn {
+    padding-top: 50px;
+} 
+
+
+/* En-tête */
+header {
+    background-color: #eee;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.header-top {
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.nav-tabs {
+    padding: 5px;
+    margin-top: 5px;
+    background-color: #172a2b;
+    justify-content: center; 
+    width: 100%;
+}
+
+.nav-link,
+.navbar {
+    color: #fff;
+    background-color: #172a2b;
+    font-size: large;
+    font-weight: bold;
+}
+
+.nav-link-top {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.nav-link.active {
+    background-color: #437e80;
+}
+
+.welcome-title {
+    margin: 1%;
+    padding: 1%;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* En-tête réduit */
+.header-reduced {
+    padding: 0.5rem 0.5rem;
+    transition: all 0.5s ease;
+  }
+  
+  .header-reduced img {
+    height: 50px; /* Réduit la taille du logo */
+  }
+  
+  .header-reduced .form-control {
+    height: 30px; /* Réduit la hauteur de la barre de recherche */
+    font-size: 14px; /* Réduit la taille de la police dans la barre de recherche */
+  }
+  
+  .header-reduced .bi {
+    font-size: 1rem; /* Réduit la taille des icônes Bootstrap */
+  }
+  
+  .header-reduced .nav-tabs {
+    display: none; /* Cache la barre de navigation dans l'entête réduit */
+  }
+
+
+/* Sidebar */
+.sidebar,
+.sidebar-large,
+.overlay-sidebar {
+    height: 100vh;
+    background-color: #eee;
+}
+
+.sidebar-small,
+#expandSidebarBtn {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.sidebar-large {
+    position: fixed;
+    left: -200px;
+    top: 0;
+    width: 200px;
+    z-index: 1040;
+    transition: left 0.0s;
+    padding-top: 60px;
+}
+
+.sidebar-subitem {
+    background-color: #fff;
+    color: #172a2b;
+}
+
+.collapse {
+    left: -200px;
+}
+
+.collapse.show {
+    left: 0;
+}
+
+.overlay-sidebar .close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.overlay {
+    display: none; 
+    position: fixed;
+    width: 100%; 
+    height: 100%; 
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1029;
+}
+
+/* Contenu Principal */
+.content {
+    background-color: #fff;
+    color: #172a2b;
+    height: 100%;
+}
+
+.text-box {
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    background-color: white;
+    color: #437e80;
+}
+
+.inner-text {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Pied de page */
+.footer {
+    background-color: #172a2b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
