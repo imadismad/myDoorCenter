@@ -176,3 +176,182 @@
     
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDoorCenter</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Main css -->
+    <link href="css/main.css" rel="stylesheet">
+    <!-- Specific css -->
+    
+    
+</head>
+<body>
+    <div class="overlay"></div>
+    <header class="container-fluid fixed-top" id="mainHeader">
+        <div class="row header-top align-items-center">
+            <div class="col-md-1 sidebar-small">
+                <button title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
+            </div>
+            <div class="col-md-3">
+                <img src="images/logo.png" alt="Logo" height="100">
+            </div>
+            <div class="col-md-4 d-flex">
+                <label title="Rechercher" for="search"><button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;"></button></label>
+                <input type="text" name="search" class="form-control" placeholder="Recherche...">
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
+            </div>
+            <div class="col-md-1">
+                <button title="Espace client" class="btn btn-light bi bi-person-circle blue-button" style="font-size: 2rem;"></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 align-center">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Portes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Blindées</a>
+                            <a class="dropdown-item" href="#">Intérieures</a>
+                            <a class="dropdown-item" href="#">Extérieures</a>
+                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
+                            <a class="dropdown-item" href="#">Personnalisées</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Blocs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Blindés</a>
+                            <a class="dropdown-item" href="#">Intérieurs</a>
+                            <a class="dropdown-item" href="#">Extérieurs</a>
+                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
+                            <a class="dropdown-item" href="#">Personnalisés</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-top" href="#">Poignées</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-top" href="#">Accessoires</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-fluid">
+        <div class="row">
+            
+            <div class="col-md-2 sidebar-large collapse overlay-sidebar" id="sidebarCollapse">
+                <button type="button" class="btn close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#porteSubmenu">Portes</a>
+                        <ul class="collapse list-unstyled" id="porteSubmenu">
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Blindées</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Intérieures</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Extérieures</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Porte-fenêtres</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Personnalisées</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#blocSubmenu">Blocs</a>
+                        <ul class="collapse list-unstyled" id="blocSubmenu">
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Blindés</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Intérieurs</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Extérieurs</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Porte-fenêtres</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Personnalisés</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#poigneeSubmenu">Poignées</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="col-md-12 content">
+                <div class="bg-dark text-white text-center p-3">
+                    <h1>My Door Center - Contact Service Client</h1>
+                </div>
+            
+                <div class="">
+                    <h2>Contactez-nous</h2>
+                    <form method="post" action="#">
+                        <div class="form-group">
+                            <label for="clientName">Votre nom</label>
+                            <input type="text" class="form-control" id="clientName" name="clientName" required>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="requestType">Type de requête</label>
+                            <select class="form-control" id="requestType" name="requestType" required>
+                                <option value="achat">Suite à un achat</option>
+                                <option value="paiement">Problème de paiement</option>
+                                <option value="confidentialite">Compte et confidentialité</option>
+                                <option value="signalement">Signalement</option>
+                                <option value="accessibilite">Accessibilité</option>
+                                <option value="autres">Autres</option>
+                            </select>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="productName">Nom du produit</label>
+                            <input type="text" class="form-control" id="productName" name="productName">
+                        </div>
+                        <div class="form-group">
+                            <label for="productName">Détails de la demande d'assistance</label>
+                            <textarea type="text" class="form-control" id="productName" name="productName"></textarea>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                    <hr>
+                    <h3 class="mt-4">Vos derniers articles commandés</h3>
+            
+                    <ul class="list-group">
+            
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Porte blindée Modèle A
+                            <span><a href="#" class="btn btn-outline-primary btn-sm">Problème de réception</a> <a href="#" class="btn btn-outline-secondary btn-sm">Article endommagé</a></span>
+                        </li>
+            
+                    </ul>
+                    <br>
+                </div>
+
+            </div>
+          
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span>&copy; 2024 MyDoorCenter</span>
+    </footer>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Main js -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/reduce-header.js"></script>
+    <!-- Specific js -->
+    
+</body>
+</html>

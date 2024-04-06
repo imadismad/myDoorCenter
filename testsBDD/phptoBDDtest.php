@@ -26,4 +26,6 @@ foreach ($donnees as $row) {
 
 supprimerLigne("Produit","id",100);
 
+modifierDonnees("Produit","description","ouioui","type","porte");
+
 ?>

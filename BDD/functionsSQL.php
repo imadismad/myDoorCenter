@@ -116,4 +116,38 @@ function recupererDonneesParValeur($table, $champ, $valeur) {
     return $donnees;
 }
 
+function modifierDonnees($table, $champModification, $nouvelleValeur, $champReference, $valeurReference) {
+    // Informations de connexion à la base de données
+    $serveur = SQL_SERVER;
+    $utilisateur = SQL_USER;
+    $motdepasse = SQL_PASSWORD;
+    $basededonnees = SQL_BDD_NAME;
+
+    // Connexion à la base de données
+    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+
+    // Vérifier la connexion
+    if ($connexion->connect_error) {
+        die("Erreur de connexion : " . $connexion->connect_error);
+    }
+
+    // Préparation de la requête de modification
+    $requete = $connexion->prepare("UPDATE $table SET $champModification = ? WHERE $champReference = ?");
+
+    // Liaison des valeurs des paramètres
+    $requete->bind_param("ss", $nouvelleValeur, $valeurReference);
+
+    // Exécution de la requête
+    if ($requete->execute() === TRUE) {
+        echo "\nDonnées modifiées avec succès\n";
+    } else {
+        echo "Erreur lors de la modification des données : " . $requete->error;
+    }
+
+    // Fermeture de la connexion
+    $requete->close();
+    $connexion->close();
+}
+
+
 ?>
