@@ -1,5 +1,17 @@
 # myDoorCenter
 
+## Librairie et framwork utilisé
+### Framework Frontend
+Bootstrap est utilisé en tant que framework frontend. Il est pour le moment stocké sur un serveur distant
+
+### Librairie JavaScript
+Voici la liste des librairies externe JavaScript utilisé.
+| Nom | Auteur | Lien du projet |
+|-----|--------|----------------|
+| LibPhoneNumber | Nikolay Kuchumov | https://gitlab.com/catamphetamine/libphonenumber-js |
+
+Les librairies sont quand displonibles au format min afin d'optimiser au maximum le téléchargement de ces derniers.
+
 ## Paramétrage
 Un fichier de configuration permet de paramétrer la connexion à la base de donnée. Ce fichier se trouve à l'emplacement : BDD/config.php.
 Les variables configurables sont :

@@ -61,7 +61,7 @@ session_start();
             </div>
             <label for="submit">Modifier informations</label>
             <button type="submit" name="submit" id="submit" value="submit">Confirmation Modification</button><br>
-            <script src="connexionJS/modification.js"></script>
+            <script src="js/modification.js"></script>
         </form>
     </div>
 
