@@ -20,10 +20,8 @@ function verifMajeur() {
   }
 
   if (age >= 18) {
-    console.log("L'utilisateur a au moins 18 ans.");
     return true;
   } else {
-    console.log("L'utilisateur n'a pas encore 18 ans.");
     return false;
   }
 }
@@ -45,6 +43,9 @@ function verifierPaysNumeroTelephone(numeroTelephone, pays) {
   return numeroTelephone.startsWith(prefixesPays[pays]);
 }
 
+function confirmationMDP(mdp, confirmation) {
+  mdp == confirmation ? true : false;
+}
 function verifFormat(event) {
   // majorité
   if (!verifMajeur()) {
@@ -57,9 +58,19 @@ function verifFormat(event) {
   const pays = document.getElementById('pays').value;
   console.log("Numéro de telephone: ", telephone);
 
-  if (!verifierPaysNumeroTelephone(telephone, pays)){
+  if (!verifierPaysNumeroTelephone(telephone, pays)) {
     const messageErrorTel = document.getElementById('messageErrorTel');
     messageErrorTel.textContent = "Le numéro de téléphone n'est pas compatible avec le pays spécifié.";
+    event.preventDefault();
+  }
+
+  // confirmation mdp 
+  const mdp = document.getElementById("password").value.trim();
+  const confirmation = document.getElementById("confirmation").value.trim();
+  const messageErrorPassw = document.getElementById("messageErrorPassw");
+
+  if (mdp != confirmation) {
+    messageErrorPassw.textContent = "Le mot de passe est différent.";
     event.preventDefault();
   }
 }
