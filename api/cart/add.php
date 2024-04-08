@@ -16,4 +16,3 @@ if ($productId == 0 || $quantity == 0) {
 
 $cart = Cart::getUserCart();
 $cart->addIntoCart(Product::constructFromId($productId), $quantity);
-?>

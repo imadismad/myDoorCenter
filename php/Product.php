@@ -77,4 +77,3 @@ class Product {
         $this->imageName = $imageName;
     }
 }
-?>
