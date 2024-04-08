@@ -1,0 +1,16 @@
+.div-transparent {
+    background-color: rgba(67, 126, 128, 0.7); /* Blanc avec 50% de transparence */
+    color: #fff; /* Couleur du texte */
+    padding: 20px; /* Espacement intérieur */
+  }
+
+  .div-transparent-dark {
+    background-color: rgba(17, 42, 43, 0.7); /* Blanc avec 50% de transparence */
+    color: #fff; /* Couleur du texte */
+    padding: 20px; /* Espacement intérieur */
+  }
+
+.blue-button {
+    color:#fff;
+    background-color: #437e80;
+}

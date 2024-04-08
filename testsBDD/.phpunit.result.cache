@@ -1,0 +1,1 @@
+{"version":1,"defects":{"unit_functionsSQL::testInsertionAvecEntreeValide":4,"unit_functionsSQL::testInsertionAvecEntreeInvalide":4,"unit_functionsSQL::testRecuperation":3},"times":{"unit_functionsSQL::testInsertionAvecEntreeValide":0.009,"unit_functionsSQL::testInsertionAvecEntreeInvalide":0.003,"unit_functionsSQL::testRecuperation":0.004}}

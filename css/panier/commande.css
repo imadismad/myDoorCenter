@@ -1,0 +1,53 @@
+#point-relay-result {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 500px;
+}
+
+#sameAsFactInp {
+    display: inline-block;
+}
+
+#point-relay-result > ul {
+    grid-column: 1 / 2;
+    overflow-y: auto;
+    height: 300px;
+    list-style: none;
+    padding: 0;
+
+    li:nth-child(even) {
+        background-color: gainsboro;
+    }
+
+    li.active {
+        background-color: gray;
+    }
+
+    div.name {
+        font-weight: bold;
+    }
+
+    div.openTime {
+        font-size: 14px;
+        font-weight: lighter;
+    }
+}
+
+#map {
+    grid-column: 2 / 3;
+    height: 300px;
+}
+
+#pt-relay-search-ul {
+    visibility: hidden;
+    background-color: #EEEEEE;
+}
+
+.autocomplet-input:focus-within > #pt-relay-search-ul,
+#pt-relay-search-ul:focus-within {
+    visibility: visible;
+}
+
+#pt-relay-search-ul:empty {
+    visibility: hidden !important;
+}
