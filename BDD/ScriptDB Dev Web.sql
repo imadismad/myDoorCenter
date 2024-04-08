@@ -12,7 +12,6 @@ CREATE TABLE Produit (
     nom VARCHAR(255),
     type VARCHAR(100),
     prixUnitaire DECIMAL(10, 2),
-    lienPage VARCHAR(255) UNIQUE,
     description TEXT,
     nomImage VARCHAR(255)
 );
