@@ -44,7 +44,7 @@ try {
             "mdp" => $password
         );
         insererDonnees("Client", $donnees);
-        header("Location: ../connexion.html");
+        header("Location: ../connexion");
     }
 } catch (Exception $e) {
     echo "" . $e->getMessage() . "";
