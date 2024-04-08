@@ -39,7 +39,9 @@ if (isset($_POST["submit"])) {
         $_SESSION["naissance"] = $row["naissance"];
         $_SESSION["rue"] = $row["rue"];
         $_SESSION["pays"] = $row["pays"];
-        header("Location: ../index.php");
+        $cookie_name = "prenom";
+        setcookie($cookie_name, $_SESSION["prenom"], time() + 60 * 60 * 24, "/");
+        header("Location: ../index.html");
     }
 }
 ?>
