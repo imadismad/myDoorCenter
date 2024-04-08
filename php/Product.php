@@ -8,21 +8,19 @@ class Product {
     private string $type;
     private string $description;
     private string $imageName;
-    private string $pageLink;
 
-    public function __construct(string $name, int $id, float $unitaryPrice, string $type, string $description, string $imageName, string $pageLink) {
+    public function __construct(string $name, int $id, float $unitaryPrice, string $type, string $description, string $imageName) {
         $this->name = $name;
         $this->id = $id;
         $this->unitaryPrice = $unitaryPrice;
         $this->type = $type;
         $this->description = $description;
         $this->imageName = $imageName;
-        $this->pageLink = $pageLink;
     }        
 
     public static function constructFromId(int $id): Product {
         $res = getBasicProductData($id);
-        return new Product($res["nom"], $res["id"], floatval($res["type"]), $res["prixUnitaire"], $res["lienPage"], $res["description"], $res["nomImage"]);
+        return new Product($res["nom"], $res["id"], floatval($res["type"]), $res["prixUnitaire"], $res["description"], $res["nomImage"]);
     }
 
     // Getters
@@ -51,7 +49,7 @@ class Product {
     }
 
     public function getPageLink(): string {
-        return $this->pageLink;
+        return "/product.php?id=".$this->getId();
     }
 
     // Setters
@@ -77,10 +75,6 @@ class Product {
 
     public function setImageName(string $imageName) {
         $this->imageName = $imageName;
-    }
-
-    public function setPageLink(string $pageLink) {
-        $this->pageLink = $pageLink;
     }
 }
 ?>
