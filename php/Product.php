@@ -1,5 +1,5 @@
 <?php
-include_once("../BDD/product.php");
+include_once __DIR__."/../BDD/product.php";
 
 class Product {
     private string $name;
@@ -18,11 +18,11 @@ class Product {
         $this->description = $description;
         $this->imageName = $imageName;
         $this->pageLink = $pageLink;
-    }
+    }        
 
     public static function constructFromId(int $id): Product {
         $res = getBasicProductData($id);
-        return new Product($res["id"], $res["nom"], $res["type"], $res["prixUnitaire"], $res["lienPage"], $res["description"], $res["nomImage"]);
+        return new Product($res["nom"], $res["id"], floatval($res["type"]), $res["prixUnitaire"], $res["lienPage"], $res["description"], $res["nomImage"]);
     }
 
     // Getters
