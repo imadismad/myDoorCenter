@@ -84,7 +84,7 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
             }
 
             // Insérer les entrées dans la table Concerner
-            $requeteConcerner = $connexion->prepare("INSERT INTO Concerner (idProduit, idCommande, quantite) VALUES (?, ?, ?)");
+            $requeteConcerner = $connexion->prepare("INSERT INTO Concerner (id, idProduit, idCommande, quantite) VALUES (DEFAULT, ?, ?, ?)");
             $requeteConcerner->bind_param("iii", $idProduit, $idCommande, $quantite);
             $requeteConcerner->execute();
             $requeteConcerner->close();
@@ -197,6 +197,10 @@ function getMaterialsByProduct(int $id) {
         echo "Erreur lors de la création de la commande : " . $e->getMessage();
     }
 
+}
+
+function removeProductFromCatalogue(int $id) {
+    modifierDonnees("Produit", "estAuCatalogue", 0, "id", $id);
 }
 
 ?>

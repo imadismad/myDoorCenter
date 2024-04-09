@@ -148,6 +148,3 @@ function modifierDonnees($table, $champModification, $nouvelleValeur, $champRefe
     $requete->close();
     $connexion->close();
 }
-
-
-?>

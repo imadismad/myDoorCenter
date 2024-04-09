@@ -18,7 +18,8 @@ CREATE TABLE Produit (
     type VARCHAR(100),
     prixUnitaire DECIMAL(10, 2),
     description TEXT,
-    nomImage VARCHAR(255)
+    nomImage VARCHAR(255),
+    estAuCatalogue BIT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE Client (
@@ -108,10 +109,24 @@ CREATE TABLE Noter (
 );
 
 CREATE TABLE Concerner (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     idProduit INT,
     idCommande INT,
     quantite INT,
-    PRIMARY KEY (idProduit, idCommande),
     FOREIGN KEY (idProduit) REFERENCES Produit(id),
     FOREIGN KEY (idCommande) REFERENCES Commande(id)
+);
+
+CREATE TABLE OptionAchat (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(255),
+    cout DECIMAL(10, 2)
+);
+
+CREATE TABLE AOption (
+    idConcerner INT,
+    idOption INT,
+    PRIMARY KEY (idConcerner, idOption),
+    FOREIGN KEY (idConcerner) REFERENCES Concerner(id),
+    FOREIGN KEY (idOption) REFERENCES OptionAchat(id)
 );
