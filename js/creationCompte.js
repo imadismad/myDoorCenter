@@ -1,3 +1,5 @@
+import parsePhoneNumber from 'lib/libphonenumber-min.js';
+
 function verifMajeur() {
   const inputNaissance = document.getElementById("naissance");
   const anneeNaissance = parseInt(inputNaissance.value.split("-")[0], 10);
@@ -39,7 +41,6 @@ function verifierPaysNumeroTelephone(numeroTelephone, pays) {
     "Japon": "+81",
     "Brésil": "+55"
   };
-  console.log(prefixesPays[pays])
   return numeroTelephone.startsWith(prefixesPays[pays]);
 }
 
@@ -56,7 +57,6 @@ function verifFormat(event) {
   // numéro téléphone
   const telephone = document.getElementById("tel").value;
   const pays = document.getElementById('pays').value;
-  console.log("Numéro de telephone: ", telephone);
 
   if (!verifierPaysNumeroTelephone(telephone, pays)) {
     const messageErrorTel = document.getElementById('messageErrorTel');
