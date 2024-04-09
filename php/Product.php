@@ -49,7 +49,7 @@ class Product {
             if($file->isDot()) continue;
             array_push($images, '/images/'.$this->getId()."/".$file->getFilename());
         }
-
+        array_multisort($images);
         return $images;
     }
 
