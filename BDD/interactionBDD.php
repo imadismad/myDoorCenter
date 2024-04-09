@@ -1,7 +1,7 @@
 <?php
 
 // Inclure le fichier contenant les fonctions SQL
-require_once '../BDD/functionsSQL.php';
+require_once 'functionsSQL.php';
 
 function quantitePortesEnStockParEntrepot($referenceProduit) {
     // Informations de connexion à la base de données
@@ -134,6 +134,69 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
     $connexion->close();
 }
 
+/**
+ * Return the data of a product in a DB
+ * Here are the fild : id, nom, type, prixUnitaire, lienPage, description and nomImage
+ */
+function getBasicProductData(int $id){
+    // Check if id is a int
+    if(!is_int($id)) throw new InvalidArgumentException("\$id need to be an integer");
 
+    $result = recupererDonneesParValeur("Produit", "id", $id);
+    return $result[0];
+}
+
+/**
+ * Return all materials data composing a given product
+ * Here are the field : id, nom, densite, masseVolumique
+ */
+function getMaterialsByProduct(int $id) {
+    // Check if id is a int
+    if(!is_int($id)) throw new InvalidArgumentException("\$id need to be an integer");
+
+    // Informations de connexion à la base de données
+    $serveur = SQL_SERVER;
+    $utilisateur = SQL_USER;
+    $motdepasse = SQL_PASSWORD;
+    $basededonnees = SQL_BDD_NAME;
+
+    // Connexion à la base de données
+    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+
+    // Vérifier la connexion
+    if ($connexion->connect_error) {
+        die("Erreur de connexion : " . $connexion->connect_error);
+    }
+
+    // Début de la transaction
+    $connexion->begin_transaction();
+    try {
+        $requete = $connexion->prepare(
+            "SELECT m.* FROM Materiau m
+             INNER JOIN Composer c ON m.id = c.idMateriau
+             WHERE c.idProduit = ?"
+        );
+
+        $requete -> bind_param("i", $id);
+        $requete -> execute();
+
+        $resultat = $requete->get_result();
+        $donnees = array();
+        while ($row = $resultat->fetch_assoc()) {
+            // Ajouter les données de chaque ligne au tableau
+            $donnees[] = $row;
+        }
+
+        $requete->close();
+        $connexion->close();
+        return $donnees;
+
+    } catch (Exception $e) {
+        // En cas d'erreur, annuler la transaction
+        $connexion->rollback();
+        echo "Erreur lors de la création de la commande : " . $e->getMessage();
+    }
+
+}
 
 ?>
