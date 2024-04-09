@@ -136,19 +136,17 @@ if (!isset($_GET["id"]) || $product === null ) {
                     <!-- Galerie d'images à gauche -->
                     <div class="col-md-5">
                         <div id="main-image-container" class="mb-3 rounded">
-                            <img src="images/porte.png" id="main-image" alt="Image principale" class="img-fluid">
+                            <?php
+                                $images = $product->getImagesPath();
+                                echo '<img src="'.$images[0].'" id="main-image" alt="Image principale" class="img-fluid">';
+                            ?>
                         </div>
                         <div id="vignettes-container" class="d-flex flex-row rounded">
                             <?php
-                                foreach ($product->getImagesPath() as $path) {
+                                foreach ($images as $path) {
                                     echo '<img src="'.$path.'" class="vignette" alt="Image Accessoire">';
                                 }
                             ?>
-                            <img src="images/accessoire.png" class="vignette" alt="Image Accessoire">
-                            <img src="images/blocporte.png" class="vignette" alt="Image Bloc Porte">
-                            <img src="images/porte.png" class="vignette" alt="Image Porte">
-                            <img src="images/porteinterro.png" class="vignette" alt="Image Porte">
-                            <img src="images/magasin.png" class="vignette" alt="Image Porte">
                         </div>
                     </div>
 
