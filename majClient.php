@@ -18,52 +18,90 @@ session_start();
 
 <body>
     <div class="overlay"></div>
-    <header class="container-fluid fixed-top" id="mainHeader">
+    <header class="container-fluid" id="mainHeader">
         <div class="row header-top align-items-center">
-            <div class="col-md-1 sidebar-small">
-                <button title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-3 container-fluid align-items-center">
                 <a href="index.html"><img src="images/logo.png" alt="Logo" height="100"></a>
             </div>
+            <main class="container-fluid sticky-top align-items-center">
+
+                <div class="container"></div>
+                <div class="col-md-12 content text-center">
+                    <h1 class="welcome-title border rounded display-1"><b>Mise à jour informations</b></h1>
+            </main>
     </header>
-    <main class="container-fluid">
-        <div class="col-md-12 content text-center">
-            <h1 class="welcome-title border rounded display-1"><b>Mise à jour informations</b></h1>
-    </main>
+
     <div class="container">
-        <form action="BDD/updateUser.php" method="post">
-            <h3>informations personnelle:</h3>
-            <div id="info_perso" class="perso">
-                <label for="pays">Pays:</label>
-                <p id="pays">
-                    <?php printf("%s", $_SESSION["pays"]) ?>
-                </p>
-                <label for="tel">Numéro téléphone:</label>
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="w-50 p-3">
+                <div class="text-bg-light p-3">
+                    <form action="BDD/updateUser.php" method="post" class="row g-3">
 
-                <input type="tel" name="tel" id="tel" placeholder="ex: +33712345678" minlength="3" maxlength="12"
-                    required><br>
-                <span id="messageErrorTel" class="error"></span><br>
+                        <!--info sur la personne-->
+                        <h3>Information personnelle:</h3>
+                        <div id="info_perso" class="row g-3">
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Numéro téléphone:</span>
+                                <input type="tel" name="tel" id="tel" placeholder="ex: +33712345678" minlength="3" maxlength="12"
+                                    class="form-control" aria-describedby="basic-addon1" required>
+                                <span id="messageErrorTel" class="error"></span><br>
+                            </div>
+                        </div>
+
+                        <!--info livraison-->
+                        <div id="info_perso" class="row g-3">
+                            <h3>Adresse:</h3>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Ville:</span>
+                                <input type="text" name="ville" id="ville" placeholder="Ville" class="form-control"
+                                    aria-describedby="basic-addon1" required>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Rue:</span>
+                                <input type="text" name="rue" id="rue" placeholder="Rue" class="form-control"
+                                    aria-describedby="basic-addon1" required>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Code postal:</span>
+                                <input type="text" name="postal" id="postal" placeholder="Code postal" class="form-control"
+                                    aria-describedby="basic-addon1" required>
+                            </div>
+                        </div>
+                        <!--TODO à sécuriser-->
+                        <!--Info sensible-->
+                        <div id="sensible" class="row g-3">
+                            <h3>Information confidentiels:</h3>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Mot de passe:</span>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    aria-describedby="basic-addon1" required>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Confirmation Mot de passe:</span>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    aria-describedby="basic-addon1" required>
+                            </div>
+
+                            <span id="messageErrorPassw" class="error"></span><br>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary" name="submit" id="submit"
+                                    value="submit">Modifier informations</button>
+                                <script src="js/modification.js"></script>
+                            </div>
+                        </div>
+                </div>
             </div>
+        </div>
 
-            <div id="info_perso" class="livraison">
-                <h3>Adresse:</h3>
-
-                <label for="ville">Ville:</label>
-                <input type="text" name="ville" id="ville" placeholder="Ville" required><br>
-
-                <label for="rue">Rue:</label>
-                <input type="text" name="rue" id="rue" placeholder="Rue" required><br>
-
-                <label for="postal">Code postal:</label>
-                <input type="text" name="postal" id="postal" placeholder="Code postal" required>
-
-            </div>
-            <label for="submit">Modifier informations</label>
-            <button type="submit" name="submit" id="submit" value="submit">Confirmation Modification</button><br>
-            <script src="js/modification.js"></script>
-        </form>
     </div>
+    </form>
 
 </body>
 

@@ -9,7 +9,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, nom, type, prixUnitaire, lienPage, description, nomImage FROM Produit";
+$sql = "SELECT * FROM Produit";
 $result = $conn->query($sql);
 
 // Output data as JSON
