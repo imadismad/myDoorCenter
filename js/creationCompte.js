@@ -1,5 +1,3 @@
-import parsePhoneNumber from 'lib/libphonenumber-min.js';
-
 function verifMajeur() {
   const inputNaissance = document.getElementById("naissance");
   const anneeNaissance = parseInt(inputNaissance.value.split("-")[0], 10);
@@ -7,6 +5,7 @@ function verifMajeur() {
   const jourNaissance = parseInt(inputNaissance.value.split("-")[2], 10);
 
   const messageAge = document.getElementById("messageError");
+  
 
   const dateActuelle = new Date();
   const anneeActuelle = dateActuelle.getFullYear();
@@ -50,6 +49,7 @@ function confirmationMDP(mdp, confirmation) {
 function verifFormat(event) {
   // majorité
   if (!verifMajeur()) {
+    messageAge.style.color = "red";
     messageAge.textContent = "Vous devez avoir au moins 18 ans !";
     event.preventDefault();
   }
@@ -57,9 +57,10 @@ function verifFormat(event) {
   // numéro téléphone
   const telephone = document.getElementById("tel").value;
   const pays = document.getElementById('pays').value;
-
+  console.log(telephone, pays);
   if (!verifierPaysNumeroTelephone(telephone, pays)) {
     const messageErrorTel = document.getElementById('messageErrorTel');
+    messageErrorTel.style.color="red";
     messageErrorTel.textContent = "Le numéro de téléphone n'est pas compatible avec le pays spécifié.";
     event.preventDefault();
   }
