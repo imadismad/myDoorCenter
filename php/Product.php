@@ -1,5 +1,5 @@
 <?php
-include_once("../BDD/product.php");
+include_once __DIR__."/../BDD/interactionBDD.php";
 
 class Product {
     private string $name;
@@ -8,21 +8,57 @@ class Product {
     private string $type;
     private string $description;
     private string $imageName;
-    private string $pageLink;
+    private Array $materials;
 
-    public function __construct(string $name, int $id, float $unitaryPrice, string $type, string $description, string $imageName, string $pageLink) {
+    public function __construct(string $name, int $id, float $unitaryPrice, string $type, string $description, string $imageName) {
         $this->name = $name;
         $this->id = $id;
         $this->unitaryPrice = $unitaryPrice;
         $this->type = $type;
         $this->description = $description;
         $this->imageName = $imageName;
-        $this->pageLink = $pageLink;
+
+        $this->materials = array();
+    }        
+
+    public static function constructFromId(int $id): Product | null {
+        $res = getBasicProductData($id);
+
+        if ($res === null) return null;
+
+        $product = new Product($res["nom"], $res["id"], floatval($res["prixUnitaire"]), $res["type"], $res["description"], $res["nomImage"]);
+        $materials = getMaterialsByProduct($id);
+
+        foreach ($materials as $material) {
+            $product->addMaterial(new Material($material["id"], $material["nom"], $material["densite"], $material["masseVolumique"]));
+        }
+
+        return $product;
     }
 
-    public static function constructFromId(int $id): Product {
-        $res = getBasicProductData($id);
-        return new Product($res["id"], $res["nom"], $res["type"], $res["prixUnitaire"], $res["lienPage"], $res["description"], $res["nomImage"]);
+    /**
+     * Return the path to the miniature of the product
+     */
+    public function getMiniaturePath(): string {
+        return "/images/miniature/".$this->getImageName();
+    }
+
+    public function getImagesPath(): Array {
+        $images = [];
+        foreach (new DirectoryIterator('./images/'.$this->getId()) as $file) {
+            if($file->isDot()) continue;
+            array_push($images, '/images/'.$this->getId()."/".$file->getFilename());
+        }
+        array_multisort($images);
+        return $images;
+    }
+
+    public function getMaterialsName(): array {
+        $res = [];
+        foreach ($this->materials as $material) {
+            array_push($res, $material->getName());
+        }
+        return $res;
     }
 
     // Getters
@@ -51,7 +87,7 @@ class Product {
     }
 
     public function getPageLink(): string {
-        return $this->pageLink;
+        return "/product.php?id=".$this->getId();
     }
 
     // Setters
@@ -79,8 +115,37 @@ class Product {
         $this->imageName = $imageName;
     }
 
-    public function setPageLink(string $pageLink) {
-        $this->pageLink = $pageLink;
+    public function addMaterial(Material $material) {
+        array_push($this->materials, $material);
     }
 }
-?>
+
+class Material {
+    private int $id;
+    private string $name;
+    private float $relativeDensity;
+    private float $density;
+
+    public function __construct(int $id, string $name, float $relativeDensity, float $density) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->relativeDensity = $relativeDensity;
+        $this->density = $density;
+    }
+
+    public function getId(): int {
+        return $this->id;
+    }
+    
+    public function getName(): string {
+        return $this->name;
+    }
+    
+    public function getRelativeDensity(): float {
+        return $this->relativeDensity;
+    }
+
+    public function getDensity(): float {
+        return $this->density;
+    }
+}

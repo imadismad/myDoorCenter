@@ -1,16 +1,16 @@
 USE DW;
 
-INSERT INTO Produit (id, nom, type, prixUnitaire, lienPage, description, nomImage) VALUES
-(1, 'Porte en bois massif', 'Porte', 299.99, 'http://example.com/porte-bois-massif', 'Porte chêne massif avec finition naturelle', 'porte_bois.jpg'),
-(2, 'Porte coulissante moderne', 'Porte', 499.99, 'http://example.com/porte-coulissante-moderne', 'Porte coulissante en verre trempé avec cadre en aluminium', 'porte_coulissante.jpg'),
-(3, 'Poignée de porte en acier inoxydable', 'Poignée', 29.99, 'http://example.com/poignee-inox', 'Poignée de porte en acier inoxydable brossé, design moderne', 'poignee_inox.jpg'),
-(4, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'http://example.com/poignee-laiton', 'Poignée de porte traditionnelle en laiton poli', 'poignee_laiton.jpg'),
-(5, 'Porte intérieur en pin', 'Porte', 199.99, 'http://example.com/porte-interieur-pin', 'Porte intérieure en pin massif avec panneaux moulés', 'porte_pin.jpg'),
-(6, 'Porte coupe-feu certifiée', 'Porte', 399.99, 'http://example.com/porte-coupe-feu', 'Porte coupe-feu résistante aux flammes avec isolation thermique', 'porte_coupe_feu.jpg'),
-(7, 'Poignée de porte en laiton antique', 'Poignée', 39.99, 'http://example.com/poignee-laiton-antique', 'Poignée de porte vintage en laiton antique avec motifs gravés', 'poignee_laiton_antique.jpg'),
-(8, 'Porte de garage sectionnelle', 'Porte', 899.99, 'http://example.com/porte-garage-sectionnelle', 'Porte de garage automatique à panneaux sectionnels en acier', 'porte_garage_sectionnelle.jpg'),
-(9, 'Poignée de porte design en acrylique', 'Poignée', 49.99, 'http://example.com/poignee-acrylique-design', 'Poignée de porte moderne en acrylique transparent', 'poignee_acrylique.jpg'),
-(10, 'Porte-fenêtre en PVC', 'Porte', 349.99, 'http://example.com/porte-fenetre-pvc', 'Porte-fenêtre en PVC blanc avec double vitrage isolant', 'porte_fenetre_pvc.jpg');
+INSERT INTO Produit (id, nom, type, prixUnitaire, description, nomImage) VALUES
+(1, 'Porte en bois massif', 'Porte', 299.99, 'Porte chêne massif avec finition naturelle', 'porte_bois.jpg'),
+(2, 'Porte coulissante moderne', 'Porte', 499.99, 'Porte coulissante en verre trempé avec cadre en aluminium', 'porte_coulissante.jpg'),
+(3, 'Poignée de porte en acier inoxydable', 'Poignée', 29.99, 'Poignée de porte en acier inoxydable brossé, design moderne', 'poignee_inox.jpg'),
+(4, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'Poignée de porte traditionnelle en laiton poli', 'poignee_laiton.jpg'),
+(5, 'Porte intérieur en pin', 'Porte', 199.99, 'Porte intérieure en pin massif avec panneaux moulés', 'porte_pin.jpg'),
+(6, 'Porte coupe-feu certifiée', 'Porte', 399.99, 'Porte coupe-feu résistante aux flammes avec isolation thermique', 'porte_coupe_feu.jpg'),
+(7, 'Poignée de porte en laiton antique', 'Poignée', 39.99, 'Poignée de porte vintage en laiton antique avec motifs gravés', 'poignee_laiton_antique.jpg'),
+(8, 'Porte de garage sectionnelle', 'Porte', 899.99, 'Porte de garage automatique à panneaux sectionnels en acier', 'porte_garage_sectionnelle.jpg'),
+(9, 'Poignée de porte design en acrylique', 'Poignée', 49.99, 'Poignée de porte moderne en acrylique transparent', 'poignee_acrylique.jpg'),
+(10, 'Porte-fenêtre en PVC', 'Porte', 349.99, 'Porte-fenêtre en PVC blanc avec double vitrage isolant', 'porte_fenetre_pvc.jpg');
 
 INSERT INTO Client (id, nom, prenom, rue, CP, ville, pays, mail, telephone, mdp) VALUES
 (1, 'Dupont', 'Jean', '10 Rue des Lilas', '75001', 'Paris', 'France', 'jean.dupont@example.com', '0123456789', 'mdpclient1'),
@@ -44,6 +44,7 @@ INSERT INTO Materiau (id, nom, densite, masseVolumique, type) VALUES
 (10, 'Marbre', 2.7, 2700, 'Naturel');
 
 INSERT INTO Entrepot (id, nom, latitude, longitude, stockTheorique, stockActuel) VALUES
+(1000, 'Livraison', 0, 0, 10000, 0),
 (1, 'Entrepôt Paris', 48.8566, 2.3522, 1000, 800),
 (2, 'Entrepôt Lyon', 45.7578, 4.8320, 800, 700),
 (3, 'Entrepôt Marseille', 43.2965, 5.3698, 1200, 1100),
@@ -65,7 +66,9 @@ INSERT INTO Porte (id, idProduit, idEntrepot) VALUES
 (7, 2, 8),
 (8, 3, 6),
 (9, 9, 2),
-(10, 5, 4);
+(10, 5, 4),
+(11, 8, 9),
+(12, 8, 9);
 
 INSERT INTO Livraison (id, arriveeEstimee, distance, nbPointsArrets, idCommande, idClient, idPorte) VALUES
 (1, '2024-03-10 08:00:00', 50.25, 3, 1, 1, 1),

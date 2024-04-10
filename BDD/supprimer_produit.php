@@ -4,5 +4,4 @@
     include("functionsSQL.php");
     $idProd = $_POST["id"];
     echo "".$idProd."";
-    supprimerLigne('Produit', 'id', $idProd);
-?>
+    removeProductFromCatalogue($idProd);
