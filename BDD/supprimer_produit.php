@@ -2,6 +2,8 @@
     session_start();
     include("config.php");
     include("functionsSQL.php");
+    require_once "interBDDProduit.php";
+    
     $idProd = $_POST["id"];
-    echo "".$idProd."";
+    fwrite(STDOUT, "".$idProd."");
     removeProductFromCatalogue($idProd);

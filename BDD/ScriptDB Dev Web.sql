@@ -19,7 +19,7 @@ CREATE TABLE Produit (
     prixUnitaire DECIMAL(10, 2),
     description TEXT,
     nomImage VARCHAR(255),
-    estAuCatalogue BIT NOT NULL DEFAULT 1
+    estAuCatalogue BIT NOT NULL DEFAULT 1 -- Type qui prends deux valeur : 1 ou 0
 );
 
 CREATE TABLE Client (
@@ -119,8 +119,10 @@ CREATE TABLE Concerner (
 
 CREATE TABLE OptionAchat (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(255),
-    cout DECIMAL(10, 2)
+    libele VARCHAR(255),
+    cout DECIMAL(10, 2),
+    typeProduit VARCHAR(100), -- Même valeur que type dans Produit
+    active BIT NOT NULL DEFAULT 1 -- Bool pour savoir si on doit l'afficher à l'utilisateur
 );
 
 CREATE TABLE AOption (

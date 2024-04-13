@@ -32,14 +32,14 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
 
     // Affichage des quantités de portes par entrepôt
     if ($resultat->num_rows === 0) {
-        echo "La référence n'est pas en stock.";
+        fwrite(STDERR, "La référence n'est pas en stock.");
         return false;
     } else {
         // Affichage des quantités de portes par entrepôt
         while ($row = $resultat->fetch_assoc()) {
             $idEntrepot = $row["idEntrepot"];
             $quantite = $row["quantite"];
-            echo "Entrepôt ID: $idEntrepot, Quantité: $quantite\n";
+            fwrite(STDOUT, "Entrepôt ID: $idEntrepot, Quantité: $quantite\n");
         }
     }
 
@@ -123,84 +123,13 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
         // Valider la transaction
         $connexion->commit();
 
-        echo "La commande a été créée avec succès.";
+        fwrite(STDOUT, "La commande a été créée avec succès.");
     } catch (Exception $e) {
         // En cas d'erreur, annuler la transaction
         $connexion->rollback();
-        echo "Erreur lors de la création de la commande : " . $e->getMessage();
+        fwrite(STDERR, "Erreur lors de la création de la commande : " . $e->getMessage());
     }
 
     // Fermeture de la connexion
     $connexion->close();
 }
-
-/**
- * Return the data of a product in a DB
- * Here are the fild : id, nom, type, prixUnitaire, lienPage, description and nomImage
- */
-function getBasicProductData(int $id){
-    // Check if id is a int
-    if(!is_int($id)) throw new InvalidArgumentException("\$id need to be an integer");
-
-    $result = recupererDonneesParValeur("Produit", "id", $id);
-    return $result[0];
-}
-
-/**
- * Return all materials data composing a given product
- * Here are the field : id, nom, densite, masseVolumique
- */
-function getMaterialsByProduct(int $id) {
-    // Check if id is a int
-    if(!is_int($id)) throw new InvalidArgumentException("\$id need to be an integer");
-
-    // Informations de connexion à la base de données
-    $serveur = SQL_SERVER;
-    $utilisateur = SQL_USER;
-    $motdepasse = SQL_PASSWORD;
-    $basededonnees = SQL_BDD_NAME;
-
-    // Connexion à la base de données
-    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
-
-    // Vérifier la connexion
-    if ($connexion->connect_error) {
-        die("Erreur de connexion : " . $connexion->connect_error);
-    }
-
-    // Début de la transaction
-    $connexion->begin_transaction();
-    try {
-        $requete = $connexion->prepare(
-            "SELECT m.* FROM Materiau m
-             INNER JOIN Composer c ON m.id = c.idMateriau
-             WHERE c.idProduit = ?"
-        );
-
-        $requete -> bind_param("i", $id);
-        $requete -> execute();
-
-        $resultat = $requete->get_result();
-        $donnees = array();
-        while ($row = $resultat->fetch_assoc()) {
-            // Ajouter les données de chaque ligne au tableau
-            $donnees[] = $row;
-        }
-
-        $requete->close();
-        $connexion->close();
-        return $donnees;
-
-    } catch (Exception $e) {
-        // En cas d'erreur, annuler la transaction
-        $connexion->rollback();
-        echo "Erreur lors de la création de la commande : " . $e->getMessage();
-    }
-
-}
-
-function removeProductFromCatalogue(int $id) {
-    modifierDonnees("Produit", "estAuCatalogue", 0, "id", $id);
-}
-
-?>
