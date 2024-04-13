@@ -9,15 +9,15 @@ class Product {
     private string $description;
     private string $imageName;
     private Array $materials;
-
-    public function __construct(string $name, int $id, float $unitaryPrice, string $type, string $description, string $imageName) {
+    private int $catalogue;
+    public function __construct(string $name, int $id, float $unitaryPrice, string $type, string $description, string $imageName, int $catalogue) {
         $this->name = $name;
         $this->id = $id;
         $this->unitaryPrice = $unitaryPrice;
         $this->type = $type;
         $this->description = $description;
         $this->imageName = $imageName;
-
+        $this->catalogue = $catalogue;
         $this->materials = array();
     }        
 
@@ -26,7 +26,7 @@ class Product {
 
         if ($res === null) return null;
 
-        $product = new Product($res["nom"], $res["id"], floatval($res["prixUnitaire"]), $res["type"], $res["description"], $res["nomImage"]);
+        $product = new Product($res["nom"], $res["id"], floatval($res["prixUnitaire"]), $res["type"], $res["description"], $res["nomImage"], $res["estAuCatalogue"]);
         $materials = getMaterialsByProduct($id);
 
         foreach ($materials as $material) {
@@ -89,8 +89,14 @@ class Product {
     public function getPageLink(): string {
         return "/product.php?id=".$this->getId();
     }
+    public function getCatalogue(): int{
+        return $this->catalogue;
+    }
 
     // Setters
+    public function setCatalogue(int $catalogue){
+        $this->catalogue = $catalogue;
+    }
     public function setName(string $name) {
         $this->name = $name;
     }

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../admin.html");
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -10,11 +16,14 @@
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
+
         th {
             background-color: #f2f2f2;
         }
@@ -30,9 +39,9 @@
                 <th>Name</th>
                 <th>Type</th>
                 <th>Price</th>
-                <th>Page Link</th>
                 <th>Description</th>
                 <th>Image</th>
+                <th>Dans le catalogue</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -47,25 +56,46 @@
                 row.append('<td>' + product.nom + '</td>');
                 row.append('<td>' + product.type + '</td>');
                 row.append('<td>' + product.prixUnitaire + '</td>');
-                row.append('<td><a href="' + product.lienPage + '">View Product</a></td>');
                 row.append('<td>' + product.description + '</td>');
                 row.append('<td><img src="' + product.nomImage + '" alt="' + product.nom + '"></td>');
+                if (product.estAuCatalogue == 1) {
+                    row.append('<td id=catalogue' + product.id + '>Yes</td>');
+                } else {
+                    row.append('<td id=catalogue' + product.id + '>No</td>');
+                }
                 row.append('<td><button class="delete-button" data-id="' + product.id + '">Delete</button> <button class="modify-button" data-id="' + product.id + '">Modify</button></td>');
                 tableBody.append(row);
             });
         });
-
         // Supprimer produit
-        $(document).on('click','.delete-button',function() {
+        $(document).on('click', '.delete-button', function () {
             var id = $(this).data('id');
-            if (confirm('Are you sure you want to delete this product?')) {
-                $.post('../BDD/supprimer_produit.php', { id: id }, function() {
-                    console.log("Product deleted successfully");
-                    location.reload();
+            if (confirm('Voulez vous vraiment supprimer ce produit de votre catalogue')) {
+                document.getElementById('catalogue' + id).innerHTML = "No";
+                $.get("deleteCatalogue.php", { id: id }, function () {
+                    window.location.assign('deleteCatalogue.php?id=' + id);
                 });
             }
         });
+
+        // Modification produit
+        $(document).on('click', '.modify-button', function () {
+            var id = $(this).data('id');
+            if (confirm('Voulez vous vraiment modifier ce produit ?')) {
+                $.get('modifProductPage.php', { id: id }, function () {
+                    window.location.assign('modifProductPage.php?id=' + id);
+                })
+            }
+        })
+
+        // Ajout de nouveau produit
+        $(document).on('click', '.add-button', function(){
+            if (confirm("Vous allez ajouter un nouveau produit")){
+                window.location.assign('createProduct.php');
+            }
+        })
     </script>
+    <button class="add-button">Ajouter produit</button>
 </body>
 
 </html>
