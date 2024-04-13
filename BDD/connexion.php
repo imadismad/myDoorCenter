@@ -50,7 +50,7 @@ try {
         header("Location: ../connexion");
     }
 } catch (Exception $e) {
-    echo "" . $e->getMessage() . "";
+    fwrite(STDERR, "" . $e->getMessage() . "");
     header("Location: ../creationCompte.html");
 }
 

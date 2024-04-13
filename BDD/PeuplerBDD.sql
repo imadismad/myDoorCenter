@@ -31,6 +31,20 @@ INSERT INTO Composer (idProduit, idMateriau) VALUES
 (2, 15), (2, 14), (2, 13), (2, 6),
 (1, 9), (1, 11), (1, 6), (1, 7), (1, 13);
 
+-- Ajout de vieille option plus dispinible
+INSERT INTO OptionAchat (id, libele, cout, typeProduit, active) VALUES
+(DEFAULT, "Avec cadre", 685, "Porte", 0),
+(DEFAULT, "Avec cadre", 68, "Porte", 0),
+(DEFAULT, "Avec poignée", 22, "Porte", 0),
+(DEFAULT, "Avec porte", 999, "Porte", 0);
+
+
+INSERT INTO OptionAchat (id, libele, cout, typeProduit) VALUES
+(DEFAULT, "Avec cadre", 250, "Porte"),
+(DEFAULT, "Avec poignée", 50, "Porte"),
+(DEFAULT, "Avec porte", 0, "Porte"),
+(DEFAULT, "Avec installation", 79.99, "Porte");
+
 INSERT INTO Client (id, genre, nom, prenom, rue, CP, ville, pays, mail, telephone, mdp, naissance) VALUES
 -- MDP pour Louis : Live before your head fall
 (DEFAULT, "Homme", "Le Grand", "Louis", "7 Rue du Chateau", 78000, "Versaille", "France", "louis.le-grand@whitout-head.fr", "06 666 666 66", "$2y$10$zHid668AuTyWDCsSIyh.I.AezPjR7zCPSRrGdIiB8nIMlMCjdcvAK", "1754-08-23"),
