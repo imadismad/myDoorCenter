@@ -19,7 +19,7 @@ CREATE TABLE Produit (
     prixUnitaire DECIMAL(10, 2),
     description TEXT,
     nomImage VARCHAR(255),
-    estAuCatalogue BIT NOT NULL DEFAULT 1
+    estAuCatalogue BIT NOT NULL DEFAULT 1 -- Type qui prends deux valeur : 1 ou 0
 );
 
 CREATE TABLE Client (
