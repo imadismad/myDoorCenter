@@ -13,13 +13,20 @@
         <input type="text" name="search" class="form-control" placeholder="Recherche...">
       </div>
       <div class="col-md-1"></div>
-      <div class="col-md-2">
+      <div class="col-md-1">
         <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
       </div>
-      <div class="col-md-1">
-        <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button"
-            style="font-size: 2rem;"></button></a>
+      <div class="col-md-2 row">
+        <div class="col">
+        <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-cart3 blue-button"
+              style="font-size: 2rem;"></button></a>
+        </div>
+        <div class="col">
+          <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button"
+              style="font-size: 2rem;"></button></a>
+        </div>
       </div>
+      
     </div>
     <div class="row">
       <div class="col-md-12 align-center">
