@@ -19,7 +19,7 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
     }
 
     // Préparation de la requête de sélection
-    $requete = $connexion->prepare("SELECT idEntrepot, COUNT(*) AS quantite FROM Porte WHERE idProduit = ? GROUP BY idEntrepot");
+    $requete = $connexion->prepare("SELECT idEntrepot, COUNT(*) AS quantite FROM Porte WHERE idProduit = ? AND idEntrepot <> 1000 GROUP BY idEntrepot");
 
     // Liaison des valeurs des paramètres
     $requete->bind_param("s", $referenceProduit);
@@ -64,6 +64,14 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
         die("Erreur de connexion : " . $connexion->connect_error);
     }
 
+    // Vérifier le stock pour tous les produits d'abord
+    foreach ($produitsQuantites as $idProduit => $quantite) {
+        if (quantitePortesEnStockParEntrepot($idProduit) < $quantite) {
+            $connexion->close();
+            die("Le produit avec l'ID $idProduit n'est pas en stock en quantité suffisante.");
+        }
+    }
+
     // Début de la transaction
     $connexion->begin_transaction();
 
@@ -78,46 +86,45 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
 
         // Pour chaque produit et quantité dans la commande
         foreach ($produitsQuantites as $idProduit => $quantite) {
-            // Vérifier si le produit est en stock
-            if (quantitePortesEnStockParEntrepot($idProduit) < $quantite) {
-                throw new Exception("Le produit avec l'ID $idProduit n'est pas en stock en quantité suffisante.");
+            for ($i = 0; $i < $quantite; $i++) {
+                // Récupérer l'ID de l'entrepôt correspondant à la porte retirée
+                $requeteEntrepot = $connexion->prepare("SELECT id, idEntrepot FROM Porte WHERE idProduit = ? AND idEntrepot <> 1000 LIMIT 1");
+                $requeteEntrepot->bind_param("i", $idProduit);
+                $requeteEntrepot->execute();
+                $resultatEntrepot = $requeteEntrepot->get_result();
+                $rowEntrepot = $resultatEntrepot->fetch_assoc();
+
+                if (isset($rowEntrepot['idEntrepot'])) {
+                    $idEntrepot = $rowEntrepot['idEntrepot'];
+                } else {
+                    throw new Exception("L'entrepôt n'a pas été trouvé pour le produit avec l'ID $idProduit.");
+                }
+
+                $idPorte = $rowEntrepot['id'];
+                $idEntrepot = $rowEntrepot['idEntrepot'];
+                $requeteEntrepot->close();
+
+                // Mettre à jour le stock actuel dans la table Entrepot
+                $requeteStock = $connexion->prepare("UPDATE Entrepot SET stockActuel = stockActuel - 1 WHERE id = ?");
+                $requeteStock->bind_param("i", $idEntrepot);
+                $requeteStock->execute();
+                $requeteStock->close();
+
+                // Déplacer la porte vers l'entrepôt 1000
+                $requeteDeplacement = $connexion->prepare("UPDATE Porte SET idEntrepot = 1000 WHERE id = ?");
+                $requeteDeplacement->bind_param("i", $idPorte);
+                $requeteDeplacement->execute();
+                $requeteDeplacement->close();
+
+                // Créer une livraison pour la porte
+                $requeteLivraison = $connexion->prepare("INSERT INTO Livraison (arriveeEstimee, distance, nbPointsArrets, idCommande, idClient, idPorte) VALUES (?, ?, ?, ?, ?, ?)");
+                $arriveeEstimee = date("Y-m-d H:i:s", strtotime("+1 week")); // Exemple de date d'arrivée estimée
+                $distance = 100.0; // Exemple de distance
+                $nbPointsArrets = 0; // Exemple de nombre de points d'arrêt
+                $requeteLivraison->bind_param("siiiii", $arriveeEstimee, $distance, $nbPointsArrets, $idCommande, $idClient, $idPorte);
+                $requeteLivraison->execute();
+                $requeteLivraison->close();
             }
-
-            // Insérer les entrées dans la table Concerner
-            $requeteConcerner = $connexion->prepare("INSERT INTO Concerner (idProduit, idCommande, quantite) VALUES (?, ?, ?)");
-            $requeteConcerner->bind_param("iii", $idProduit, $idCommande, $quantite);
-            $requeteConcerner->execute();
-            $requeteConcerner->close();
-
-            // Récupérer l'ID de l'entrepôt correspondant à la porte retirée
-            $requeteEntrepot = $connexion->prepare("SELECT idEntrepot FROM Porte WHERE idProduit = ?");
-            $requeteEntrepot->bind_param("i", $idProduit);
-            $requeteEntrepot->execute();
-            $resultatEntrepot = $requeteEntrepot->get_result();
-            $rowEntrepot = $resultatEntrepot->fetch_assoc();
-            $idEntrepot = $rowEntrepot['idEntrepot'];
-            $requeteEntrepot->close();
-
-            // Mettre à jour le stock actuel dans la table Entrepot
-            $requeteStock = $connexion->prepare("UPDATE Entrepot SET stockActuel = stockActuel - ? WHERE id = ?");
-            $requeteStock->bind_param("ii", $quantite, $idEntrepot);
-            $requeteStock->execute();
-            $requeteStock->close();
-
-            // Supprimer la porte en stock dans la table Porte
-            $requeteSuppression = $connexion->prepare("UPDATE Porte SET idEntrepot = 1000 WHERE idEntrepot = ? LIMIT 1");
-            $requeteSuppression->bind_param("i", $idEntrepot);
-            $requeteSuppression->execute();
-            $requeteSuppression->close();
-
-            // Créer une livraison par porte pour chaque produit
-            $requeteLivraison = $connexion->prepare("INSERT INTO Livraison (arriveeEstimee, distance, nbPointsArrets, idCommande, idClient, idPorte) SELECT ?, ?, ?, ?, ?, p.id FROM Porte p WHERE p.idProduit = ?");
-            $arriveeEstimee = date("Y-m-d H:i:s", strtotime("+1 week")); // Exemple de date d'arrivée estimée
-            $distance = 100.0; // Exemple de distance
-            $nbPointsArrets = 0; // Exemple de nombre de points d'arrêt
-            $requeteLivraison->bind_param("siiiii", $arriveeEstimee, $distance, $nbPointsArrets, $idCommande, $idClient, $idProduit);
-            $requeteLivraison->execute();
-            $requeteLivraison->close();
         }
 
         // Valider la transaction
@@ -133,6 +140,7 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
     // Fermeture de la connexion
     $connexion->close();
 }
+
 
 
 
