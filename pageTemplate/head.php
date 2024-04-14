@@ -13,13 +13,19 @@
   <!-- Main css -->
   <link href="css/main.css" rel="stylesheet">
 
-  <!-- Get the specific css path -->
-  <?php
-      $currentPage = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
-
-      $cssFilePath = "css/$currentPage/style.css";
-    ?>
   <!-- Specific css -->
-  <link href="<?php echo $cssFilePath; ?>" rel="stylesheet">
+  <?php
+    $currentPage = pathinfo($_SERVER['PHP_SELF'], PATHINFO_FILENAME);
+
+    $cssFilePath = "css/$currentPage";
+
+    $styles = scandir($cssFilePath);
+
+    foreach ($styles as $style) {
+        if (pathinfo($style, PATHINFO_EXTENSION) === 'css') {
+            echo '<link href="' . $cssFilePath . '/' . $style . '"rel="stylesheet">' . PHP_EOL;
+        }
+    }
+    ?>
 
 </head>
