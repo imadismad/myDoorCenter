@@ -1,58 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyDoorCenter</title>
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Main css -->
-  <link href="css/main.css" rel="stylesheet">
-  <!-- Specific css -->
-  <link href="css/index/style.css" rel="stylesheet">
+<!-- Head with automatic css imports -->
+<?php include 'pageTemplate/head.php'; ?>
 
-</head>
 
 <body>
+
+  <!-- Header import -->
   <?php include 'pageTemplate/header.php'; ?>
+
+  <!-- Sidebar import -->
+  <?php include 'pageTemplate/sidebar.php'; ?>
 
 
   <main class="container-fluid">
-    <div class="row">
-
-      <div class="col-md-2 sidebar-large collapse overlay-sidebar" id="sidebarCollapse">
-        <button type="button" class="btn close" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#porteSubmenu">Portes</a>
-            <ul class="collapse list-unstyled" id="porteSubmenu">
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Blindées</a></li>
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Intérieures</a></li>
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Extérieures</a></li>
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Porte-fenêtres</a></li>
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Personnalisées</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#blocSubmenu">Blocs</a>
-            <ul class="collapse list-unstyled" id="blocSubmenu">
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Blindés</a></li>
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Intérieurs</a></li>
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Extérieurs</a></li>
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Porte-fenêtres</a></li>
-              <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Personnalisés</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#poigneeSubmenu">Poignées</a>
-          </li>
-        </ul>
-      </div>
+     <!-- CONTENT HERE -->
+    <div class="row">      
 
       <div class="col-md-12 content text-center">
         <h1 class="welcome-title border rounded display-1"><b>Bienvenue sur MyDoorCenter</b></h1>
@@ -116,84 +80,7 @@
             </div>
           </div>
         </div>
-        <!--                 
-                <div class="text-box">
-                    <h5 class="display-5">Avec notre large sélection, tous les projets sont à portée de main !</h5>
-                    <div class="inner-text">
-                        <div class="container">
-                            <div class="row">
 
-                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                  <img src="images/porte.png" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <p class="card-text">Porte</p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                  <img src="images/porte.png" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <p class="card-text">Porte</p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                  <img src="images/porte.png" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <p class="card-text">Porte</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                  <img src="images/porte.png" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <p class="card-text">Porte</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                  <img src="images/porte.png" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <p class="card-text">Porte</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                  <img src="images/porte.png" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <p class="card-text">Porte</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                  <img src="images/porte.png" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <p class="card-text">Porte</p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                                <div class="card">
-                                  <img src="images/porte.png" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <p class="card-text">Porte</p>
-                                  </div>
-                                </div>
-                              </div>
-
-                            </div>
-                          </div>
-                    </div>
-                </div> -->
         <div class="text-box" style="background-color: #437e80;">
           <h5 class="display-5" style="color: white;">Actualités</h5>
           <div class="inner-text">
@@ -254,18 +141,12 @@
         </div>
       </div>
     </div>
+    <!-- END OF CONTENT -->
   </main>
 
-  <footer class="footer">
-    <span>&copy; 2024 MyDoorCenter</span>
-  </footer>
+  <!-- JS Import -->
+  <?php include 'pageTemplate/jsImport.php'; ?>
 
-  <!-- Bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Main js -->
-  <script src="js/sidebar.js"></script>
-  <script src="js/reduce-header.js"></script>
 </body>
 
 </html>
