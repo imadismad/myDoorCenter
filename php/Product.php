@@ -22,6 +22,9 @@ class Product extends DBObject {
     private string $description;
     private string $imageName;
     private Array $materials;
+
+    private int $catalogue;
+    public function __construct(string $name, int $id, float $unitaryPrice, string $type, string $description, string $imageName, int $catalogue) {
     private Array $newMaterials; // New material add to the product
     private Array $oldMaterials; // Old material remove from the product
 
@@ -29,13 +32,12 @@ class Product extends DBObject {
 
     public function __construct(string $name, float $unitaryPrice, string $type, string $description, string $imageName) {
         parent::__construct(null, Product::TABLE_NAME);
-        
         $this->name = $name;
         $this->unitaryPrice = $unitaryPrice;
         $this->type = $type;
         $this->description = $description;
         $this->imageName = $imageName;
-
+        $this->catalogue = $catalogue;
         $this->materials = array();
         $this->newMaterials = array();
         $this->oldMaterials = array();
@@ -46,6 +48,9 @@ class Product extends DBObject {
 
         if ($res === null) return null;
 
+
+        $product = new Product($res["nom"], $res["id"], floatval($res["prixUnitaire"]), $res["type"], $res["description"], $res["nomImage"], $res["estAuCatalogue"]);
+        $materials = getMaterialsByProduct($id);
         $product = new Product(
             $res[Product::NAME_DB_NAME],
             floatval($res[Product::UNITARY_PRICE_DB_NAME]),
@@ -53,7 +58,6 @@ class Product extends DBObject {
             $res[Product::DESCRIPTION_DB_NAME],
             $res[Product::IMAGE_NAME_DB_NAME]
         );
-
         $product -> setId($res["id"]);
         $product -> materials = Material::constructAllFromProduct($product -> getId());
 
@@ -136,8 +140,14 @@ class Product extends DBObject {
     public function getPageLink(): string {
         return "/product.php?id=".$this->getId();
     }
+    public function getCatalogue(): int{
+        return $this->catalogue;
+    }
 
     // Setters
+    public function setCatalogue(int $catalogue){
+        $this->catalogue = $catalogue;
+    }
     public function setName(string $name) {
         $this -> addModification(Product::NAME_DB_NAME, $name);
         $this->name = $name;
