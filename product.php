@@ -1,3 +1,14 @@
+<?php
+require_once __DIR__ ."/php/Product.php";
+
+$product = Product::constructFromId(intval($_GET["id"]));
+if (!isset($_GET["id"]) || $product === null ) {
+    include __DIR__."/pageTemplate/404Product.html";
+    http_response_code(404);
+    exit;
+}
+?>
+<!-- Info manquante dans la BDD pour la page du produit : Reference du produit, dimension disponibles, couleurs dispo -->
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -116,24 +127,31 @@
             </div>
 
             <div class="col-md-12 content">
-                <h2 style="padding: 3%;"><strong>Porte Hiyon</strong></h2>
+                <h2 style="padding: 3%;">
+                    <strong>
+                        <?php echo $product -> getName()?>
+                    </strong>
+                </h2>
                 <div class="row">
                     <!-- Galerie d'images à gauche -->
                     <div class="col-md-5">
                         <div id="main-image-container" class="mb-3 rounded">
-                            <img src="images/porte.png" id="main-image" alt="Image principale" class="img-fluid">
+                            <?php
+                                $images = $product->getImagesPath();
+                                echo '<img src="'.$images[0].'" id="main-image" alt="Image principale" class="img-fluid">';
+                            ?>
                         </div>
                         <div id="vignettes-container" class="d-flex flex-row rounded">
-                            <img src="images/accessoire.png" class="vignette" alt="Image Accessoire">
-                            <img src="images/blocporte.png" class="vignette" alt="Image Bloc Porte">
-                            <img src="images/porte.png" class="vignette" alt="Image Porte">
-                            <img src="images/porteinterro.png" class="vignette" alt="Image Porte">
-                            <img src="images/magasin.png" class="vignette" alt="Image Porte">
+                            <?php
+                                foreach ($images as $path) {
+                                    echo '<img src="'.$path.'" class="vignette" alt="Image Accessoire">';
+                                }
+                            ?>
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        Référence: BDD78
+                        Référence: BDD78 (static comme la liste en dessous)
                         <ul>
                             <li>Revêtement laminé premium texturé</li>
                             <li>Épaisseur de 44mm</li>
@@ -145,11 +163,8 @@
                             <li>Lisière en bois massif de 38mm</li>
                             <li>Usage interne</li>
                         </ul>
-                        <p>Cette porte d'exception s'intègre parfaitement dans tout type d'intérieur, apportant une
-                            touche d'élégance et de modernité. Fini les pièces sans ouverture pour y pénétrer. Idéale
-                            pour les amateurs de design, elle saura mettre en valeur votre espace de vie.
-                            Cet objet de confort s'adresse à tous ceux qui souhaitent pouvoir entrer dans une pièce,
-                            ainsi qu'en ressortir.
+                        <p>
+                            <?php echo $product -> getDescription()?>
                         </p>
                     </div>
 
@@ -157,7 +172,12 @@
                     <div class="col-md-3"
                         style="background-color: #f0f0f0; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                         <h3>
-                            <div id="price">120€</div>
+                            <div id="price">
+                                <!--
+                                    The price will be initializ at the end of the doc
+                                    Usefull when web browser store a previous quantity when page reloading
+                                -->
+                            </div>
                         </h3>
                         <form>
                             <div class="mb-3">
@@ -187,7 +207,7 @@
                             <div class="mb-3">
                                 <label for="quantity-select" class="form-label">Quantité</label>
                                 <input type="number" class="form-control" id="quantity-select" value="1" min="1"
-                                    onchange="updatePrice(this)">
+                                    onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
                             </div>
 
                             <div class="mb-3">
@@ -237,7 +257,14 @@
                             <tr>
                                 <th>198*60, 198*66, 198*71, 198*76, 203*81, 203*86, 0.2*16547</th>
                                 <th>Noir, Blanc, Orange, Fushia, Jaune Citron, Marronnasse</th>
-                                <th>Bois, Pierre, Présent, Eau, Vent</th>
+                                <th>
+                                    <?php
+                                        foreach ($product -> getMaterialsName() as $index=>$name) {
+                                            if ($index !== 0) echo ", ";
+                                            echo $name;
+                                        }
+                                    ?>
+                                </th>
                             </tr>
                         </tbody>
                     </table>
@@ -320,6 +347,11 @@
     <script src="js/reduce-header.js"></script>
     <!-- Specific js -->
     <script src="js/product/productUtilities.js"></script>
+
+    <script>
+        // Init price
+        updatePrice(document.getElementById("quantity-select"), <?php echo $product -> getUnitaryPrice() ?>)
+    </script>
 </body>
 
 </html>

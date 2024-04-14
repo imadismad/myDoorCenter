@@ -1,7 +1,7 @@
 <?php
 
 // Inclure le fichier contenant les fonctions SQL
-require_once '../BDD/functionsSQL.php';
+require_once 'functionsSQL.php';
 
 function quantitePortesEnStockParEntrepot($referenceProduit) {
     // Informations de connexion à la base de données
@@ -32,14 +32,14 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
 
     // Affichage des quantités de portes par entrepôt
     if ($resultat->num_rows === 0) {
-        echo "La référence n'est pas en stock.";
+        fwrite(STDERR, "La référence n'est pas en stock.");
         return false;
     } else {
         // Affichage des quantités de portes par entrepôt
         while ($row = $resultat->fetch_assoc()) {
             $idEntrepot = $row["idEntrepot"];
             $quantite = $row["quantite"];
-            echo "Entrepôt ID: $idEntrepot, Quantité: $quantite\n";
+            fwrite(STDOUT, "Entrepôt ID: $idEntrepot, Quantité: $quantite\n");
         }
     }
 
@@ -130,18 +130,16 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
         // Valider la transaction
         $connexion->commit();
 
-        echo "La commande a été créée avec succès.";
+        fwrite(STDOUT, "La commande a été créée avec succès.");
     } catch (Exception $e) {
         // En cas d'erreur, annuler la transaction
         $connexion->rollback();
-        echo "Erreur lors de la création de la commande : " . $e->getMessage();
+        fwrite(STDERR, "Erreur lors de la création de la commande : " . $e->getMessage());
     }
 
     // Fermeture de la connexion
     $connexion->close();
 }
-
-
 
 
 ?>

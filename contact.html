@@ -10,7 +10,8 @@
     <!-- Main css -->
     <link href="css/main.css" rel="stylesheet">
     <!-- Specific css -->
-    
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+
     
 </head>
 <body>
@@ -32,7 +33,8 @@
                 <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
             </div>
             <div class="col-md-1">
-                <button title="Espace client" class="btn btn-light bi bi-person-circle blue-button" style="font-size: 2rem;"></button>
+                <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button"
+                    style="font-size: 2rem;"></button></a>
             </div>
         </div>
         <div class="row">
@@ -114,12 +116,15 @@
             
                 <div class="">
                     <h2>Contactez-nous</h2>
-                    <form method="post" action="#">
+                    <form onsubmit="return sendEmail(this);">
                         <div class="form-group">
                             <label for="clientName">Votre nom</label>
                             <input type="text" class="form-control" id="clientName" name="clientName" required>
                         </div>
-            
+                        <div class="form-group">
+                            <label for="clientMail">Votre e-mail</label>
+                            <input type="email" class="form-control" id="clientMail" name="clientMail" required>
+                        </div>
                         <div class="form-group">
                             <label for="requestType">Type de requête</label>
                             <select class="form-control" id="requestType" name="requestType" required>
@@ -131,18 +136,18 @@
                                 <option value="autres">Autres</option>
                             </select>
                         </div>
-            
                         <div class="form-group">
                             <label for="productName">Nom du produit</label>
-                            <input type="text" class="form-control" id="productName" name="productName">
+                            <input type="text" class="form-control" id="productName" name="productName" placeholder="Nom du produit">
                         </div>
                         <div class="form-group">
-                            <label for="productName">Détails de la demande d'assistance</label>
-                            <textarea type="text" class="form-control" id="productName" name="productName"></textarea>
+                            <label for="requestDetails">Détails de la demande d'assistance</label>
+                            <textarea class="form-control" id="requestDetails" name="requestDetails"></textarea>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Envoyer</button>
                     </form>
+                    
                     <hr>
                     <h3 class="mt-4">Vos derniers articles commandés</h3>
             
@@ -173,6 +178,7 @@
     <script src="js/sidebar.js"></script>
     <script src="js/reduce-header.js"></script>
     <!-- Specific js -->
-    
+    <script src="js/contact/sendEmail.js"></script>
+
 </body>
 </html>
