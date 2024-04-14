@@ -142,3 +142,4 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
 }
 
 
+?>
