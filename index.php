@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-
 <!-- Head with automatic css imports -->
 <?php include 'pageTemplate/head.php'; ?>
 
@@ -149,4 +146,4 @@
 
 </body>
 
-</html>
+<?php include 'pageTemplate/footer.php'; ?>
