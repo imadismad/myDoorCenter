@@ -1,3 +1,4 @@
+<div class="overlay"></div>
 <div class="col-md-2 sidebar-large collapse overlay-sidebar" id="sidebarCollapse">
     <button type="button" class="btn close" aria-label="Close">
         <span aria-hidden="true">&times;</span>

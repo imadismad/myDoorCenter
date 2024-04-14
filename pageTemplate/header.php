@@ -1,8 +1,9 @@
-<div class="overlay"></div>
+
   <header class="container-fluid fixed-top" id="mainHeader">
+  <div class="overlay"></div>
     <div class="row header-top align-items-center">
       <div class="col-md-1 sidebar-small">
-        <button title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
+        <button id="sidebarToggleButton" title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
       </div>
       <div class="col-md-3">
         <img src="images/logo.png" alt="Logo" height="100">
@@ -13,13 +14,20 @@
         <input type="text" name="search" class="form-control" placeholder="Recherche...">
       </div>
       <div class="col-md-1"></div>
-      <div class="col-md-2">
+      <div class="col-md-1">
         <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
       </div>
-      <div class="col-md-1">
-        <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button"
-            style="font-size: 2rem;"></button></a>
+      <div class="col-md-2 row">
+        <div class="col-md-6">
+        <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-cart3"
+              style="font-size: 2rem;"></button></a>
+        </div>
+        <div class="col-md-6">
+          <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button"
+              style="font-size: 2rem;"></button></a>
+        </div>
       </div>
+      
     </div>
     <div class="row">
       <div class="col-md-12 align-center">
