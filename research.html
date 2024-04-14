@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Main css -->
+    <link href="css/main.css" rel="stylesheet">
+    <!-- Specific css -->
+    <link href="css/research/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+    <header class="container-fluid fixed-top" id="mainHeader">
+        <div class="row header-top align-items-center">
+            <div class="col-md-1 sidebar-small">
+                <button title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
+            </div>
+            <div class="col-md-3">
+                <img src="images/logo.png" alt="Logo" height="100">
+            </div>
+            <div class="col-md-4 d-flex">
+                <label title="Rechercher" for="search"><button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;"></button></label>
+                <input type="text" name="search" class="form-control" placeholder="Recherche...">
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
+            </div>
+            <div class="col-md-1">
+                <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button" style="font-size: 2rem;"></button></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 align-center">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Portes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Blindées</a>
+                            <a class="dropdown-item" href="#">Intérieures</a>
+                            <a class="dropdown-item" href="#">Extérieures</a>
+                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
+                            <a class="dropdown-item" href="#">Personnalisées</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Blocs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Blindés</a>
+                            <a class="dropdown-item" href="#">Intérieurs</a>
+                            <a class="dropdown-item" href="#">Extérieurs</a>
+                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
+                            <a class="dropdown-item" href="#">Personnalisés</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-top" href="#">Poignées</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-top" href="#">Accessoires</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-fluid">
+        <div class="row">
+            
+            <div class="col-md-2 sidebar-large collapse overlay-sidebar" id="sidebarCollapse">
+                <button type="button" class="btn close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#porteSubmenu">Portes</a>
+                        <ul class="collapse list-unstyled" id="porteSubmenu">
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Blindées</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Intérieures</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Extérieures</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Porte-fenêtres</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Personnalisées</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#blocSubmenu">Blocs</a>
+                        <ul class="collapse list-unstyled" id="blocSubmenu">
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Blindés</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Intérieurs</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Extérieurs</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Porte-fenêtres</a></li>
+                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Personnalisés</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#poigneeSubmenu">Poignées</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <form method="post" action="#" class="p-3">
+              <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Rechercher des portes..." style="margin: 2%;">
+              </div>
+      
+              <div class="row">
+                  <div class="col-md-3 bg-light rounded">
+                    <label class="filterCategory rounded">Trier par
+                        <select name="material">
+                            <option value="">Prix : Ordre croissant</option>
+                            <option value="bois">Prix : Ordre décroissant</option>
+                            <option value="acier">Mise en avant</option>
+                            <option value="verre">Moyenne des commentaires</option>
+                        </select>
+                    </label>
+                      <h3>Catégories</h3>
+                      <div class="form-check">
+                          <label><input type="checkbox" name="category" value="porte_blindée"> Portes blindées</label>
+                          <br>
+                          <label><input type="checkbox" name="category" value="porte_intérieure"> Portes intérieurs</label>
+                          <br>
+                          <label><input type="checkbox" name="category" value="porte_extérieure"> Portes extérieurs</label>
+                          <br>
+                          <label><input type="checkbox" name="category" value="porte_fenêtre"> Portes fenêtres</label>
+                          <br>
+                          <label><input type="checkbox" name="category" value="porte_personnalisée"> Porte personnalisable</label>
+                          <br>
+                          <label><input type="checkbox" name="category" value="poignée"> Poignées</label>
+                          <br>
+                          <label><input type="checkbox" name="category" value="canon"> Canon</label>
+                          <br>
+                          <label><input type="checkbox" name="category" value="bloque_complet"> Bloque complet</label>
+                      </div>
+      
+                      <h3>Plus de Filtres</h3>
+                      <div class="form-group">
+                        <label class="filterCategory rounded">Prix minimal
+                            <input type="range" name="price" id="priceRangeMin" min="0" max="5000" value="0">
+                            <input type="number" id="priceNumberMin" min="0" max="5000" value="0">
+                            <span id="priceValueMin">0</span>€
+                        </label>
+
+                        <label class="filterCategory rounded">Prix maximal
+                          <input type="range" name="price" id="priceRangeMax" min="0" max="5000" value="5000">
+                          <input type="number" id="priceNumberMax" min="0" max="5000" value="5000">
+                          <span id="priceValueMax">5000</span>€
+                        </label>
+                          <br>
+                          <label class="filterCategory rounded">Matériaux
+                              <select name="material">
+                                  <option value="">Sélectionner</option>
+                                  <option value="bois">Bois</option>
+                                  <option value="acier">Acier</option>
+                                  <option value="verre">Verre</option>
+                              </select>
+                          </label>
+                          <br>
+                          <label class="filterCategory rounded"><input type="checkbox" name="recent_article"> Article récent</label>
+                          <br>
+                          <label class="filterCategory rounded">Note des clients
+                              <select name="rating">
+                                  <option value="">Sélectionner</option>
+                                  <option value="1">★☆☆☆☆</option>
+                                  <option value="2">★★☆☆☆</option>
+                                  <option value="3">★★★☆☆</option>
+                                  <option value="4">★★★★☆</option>
+                                  <option value="5">★★★★★</option>
+                              </select>
+                          </label>
+                          <br>
+                          <label class="filterCategory rounded">Couleurs disponibles
+                              <select name="color">
+                                  <option value="">Sélectionner</option>
+                                  <option value="blanc">Blanc</option>
+                                  <option value="noir">Noir</option>
+                                  <option value="rouge">Rouge</option>
+                              </select>
+                          </label>
+                      </div>
+                      <hr>
+                      <button type="submit" class="btn btn-primary">Rechercher</button>
+                  </div>
+      
+                  <div class="col-md-9">
+                    <div class="row">
+
+                      <div class="row">
+
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title"><b>Porte 1</b></h5>
+                              </div>
+                              <img src="images/porte.png" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <p class="card-text">
+                                    Une belle porte
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title"><b>Porte 2</b></h5>
+                              </div>
+                              <img src="images/porte.png" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <p class="card-text">
+                                    Une porte
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          
+
+                          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title"><b>Porte 3</b></h5>
+                              </div>
+                              <img src="images/porte.png" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                <p class="card-text">
+                                    Une porte pas chere
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                    </div>
+                  </div>
+                  
+                  </div>
+                  
+              </div>
+      
+              
+          </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span>&copy; 2024 MyDoorCenter</span>
+    </footer>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Main js -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/reduce-header.js"></script>
+    <!-- Specific js -->
+    <script src="js/research/filters.js"></script>
+</body>
+</html>

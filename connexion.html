@@ -6,15 +6,15 @@
     <title>Page de connexion</title>
 </head>
 <body>
-    <!-- TODO page de co -->
+    <!-- Page de connexion -->
     <div class="container">
-        <h2>connexion</h2>
+        <h2>Connexion</h2>
         <form action="connexion/initSession.php" method="post">
             <label for="mail">Mail:</label>
-            <input type="mail" name="mail" id="mail" placeholder="Votre mail"><br>
+            <input type="email" name="mail" id="mail" placeholder="Votre mail" required><br>
             <label for="mdp">Mot de passe:</label>
-            <input type="password" name="password" id="password" placeholder="Mot de passe">
-            <input type="submit" value="Connexion">
+            <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+            <input type="submit" name="submit" value="connexion">
         </form>
     </div>
 </body>

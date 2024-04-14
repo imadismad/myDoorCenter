@@ -1,6 +1,6 @@
 <!-- Faire la connexion en bdd et initialiser et recup les infos pour initialiser les infos puis rediriger vers une page-->
 <?php
-include_once("config.php");
+include_once ("config.php");
 require_once "functionsSQL.php";
 $serveur = SQL_SERVER;
 $utilisateur = SQL_USER;
@@ -14,37 +14,42 @@ $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
 if ($connexion->connect_error) {
     die("Erreur de connexion : " . $connexion->connect_error);
 }
-if (isset($_POST["submit"])) {
-    $genre = $_POST['sex'];
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $email = $_POST['mail'];
+try {
+    if (isset($_POST["submit"])) {
+        $genre = mysqli_real_escape_string($connexion, $_POST['sex']);
+        $nom = mysqli_real_escape_string($connexion, $_POST['nom']);
+        $prenom = mysqli_real_escape_string($connexion, $_POST['prenom']);
+        $email = mysqli_real_escape_string($connexion, $_POST['mail']);
+        $naissance = mysqli_real_escape_string($connexion, $_POST['naissance']);
+        $pays = mysqli_real_escape_string($connexion, $_POST['pays']);
+        $telephone = mysqli_real_escape_string($connexion, $_POST['tel']);
+        $id = 0;
+        $ville = mysqli_real_escape_string($connexion, $_POST['ville']);
+        $rue = mysqli_real_escape_string($connexion, $_POST['rue']);
+        $CP = mysqli_real_escape_string($connexion, $_POST['postal']);
 
-    $naissance = $_POST['naissance'];
-    $pays = $_POST['pays'];
-
-    $telephone = $_POST['tel'];
-
-    $ville = $_POST['ville'];
-    $rue = $_POST['rue'];
-    $CP = $_POST['postal'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $donnees = array(
-        "id" => 12,
-        "genre" => $genre,
-        "nom" => $nom,
-        "prenom" => $prenom,
-        "mail" => $email,
-        "naissance" => $naissance,
-        "pays" => $pays,
-        "telephone" => $telephone,
-        "ville" => $ville,
-        "rue" => $rue,
-        "CP" => $CP,
-        "mdp" => $password
-    );
-    // $stmt = $connexion->prepare("INSERT INTO Client (genre) VALUES ($genre)");
-    insererDonnees("Client", $donnees);
-    header("Location: ../connexion.html");
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $donnees = array(
+            "id" => $id,
+            "genre" => $genre,
+            "nom" => $nom,
+            "prenom" => $prenom,
+            "mail" => $email,
+            "naissance" => $naissance,
+            "pays" => $pays,
+            "telephone" => $telephone,
+            "ville" => $ville,
+            "rue" => $rue,
+            "CP" => $CP,
+            "mdp" => $password
+        );
+        insererDonnees("Client", $donnees);
+        header("Location: ../connexion.html");
+    }
+} catch (Exception $e) {
+    echo "" . $e->getMessage() . "";
+    header("Location: ../creationCompte.html");
 }
+
+
 ?>

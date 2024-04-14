@@ -1,0 +1,33 @@
+#main-image-container {
+    width: 70%; /* Largeur de l'encadré */
+    height: 70%; /* Hauteur de l'encadré */
+    overflow: hidden; /* Cache les parties de l'image qui dépassent */
+    display: flex; /* Utilisé pour centrer l'image */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    margin-top: 5%;
+    border: solid 1px #aaaaaa;
+    padding: 1%;
+}
+
+#main-image {
+    max-width: 100%; /* Empêche l'image de dépasser la largeur de l'encadré */
+    max-height: 100%; /* Empêche l'image de dépasser la hauteur de l'encadré */
+    object-fit: cover; /* Couvre l'encadré avec l'image, en conservant les proportions */
+}
+
+#vignettes-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    border: #aaaaaa solid 1px;
+    padding: 1%;
+}
+
+.vignette {
+    flex: 0 0 auto;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    object-fit: cover; /* Assure que les vignettes couvrent leur espace sans déformer l'image */
+}
