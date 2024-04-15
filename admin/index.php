@@ -57,7 +57,7 @@ if (!isset($_SESSION["admin"])) {
                 row.append('<td>' + product.type + '</td>');
                 row.append('<td>' + product.prixUnitaire + '</td>');
                 row.append('<td>' + product.description + '</td>');
-                row.append('<td><img src="' + +product.nomImage + '" alt="' + product.nom + '"></td>');
+                row.append('<td><img src="' + product.nomImage + '" alt="' + product.nom + '"></td>');
                 if (product.estAuCatalogue == 1) {
                     row.append('<td id=catalogue' + product.id + '>Yes</td>');
                 } else {
@@ -87,8 +87,14 @@ if (!isset($_SESSION["admin"])) {
                 })
             }
         })
+        $(document).on('click', '.add-button', function () {
+            var id = $(this).data('id');
+            if (confirm('Ajoutez un produit')) {
+                window.location.assign('createProduct.php');
+            }
+        })
     </script>
-    <button class="ajout">Ajouter produit</button>
+    <button class="add-button">Ajouter produit</button>
 </body>
 
 </html>

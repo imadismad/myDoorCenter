@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../php/Product.php';
+require_once '../php/ProductHadj.php';
 require_once "../BDD/config.php";
 require_once "../BDD/functionsSQL.php";
 // Get the modified product details from the POST request
@@ -9,7 +9,7 @@ $name = $_POST['name'];
 $type = $_POST['type'];
 $unitaryPrice = $_POST['price'];
 $description = $_POST['description'];
-$imageName = $_POST['image'];
+$imageName = "../images/".$_POST['image'];
 $estAuCatalogue = $_POST['catalog'];
 
 if (isset($_POST["submit"])) {

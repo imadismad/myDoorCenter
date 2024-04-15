@@ -214,3 +214,4 @@ class Product extends DBObject {
         $this -> addMaterial(Material::constructFromId($idMaterial));
     }
 }
+}
