@@ -7,7 +7,7 @@ body {
 
 
 /* Responsive Header size */
-.pt-header-xs { padding-top: 18rem; } 
+.pt-header-xs { padding-top: 18rem; } /* Default for very small screens */
 
 @media (min-width: 576px) {
   .pt-header-sm { padding-top: 16rem; }
@@ -25,12 +25,17 @@ body {
   .pt-header-xl { padding-top: 11rem; }
 }
 
+/* Specific high-density small screens */
+@media only screen and (max-width: 575.98px) and (min-device-pixel-ratio: 2), 
+       only screen and (max-width: 575.98px) and (min-resolution: 192dpi) {
+    .pt-header-xs { padding-top: 50rem; } /* Adjusted padding for high-density small screens */
+}
 
 /* Responsive title margin */
-.pt-title-xs { padding-top: 4rem; } 
+.pt-title-xs { padding-top: 4rem; } /* Default for very small screens */
 
 @media (min-width: 576px) {
-  .pt-xtitle-sm { padding-top: 0rem; }
+  .pt-title-sm { padding-top: 0rem; }
 }
 
 @media (min-width: 768px) {
@@ -43,6 +48,12 @@ body {
 
 @media (min-width: 1200px) {
   .pt-title-xl { padding-top: 0rem; }
+}
+
+/* Specific high-density small screens */
+@media only screen and (max-width: 575.98px) and (min-device-pixel-ratio: 2), 
+       only screen and (max-width: 575.98px) and (min-resolution: 192dpi) {
+    .pt-title-xs { padding-top: 10rem; } /* Adjusted padding for high-density small screens */
 }
 
 
