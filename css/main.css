@@ -1,9 +1,50 @@
 /* Structure Globale */
 
 body {
-    padding-top: 13%; 
+    /* padding-top: 13%;  */
     background-color: #eee;
 }
+
+
+/* Responsive Header size */
+.pt-header-xs { padding-top: 18rem; } 
+
+@media (min-width: 576px) {
+  .pt-header-sm { padding-top: 16rem; }
+}
+
+@media (min-width: 768px) {
+  .pt-header-md { padding-top: 14rem; }
+}
+
+@media (min-width: 992px) {
+  .pt-header-lg { padding-top: 12rem; }
+}
+
+@media (min-width: 1200px) {
+  .pt-header-xl { padding-top: 11rem; }
+}
+
+
+/* Responsive title margin */
+.pt-title-xs { padding-top: 4rem; } 
+
+@media (min-width: 576px) {
+  .pt-xtitle-sm { padding-top: 0rem; }
+}
+
+@media (min-width: 768px) {
+  .pt-title-md { padding-top: 0rem; }
+}
+
+@media (min-width: 992px) {
+  .pt-title-lg { padding-top: 0rem; }
+}
+
+@media (min-width: 1200px) {
+  .pt-title-xl { padding-top: 0rem; }
+}
+
 
 .container {
     display: flex;
