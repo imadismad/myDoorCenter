@@ -28,7 +28,7 @@ body {
 /* Specific high-density small screens */
 @media only screen and (max-width: 575.98px) and (min-device-pixel-ratio: 2), 
        only screen and (max-width: 575.98px) and (min-resolution: 192dpi) {
-    .pt-header-xs { padding-top: 30rem; } /* Adjusted padding for high-density small screens */
+    .pt-header-xs { padding-top: 25rem; } /* Adjusted padding for high-density small screens */
 }
 
 /* Responsive title margin */
