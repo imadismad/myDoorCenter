@@ -11,18 +11,20 @@
   <?php include 'pageTemplate/sidebar.php'; ?>
 
 
-  <main class="container-fluid">
+  <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
      <!-- CONTENT HERE -->
     <div class="row">      
 
       <div class="col-md-12 content text-center">
         <h1 class="welcome-title border rounded display-1"><b>Bienvenue sur MyDoorCenter</b></h1>
+        <div class="pt-title-xs pt-title-sm pt-title-md pt-title-lg pt-title-xl"></div>
         <div class="position-relative text-center">
           <img src="images/fresqueworker.png" alt="Logo" width="100%">
           <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent">
             <h6 class="display-6"><b>Vous avez frappé <br>à la bonne porte !</b></h6>
           </div>
         </div>
+        <div class="pt-title-xs pt-title-sm pt-title-md pt-title-lg pt-title-xl"></div>
 
         <div class="text-box">
           <h5 class="display-5">Nos services</h5>
