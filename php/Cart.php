@@ -1,14 +1,17 @@
 <?php
 require_once "Product.php";
+require_once "OptionArray.php";
 
 class Cart implements Iterator {
     private Array $products;
     private Array $productsQuantity;
+    private Array $productOption;
     private int $position = 0;
 
     public function __construct() {
         $this->products = array();
         $this->productsQuantity = array();
+        $this->productOption = array();
     }
 
     public function __toString(): string {
@@ -52,14 +55,30 @@ class Cart implements Iterator {
     }
 
     /**
+     * Search a product in the cart, if option are specify check also the option
+     * @param Product $product The product
+     * @param OptionArray $option The option of the product, if null dont check them
+     */
+    public function searchProduct(Product $product, OptionArray $option = null): int|false {
+        $i = 0;
+        while ($i < count($this -> products)) {
+            if ($this->products[$i] == $product && ($option === null || $this->productOption == $option))
+                return $i;
+        }
+
+        return false;
+    }
+
+    /**
      * This function can be use to add or remove an element in the cart
      * If the product have an negative or null quantity, remove 
      */
-    public function addIntoCart(Product $product, int $quantity) {
-        $pos = array_search($product, $this->products, false);
+    public function addIntoCart(Product $product, int $quantity, OptionArray $arrayOption) {
+        $pos = $this -> searchProduct($product, $arrayOption);
         if ($pos === false) {
             array_push($this->products, $product);
             array_push($this->productsQuantity, 0);
+            array_push($this->productOption, $arrayOption);
             $pos = sizeof($this->productsQuantity) - 1;
         }
 
