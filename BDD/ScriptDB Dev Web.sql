@@ -17,9 +17,9 @@ CREATE TABLE Produit (
     nom VARCHAR(255),
     type VARCHAR(100),
     prixUnitaire DECIMAL(10, 2),
-    lienPage VARCHAR(255) UNIQUE,
     description TEXT,
-    nomImage VARCHAR(255)
+    nomImage VARCHAR(255),
+    estAuCatalogue BIT NOT NULL DEFAULT 1 -- Type qui prends deux valeur : 1 ou 0
 );
 
 CREATE TABLE Client (
@@ -109,10 +109,26 @@ CREATE TABLE Noter (
 );
 
 CREATE TABLE Concerner (
+    id INT PRIMARY KEY AUTO_INCREMENT,
     idProduit INT,
     idCommande INT,
     quantite INT,
-    PRIMARY KEY (idProduit, idCommande),
     FOREIGN KEY (idProduit) REFERENCES Produit(id),
     FOREIGN KEY (idCommande) REFERENCES Commande(id)
+);
+
+CREATE TABLE OptionAchat (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    libele VARCHAR(255),
+    cout DECIMAL(10, 2),
+    typeProduit VARCHAR(100), -- Même valeur que type dans Produit
+    active BIT NOT NULL DEFAULT 1 -- Bool pour savoir si on doit l'afficher à l'utilisateur
+);
+
+CREATE TABLE AOption (
+    idConcerner INT,
+    idOption INT,
+    PRIMARY KEY (idConcerner, idOption),
+    FOREIGN KEY (idConcerner) REFERENCES Concerner(id),
+    FOREIGN KEY (idOption) REFERENCES OptionAchat(id)
 );

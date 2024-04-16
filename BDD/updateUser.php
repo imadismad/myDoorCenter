@@ -24,4 +24,3 @@ if (isset($_POST["submit"])) {
     $request->close();
     header("Location: deconnexion.php");
 }
-?>

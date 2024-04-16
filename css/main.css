@@ -47,8 +47,19 @@ header {
     margin-right: 50px;
 }
 
+.nav-link-side {
+    color: #172a2b;
+    font-size: large;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 .nav-link.active {
     background-color: #437e80;
+}
+
+.nav-item-side {
+    margin-left: 5%;
 }
 
 .welcome-title {
@@ -114,7 +125,7 @@ header {
 }
 
 .sidebar-subitem {
-    background-color: #fff;
+    /* background-color: #fff; */
     color: #172a2b;
 }
 

@@ -10,9 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-          function updatePrice(element) {
+function updatePrice(element, basePrice) {
   var quantity = element.value;
-  var basePrice = 120; // Prix de base du produit, à ajuster
   var totalPrice = quantity * basePrice;
-  document.getElementById('price').innerText = totalPrice + '€';
+  document.getElementById('price').innerText = totalPrice.toFixed(2) + '€';
 }

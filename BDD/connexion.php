@@ -1,5 +1,8 @@
 <!-- Faire la connexion en bdd et initialiser et recup les infos pour initialiser les infos puis rediriger vers une page-->
 <?php
+/*
+ * THIS PHP USE ONLY Client TABLE
+ */
 include_once ("config.php");
 require_once "functionsSQL.php";
 $serveur = SQL_SERVER;
@@ -47,7 +50,7 @@ try {
         header("Location: ../connexion");
     }
 } catch (Exception $e) {
-    echo "" . $e->getMessage() . "";
+    fwrite(STDERR, "" . $e->getMessage() . "");
     header("Location: ../creationCompte.html");
 }
 
