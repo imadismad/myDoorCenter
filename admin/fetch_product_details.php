@@ -1,5 +1,5 @@
 <?php
-require_once '../php/Product.php';
+require_once '../php/ProductHadj.php';
 
 // Get the product ID from the query string
 $id = $_GET['id'];
