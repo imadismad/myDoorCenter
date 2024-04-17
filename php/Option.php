@@ -45,6 +45,27 @@ class Option extends DBObject{
         return $option;
     }
 
+    public static function constructAllFromType(string $type, bool $onlyActive): Array {
+        $resList = getProductOption($type);
+        $options = [];
+
+        foreach($resList as $res) {
+            $option = new Option(
+                $res[Option::LIBELE_DB_NAME],
+                $res[Option::PRICE_DB_NAME],
+                $res[Option::PRODUCT_TYPE_DB_NAME],
+                $res[Option::IS_ACTIVE_DB_NAME]
+            );
+
+            if ($option -> isActive || !$onlyActive) {
+                array_push($options, $option);
+                $option -> setId($res["id"]);
+            }
+        }
+
+        return $options;
+    }
+
     /*
      * Getteur
      */

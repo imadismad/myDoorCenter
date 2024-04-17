@@ -1,14 +1,17 @@
 <?php
 require_once "Product.php";
+require_once "OptionArray.php";
 
 class Cart implements Iterator {
     private Array $products;
     private Array $productsQuantity;
+    private Array $productOption; // Array of OptionArray
     private int $position = 0;
 
     public function __construct() {
         $this->products = array();
         $this->productsQuantity = array();
+        $this->productOption = array();
     }
 
     public function __toString(): string {
@@ -16,9 +19,12 @@ class Cart implements Iterator {
     }
 
     public static function getUserCart(): Cart {
-        if (session_status() == PHP_SESSION_NONE) session_start();
-        if (!isset($_SESSION["cart"]) || !$_SESSION["cart"] instanceof Cart)
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        if (!isset($_SESSION["cart"]) || !$_SESSION["cart"] instanceof Cart) {
+            if (get_class($_SESSION["cart"]) === "__PHP_Incomplete_Class")
+                fwrite(STDERR, "Attention, la session semble avoir été initialisé avant l'import de Cart.php");
             $_SESSION["cart"] = new Cart();
+        }
         return $_SESSION["cart"];
     }
 
@@ -27,6 +33,7 @@ class Cart implements Iterator {
         return array(
             "product" => clone $this->products[$this->position],
             "quantity" => $this->productsQuantity[$this->position],
+            "optionArray" => $this->productOption[$this->position]
         );
     }
 
@@ -52,14 +59,31 @@ class Cart implements Iterator {
     }
 
     /**
+     * Search a product in the cart, if option are specify check also the option
+     * @param Product $product The product
+     * @param OptionArray $option The option of the product, if null dont check them
+     */
+    public function searchProduct(Product $product, OptionArray $option = null): int|false {
+        $i = 0;
+        while ($i < count($this -> products)) {
+            if ($this->products[$i] == $product && ($option === null || $this->productOption[$i] == $option))
+                return $i;
+            $i++;
+        }
+
+        return false;
+    }
+
+    /**
      * This function can be use to add or remove an element in the cart
      * If the product have an negative or null quantity, remove 
      */
-    public function addIntoCart(Product $product, int $quantity) {
-        $pos = array_search($product, $this->products, false);
+    public function addIntoCart(Product $product, int $quantity, OptionArray $arrayOption) {
+        $pos = $this -> searchProduct($product, $arrayOption);
         if ($pos === false) {
             array_push($this->products, $product);
             array_push($this->productsQuantity, 0);
+            array_push($this->productOption, $arrayOption);
             $pos = sizeof($this->productsQuantity) - 1;
         }
 
@@ -70,5 +94,9 @@ class Cart implements Iterator {
             array_splice($this->products, $pos, 1);
             array_splice($this->productsQuantity, $pos, 1);
         }
+    }
+
+    public function count() {
+        return count($this->products);
     }
 }
