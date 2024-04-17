@@ -21,7 +21,7 @@ class Cart implements Iterator {
     public static function getUserCart(): Cart {
         if (session_status() === PHP_SESSION_NONE) session_start();
         if (!isset($_SESSION["cart"]) || !$_SESSION["cart"] instanceof Cart) {
-            if (get_class($_SESSION["cart"]) === "__PHP_Incomplete_Class")
+            if (isset($_SESSION["cart"]) && get_class($_SESSION["cart"]) === "__PHP_Incomplete_Class")
                 fwrite(STDERR, "Attention, la session semble avoir été initialisé avant l'import de Cart.php");
             $_SESSION["cart"] = new Cart();
         }

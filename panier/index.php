@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
     <!-- Sidebar import -->
     <?php include '../pageTemplate/sidebar.php'; ?>
 
-    <main class="container-fluid">
+    <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
         <h1>Panier</h1>
         <div id="templatePanier">
             <?php include "../pageTemplate/panierTemplate.php"?>
