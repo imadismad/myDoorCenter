@@ -1,7 +1,5 @@
 <!-- Head with automatic css imports -->
 <?php include 'pageTemplate/head.php'; ?>
-
-
     <body>
 
     <!-- Header import -->
@@ -13,7 +11,7 @@
 
     <main class="container-fluid">
         <!-- CONTENT HERE -->
-
+        
         <!-- END OF CONTENT -->
     </main>
 

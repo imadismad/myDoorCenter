@@ -186,7 +186,7 @@ if (!isset($_GET["id"]) || $product === null ) {
                                     foreach ($product -> getCompatibleBuyingOption() as $option) {
                                         echo
                                         '<div class="form-check">'.
-                                            '<input class="form-check-input" type="checkbox" value="'.$option->getLibele().'" id="option-'.$option->getLibele().'">'.
+                                            '<input class="form-check-input" type="checkbox" name="optionId" value="'.$option->getId().'" id="option-'.$option->getLibele().'">'.
                                             '<label class="form-check-label" for="optionCadre">'.$option->getLibele().' (+ '.$option->getPrice().' &euro;)</label>'.
                                         '</div>';
                                     }
@@ -195,7 +195,7 @@ if (!isset($_GET["id"]) || $product === null ) {
 
                             <div class="mb-3">
                                 <label for="quantity-select" class="form-label">Quantité</label>
-                                <input type="number" class="form-control" id="quantity-select" value="1" min="1"
+                                <input type="number" class="form-control" id="quantity-select" name="quantity" value="1" min="1"
                                     onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
                             </div>
 
@@ -215,7 +215,14 @@ if (!isset($_GET["id"]) || $product === null ) {
                                 </ul>
                             </div>
 
-                            <button type="button" class="btn btn-light">Ajouter au panier</button>
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                id="ajoutPanier"
+                                onclick=<?php echo "addProduct(".$product->getId().")" ?>
+                            >
+                                Ajouter au panier
+                            </button>
                         </form>
                     </div>
                 </div>

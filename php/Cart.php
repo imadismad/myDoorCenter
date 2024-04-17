@@ -5,7 +5,7 @@ require_once "OptionArray.php";
 class Cart implements Iterator {
     private Array $products;
     private Array $productsQuantity;
-    private Array $productOption;
+    private Array $productOption; // Array of OptionArray
     private int $position = 0;
 
     public function __construct() {
@@ -19,9 +19,12 @@ class Cart implements Iterator {
     }
 
     public static function getUserCart(): Cart {
-        if (session_status() == PHP_SESSION_NONE) session_start();
-        if (!isset($_SESSION["cart"]) || !$_SESSION["cart"] instanceof Cart)
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        if (!isset($_SESSION["cart"]) || !$_SESSION["cart"] instanceof Cart) {
+            if (get_class($_SESSION["cart"]) === "__PHP_Incomplete_Class")
+                fwrite(STDERR, "Attention, la session semble avoir été initialisé avant l'import de Cart.php");
             $_SESSION["cart"] = new Cart();
+        }
         return $_SESSION["cart"];
     }
 
@@ -30,6 +33,7 @@ class Cart implements Iterator {
         return array(
             "product" => clone $this->products[$this->position],
             "quantity" => $this->productsQuantity[$this->position],
+            "optionArray" => $this->productOption[$this->position]
         );
     }
 
@@ -62,8 +66,9 @@ class Cart implements Iterator {
     public function searchProduct(Product $product, OptionArray $option = null): int|false {
         $i = 0;
         while ($i < count($this -> products)) {
-            if ($this->products[$i] == $product && ($option === null || $this->productOption == $option))
+            if ($this->products[$i] == $product && ($option === null || $this->productOption[$i] == $option))
                 return $i;
+            $i++;
         }
 
         return false;
@@ -89,5 +94,9 @@ class Cart implements Iterator {
             array_splice($this->products, $pos, 1);
             array_splice($this->productsQuantity, $pos, 1);
         }
+    }
+
+    public function count() {
+        return count($this->products);
     }
 }

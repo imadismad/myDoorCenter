@@ -117,4 +117,13 @@ class OptionArray {
     public function count(): int {
         return count($this -> array);
     }
+
+    public function toIdsRequete(): string {
+        if ($this -> count() === 0) return "";
+        $str = $this -> get(0) -> getId();
+        for ($i = 1; $i < $this ->count(); $i++) {
+            $str .= "|".$this -> get($i) -> getId();
+        }
+        return $str;
+    }
 }
