@@ -24,9 +24,10 @@ class Product extends DBObject {
     private string $imageName;
     private Array $materials;
 
-    private int $catalogue;
     private Array $newMaterials; // New material add to the product
     private Array $oldMaterials; // Old material remove from the product
+
+    private int $catalogue;
 
     public function __construct(string $name, float $unitaryPrice, string $type, string $description, string $imageName, int $catalogue) {
         parent::__construct(null, Product::TABLE_NAME);
@@ -177,7 +178,6 @@ class Product extends DBObject {
     }
 
     public function removeMaterial(Material $material) {
-        fwrite(STDERR, "AJOUTER LA MISE A JOUR DANS LA DB DES MATERIAUX");
         if (Material::searchMaterial($material, $this->oldMaterials) !== false) return;
         
         $indexM = Material::searchMaterial($material, $this->materials);
@@ -195,7 +195,6 @@ class Product extends DBObject {
     }
 
     public function addMaterial(Material $material) {
-        fwrite(STDERR, "AJOUTER LA MISE A JOUR DANS LA DB DES MATERIAUX");
         if (Material::searchMaterial($material, $this->materials) !== false) return;
 
         if (($index = Material::searchMaterial($material, $this->oldMaterials)) !== false) {
@@ -216,5 +215,4 @@ class Product extends DBObject {
     public function addMaterialFromId(int $idMaterial) {
         $this -> addMaterial(Material::constructFromId($idMaterial));
     }
-}
 }
