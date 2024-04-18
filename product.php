@@ -32,6 +32,12 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 
 <body>
+    <!-- Header import -->
+    <?php include BASE_DIR.'pageTemplate/header.php'; ?>
+
+    <!-- Sidebar import -->
+    <?php include BASE_DIR.'pageTemplate/sidebar.php'; ?>
+
     <!-- Modal  creation-->
     <div class="modal fade" id="modale" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -59,103 +65,10 @@ define('BASE_DIR_STATIC', getProjectPath());
         </div>
     </div>
 
-    <div class="overlay"></div>
-    <header class="container-fluid fixed-top" id="mainHeader">
-        <div class="row header-top align-items-center">
-            <div class="col-md-1 sidebar-small">
-                <button title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
-            </div>
-            <div class="col-md-3">
-                <img src="images/logo.png" alt="Logo" height="100">
-            </div>
-            <div class="col-md-4 d-flex">
-                <label title="Rechercher" for="search"><button class="btn btn-light bi bi-search blue-button"
-                        style="font-size: 1rem;"></button></label>
-                <input type="text" name="search" class="form-control" placeholder="Recherche...">
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-2">
-                <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
-            </div>
-            <div class="col-md-1">
-                <button title="Espace client" class="btn btn-light bi bi-person-circle blue-button"
-                    style="font-size: 2rem;"></button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 align-center">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Portes
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Blindées</a>
-                            <a class="dropdown-item" href="#">Intérieures</a>
-                            <a class="dropdown-item" href="#">Extérieures</a>
-                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
-                            <a class="dropdown-item" href="#">Personnalisées</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Blocs
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Blindés</a>
-                            <a class="dropdown-item" href="#">Intérieurs</a>
-                            <a class="dropdown-item" href="#">Extérieurs</a>
-                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
-                            <a class="dropdown-item" href="#">Personnalisés</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-top" href="#">Poignées</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-top" href="#">Accessoires</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
+    
 
-    <main class="container-fluid">
+    <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
         <div class="row">
-
-            <div class="col-md-2 sidebar-large collapse overlay-sidebar" id="sidebarCollapse">
-                <button type="button" class="btn close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#porteSubmenu">Portes</a>
-                        <ul class="collapse list-unstyled" id="porteSubmenu">
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Blindées</a></li>
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Intérieures</a></li>
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Extérieures</a></li>
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Porte-fenêtres</a></li>
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Personnalisées</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#blocSubmenu">Blocs</a>
-                        <ul class="collapse list-unstyled" id="blocSubmenu">
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Blindés</a></li>
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Intérieurs</a></li>
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Extérieurs</a></li>
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Porte-fenêtres</a></li>
-                            <li><a class="sidebar-subitem dropdown-item rounded border" href="#">Personnalisés</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#poigneeSubmenu">Poignées</a>
-                    </li>
-                </ul>
-            </div>
 
             <div class="col-md-12 content">
                 <h2 style="padding: 3%;">
