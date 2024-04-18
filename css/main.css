@@ -127,6 +127,11 @@ header {
     display: block;
 }
 
+.blue-button {
+    color:#fff;
+    background-color: #437e80;
+}
+
 /* En-tête réduit */
 .header-reduced {
     padding: 0.5rem 0.5rem;

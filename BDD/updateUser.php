@@ -22,5 +22,5 @@ if (isset($_POST["submit"])) {
     $request->bind_param("sssss", $tel, $ville, $rue, $CP, $_SESSION['mail']);
     $request->execute();
     $request->close();
-    header("Location: deconnexion.php");
+    header("Location: api/disconnect.php");
 }
