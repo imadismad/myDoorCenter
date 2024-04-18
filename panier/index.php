@@ -13,33 +13,14 @@ function getProjectPath() {
 }
 
 function getAbsoluteMyDoorCenterPath() {
-    $currentPath = __DIR__; // Obtient le chemin du dossier du script en cours.
-    $lower = strtolower($currentPath); // Convertit le chemin en minuscules pour la recherche insensible à la casse.
-
-    // Définition des noms de dossiers à rechercher.
-    $projectFolder = 'mydoorcenter';
-    $fallbackFolder = 'wwwroot';
-
-    // Recherche du dossier 'mydoorcenter'.
-    $projectPos = strpos($lower, $projectFolder);
-
-    if ($projectPos !== false) {
-        // Si 'mydoorcenter' est trouvé, extrait le chemin jusqu'à la fin de ce dossier.
-        $path = substr($currentPath, 0, $projectPos + strlen($projectFolder));
-    } else {
-        // Si 'mydoorcenter' n'est pas trouvé, recherche de 'wwwroot'.
-        $fallbackPos = strpos($lower, $fallbackFolder);
-        if ($fallbackPos !== false) {
-            // Si 'wwwroot' est trouvé, extrait le chemin jusqu'à la fin de ce dossier.
-            $path = substr($currentPath, 0, $fallbackPos + strlen($fallbackFolder));
-        } else {
-            // Si aucun des deux dossiers n'est trouvé, utilise le chemin complet.
-            $path = $currentPath;
-        }
+    $path = __DIR__;
+    foreach (['mydoorcenter', 'wwwroot'] as $folder) {
+        if (($pos = strpos(strtolower($path), $folder)) !== false) return substr($path, 0, $pos + strlen($folder));
     }
-
     return $path;
 }
+
+
 
 define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
 define('BASE_DIR_STATIC', getProjectPath());
