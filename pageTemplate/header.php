@@ -53,8 +53,8 @@
         <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
       </div>
       <div class="col-6 d-flex justify-content-between">
-        <a href="<?php echo BASE_DIR_STATIC."/panier"; ?>"><button title="Panier" class="btn btn-light bi bi-cart3" style="font-size: 1.5rem;"></button></a>
-        <a href="<?php echo BASE_DIR_STATIC."/espaceClient.php"; ?>"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button" style="font-size: 1.5rem;"></button></a>
+        <a href="<?php echo BASE_DIR_STATIC."panier"; ?>"><button title="Panier" class="btn btn-light bi bi-cart3" style="font-size: 1.5rem;"></button></a>
+        <a href="<?php echo BASE_DIR_STATIC."espaceClient.php"; ?>"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button" style="font-size: 1.5rem;"></button></a>
       </div>
     </div>
 
