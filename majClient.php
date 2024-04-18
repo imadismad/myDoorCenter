@@ -33,7 +33,9 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 
     <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
-
+        <div class="col-md-12 content text-center">
+            <h1 class="welcome-title border rounded display-1"><b>Mettre à jour mes informations</b></h1>
+        </div>
         <div class="container">
             <div class="d-flex align-items-center justify-content-center">
                 <div class="w-50 p-3">
@@ -41,7 +43,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                         <form action="BDD/updateUser.php" method="post" class="row g-3">
 
                             <!--info sur la personne-->
-                            <h3>Information personnelle:</h3>
+                            <h3>Informations personnelles :</h3>
                             <div id="info_perso" class="row g-3">
 
                                 <div class="input-group mb-3">
