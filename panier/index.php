@@ -28,6 +28,33 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 
     <body>
+    <!-- Modal  creation-->
+    <div class="modal fade" id="modale" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Supression article</h5>
+                <button
+                    type="button"
+                    class="btn btn-danger close"
+                    style="margin-left: auto;"
+                    onclick="hideModal(false)"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Voulez-vous vraiment retirer cette article de votre panier ?.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="hideModal(false)">Non</a>
+                <button type="button" class="btn btn-danger" onclick="hideModal(true)">Oui</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Header import -->
     <?php include BASE_DIR.'pageTemplate/header.php'; ?>
@@ -44,8 +71,7 @@ define('BASE_DIR_STATIC', getProjectPath());
         </div>
         <label>Code promo : <input type="text" name="codePromo"></label><br />
 
-        <input type="submit" value="Commander">
-        <!-- END OF CONTENT -->
+        <a role="button" class="btn btn-primary" href="panier/commande.php">Commander</a>
     </main>
 
     <!-- JS Import -->

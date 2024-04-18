@@ -31,15 +31,98 @@ define('BASE_DIR_STATIC', getProjectPath());
 <?php include BASE_DIR.'pageTemplate/head.php'; ?>
 
 
-    <body>
+<body>
+    <!-- Modal  creation-->
+    <div class="modal fade" id="modale" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Article ajouté</h5>
+                <button
+                    type="button"
+                    class="btn btn-danger close"
+                    style="margin-left: auto;"
+                    onclick="hideModal()"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Votre article a bien été ajouté au panier.
+            </div>
+            <div class="modal-footer">
+                <a role="button" class="btn btn-secondary" href="panier">Voir mon panier</a>
+                <button type="button" class="btn btn-primary" onclick="hideModal()">Cotinuer mes achats</button>
+            </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Header import -->
-    <?php include BASE_DIR.'pageTemplate/header.php'; ?>
+    <div class="overlay"></div>
+    <header class="container-fluid fixed-top" id="mainHeader">
+        <div class="row header-top align-items-center">
+            <div class="col-md-1 sidebar-small">
+                <button title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
+            </div>
+            <div class="col-md-3">
+                <img src="images/logo.png" alt="Logo" height="100">
+            </div>
+            <div class="col-md-4 d-flex">
+                <label title="Rechercher" for="search"><button class="btn btn-light bi bi-search blue-button"
+                        style="font-size: 1rem;"></button></label>
+                <input type="text" name="search" class="form-control" placeholder="Recherche...">
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
+            </div>
+            <div class="col-md-1">
+                <button title="Espace client" class="btn btn-light bi bi-person-circle blue-button"
+                    style="font-size: 2rem;"></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 align-center">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Portes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Blindées</a>
+                            <a class="dropdown-item" href="#">Intérieures</a>
+                            <a class="dropdown-item" href="#">Extérieures</a>
+                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
+                            <a class="dropdown-item" href="#">Personnalisées</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Blocs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Blindés</a>
+                            <a class="dropdown-item" href="#">Intérieurs</a>
+                            <a class="dropdown-item" href="#">Extérieurs</a>
+                            <a class="dropdown-item" href="#">Porte-fenêtres</a>
+                            <a class="dropdown-item" href="#">Personnalisés</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-top" href="#">Poignées</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-top" href="#">Accessoires</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
 
-    <!-- Sidebar import -->
-    <?php include BASE_DIR.'pageTemplate/sidebar.php'; ?>
-
-    <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
+    <main class="container-fluid">
         <div class="row">
 
             <div class="col-md-2 sidebar-large collapse overlay-sidebar" id="sidebarCollapse">
@@ -127,51 +210,49 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 -->
                             </div>
                         </h3>
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Options</label>
-                                <?php
-                                    foreach ($product -> getCompatibleBuyingOption() as $option) {
-                                        echo
-                                        '<div class="form-check">'.
-                                            '<input class="form-check-input" type="checkbox" name="optionId" value="'.$option->getId().'" id="option-'.$option->getLibele().'">'.
-                                            '<label class="form-check-label" for="optionCadre">'.$option->getLibele().' (+ '.$option->getPrice().' &euro;)</label>'.
-                                        '</div>';
-                                    }
-                                ?>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label">Options</label>
+                            <?php
+                                foreach ($product -> getCompatibleBuyingOption() as $option) {
+                                    echo
+                                    '<div class="form-check">'.
+                                        '<input class="form-check-input" type="checkbox" name="optionId" value="'.$option->getId().'" id="option-'.$option->getLibele().'">'.
+                                        '<label class="form-check-label" for="optionCadre">'.$option->getLibele().' (+ '.$option->getPrice().' &euro;)</label>'.
+                                    '</div>';
+                                }
+                            ?>
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="quantity-select" class="form-label">Quantité</label>
-                                <input type="number" class="form-control" id="quantity-select" name="quantity" value="1" min="1"
-                                    onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
-                            </div>
+                        <div class="mb-3">
+                            <label for="quantity-select" class="form-label">Quantité</label>
+                            <input type="number" class="form-control" id="quantity-select" name="quantity" value="1" min="1"
+                                onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
+                        </div>
 
-                            <div class="mb-3">
-                                <h4>Modalités de livraison et d'installation:</h4>
-                                <ul>
-                                    <dt>Livraison</dt>
-                                    <dd>
-                                        <li>Frais de livraison: 20€</li>
-                                        <li>Délai de livraison: 2 jours à partir du départ de l'entrepôt</li>
-                                    </dd>
-                                    <dt>Installation</dt>
-                                    <dd>
-                                        <li>Durée de l'installation: 30 minutes</li>
-                                    </dd>
+                        <div class="mb-3">
+                            <h4>Modalités de livraison et d'installation:</h4>
+                            <ul>
+                                <dt>Livraison</dt>
+                                <dd>
+                                    <li>Frais de livraison: 20€</li>
+                                    <li>Délai de livraison: 2 jours à partir du départ de l'entrepôt</li>
+                                </dd>
+                                <dt>Installation</dt>
+                                <dd>
+                                    <li>Durée de l'installation: 30 minutes</li>
+                                </dd>
 
-                                </ul>
-                            </div>
+                            </ul>
+                        </div>
 
-                            <button
-                                type="button"
-                                class="btn btn-light"
-                                id="ajoutPanier"
-                                onclick=<?php echo "addProduct(".$product->getId().")" ?>
-                            >
-                                Ajouter au panier
-                            </button>
-                        </form>
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            id="ajoutPanier"
+                            onclick=<?php echo "addProduct(".$product->getId().")" ?>
+                        >
+                            Ajouter au panier
+                        </button>
                     </div>
                 </div>
                 <hr>

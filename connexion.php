@@ -1,3 +1,7 @@
+<?php
+require_once "php/Redirect.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -35,7 +39,7 @@
             <div class="w-50 p-3">
                 <div class="text-bg-light p-3">
                     <h2>Connexion</h2>
-                    <form action="connexion/initSession.php" method="post" class="row g-4">
+                    <form action=<?php echo getUrlWithSaveRedirect("api/connect.php"); ?> method="post" class="row g-4">
 
                         <div class="input-group input-group-lg">
                             <span class="input-group-text" id="inputGroup-sizing-lg">@</span>

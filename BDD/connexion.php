@@ -51,7 +51,7 @@ try {
     }
 } catch (Exception $e) {
     fwrite(STDERR, "" . $e->getMessage() . "");
-    header("Location: ../creationCompte.html");
+    header("Location: ../creationCompte.php");
 }
 
 
