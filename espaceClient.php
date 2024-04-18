@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_COOKIE["prenom"])) {
-    header("Location: creationCompte.html");
+    header("Location: creationCompte.php");
 } else {
     $cookie_name = "prenom";
     setcookie($cookie_name, $_SESSION["prenom"], time() + 60 * 60 * 24, "/");

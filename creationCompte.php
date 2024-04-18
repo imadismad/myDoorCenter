@@ -37,7 +37,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                             <form action="BDD/connexion.php" method="post" class="row g-3">
 
                                 <!--info sur la personne-->
-                                <h3>Information personnelle:</h3>
+                                <h3>Informations personnelles :</h3>
                                 <div id="info_perso" class="row g-3">
 
                                     <div class="col-md-3">
