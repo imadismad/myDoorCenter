@@ -7,10 +7,11 @@ function getProjectPath() {
 }
 
 function getAbsoluteMyDoorCenterPath() {
-    $path = strpos($lower = strtolower($currentPath = __DIR__), $projectFolder = 'mydoorcenter') !== false ?
-            substr($currentPath, 0, strpos($lower, $projectFolder) + strlen($projectFolder)) :
-            $currentPath;
-    return $path;
+  $path = __DIR__;
+  foreach (['mydoorcenter', 'wwwroot'] as $folder) {
+      if (($pos = strpos(strtolower($path), $folder)) !== false) return substr($path, 0, $pos + strlen($folder));
+  }
+  return $path;
 }
 
 define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
