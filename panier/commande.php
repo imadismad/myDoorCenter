@@ -1,3 +1,17 @@
+<?php
+require_once "../php/Cart.php";
+require_once "../php/UserUtils.php";
+require_once "../php/Redirect.php";
+if (Cart::getUserCart()->isEmpty()) {
+    header("Location: /");
+    exit();
+}
+
+if (!UserUtils::isConnect()) {
+    goToURL("/creationCompte.php", "/panier/commande.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,3 +1,5 @@
+const modal = new bootstrap.Modal(document.getElementById("modale"))
+
 // JavaScript pour le changement de l'image principale au survol
 document.addEventListener('DOMContentLoaded', function () {
     var vignettes = document.querySelectorAll('.vignette');
@@ -35,6 +37,16 @@ function addProduct(productId) {
         "/api/cart/add.php?productId="+productId+"&quantity="+quantity+"&optionsId="+optionsId,
     ).then((value) => {
         button.disabled = false;
+        displayModal();
     });
 
+}
+
+
+function displayModal() {
+    modal.show();
+}
+
+function hideModal() {
+    modal.hide();
 }

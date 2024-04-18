@@ -28,6 +28,33 @@ if (!isset($_GET["id"]) || $product === null ) {
 </head>
 
 <body>
+    <!-- Modal  creation-->
+    <div class="modal fade" id="modale" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Article ajouté</h5>
+                <button
+                    type="button"
+                    class="btn btn-danger close"
+                    style="margin-left: auto;"
+                    onclick="hideModal()"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Votre article a bien été ajouté au panier.
+            </div>
+            <div class="modal-footer">
+                <a role="button" class="btn btn-secondary" href="panier">Voir mon panier</a>
+                <button type="button" class="btn btn-primary" onclick="hideModal()">Cotinuer mes achats</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <div class="overlay"></div>
     <header class="container-fluid fixed-top" id="mainHeader">
         <div class="row header-top align-items-center">
@@ -179,51 +206,49 @@ if (!isset($_GET["id"]) || $product === null ) {
                                 -->
                             </div>
                         </h3>
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Options</label>
-                                <?php
-                                    foreach ($product -> getCompatibleBuyingOption() as $option) {
-                                        echo
-                                        '<div class="form-check">'.
-                                            '<input class="form-check-input" type="checkbox" name="optionId" value="'.$option->getId().'" id="option-'.$option->getLibele().'">'.
-                                            '<label class="form-check-label" for="optionCadre">'.$option->getLibele().' (+ '.$option->getPrice().' &euro;)</label>'.
-                                        '</div>';
-                                    }
-                                ?>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label">Options</label>
+                            <?php
+                                foreach ($product -> getCompatibleBuyingOption() as $option) {
+                                    echo
+                                    '<div class="form-check">'.
+                                        '<input class="form-check-input" type="checkbox" name="optionId" value="'.$option->getId().'" id="option-'.$option->getLibele().'">'.
+                                        '<label class="form-check-label" for="optionCadre">'.$option->getLibele().' (+ '.$option->getPrice().' &euro;)</label>'.
+                                    '</div>';
+                                }
+                            ?>
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="quantity-select" class="form-label">Quantité</label>
-                                <input type="number" class="form-control" id="quantity-select" name="quantity" value="1" min="1"
-                                    onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
-                            </div>
+                        <div class="mb-3">
+                            <label for="quantity-select" class="form-label">Quantité</label>
+                            <input type="number" class="form-control" id="quantity-select" name="quantity" value="1" min="1"
+                                onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
+                        </div>
 
-                            <div class="mb-3">
-                                <h4>Modalités de livraison et d'installation:</h4>
-                                <ul>
-                                    <dt>Livraison</dt>
-                                    <dd>
-                                        <li>Frais de livraison: 20€</li>
-                                        <li>Délai de livraison: 2 jours à partir du départ de l'entrepôt</li>
-                                    </dd>
-                                    <dt>Installation</dt>
-                                    <dd>
-                                        <li>Durée de l'installation: 30 minutes</li>
-                                    </dd>
+                        <div class="mb-3">
+                            <h4>Modalités de livraison et d'installation:</h4>
+                            <ul>
+                                <dt>Livraison</dt>
+                                <dd>
+                                    <li>Frais de livraison: 20€</li>
+                                    <li>Délai de livraison: 2 jours à partir du départ de l'entrepôt</li>
+                                </dd>
+                                <dt>Installation</dt>
+                                <dd>
+                                    <li>Durée de l'installation: 30 minutes</li>
+                                </dd>
 
-                                </ul>
-                            </div>
+                            </ul>
+                        </div>
 
-                            <button
-                                type="button"
-                                class="btn btn-light"
-                                id="ajoutPanier"
-                                onclick=<?php echo "addProduct(".$product->getId().")" ?>
-                            >
-                                Ajouter au panier
-                            </button>
-                        </form>
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            id="ajoutPanier"
+                            onclick=<?php echo "addProduct(".$product->getId().")" ?>
+                        >
+                            Ajouter au panier
+                        </button>
                     </div>
                 </div>
                 <hr>

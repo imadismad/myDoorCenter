@@ -96,7 +96,11 @@ class Cart implements Iterator {
         }
     }
 
-    public function count() {
+    public function count(): int {
         return count($this->products);
+    }
+
+    public function isEmpty(): bool {
+        return $this -> count() === 0;
     }
 }

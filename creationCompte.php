@@ -1,3 +1,7 @@
+<?php
+require_once "php/Redirect.php";
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -138,7 +142,7 @@
                             </div>
                             <div class="col-12">
                                 <input class="btn btn-primary" type="button" value="Connexion"
-                                    onclick="window.location='connexion';">
+                                    onclick=<?php echo "window.location='".getUrlWithSaveRedirect("/connexion.php")."';"?>>
                             </div>
                             <br>
                         </div>
