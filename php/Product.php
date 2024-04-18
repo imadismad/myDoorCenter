@@ -1,7 +1,7 @@
 <?php
 require_once "DBObject.php";
 require_once "Material.php";
-
+require_once "Option.php";
 class Product extends DBObject {
     // Prduct table
     private const TABLE_NAME            = "Produit";
@@ -10,6 +10,7 @@ class Product extends DBObject {
     private const UNITARY_PRICE_DB_NAME = "prixUnitaire";
     private const DESCRIPTION_DB_NAME   = "description";
     private const IMAGE_NAME_DB_NAME    = "nomImage";
+    private const IN_CATALOGUE_DB_NAME    = "estAuCatalogue";
 
     // Compose table (for product and materials association)
     private const COMPOSE_TABLE_NAME           = "Composer";
@@ -23,14 +24,12 @@ class Product extends DBObject {
     private string $imageName;
     private Array $materials;
 
-    private int $catalogue;
-    public function __construct(string $name, int $id, float $unitaryPrice, string $type, string $description, string $imageName, int $catalogue) {
     private Array $newMaterials; // New material add to the product
     private Array $oldMaterials; // Old material remove from the product
 
+    private int $catalogue;
 
-
-    public function __construct(string $name, float $unitaryPrice, string $type, string $description, string $imageName) {
+    public function __construct(string $name, float $unitaryPrice, string $type, string $description, string $imageName, int $catalogue) {
         parent::__construct(null, Product::TABLE_NAME);
         $this->name = $name;
         $this->unitaryPrice = $unitaryPrice;
@@ -48,20 +47,17 @@ class Product extends DBObject {
 
         if ($res === null) return null;
 
-
-        $product = new Product($res["nom"], $res["id"], floatval($res["prixUnitaire"]), $res["type"], $res["description"], $res["nomImage"], $res["estAuCatalogue"]);
-        $materials = getMaterialsByProduct($id);
         $product = new Product(
             $res[Product::NAME_DB_NAME],
             floatval($res[Product::UNITARY_PRICE_DB_NAME]),
             $res[Product::TYPE_DB_NAME],
             $res[Product::DESCRIPTION_DB_NAME],
-            $res[Product::IMAGE_NAME_DB_NAME]
+            $res[Product::IMAGE_NAME_DB_NAME],
+            $res[Product::IN_CATALOGUE_DB_NAME]
         );
         $product -> setId($res["id"]);
         $product -> materials = Material::constructAllFromProduct($product -> getId());
-
-        return $product;
+         return $product;
     }
 
     public function updateDB(): void {
@@ -116,6 +112,13 @@ class Product extends DBObject {
         return $res;
     }
 
+    /**
+     * @return array all compatible and active option as Option object
+     */
+    public function getCompatibleBuyingOption() {
+        return Option::constructAllFromType($this -> type, true);
+    }
+
     // Getters
     public function getName(): string {
         return $this->name;
@@ -146,11 +149,12 @@ class Product extends DBObject {
 
     // Setters
     public function setCatalogue(int $catalogue){
-        $this->catalogue = $catalogue;
+        $this -> addModification(Product::IN_CATALOGUE_DB_NAME, $catalogue);
+        $this -> catalogue = $catalogue;
     }
     public function setName(string $name) {
         $this -> addModification(Product::NAME_DB_NAME, $name);
-        $this->name = $name;
+        $this -> name = $name;
     }
 
     public function setUnitaryPrice(float $unitaryPrice) {
@@ -174,7 +178,6 @@ class Product extends DBObject {
     }
 
     public function removeMaterial(Material $material) {
-        fwrite(STDERR, "AJOUTER LA MISE A JOUR DANS LA DB DES MATERIAUX");
         if (Material::searchMaterial($material, $this->oldMaterials) !== false) return;
         
         $indexM = Material::searchMaterial($material, $this->materials);
@@ -192,7 +195,6 @@ class Product extends DBObject {
     }
 
     public function addMaterial(Material $material) {
-        fwrite(STDERR, "AJOUTER LA MISE A JOUR DANS LA DB DES MATERIAUX");
         if (Material::searchMaterial($material, $this->materials) !== false) return;
 
         if (($index = Material::searchMaterial($material, $this->oldMaterials)) !== false) {
@@ -213,5 +215,4 @@ class Product extends DBObject {
     public function addMaterialFromId(int $idMaterial) {
         $this -> addMaterial(Material::constructFromId($idMaterial));
     }
-}
 }

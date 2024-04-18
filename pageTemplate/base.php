@@ -32,7 +32,7 @@ define('BASE_DIR_STATIC', getProjectPath());
 
     <main class="container-fluid">
         <!-- CONTENT HERE -->
-
+        
         <!-- END OF CONTENT -->
     </main>
 

@@ -182,44 +182,21 @@ if (!isset($_GET["id"]) || $product === null ) {
                         <form>
                             <div class="mb-3">
                                 <label class="form-label">Options</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="cadre" id="optionCadre">
-                                    <label class="form-check-label" for="optionCadre">Avec cadre</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="poignee" id="optionPoignee">
-                                    <label class="form-check-label" for="optionPoignee">Avec poignée</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="vitre" id="optionVitre">
-                                    <label class="form-check-label" for="optionVitre">Avec vitre</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="vitre" id="optionVitre">
-                                    <label class="form-check-label" for="optionVitre">Avec porte</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="vitre" id="optionVitre">
-                                    <label class="form-check-label" for="optionVitre">Avec installation</label>
-                                </div>
+                                <?php
+                                    foreach ($product -> getCompatibleBuyingOption() as $option) {
+                                        echo
+                                        '<div class="form-check">'.
+                                            '<input class="form-check-input" type="checkbox" name="optionId" value="'.$option->getId().'" id="option-'.$option->getLibele().'">'.
+                                            '<label class="form-check-label" for="optionCadre">'.$option->getLibele().' (+ '.$option->getPrice().' &euro;)</label>'.
+                                        '</div>';
+                                    }
+                                ?>
                             </div>
 
                             <div class="mb-3">
                                 <label for="quantity-select" class="form-label">Quantité</label>
-                                <input type="number" class="form-control" id="quantity-select" value="1" min="1"
+                                <input type="number" class="form-control" id="quantity-select" name="quantity" value="1" min="1"
                                     onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
-                            </div>
-
-                            <div class="mb-3">
-                                <select class="form-control" id="dimensionSelect">
-                                    <option selected disabled>Choisir une dimension</option>
-                                    <option value="198x60">198x60 cm</option>
-                                    <option value="198x66">198x66 cm</option>
-                                    <option value="198x71">198x71 cm</option>
-                                    <option value="198x76">198x76 cm</option>
-                                    <option value="203x81">203x81 cm</option>
-                                    <option value="203x86">203x86 cm</option>
-                                </select>
                             </div>
 
                             <div class="mb-3">
@@ -232,14 +209,20 @@ if (!isset($_GET["id"]) || $product === null ) {
                                     </dd>
                                     <dt>Installation</dt>
                                     <dd>
-                                        <li>Coût de l'installation: 50€</li>
                                         <li>Durée de l'installation: 30 minutes</li>
                                     </dd>
 
                                 </ul>
                             </div>
 
-                            <button type="button" class="btn btn-light">Ajouter au panier</button>
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                id="ajoutPanier"
+                                onclick=<?php echo "addProduct(".$product->getId().")" ?>
+                            >
+                                Ajouter au panier
+                            </button>
                         </form>
                     </div>
                 </div>
