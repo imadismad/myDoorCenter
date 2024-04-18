@@ -22,7 +22,8 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 
 <body>
-
+  <?php echo BASE_DIR ?>
+  <?php echo BASE_DIR_STATIC ?>
   <!-- Header import -->
   <?php include BASE_DIR.'pageTemplate/header.php'; ?>
 
