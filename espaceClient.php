@@ -79,7 +79,7 @@ define('BASE_DIR_STATIC', getProjectPath());
             <!-- Liens additionnels en dessous des informations -->
             <div class="col-12" style="margin-bottom: 10%;">
                 <ul class="nav justify-content-center nav-pills gap-3">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Aller à la page principale</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo BASE_DIR_STATIC.'index.php'; ?>">Aller à la page principale</a></li>
                     <li class="nav-item"><a class="nav-link" href="BDD/deconnexion.php">Se déconnecter</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Assistance</a></li>
                 </ul>
