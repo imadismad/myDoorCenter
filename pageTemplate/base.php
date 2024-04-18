@@ -30,7 +30,7 @@ define('BASE_DIR_STATIC', getProjectPath());
     <?php include BASE_DIR.'pageTemplate/sidebar.php'; ?>
 
 
-    <main class="container-fluid">
+    <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
         <!-- CONTENT HERE -->
         
         <!-- END OF CONTENT -->
