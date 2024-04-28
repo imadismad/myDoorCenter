@@ -148,7 +148,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                                 <div class="col-12">
                                     <input class="btn btn-primary" type="button" value="Connexion"
-                                        onclick=<?php echo "window.location='".getUrlWithSaveRedirect("/connexion.php")."';"?>>
+                                        onclick=<?php echo "window.location='".getUrlWithSaveRedirect(BASE_DIR_STATIC.'connexion.php')."';"?>>
                                 </div>
                                 <br>
                             </div>
