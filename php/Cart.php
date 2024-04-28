@@ -93,6 +93,7 @@ class Cart implements Iterator {
         if ($this->productsQuantity[$pos] <= 0){
             array_splice($this->products, $pos, 1);
             array_splice($this->productsQuantity, $pos, 1);
+            array_splice($this->productOption, $pos, 1);
         }
     }
 

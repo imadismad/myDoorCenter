@@ -40,12 +40,16 @@
     $cssFilePath = BASE_DIR_STATIC . "css/" . $directoryPath;
     $cssFilePathCheck = BASE_DIR . "css/" . $directoryPath;
 
-    $styles = scandir($cssFilePathCheck);
-    foreach ($styles as $style) {
-        if (pathinfo($style, PATHINFO_EXTENSION) === 'css') {
-            echo '<link href="' . $cssFilePath . '/' . $style . '" rel="stylesheet">' . PHP_EOL;
+    if (file_exists($cssFilePathCheck)) {
+        $styles = scandir($cssFilePathCheck);
+        foreach ($styles as $style) {
+            if (pathinfo($style, PATHINFO_EXTENSION) === 'css') {
+                echo '<link href="' . $cssFilePath . '/' . $style . '" rel="stylesheet">' . PHP_EOL;
+            }
         }
     }
+
+    if (defined("CSS_CUSTOM_IMPORT")) echo CSS_CUSTOM_IMPORT;
 ?>
 
 

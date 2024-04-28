@@ -59,7 +59,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 Votre article a bien été ajouté au panier.
             </div>
             <div class="modal-footer">
-                <a role="button" class="btn btn-secondary" href="panier">Voir mon panier</a>
+                <a role="button" class="btn btn-secondary" href="panier" onclick="hideModal()">Voir mon panier</a>
                 <button type="button" class="btn btn-primary" onclick="hideModal()">Cotinuer mes achats</button>
             </div>
             </div>

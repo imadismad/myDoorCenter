@@ -38,16 +38,21 @@
     height: 300px;
 }
 
-#pt-relay-search-ul {
+#pt-relay-search-ul,
+#address-bill-search-ul {
     visibility: hidden;
+    z-index: 5;
     background-color: #EEEEEE;
 }
 
 .autocomplet-input:focus-within > #pt-relay-search-ul,
-#pt-relay-search-ul:focus-within {
+#pt-relay-search-ul:focus-within,
+.autocomplet-input:focus-within > #address-bill-search-ul,
+#address-bill-search-ul:focus-within {
     visibility: visible;
 }
 
-#pt-relay-search-ul:empty {
+#pt-relay-search-ul:empty;
+#address-bill-search-ul:empty {
     visibility: hidden !important;
 }
