@@ -1,4 +1,5 @@
-import limite from "../lib/limite.js";
+import limite from "../../lib/limite.js";
+import { checkMail, checkPhone } from "../../lib/dataChecker.js";
 
 const ptRelay = document.getElementById("pt-relay-search");
 const ptRelayUl = document.getElementById("pt-relay-search-ul");
@@ -64,6 +65,75 @@ document.getElementById("domicilInput").addEventListener("change", (event) => {
 
 document.querySelector("#point-relay").hidden = !document.getElementById("ptRelayInput").checked;
 document.querySelector(".home").hidden = !document.getElementById("domicilInput").checked;
+
+document.getElementById("order-next-step").addEventListener("click", () => {
+    // Check if the user has filled the form
+    const billInput = document.getElementById("bill-info").querySelectorAll("input");
+    const shopDelivery = document.getElementById("ptRelayInput").checked;
+    
+    for (const input of billInput) {
+        console.log(input.classList);
+        if (input.value.trim() === "") {
+            if (!input.classList.contains("is-invalid"))
+                input.classList.add("is-invalid");
+        } else if (input.classList.contains("is-invalid"))
+            input.classList.remove("is-invalid");
+    }
+
+    if (shopDelivery) {
+        const parent = document.getElementById("point-relay").querySelector("div.autocomplet-input");
+        const input = parent.querySelector("input");
+        console.log(pickUpShopResultUl.querySelector("li.active") === null);
+        if (pickUpShopResultUl.querySelector("li.active") === null)
+            input.classList.add("is-invalid");
+        else if (input.classList.contains("is-invalid"))
+            input.classList.remove("is-invalid");
+    } else
+        for (const input of document.getElementById("homeDelivery").querySelectorAll("input[type='text']")) {
+            if (input.value.trim() === "") {
+                if (!input.classList.contains("is-invalid"))
+                    input.classList.add("is-invalid");
+            } else if (input.classList.contains("is-invalid"))
+                input.classList.remove("is-invalid");
+        }
+    
+    for (const input of document.getElementById("creditCardInfo").querySelectorAll("input")) {
+        if (input.value.trim() === "") {
+            if (!input.classList.contains("is-invalid"))
+                input.classList.add("is-invalid");
+        } else if (input.classList.contains("is-invalid"))
+            input.classList.remove("is-invalid");
+    }
+
+    // Check if phone mail and credit card are valid
+    const phone = document.getElementById("phone");
+    if (!checkPhone(phone.value) && !phone.parentElement.classList.contains("is-invalid"))
+        phone.parentElement.classList.add("is-invalid");
+
+    
+
+});
+
+document.getElementById("address-bill").addEventListener("input", limite(async (event) => {
+    const data = await autoCompleteAddress(event.target.value, null);
+    const result = data.features; // Array
+
+    const ul = document.getElementById("address-bill-search-ul");
+
+    result.forEach((element) => {
+        const pte = element.properties;
+        console.log(`Street : ${pte.name}, Post Code : ${pte.postcode}, City : ${pte.city}`);
+        const button = document.createElement("button");
+        button.classList.add("dropdown-item", "list-group-item-action");
+        button.textContent = `${pte.name}, ${pte.postcode} ${pte.city}`;
+        button.addEventListener("click", () => {
+            //event.target.value = button.textContent;
+            //ul.hidden = true;
+        });
+
+        ul.appendChild(button);
+    });
+}, 500));
 
 window.onload = () => {
     map = L.map("map");
@@ -206,4 +276,18 @@ function keyToDay(dayKey) {
     }
 
     return "undefined";
+}
+
+/**
+ * Autocomplete address for user
+ * @param {string} input The input give by the user
+ * @param {HTMLInputElement} HTMLinput the HTLML input element
+ */
+async function autoCompleteAddress(input, div) {
+    if (input.length < 3) return;
+    const URL = "/api/searchCity.php?q=" + encodeURIComponent(input.replaceAll(" ", "+"));
+    const response = await fetch(URL);
+    const data = await response.json();
+
+    return data;    
 }

@@ -31,7 +31,6 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 
     <body>
-    CHANGE3
     <!-- Modal  creation-->
     <div class="modal fade" id="modale" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

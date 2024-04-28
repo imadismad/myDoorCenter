@@ -21,6 +21,7 @@ function updatePrice(element, basePrice) {
 function addProduct(productId) {
     const quantity = document.getElementById("quantity-select").value
     const optionId = document.querySelectorAll("input[name='optionId']:checked");
+    console.log(optionId);
 
     const button = document.getElementById("ajoutPanier");
     button.disabled = true;

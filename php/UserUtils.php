@@ -65,4 +65,66 @@ class UserUtils {
 
         return true;
     }
+
+    public static function getFirstName(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["prenom"];
+    }
+
+    public static function getLastName(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["nom"];
+    }
+
+    public static function getMail(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["mail"];
+    }
+
+    public static function getCity(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["ville"];
+    }
+
+    public static function getGender(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["genre"];
+    }
+
+    public static function getPostCode(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["CP"];
+    }
+
+    public static function getPhone(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["tel"];
+    }
+
+    public static function getBirth(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["naissance"];
+    }
+    
+    public static function getStreet(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["rue"];
+    }
+
+    public static function getContry(): string {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["pays"];
+    }
+
+
 }

@@ -31,12 +31,17 @@
     $jsFilePath = BASE_DIR_STATIC . "js/" . $directoryPath;
     $jsFilePathCheck = BASE_DIR . "js/" . $directoryPath;
 
-    $scripts = scandir($jsFilePathCheck);
-
-    foreach ($scripts as $script) {
-        if (pathinfo($script, PATHINFO_EXTENSION) === 'js') {
-            echo '<script src="' . $jsFilePath . '/' . $script . '"></script>' . PHP_EOL;
+    if (file_exists($jsFilePathCheck)) {
+        $scripts = scandir($jsFilePathCheck);
+        foreach ($scripts as $script) {
+            if (pathinfo($script, PATHINFO_EXTENSION) === 'js') {
+                if (str_starts_with($script, "module."))
+                echo '<script type="module" src="' . $jsFilePath . '/' . $script . '"></script>' . PHP_EOL;
+                else
+                    echo '<script src="' . $jsFilePath . '/' . $script . '"></script>' . PHP_EOL;
+            }
         }
     }
-?>
 
+    if (defined("JS_CUSTOM_IMPORT")) echo JS_CUSTOM_IMPORT;
+?>

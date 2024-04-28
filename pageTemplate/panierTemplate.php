@@ -25,13 +25,16 @@ $cart = Cart::getUserCart();
                 $totTVA = $totHT * 0.2;
                 $totTTC = $totHT + $totTVA;
                 $totOption = 0;
+
+                $quantityOption = $optionArray -> count();
+
                 echo
                 "<tr>"
                     ."<td>".$product->getName().
                     "<ul>";
                     
                     
-                    for ($i = 0; $i < $optionArray -> count(); $i++) {
+                    for ($i = 0; $i < $quantityOption   ; $i++) {
                         echo "<li>".$optionArray->get($i)->getLibele().
                         " (".$optionArray->get($i)->getPrice()." &euro;)"."</li>";
                         $totOption += $optionArray->get($i)->getPrice();
