@@ -142,4 +142,146 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
 }
 
 
+function rechercherProduits($search = null, $type = null, $tri = 'nom', $prixMin = null, $prixMax = null, $triNote = false) {
+    // Informations de connexion à la base de données
+    $serveur = SQL_SERVER;
+    $utilisateur = SQL_USER;
+    $motdepasse = SQL_PASSWORD;
+    $basededonnees = SQL_BDD_NAME;
+
+    // Connexion à la base de données
+    $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
+
+    if ($connexion->connect_error) {
+        die("Erreur de connexion : " . $connexion->connect_error);
+    }
+
+    // Initialisation des variables
+    $where = [];
+    $bind_types = "";
+    $bind_values = [];
+
+
+    // Construction de la requête SQL
+    $sql = "SELECT p.*, AVG(n.note) as noteMoyenne, 
+            (CASE WHEN p.nom LIKE ? THEN 5 ELSE 0 END) AS pertinenceTitre,
+            (CASE WHEN p.description LIKE ? THEN 1 ELSE 0 END) AS pertinenceDescription 
+            FROM Produit p 
+            LEFT JOIN Noter n ON p.id = n.idProduit";
+    $bind_types .= "ss";
+    $bind_values[] = "%" . $search . "%";
+    $bind_values[] = "%" . $search . "%";
+
+    // Traitement du filtre par type
+    if ($type !== null && !empty($type)) {
+        $where[] = "p.type = ?";
+        $bind_types .= "s";
+        $bind_values[] = $type;
+    }
+
+    // Traitement de la fourchette de prix
+    if ($prixMin !== null && is_numeric($prixMin)) {
+        $where[] = "p.prixUnitaire >= ?";
+        $bind_types .= "d";
+        $bind_values[] = $prixMin;
+    }
+
+    if ($prixMax !== null && is_numeric($prixMax)) {
+        $where[] = "p.prixUnitaire <= ?";
+        $bind_types .= "d";
+        $bind_values[] = $prixMax;
+    }
+
+    if (!empty($where)) {
+        $sql .= " WHERE " . implode(" AND ", $where);
+    }
+
+    $sql .= " GROUP BY p.id";
+
+    // Calcul de la distance de Levenshtein
+    if ($search !== null && !empty($search)) {
+        $sql .= " HAVING (pertinenceTitre + pertinenceDescription - LEAST(5, LEVENSHTEIN(p.nom, ?))) > 0";
+        $bind_types .= "s";
+        $bind_values[] = $search;
+    }
+
+    // Traitement du tri
+    if ($triNote !== false && is_numeric($triNote)) {
+        if ($triNote == 0) {
+            $sql .= " ORDER BY noteMoyenne DESC";
+        } elseif ($triNote == 6) {
+            $sql .= " ORDER BY noteMoyenne ASC";
+        } else {
+            $sql .= " HAVING noteMoyenne >= ? AND noteMoyenne < ?";
+            $bind_types .= "dd";
+            $bind_values[] = $triNote;
+            $bind_values[] = $triNote + 1;
+        }
+    } else {
+        $sql .= " ORDER BY p.nom";
+    }
+
+    print($sql);
+    echo "\nbind_types: " . $bind_types . "\n";
+    echo "bind_values: ";
+    print_r($bind_values);
+    // Exécution de la requête
+    $requete = $connexion->prepare($sql);
+    if (!empty($bind_values)) {
+        $requete->bind_param($bind_types, ...$bind_values);
+    }
+    $requete->execute();
+    $resultat = $requete->get_result();
+
+    // Création du tableau associatif pour les résultats
+    $resultats = [];
+    while ($row = $resultat->fetch_assoc()) {
+        $resultats[] = $row;
+    }
+
+    $requete->close();
+    $connexion->close();
+
+    return $resultats;
+}
+
+
+
+
+//----------------------Utilitaire---------------------//
+
+function damerauLevenshteinDistance($str1, $str2) {
+    $lenStr1 = mb_strlen($str1);
+    $lenStr2 = mb_strlen($str2);
+
+    // Initialisation de la matrice
+    $d = [];
+    for ($i = 0; $i <= $lenStr1; $i++) {
+        $d[$i] = [];
+        $d[$i][0] = $i;
+    }
+    for ($j = 0; $j <= $lenStr2; $j++) {
+        $d[0][$j] = $j;
+    }
+
+    // Calcul de la distance de Damerau-Levenshtein
+    for ($i = 1; $i <= $lenStr1; $i++) {
+        for ($j = 1; $j <= $lenStr2; $j++) {
+            $cost = ($str1[$i - 1] !== $str2[$j - 1]) ? 1 : 0;
+            $d[$i][$j] = min(
+                $d[$i - 1][$j] + 1,     // Suppression
+                $d[$i][$j - 1] + 1,     // Insertion
+                $d[$i - 1][$j - 1] + $cost  // Substitution
+            );
+            if ($i > 1 && $j > 1 && $str1[$i - 1] === $str2[$j - 2] && $str1[$i - 2] === $str2[$j - 1]) {
+                $d[$i][$j] = min($d[$i][$j], $d[$i - 2][$j - 2] + $cost); // Transposition
+            }
+        }
+    }
+
+    return $d[$lenStr1][$lenStr2];
+}
+
+
+
 ?>

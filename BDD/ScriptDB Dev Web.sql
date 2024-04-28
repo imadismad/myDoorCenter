@@ -132,3 +132,42 @@ CREATE TABLE AOption (
     FOREIGN KEY (idConcerner) REFERENCES Concerner(id),
     FOREIGN KEY (idOption) REFERENCES OptionAchat(id)
 );
+
+DELIMITER //
+CREATE FUNCTION LEVENSHTEIN(s1 VARCHAR(255), s2 VARCHAR(255))
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE s1_len, s2_len, i, j, c, c_temp INT;
+    DECLARE s1_char CHAR;
+    DECLARE cv0, cv1 VARBINARY(256);
+
+    SET s1_len = LENGTH(s1), s2_len = LENGTH(s2), cv1 = 0x00, j = 1, i = 1, c = 0;
+
+    IF s1 = s2 THEN
+        RETURN 0;
+    ELSEIF s1_len = 0 THEN
+        RETURN s2_len;
+    ELSEIF s2_len = 0 THEN
+        RETURN s1_len;
+    ELSE
+        WHILE j <= s2_len DO
+            SET cv1 = CONCAT(cv1, UNHEX(HEX(j))), j = j + 1;
+        END WHILE;
+        WHILE i <= s1_len DO
+            SET s1_char = SUBSTRING(s1, i, 1), c = i, cv0 = UNHEX(HEX(i)), j = 1;
+            WHILE j <= s2_len DO
+                SET c = c + 1;
+                SET c_temp = IF(s1_char = SUBSTRING(s2, j, 1), 0, 1);
+                SET c = IF(c > (c_temp = LEAST(LEAST(cv1, cv0) + 1, c + 1, c_temp)), c_temp, c);
+                SET j = j + 1;
+                SET cv0 = CONV(CONCAT_WS('', cv1, HEX(c)), 16, 10);
+            END WHILE;
+            SET i = i + 1;
+        END WHILE;
+    END IF;
+
+    RETURN c;
+END //
+DELIMITER ;
+
