@@ -1,5 +1,8 @@
 <?php
 ob_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once "config.php";
 require_once "functionsSQL.php";
 
@@ -47,6 +50,7 @@ try {
     }
 
     header("Location: /connexion.php");
+    exit();
 } catch (Exception $e) {
     error_log($e->getMessage());
     header("Location: /creationCompte.php");
