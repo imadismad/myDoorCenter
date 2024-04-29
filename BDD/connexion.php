@@ -46,10 +46,10 @@ try {
         throw new Exception("Failed to insert data.");
     }
 
-    header("Location: /connexion.php?success=account_created");
+    header("Location: /connexion.php");
 } catch (Exception $e) {
     error_log($e->getMessage());
-    header("Location: /creationCompte.php?error=server_error");
+    header("Location: /creationCompte.php");
 }
 exit();
 ob_end_flush();
