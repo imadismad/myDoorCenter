@@ -1,4 +1,3 @@
-<!-- Faire la connexion en bdd et initialiser et recup les infos pour initialiser les infos puis rediriger vers une page-->
 <?php
 /*
  * THIS PHP USE ONLY Client TABLE
@@ -46,13 +45,13 @@ try {
             "CP" => $CP,
             "mdp" => $password
         );
-        insererDonnees("Client", $donnees);
-        header("Location: ../connexion");
+        insererDonnees("Client", $donnees); // Ensure this function is safe against SQL injection
+        header("Location: /connexion.php");
+        exit();
     }
 } catch (Exception $e) {
-    fwrite(STDERR, "" . $e->getMessage() . "");
+    error_log($e->getMessage());
     header("Location: /creationCompte.php");
+    exit();
 }
-
-
 ?>
