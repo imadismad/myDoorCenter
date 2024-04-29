@@ -173,7 +173,3 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 <?php include BASE_DIR.'pageTemplate/footer.php'; ?>
 
-<!--TODO 1) Faire la page de création de compte basique
-    2) Rediriger vers une page de confirmation des informations
-    3) Rediriger vers l'acceuil 
--->
