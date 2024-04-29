@@ -32,7 +32,7 @@ jobs:
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip -r release.zip ./*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -57,7 +57,12 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
+      - name: Create deployment directory and move contents
+        run: |
+          mkdir mydoorcenter
+          mv -v * mydoorcenter/  # Move everything to mydoorcenter folder
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -71,5 +76,4 @@ jobs:
         with:
           app-name: 'mydoorcenter'
           slot-name: 'Production'
-          package: .
-          
+          package: mydoorcenter
