@@ -1,7 +1,7 @@
 <?php
 ob_start();
-require_once "../config.php";
-require_once "../functionsSQL.php";
+require_once "config.php";
+require_once "functionsSQL.php";
 
 // Check if the form was submitted
 if (!isset($_POST["submit"])) {
