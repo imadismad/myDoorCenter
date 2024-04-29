@@ -42,7 +42,7 @@ define('BASE_DIR_STATIC', getProjectPath());
             <div class="d-flex align-items-center justify-content-center">
                 <div class="w-50 p-3">
                     <div class="text-bg-light p-3">
-                        <form action="BDD/connexion.php" method="post" class="row g-3">
+                        <form action="/BDD/connexion.php" method="post" class="row g-3">
 
                             <!--info sur la personne-->
                             <h3>Information personnelle:</h3>
