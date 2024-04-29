@@ -19,4 +19,24 @@ function checkPhone(phone) {
     return libphonenumber.isValidPhoneNumber(phone, "FR");
 }
 
-export { checkMail, checkPhone };
+/**
+ * Check if a credit card number is a Visa card
+ * @param {string} cardNumber The card number to check
+ * @returns If the credit card is a Visa card
+ */
+function checkVisa(cardNumber) {
+    const regexCheck = /^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/;
+    return regexCheck.test(cardNumber);
+}
+
+/**
+ * Check if a credit card number is a MasterCard
+ * @param {string} cardNumber The card number to check
+ * @returns If the credit card is a MasterCard
+ */
+function checkMasterCard(cardNumber) {
+    const regexCheck = /^5[1-5]\d{2}-?\d{4}-?\d{4}-?\d{4}$/;
+    return regexCheck.test(cardNumber);
+}
+
+export { checkVisa, checkMasterCard, checkMail, checkPhone };
