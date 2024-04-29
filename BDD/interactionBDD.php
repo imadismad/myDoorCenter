@@ -30,6 +30,7 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
 
     // Récupération des résultats
     $resultat = $requete->get_result();
+    $arrayResult = array();
 
     // Affichage des quantités de portes par entrepôt
     if ($resultat->num_rows === 0) {
@@ -40,6 +41,7 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
         while ($row = $resultat->fetch_assoc()) {
             $idEntrepot = $row["idEntrepot"];
             $quantite = $row["quantite"];
+            array_push($arrayResult, array("idEntrepot" => $idEntrepot, "quantite" => $quantite));
             fwrite(STDOUT, "Entrepôt ID: $idEntrepot, Quantité: $quantite\n");
         }
     }
@@ -47,7 +49,7 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
     // Fermeture de la connexion
     $requete->close();
     $connexion->close();
-    return true;
+    return $arrayResult;
 }
 
 function creerCommande($idClient, $modePaiement, $produitsQuantites) {
