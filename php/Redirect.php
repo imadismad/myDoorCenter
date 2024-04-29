@@ -11,7 +11,6 @@ if(!defined("DEFAULT_REDIRECT_PATH")) define("DEFAULT_REDIRECT_PATH", "/");
 
 function goToRedirect() {
     $redirect = isset($_GET["redirect"]) ? $_GET["redirect"] : DEFAULT_REDIRECT_PATH;
-    echo $redirect;
     header("Location: ".$redirect);
     exit();
 }
