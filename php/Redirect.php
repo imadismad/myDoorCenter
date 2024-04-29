@@ -60,3 +60,5 @@ function goToURL(string $url, string $redirect, bool $hasOtherOption = false) {
 }
 ob_end_flush();
 ?>
+
+
