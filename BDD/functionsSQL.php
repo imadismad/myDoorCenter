@@ -126,3 +126,4 @@ function recupType($donnees): string {
     }
     return $types;
 }
+
