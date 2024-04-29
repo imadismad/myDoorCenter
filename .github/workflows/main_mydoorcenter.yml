@@ -32,7 +32,7 @@ jobs:
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./*
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -58,14 +58,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      - name: Create deployment directory and move contents
-        run: |
-          mkdir mydoorcenter
-          shopt -s extglob  # Enable extended globbing
-          mv !(mydoorcenter) mydoorcenter/  # Move all files except mydoorcenter directory itself
-          shopt -u extglob  # Disable extended globbing
-
-
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -79,4 +71,4 @@ jobs:
         with:
           app-name: 'mydoorcenter'
           slot-name: 'Production'
-          package: mydoorcenter
+          package: .
