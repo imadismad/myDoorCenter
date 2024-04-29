@@ -1,4 +1,6 @@
 <?php
+include_once "checkDefine.php";
+
 require_once "Product.php";
 require_once "OptionArray.php";
 

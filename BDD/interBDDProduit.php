@@ -1,4 +1,5 @@
 <?php
+include_once "../php/checkDefine.php";
 // Inclure le fichier contenant les fonctions SQL
 require_once 'functionsSQL.php';
 

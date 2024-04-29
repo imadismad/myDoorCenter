@@ -1,5 +1,6 @@
 <?php
-include("config.php");
+include_once "../php/checkDefine.php";
+include_once "config.php";
 
 function connexionBDD(): mysqli {
     // Informations de connexion Azure SQL Server
