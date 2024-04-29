@@ -17,7 +17,7 @@ CREATE TABLE Produit (
     nom VARCHAR(255),
     type VARCHAR(100),
     prixUnitaire DECIMAL(10, 2),
-    description VARCHAR(3000),
+    description TEXT,
     nomImage VARCHAR(255),
     estAuCatalogue BIT NOT NULL DEFAULT 1 -- Type qui prends deux valeur : 1 ou 0
 );
@@ -134,7 +134,6 @@ CREATE TABLE AOption (
 );
 
 DELIMITER //
-
 CREATE FUNCTION LEVENSHTEIN(s1 VARCHAR(255), s2 VARCHAR(255))
 RETURNS INT
 DETERMINISTIC
@@ -160,7 +159,7 @@ BEGIN
             WHILE j <= s2_len DO
                 SET c = c + 1;
                 SET c_temp = IF(s1_char = SUBSTRING(s2, j, 1), 0, 1);
-                SET c = IF(c > LEAST(LEAST(cv1, cv0) + 1, c + 1, c_temp), c_temp, c);
+                SET c = IF(c > (c_temp = LEAST(LEAST(cv1, cv0) + 1, c + 1, c_temp)), c_temp, c);
                 SET j = j + 1;
                 SET cv0 = CONV(CONCAT_WS('', cv1, HEX(c)), 16, 10);
             END WHILE;
@@ -170,7 +169,5 @@ BEGIN
 
     RETURN c;
 END //
-
 DELIMITER ;
-
 
