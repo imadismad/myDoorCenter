@@ -1,4 +1,5 @@
 <?php
+ob_start();
 /*
  * THIS PHP USE ONLY Client TABLE
  */
@@ -8,10 +9,8 @@ $serveur = SQL_SERVER;
 $utilisateur = SQL_USER;
 $motdepasse = SQL_PASSWORD;
 $basededonnees = SQL_BDD_NAME;
-
 // Connexion à la base de données
 $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $basededonnees);
-
 // Vérifier la connexion
 if ($connexion->connect_error) {
     die("Erreur de connexion : " . $connexion->connect_error);
@@ -29,7 +28,6 @@ try {
         $ville = mysqli_real_escape_string($connexion, $_POST['ville']);
         $rue = mysqli_real_escape_string($connexion, $_POST['rue']);
         $CP = mysqli_real_escape_string($connexion, $_POST['postal']);
-
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $donnees = array(
             "id" => $id,
@@ -54,4 +52,5 @@ try {
     header("Location: /creationCompte.php");
     exit();
 }
+ob_end_flush();
 ?>
