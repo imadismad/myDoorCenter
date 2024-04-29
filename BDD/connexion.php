@@ -46,7 +46,7 @@ try {
             "mdp" => $password
         );
         insererDonnees("Client", $donnees); // Ensure this function is safe against SQL injection
-        header("Location: https://mydoorcenter.com/connexion.php");
+        header("Location: /connexion.php");
         exit();
     }
 } catch (Exception $e) {
