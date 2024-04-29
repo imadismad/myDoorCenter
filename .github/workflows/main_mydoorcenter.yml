@@ -61,7 +61,10 @@ jobs:
       - name: Create deployment directory and move contents
         run: |
           mkdir mydoorcenter
-          mv -v * mydoorcenter/  # Move everything to mydoorcenter folder
+          shopt -s extglob  # Enable extended globbing
+          mv !(mydoorcenter) mydoorcenter/  # Move all files except mydoorcenter directory itself
+          shopt -u extglob  # Disable extended globbing
+
 
       - name: Login to Azure
         uses: azure/login@v1
