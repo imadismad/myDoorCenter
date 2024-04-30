@@ -27,7 +27,7 @@ creerCommande($idClient, $modePaiement, $produitsQuantites);
 
 */
 
-$resultats = rechercherProduits("porte", null,null,500,0);
+$resultats = rechercherProduits("j'adoreleraisin", "porte",0,1000,True);
 //function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false) {
 
 

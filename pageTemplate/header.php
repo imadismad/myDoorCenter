@@ -45,7 +45,9 @@
         <div class="input-group-prepend">
           <button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;"></button>
         </div>
-        <input type="text" name="search" class="form-control" placeholder="Recherche...">
+        <form method="get" action="../research.php">
+          <input id="research" type="text" name="research" class="form-control" placeholder="Recherche...">
+        </form>
       </div>
     </div>
     

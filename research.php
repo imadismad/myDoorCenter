@@ -1,4 +1,7 @@
 <?php 
+require_once 'BDD/functionsSQL.php';
+require_once 'BDD/interactionBDD.php';
+
 function getProjectPath() {
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
             substr($scriptPath, 0, strpos($lower, $projectFolder) + strlen($projectFolder)) :
@@ -16,6 +19,8 @@ function getAbsoluteMyDoorCenterPath() {
 
 define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
 define('BASE_DIR_STATIC', getProjectPath());
+
+$resultats = rechercherProduits($_GET["research"], "porte",0,1000,True);
 ?>
 
 <!-- Head with automatic css imports -->
@@ -65,9 +70,9 @@ define('BASE_DIR_STATIC', getProjectPath());
                 </ul>
             </div>
             
-            <form method="post" action="#" class="p-3">
+            <form method="get" action="research.php" class="p-3">
               <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Rechercher des portes..." style="margin: 2%;">
+                  <input id="research" name="research" type="text" class="form-control" placeholder="Rechercher des portes..." style="margin: 2%;">
               </div>
       
               <div class="row">
@@ -152,55 +157,43 @@ define('BASE_DIR_STATIC', getProjectPath());
                     <div class="row">
 
                       <div class="row">
+                        <?php
 
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title"><b>Porte 1</b></h5>
-                              </div>
-                              <img src="images/porte.png" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <p class="card-text">
-                                    Une belle porte
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title"><b>Porte 2</b></h5>
-                              </div>
-                              <img src="images/porte.png" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <p class="card-text">
-                                    Une porte
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          
+                          foreach ($resultats as $produit) {
+                              $article = "";
 
-                          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title"><b>Porte 3</b></h5>
-                              </div>
-                              <img src="images/porte.png" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <p class="card-text">
-                                    Une porte pas chere
-                                </p>
-                              </div>
-                            </div>
-                          </div>
+                              
 
-                    </div>
+                              $article.= '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
+                              $article.= '<a href="'.BASE_DIR_STATIC.'product.php?id='.$produit['id'].'">';
+                              $article.= '<div class="card">';
+                              $article.= '<div class="card-body">';
+                              $article.= '<h5 class="card-title"><b>'.$produit['nom'].'</b></h5>';
+                              $article.= '</div>';
+                              $article.= '<img src="'.BASE_DIR_STATIC.'images/miniature/'.$produit['nomImage'].'" class="card-img-top" alt="...">';
+                              $article.= '<div class="card-body">';
+                              $article.= '<p class="card-text">';
+                              $article.= 'Une belle porte';
+                              $article.= '</p>';
+                              $article.= '</div>';
+                              $article.= '</div>';
+                              $article.= '</a>';
+                              $article.= '</div>';
+
+                              
+
+
+                              echo $article;
+
+                          }
+
+
+                        ?>
                   </div>
                   
                   </div>
                   
+              </div>
               </div>
       
               

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ ."/php/Product.php";
+require_once __DIR__."/php/Product.php";
 
 $product = Product::constructFromId(intval($_GET["id"]));
 if (!isset($_GET["id"]) || $product === null ) {
