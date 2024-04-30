@@ -7,10 +7,10 @@ body {
 
 
 /* Responsive Header size */
-.pt-header-xs { padding-top: 18rem; } /* Default for very small screens */
+.pt-header-xs { padding-top: 22rem; } /* Default for very small screens */
 
 @media (min-width: 576px) {
-  .pt-header-sm { padding-top: 16rem; }
+  .pt-header-sm { padding-top: 17rem; }
 }
 
 @media (min-width: 768px) {
@@ -22,7 +22,7 @@ body {
 }
 
 @media (min-width: 1200px) {
-  .pt-header-xl { padding-top: 11rem; }
+  .pt-header-xl { padding-top: 12rem; }
 }
 
 /* Specific high-density small screens */

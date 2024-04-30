@@ -1,5 +1,5 @@
 import limite from "../../lib/limite.js";
-import { checkMail, checkPhone } from "../../lib/dataChecker.js";
+import { checkVisa, checkMasterCard, checkPhone } from "../../lib/dataChecker.js";
 
 const ptRelay = document.getElementById("pt-relay-search");
 const ptRelayUl = document.getElementById("pt-relay-search-ul");
@@ -8,6 +8,32 @@ const mapMarkers = [];
 const pickUpShopResultUl = document.getElementById("point-relay-result").querySelector("ul");
 
 let currentActive; // To know wich relai point is active
+
+// Linking the input bill with the input delivery
+document.getElementById("bill-info").querySelectorAll("input").forEach((input) => {
+    const id = input.id;
+    const deliveryInput = document.getElementById(id.replace("-bill", ""));
+
+    if (deliveryInput !== null)
+        input.addEventListener("input", (event) => {
+            if (document.getElementById("same-as-bill").checked)
+                deliveryInput.value = event.target.value;
+        });
+});
+
+document.getElementById("same-as-bill").addEventListener("change", (event) => {
+    if (event.target.checked) {
+        document.getElementById("homeDelivery").querySelectorAll("input").forEach((input) => {
+            if (input.type === "text") {
+                const id = input.id;
+                const billInput = document.getElementById(id + "-bill");
+
+                if (billInput !== null)
+                    input.value = billInput.value;
+            }
+        });
+    }
+});
 
 // Adding event
 ptRelay.addEventListener("input", limite(async () => {
@@ -66,13 +92,13 @@ document.getElementById("domicilInput").addEventListener("change", (event) => {
 document.querySelector("#point-relay").hidden = !document.getElementById("ptRelayInput").checked;
 document.querySelector(".home").hidden = !document.getElementById("domicilInput").checked;
 
+// Check form content
 document.getElementById("order-next-step").addEventListener("click", () => {
     // Check if the user has filled the form
     const billInput = document.getElementById("bill-info").querySelectorAll("input");
     const shopDelivery = document.getElementById("ptRelayInput").checked;
     
     for (const input of billInput) {
-        console.log(input.classList);
         if (input.value.trim() === "") {
             if (!input.classList.contains("is-invalid"))
                 input.classList.add("is-invalid");
@@ -83,7 +109,7 @@ document.getElementById("order-next-step").addEventListener("click", () => {
     if (shopDelivery) {
         const parent = document.getElementById("point-relay").querySelector("div.autocomplet-input");
         const input = parent.querySelector("input");
-        console.log(pickUpShopResultUl.querySelector("li.active") === null);
+
         if (pickUpShopResultUl.querySelector("li.active") === null)
             input.classList.add("is-invalid");
         else if (input.classList.contains("is-invalid"))
@@ -107,32 +133,40 @@ document.getElementById("order-next-step").addEventListener("click", () => {
 
     // Check if phone mail and credit card are valid
     const phone = document.getElementById("phone");
-    if (!checkPhone(phone.value) && !phone.parentElement.classList.contains("is-invalid"))
-        phone.parentElement.classList.add("is-invalid");
+    if (!checkPhone(phone.value) && !phone.classList.contains("is-invalid"))
+        phone.classList.add("is-invalid");
 
+    const cardNumber = document.getElementById("cardNumber");
+    if (
+        !checkVisa(cardNumber.value) &&
+        !checkMasterCard(cardNumber.value) &&
+        !cardNumber.classList.contains("is-invalid")
+    )
+        cardNumber.classList.add("is-invalid");
+
+    const cardCVV = document.getElementById("cardCVV");
+    if (cardCVV.value.trim().length !== 3 && !cardCVV.classList.contains("is-invalid"))
+        cardCVV.classList.add("is-invalid");
+
+    const cardExpiryDate = document.getElementById("cardExpiryDate");
+    const date = new Date("01/"+cardExpiryDate.value);
+    if (
+        (date.toString() === "Invalid Date" || date < new Date())&&
+        !cardExpiryDate.classList.contains("is-invalid")
+    )
+        cardExpiryDate.classList.add("is-invalid");
     
 
 });
 
+// autocomplete adress
 document.getElementById("address-bill").addEventListener("input", limite(async (event) => {
-    const data = await autoCompleteAddress(event.target.value, null);
-    const result = data.features; // Array
-
-    const ul = document.getElementById("address-bill-search-ul");
-
-    result.forEach((element) => {
-        const pte = element.properties;
-        console.log(`Street : ${pte.name}, Post Code : ${pte.postcode}, City : ${pte.city}`);
-        const button = document.createElement("button");
-        button.classList.add("dropdown-item", "list-group-item-action");
-        button.textContent = `${pte.name}, ${pte.postcode} ${pte.city}`;
-        button.addEventListener("click", () => {
-            //event.target.value = button.textContent;
-            //ul.hidden = true;
-        });
-
-        ul.appendChild(button);
-    });
+    autoCompleteAddress(
+        event.target,
+        document.getElementById("address-bill-search-ul"),
+        document.getElementById("postal-code-bill"),
+        document.getElementById("city-bill")
+    );
 }, 500));
 
 window.onload = () => {
@@ -175,12 +209,26 @@ function searchPickUpStore(Lon, Lat) {
                 openTime.classList.add("openTime");
 
                 li.append(name, address, openTime);
-                pickUpShopResultUl.appendChild(li);
-                addStoreToMap(store.lon, store.lat, () => {
+
+                li.addEventListener("click", () => {
                     if (currentActive !== undefined)
                         pickUpShopResultUl.querySelector("li.active").classList.remove("active");
 
                     li.classList.add("active");
+                    currentActive = index;
+
+                    centerMapOn(store.lon, store.lat);
+                });
+
+                pickUpShopResultUl.appendChild(li);
+                addStoreToMap(store.lon, store.lat, (marker) => {
+                    if (currentActive !== undefined)
+                        pickUpShopResultUl.querySelector("li.active").classList.remove("active");
+
+                    li.classList.add("active");
+                    li.scrollIntoView();
+                    centerMapOn(store.lon, store.lat);
+
                     currentActive = index;
                 });
             });
@@ -198,7 +246,7 @@ function addStoreToMap(Lon, Lat, callback) {
     const marker = L.marker([Lat, Lon]);
     mapMarkers.push(marker);
 
-    marker.on("click", callback);
+    marker.on("click", () => { callback(marker) });
 
     marker.addTo(map);
 }
@@ -280,14 +328,35 @@ function keyToDay(dayKey) {
 
 /**
  * Autocomplete address for user
- * @param {string} input The input give by the user
- * @param {HTMLInputElement} HTMLinput the HTLML input element
+ * @param {HTMLInputElement} inputStreet The input give by the user
+ * @param {HTMLDivElement} divResult the HTLML input element
+ * @param {HTMLInputElement} HTMLinputPostCode the HTML input element for the postal code
+ * @param {HTMLInputElement} HTMLinputCity the HTML input element for the city
  */
-async function autoCompleteAddress(input, div) {
-    if (input.length < 3) return;
-    const URL = "/api/searchCity.php?q=" + encodeURIComponent(input.replaceAll(" ", "+"));
+async function autoCompleteAddress(inputStreet, divResult, HTMLinputPostCode, HTMLinputCity) {
+    if (inputStreet.value.length < 3) return;
+    const URL = "/api/searchCity.php?q=" + encodeURIComponent(inputStreet.value.replaceAll(" ", "+"));
     const response = await fetch(URL);
     const data = await response.json();
+    const result = data.features; // Array
 
-    return data;    
+    const ul = inputStreet; 
+
+    while (ul.firstChild) ul.removeChild(ul.lastChild);
+
+    result.forEach((element) => {
+        const pte = element.properties;
+        const button = document.createElement("button");
+
+        button.classList.add("dropdown-item", "list-group-item-action");
+        button.textContent = `${pte.name}, ${pte.postcode} ${pte.city}`;
+        button.addEventListener("click", () => {
+            inputStreet.value = pte.name;
+            document.getElementById("postal-code-bill").value = pte.postcode;
+            document.getElementById("city-bill").value = pte.city;
+            while (ul.firstChild) ul.removeChild(ul.lastChild);
+        });
+
+        ul.appendChild(button);
+    });  
 }

@@ -2,6 +2,8 @@
 require_once "DBObject.php";
 require_once "Material.php";
 require_once "Option.php";
+require_once "Redirect.php";
+require_once __DIR__."/../BDD/interactionBDD.php";
 class Product extends DBObject {
     // Prduct table
     private const TABLE_NAME            = "Produit";
@@ -10,7 +12,7 @@ class Product extends DBObject {
     private const UNITARY_PRICE_DB_NAME = "prixUnitaire";
     private const DESCRIPTION_DB_NAME   = "description";
     private const IMAGE_NAME_DB_NAME    = "nomImage";
-    private const IN_CATALOGUE_DB_NAME    = "estAuCatalogue";
+    private const IN_CATALOGUE_DB_NAME  = "estAuCatalogue";
 
     // Compose table (for product and materials association)
     private const COMPOSE_TABLE_NAME           = "Composer";
@@ -31,6 +33,12 @@ class Product extends DBObject {
 
     public function __construct(string $name, float $unitaryPrice, string $type, string $description, string $imageName, int $catalogue) {
         parent::__construct(null, Product::TABLE_NAME);
+        
+        if ($name === "") throw new Exception("Product name can't be empty");
+        if ($unitaryPrice < 0) throw new Exception("Product price can't be negative");
+        if ($type === "") throw new Exception("Product type can't be empty");
+        if ($catalogue !== 0 && $catalogue !== 1) throw new Exception("Product catalogue must be 0 or 1");
+
         $this->name = $name;
         $this->unitaryPrice = $unitaryPrice;
         $this->type = $type;
@@ -149,20 +157,24 @@ class Product extends DBObject {
 
     // Setters
     public function setCatalogue(int $catalogue){
+        if ($catalogue !== 0 && $catalogue !== 1) throw new Exception("Product catalogue must be 0 or 1");
         $this -> addModification(Product::IN_CATALOGUE_DB_NAME, $catalogue);
         $this -> catalogue = $catalogue;
     }
     public function setName(string $name) {
+        if ($name === "") throw new Exception("Product name can't be empty");
         $this -> addModification(Product::NAME_DB_NAME, $name);
         $this -> name = $name;
     }
 
     public function setUnitaryPrice(float $unitaryPrice) {
+        if ($unitaryPrice < 0) throw new Exception("Product price can't be negative");
         $this -> addModification(Product::UNITARY_PRICE_DB_NAME, $unitaryPrice);
         $this->unitaryPrice = $unitaryPrice;
     }
 
     public function setType(string $type) {
+        if ($type === "") throw new Exception("Product type can't be empty");
         $this -> addModification(Product::TYPE_DB_NAME, $type);
         $this->type = $type;
     }
@@ -177,6 +189,10 @@ class Product extends DBObject {
         $this->imageName = $imageName;
     }
 
+    /**
+     * Remove a material from the product
+     * @param Material $material the material to remove
+     */
     public function removeMaterial(Material $material) {
         if (Material::searchMaterial($material, $this->oldMaterials) !== false) return;
         
@@ -194,6 +210,10 @@ class Product extends DBObject {
         array_splice($this -> materials, $indexM, 1);
     }
 
+    /**
+     * Add a material to the product
+     * @param Material $material the material to add
+     */
     public function addMaterial(Material $material) {
         if (Material::searchMaterial($material, $this->materials) !== false) return;
 
@@ -208,11 +228,53 @@ class Product extends DBObject {
         array_push($this->materials, $material);
     }
 
+    /**
+     * Remove a material from the product from its id in BD
+     * @param int $idMaterial the id of the material to remove
+     */
     public function removeMaterialFromId(int $idMaterial) {
         $this -> removeMaterial(Material::constructFromId($idMaterial));
     }
 
+    /**
+     * Add a material to the product from its id in BD
+     * @param int $idMaterial the id of the material to add
+     */
     public function addMaterialFromId(int $idMaterial) {
         $this -> addMaterial(Material::constructFromId($idMaterial));
+    }
+
+    /**
+     * Return the current stock of the product for each warehouse
+     * @return array the current stock of the product for each warehouse
+     */
+    public function getCurrentStock(): array {
+        $stock = quantitePortesEnStockParEntrepot($this -> getId());
+        if ($stock === null || $stock === false) throw new Exception("Error while getting stock");
+        return $stock;
+    }
+
+    /**
+     * Return the total quantity in stock for the current product
+     * @return int the total quantity in stock
+     */
+    public function getQuantityInStock(): int {
+        $stock = $this -> getCurrentStock();
+        $total = 0;
+        foreach ($stock as $entrepot) {
+            $total += $entrepot["quantite"];
+        }
+
+        return $total;
+    }
+
+    /**
+     * Return true if the product has enough in stock, else return the quantity missing
+     * @param int $quantity the quantity to check
+     * @return bool|int true if enough in stock, else the quantity missing
+     */
+    public function hasEnoughInStock(int $quantity): bool | int {
+        $quantityInStock = $this -> getQuantityInStock();
+        return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
     }
 }
