@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 /*
  * DEFAULT_REDIRECT_PATH is use in the case that the redirect url is not set
  * it act as a default redirect path
@@ -11,7 +12,6 @@ if(!defined("DEFAULT_REDIRECT_PATH")) define("DEFAULT_REDIRECT_PATH", "/");
 
 function goToRedirect() {
     $redirect = isset($_GET["redirect"]) ? $_GET["redirect"] : DEFAULT_REDIRECT_PATH;
-    echo $redirect;
     header("Location: ".prependStaticDirIfNeed($redirect));
     exit();
 }
@@ -84,3 +84,4 @@ function prependStaticDirIfNeed(string $url) {
         return BASE_DIR_STATIC."".substr($url, 1);
     return $url;
 }
+ob_end_flush();
