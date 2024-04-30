@@ -1,13 +1,18 @@
 <?php
 require_once __DIR__ ."/php/Product.php";
 
-$product = Product::constructFromId(intval($_GET["id"]));
-if (!isset($_GET["id"]) || $product === null ) {
+if (!isset($_GET["id"])) {
     include __DIR__."/pageTemplate/404Product.html";
     http_response_code(404);
     exit;
 }
 
+$product = Product::constructFromId(intval($_GET["id"]));
+if ($product === null ) {
+    include __DIR__."/pageTemplate/404Product.html";
+    http_response_code(404);
+    exit;
+}
 // $productQuantity = $product -> getQuantityInStock();
 // error_log("Product quantity: ".$productQuantity);
 
