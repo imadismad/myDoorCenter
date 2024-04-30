@@ -8,6 +8,9 @@ if (!isset($_GET["id"]) || $product === null ) {
     exit;
 }
 
+// $productQuantity = $product -> getQuantityInStock();
+// error_log("Product quantity: ".$productQuantity);
+
 function getProjectPath() {
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
             substr($scriptPath, 0, strpos($lower, $projectFolder) + strlen($projectFolder)) :
@@ -159,14 +162,18 @@ define('BASE_DIR_STATIC', getProjectPath());
                             </ul>
                         </div>
 
+                        <?php
+                        echo '
                         <button
                             type="button"
                             class="btn btn-light"
                             id="ajoutPanier"
-                            onclick=<?php echo "addProduct(".$product->getId().")" ?>
+                            onclick="addProduct("'.$product->getId().'")"
                         >
                             Ajouter au panier
                         </button>
+                        ';
+                        ?>
                     </div>
                 </div>
                 <hr>

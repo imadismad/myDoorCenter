@@ -276,7 +276,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <input type="text" class="form-control" id="cardNumber" name="cardNumber">
                 <label for="cardNumber">Numéro de carte de crédit</label>
                 <div class="invalid-feedback">
-                    Veuillez entrer un numéro de carte de crédit valide.
+                    Veuillez entrer un numéro de carte de crédit MasterCard ou Visa valide.
                 </div>
             </div>
             <div class="form-floating mb-3">

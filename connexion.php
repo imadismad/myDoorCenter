@@ -1,5 +1,6 @@
 <?php
 require_once "php/Redirect.php";
+
 function getProjectPath() {
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
             substr($scriptPath, 0, strpos($lower, $projectFolder) + strlen($projectFolder)) :
@@ -8,20 +9,18 @@ function getProjectPath() {
 }
 
 function getAbsoluteMyDoorCenterPath() {
-    $path = __DIR__;
-    foreach (['mydoorcenter', 'wwwroot'] as $folder) {
-        if (($pos = strpos(strtolower($path), $folder)) !== false) return substr($path, 0, $pos + strlen($folder));
-    }
-    return $path;
+  $path = __DIR__;
+  foreach (['mydoorcenter', 'wwwroot'] as $folder) {
+      if (($pos = strpos(strtolower($path), $folder)) !== false) return substr($path, 0, $pos + strlen($folder));
+  }
+  return $path;
 }
 
 define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
 define('BASE_DIR_STATIC', getProjectPath());
 ?>
-
 <!-- Head with automatic css imports -->
 <?php include BASE_DIR.'pageTemplate/head.php'; ?>
-
 
     <body>
 
@@ -39,11 +38,20 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 
         <!-- Page de connexion -->
-        <div class="container">
+        <div class="container justify-content-center">
             <div class="d-flex align-items-center justify-content-center">
                 <div class="w-50 p-3">
                     <div class="text-bg-light p-3">
                         <h2>Connexion</h2>
+                        <?php
+                            if(isset($_GET['error']) && $_GET['error'] == "true") {
+                                echo '
+                                <div class="alert alert-danger" role="alert">
+                                    Nom d\'utilisateur ou mot de passe incorrect
+                                </div>
+                                ';
+                            }
+                        ?>
                         <form action=<?php echo getUrlWithSaveRedirect("/api/connect.php"); ?> method="post" class="row g-4">
 
                             <div class="input-group input-group-lg">
@@ -67,12 +75,7 @@ define('BASE_DIR_STATIC', getProjectPath());
             </div>
 
 
-        </div>
-    </main>
+    </div>
+</body>
 
-    <!-- JS Import -->
-    <?php include BASE_DIR.'pageTemplate/jsImport.php'; ?>
-
-    </body>
-
-<?php include BASE_DIR.'pageTemplate/footer.php'; ?>
+</html>

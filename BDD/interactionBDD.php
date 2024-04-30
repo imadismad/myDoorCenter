@@ -1,5 +1,4 @@
 <?php
-
 // Inclure le fichier contenant les fonctions SQL
 require_once 'functionsSQL.php';
 
@@ -29,24 +28,26 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
 
     // Récupération des résultats
     $resultat = $requete->get_result();
+    $arrayResult = array();
 
     // Affichage des quantités de portes par entrepôt
     if ($resultat->num_rows === 0) {
-        fwrite(STDERR, "La référence n'est pas en stock.");
+        error_log("La référence n'est pas en stock.");
         return false;
     } else {
         // Affichage des quantités de portes par entrepôt
         while ($row = $resultat->fetch_assoc()) {
+            error_log(print_r($row, true));
             $idEntrepot = $row["idEntrepot"];
             $quantite = $row["quantite"];
-            fwrite(STDOUT, "Entrepôt ID: $idEntrepot, Quantité: $quantite\n");
+            array_push($arrayResult, array("idEntrepot" => $idEntrepot, "quantite" => $quantite));
         }
     }
 
     // Fermeture de la connexion
     $requete->close();
     $connexion->close();
-    return true;
+    return $arrayResult;
 }
 
 function creerCommande($idClient, $modePaiement, $produitsQuantites) {
@@ -130,11 +131,10 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
         // Valider la transaction
         $connexion->commit();
 
-        fwrite(STDOUT, "La commande a été créée avec succès.");
     } catch (Exception $e) {
         // En cas d'erreur, annuler la transaction
         $connexion->rollback();
-        fwrite(STDERR, "Erreur lors de la création de la commande : " . $e->getMessage());
+        error_log(STDERR, "Erreur lors de la création de la commande : " . $e->getMessage());
     }
 
     // Fermeture de la connexion
