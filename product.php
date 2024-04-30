@@ -29,9 +29,6 @@ function getAbsoluteMyDoorCenterPath() {
 define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
 define('BASE_DIR_STATIC', getProjectPath());
 ?>
-<!-- Info manquante dans la BDD pour la page du produit : Reference du produit, dimension disponibles, couleurs dispo -->
-
-<!-- Head with automatic css imports -->
 <?php include BASE_DIR.'pageTemplate/head.php'; ?>
 
 
@@ -168,7 +165,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                             type="button"
                             class="btn btn-light"
                             id="ajoutPanier"
-                            onclick="addProduct("'.$product->getId().'")"
+                            onclick="addProduct('.$product->getId().')"
                         >
                             Ajouter au panier
                         </button>
