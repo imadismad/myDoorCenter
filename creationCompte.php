@@ -144,7 +144,7 @@ function getAbsoluteMyDoorCenterPath() {
                                     <button type="submit" class="btn btn-primary" name="submit" id="submit"
                                         value="submit">Créer votre
                                         compte</button>
-                                    <script src="js/creationCompte.js"></script>
+                                    <!-- <script src="js/module.creationCompte.js"></script> -->
                                 </div>
                                 <div class="col-12">
                                     <input class="btn btn-primary" type="button" value="Connexion"
