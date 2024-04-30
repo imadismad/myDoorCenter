@@ -39,15 +39,16 @@ class Product extends DBObject {
         if ($type === "") throw new Exception("Product type can't be empty");
         if ($catalogue !== 0 && $catalogue !== 1) throw new Exception("Product catalogue must be 0 or 1");
 
-        $this->name = $name;
-        $this->unitaryPrice = $unitaryPrice;
-        $this->type = $type;
-        $this->description = $description;
-        $this->imageName = $imageName;
-        $this->catalogue = $catalogue;
-        $this->materials = array();
-        $this->newMaterials = array();
-        $this->oldMaterials = array();
+        $this -> setName($name);
+        $this -> setUnitaryPrice($unitaryPrice);
+        $this -> setType($type);
+        $this -> setDescription($description);
+        $this -> setImageName($imageName);
+        $this -> setCatalogue($catalogue);
+        
+        $this -> materials = array();
+        $this -> newMaterials = array();
+        $this -> oldMaterials = array();
     }        
 
     public static function constructFromId(int $id): Product | null {
@@ -276,5 +277,27 @@ class Product extends DBObject {
     public function hasEnoughInStock(int $quantity): bool | int {
         $quantityInStock = $this -> getQuantityInStock();
         return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
+    }
+
+    public static function searchProduct($search = null, $type = null, $tri = 'nom', $prixMin = null, $prixMax = null, $triNote = false): array  {
+        $arrayResult = rechercherProduits($search, $type, $tri, $prixMin, $prixMax, $triNote);
+        $arrayProduct = array();
+
+        foreach ($arrayResult as $value) {
+            $product = new Product(
+                $value[Product::NAME_DB_NAME],
+                floatval($value[Product::UNITARY_PRICE_DB_NAME]),
+                $value[Product::TYPE_DB_NAME],
+                $value[Product::DESCRIPTION_DB_NAME],
+                $value[Product::IMAGE_NAME_DB_NAME],
+                $value[Product::IN_CATALOGUE_DB_NAME]
+            );
+            $product -> setId($value["id"]);
+            $product -> materials = Material::constructAllFromProduct($product -> getId());
+
+            array_push($arrayProduct, $product);
+        }
+
+        return $arrayProduct;
     }
 }
