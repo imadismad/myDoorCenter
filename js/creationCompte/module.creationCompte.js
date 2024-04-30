@@ -1,3 +1,4 @@
+import { checkPhone } from "../lib/dataChecker.js";
 function verifMajeur() {
   const inputNaissance = document.getElementById("naissance");
   const anneeNaissance = parseInt(inputNaissance.value.split("-")[0], 10);
@@ -28,19 +29,7 @@ function verifMajeur() {
 }
 
 function verifierPaysNumeroTelephone(numeroTelephone, pays) {
-  const prefixesPays = {
-    "France": "+33",
-    "États-Unis": "+1",
-    "Royaume-Uni": "+44",
-    "Allemagne": "+49",
-    "Espagne": "+34",
-    "Italie": "+39",
-    "Canada": "+1",
-    "Australie": "+61",
-    "Japon": "+81",
-    "Brésil": "+55"
-  };
-  return numeroTelephone.startsWith(prefixesPays[pays]);
+  return checkPhone(numeroTelephone);
 }
 
 function confirmationMDP(mdp, confirmation) {
@@ -52,6 +41,8 @@ function verifFormat(event) {
     messageAge.style.color = "red";
     messageAge.textContent = "Vous devez avoir au moins 18 ans !";
     event.preventDefault();
+  }else{
+    messageAge.textContent = "";
   }
 
   // numéro téléphone
@@ -63,6 +54,8 @@ function verifFormat(event) {
     messageErrorTel.style.color="red";
     messageErrorTel.textContent = "Le numéro de téléphone n'est pas compatible avec le pays spécifié.";
     event.preventDefault();
+  }else{
+    messageErrorTel.textContent = "";
   }
 
   // confirmation mdp 
