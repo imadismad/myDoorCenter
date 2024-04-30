@@ -1,21 +1,23 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin'])){
+if (!isset($_SESSION['admin'])) {
     header("Location: ../admin.html");
 }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajout nouveau produit</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Ajouter un nouveau produit</h1>
-        <form action="../BDD/add_product.php" method="post">
+        <form enctype="multipart/form-data" action="/BDD/add_product.php" method="post">
             <div class="form-group">
                 <label for="product-name">Nom du produit:</label>
                 <input type="text" class="form-control" id="product-name" name="product-name" required>
@@ -33,8 +35,9 @@ if (!isset($_SESSION['admin'])){
                 <textarea class="form-control" id="product-description" name="product-description" required></textarea>
             </div>
             <div class="form-group">
-                <label for="product-image">Nom de l'image:</label>
-                <input type="text" class="form-control" id="product-image" name="product-image" required>
+                <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+                <input type="file" class="form-control" id="product-image" name="product-image" required>
+                <!-- <input type="text" class="form-control" id="product-image" name="product-image" required> -->
             </div>
             <div class="form-group">
                 <label for="product-catalog">Dans le catalogue:</label>
@@ -43,8 +46,9 @@ if (!isset($_SESSION['admin'])){
                     <option value="No">No</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Ajouter le produit</button>
+            <button type="submit" class="btn btn-primary", name="submit">Ajouter le produit</button>
         </form>
     </div>
 </body>
+
 </html>
