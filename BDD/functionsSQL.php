@@ -68,13 +68,6 @@ function insererDonnees($table, $donnees, bool $recupererId=false) {
     $valeurs = array_values($donnees);
     $requete->bind_param($types, ...$valeurs);
 
-    // Exécution de la requête
-    if ($requete->execute() === TRUE) {
-        fwrite(STDOUT, "\nDonnées insérées avec succès\n");
-    } else {
-        fwrite(STDERR, "Erreur lors de l'insertion des données : " . $requete->error);
-    }
-
     $newId = null;
     if ($recupererId) {
         $newId = $connexion->insert_id;
@@ -127,12 +120,6 @@ function supprimerLigne($table, $champReference, $valeurReference) {
         throw new RuntimeException("Mauvais argument passé pour \$champReference et/ou \$valeurReference");
     }
 
-    // Exécution de la requête
-    if ($requete->execute() === TRUE) {
-        fwrite(STDOUT, "\nLigne supprimée avec succès.\n");
-    } else {
-        fwrite(STDERR, "Erreur lors de la suppression de la ligne : " . $requete->error);
-    }
 
     // Fermeture de la connexion
     $requete->close();
@@ -222,12 +209,6 @@ function modifierDonnees($table, $champModification, $nouvelleValeur, $champRefe
         throw new Exception("Les paramètre de modification sont des tableaux de taille différente.");
     }
 
-    // Exécution de la requête
-    if ($requete->execute() === TRUE) {
-        fwrite(STDOUT, "\nDonnées modifiées avec succès\n");
-    } else {
-        fwrite(STDOUT, "Erreur lors de la modification des données : " . $requete->error);
-    }
 
     // Fermeture de la connexion
     $requete->close();
