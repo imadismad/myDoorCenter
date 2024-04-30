@@ -33,11 +33,20 @@ require_once "php/Redirect.php";
 
 
         <!-- Page de connexion -->
-        <div class="container">
+        <div class="container justify-content-center">
             <div class="d-flex align-items-center justify-content-center">
                 <div class="w-50 p-3">
                     <div class="text-bg-light p-3">
                         <h2>Connexion</h2>
+                        <?php
+                            if(isset($_GET['error']) && $_GET['error'] == "true") {
+                                echo '
+                                <div class="alert alert-danger" role="alert">
+                                    Nom d\'utilisateur ou mot de passe incorrect
+                                </div>
+                                ';
+                            }
+                        ?>
                         <form action=<?php echo getUrlWithSaveRedirect("/api/connect.php"); ?> method="post" class="row g-4">
 
                             <div class="input-group input-group-lg">

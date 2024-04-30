@@ -52,7 +52,7 @@
     visibility: visible;
 }
 
-#pt-relay-search-ul:empty;
+#pt-relay-search-ul:empty,
 #address-bill-search-ul:empty {
     visibility: hidden !important;
 }

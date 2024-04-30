@@ -1,4 +1,7 @@
 <?php
+/*
+ * THIS PHP USE ONLY Client TABLE
+ */
 ob_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -58,4 +61,3 @@ try {
 exit();
 ob_end_flush();
 ?>
-
