@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- Mail -->
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-  <script type="text/javascript" src="/js/lib/libphonenumber-min.js"></script>
   <!-- Main css -->
   <?php
   echo '<link href="'.BASE_DIR_STATIC.'css/main.css" rel="stylesheet">';

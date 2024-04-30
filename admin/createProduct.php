@@ -15,7 +15,7 @@ if (!isset($_SESSION['admin'])){
 <body>
     <div class="container">
         <h1>Ajouter un nouveau produit</h1>
-        <form enctype="multipart/form-data" action="/BDD/add_product.php" method="post">
+        <form action="../BDD/add_product.php" method="post">
             <div class="form-group">
                 <label for="product-name">Nom du produit:</label>
                 <input type="text" class="form-control" id="product-name" name="product-name" required>
@@ -34,9 +34,7 @@ if (!isset($_SESSION['admin'])){
             </div>
             <div class="form-group">
                 <label for="product-image">Nom de l'image:</label>
-                <input type="hidden" name="MAX_FILE_SIZE" value="30000">
-                <input type="file" class="form-control" id="product-image" name="product-image" required>
-                <!-- <input type="text" class="form-control" id="product-image" name="product-image" required> -->
+                <input type="text" class="form-control" id="product-image" name="product-image" required>
             </div>
             <div class="form-group">
                 <label for="product-catalog">Dans le catalogue:</label>
@@ -45,10 +43,8 @@ if (!isset($_SESSION['admin'])){
                     <option value="No">No</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary", name="submit">Ajouter le produit</button>
+            <button type="submit" class="btn btn-primary">Ajouter le produit</button>
         </form>
     </div>
 </body>
 </html>
-<?php
-?>

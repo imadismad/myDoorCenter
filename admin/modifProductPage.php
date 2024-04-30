@@ -21,7 +21,7 @@
     <body>
         <div class="container">
             <h1>Modify Product</h1>
-            <form enctype="multipart/form-data" action="modify_product.php" method="post" id="modify-product-form">
+            <form action="modify_product.php" method="post" id="modify-product-form">
                 <input type="hidden" name="id" id="product-id">
                 <div class="form-group">
                     <label for="product-name">Name:</label>
@@ -41,8 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label for="product-image">Image:</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
-                    <input type="file" class="form-control" id="product-imageMod" name="product-imageMod" required>
+                    <input type="text", name="image" id="product-image" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="product-catalog">In Catalog:</label>

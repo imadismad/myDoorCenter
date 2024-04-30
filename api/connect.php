@@ -1,7 +1,4 @@
 <?php
-ob_start();
-?>
-<?php
 require_once "../php/UserUtils.php";
 require_once "../php/Redirect.php";
 
@@ -16,4 +13,3 @@ if (!$isConnect) {
     saveRedirect("/connexion.php?error=true");
 }
 goToRedirect();
-ob_end_flush();
