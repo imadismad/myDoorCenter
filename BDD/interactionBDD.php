@@ -145,26 +145,7 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
 
 
 
-
-function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false) {
-
-/**
- * Recherche des produits dans la base de données en fonction des critères spécifiés.
- * 
- * ATTENTION : le tri par mots-clés est fait en dernier, ce qui implique que le tri
- * par note croissante ou décroissante est mélangée si une recherche par mots-clés
- * est faite en plus.
- *
- * @param string|null $search   La chaîne de recherche pour filtrer les résultats par pertinence.
- * @param string|null $type     Le type de produit à rechercher.
- * @param float|null  $prixMin  Le prix minimum des produits à rechercher.
- * @param float|null  $prixMax  Le prix maximum des produits à rechercher.
- * @param int|bool    $triNote  Le mode de tri des résultats par note moyenne (0 pour décroissant, 6 pour croissant, false pour ne pas trier par note, et entre 1 et 5 pour la moyenne correspondante).
- *
- * @return array              Un tableau associatif contenant les produits correspondant aux critères de recherche, triés par pertinence.
- */
-
-    
+function rechercherProduits($search = null, $type = null, $tri = 'nom', $prixMin = null, $prixMax = null, $triNote = false) {
     // Informations de connexion à la base de données
     $serveur = SQL_SERVER;
     $utilisateur = SQL_USER;
@@ -183,11 +164,17 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
     $bind_types = "";
     $bind_values = [];
 
+
     // Construction de la requête SQL
-    $sql = "SELECT p.*, AVG(n.note) as noteMoyenne 
+    $sql = "SELECT p.*, AVG(n.note) as noteMoyenne, 
+            (CASE WHEN p.nom LIKE ? THEN 5 ELSE 0 END) AS pertinenceTitre,
+            (CASE WHEN p.description LIKE ? THEN 1 ELSE 0 END) AS pertinenceDescription 
             FROM Produit p 
             LEFT JOIN Noter n ON p.id = n.idProduit";
-    
+    $bind_types .= "ss";
+    $bind_values[] = "%" . $search . "%";
+    $bind_values[] = "%" . $search . "%";
+
     // Traitement du filtre par type
     if ($type !== null && !empty($type)) {
         $where[] = "p.type = ?";
@@ -212,23 +199,36 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
         $sql .= " WHERE " . implode(" AND ", $where);
     }
 
-    // Traitement du tri par la note
+    $sql .= " GROUP BY p.id";
+
+    // Calcul de la distance de Levenshtein
+    if ($search !== null && !empty($search)) {
+        $sql .= " HAVING (pertinenceTitre + pertinenceDescription - LEAST(5, LEVENSHTEIN(p.nom, ?))) > 0";
+        $bind_types .= "s";
+        $bind_values[] = $search;
+    }
+
+    // Traitement du tri
     if ($triNote !== false && is_numeric($triNote)) {
         if ($triNote == 0) {
-            $sql .= " GROUP BY p.id ORDER BY noteMoyenne DESC";
+            $sql .= " ORDER BY noteMoyenne DESC";
         } elseif ($triNote == 6) {
-            $sql .= " GROUP BY p.id ORDER BY noteMoyenne ASC";
+            $sql .= " ORDER BY noteMoyenne ASC";
         } else {
-            $sql .= " GROUP BY p.id HAVING noteMoyenne >= ? AND noteMoyenne < ?";
+            $sql .= " HAVING noteMoyenne >= ? AND noteMoyenne < ?";
             $bind_types .= "dd";
             $bind_values[] = $triNote;
             $bind_values[] = $triNote + 1;
         }
     } else {
-        $sql .= " GROUP BY p.id ORDER BY p.nom";
+        $sql .= " ORDER BY p.nom";
     }
 
-    // Exécution de la requête pour récupérer tous les produits
+    print($sql);
+    echo "\nbind_types: " . $bind_types . "\n";
+    echo "bind_values: ";
+    print_r($bind_values);
+    // Exécution de la requête
     $requete = $connexion->prepare($sql);
     if (!empty($bind_values)) {
         $requete->bind_param($bind_types, ...$bind_values);
@@ -236,54 +236,17 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
     $requete->execute();
     $resultat = $requete->get_result();
 
-    if($search==null){
-        // Fermeture de la connexion
-        $requete->close();
-        $connexion->close();
-        return $resultat;
-    }
-
     // Création du tableau associatif pour les résultats
     $resultats = [];
     while ($row = $resultat->fetch_assoc()) {
-        // Calcul de la pertinence avec la distance de Levenshtein
-
-        $pertinenceTitre = 0;
-        foreach (explode(" ",$row["nom"]) as $word) {
-            $pertinenceInter = 10 - damerauLevenshteinDistance($word,$search);
-            $pertinenceTitre += $pertinenceInter < 0 ? 0 : $pertinenceInter;
-        }
-
-        $pertinenceDescription = 0;
-        foreach (explode(" ",$row["description"]) as $word) {
-            $pertinenceInter = 10 - damerauLevenshteinDistance($word,$search);
-            $pertinenceDescription += $pertinenceInter < 0 ? 0 : $pertinenceInter;
-        }
-
-        $totalPertinence = $pertinenceTitre * 5 + $pertinenceDescription;
-
-        // Filtrage des résultats ayant une pertinence suffisante
-        if ($totalPertinence > 0) {
-            $row['pertinenceTitre'] = $pertinenceTitre;
-            $row['pertinenceDescription'] = $pertinenceDescription;
-            $row['totalPertinence'] = $totalPertinence;
-            $resultats[] = $row;
-            echo "ID : ".$row['id']." Pertinence : ".$totalPertinence."\n";
-        }
+        $resultats[] = $row;
     }
 
-    // Tri des résultats par pertinence
-    usort($resultats, function($a, $b) {
-        return $b['totalPertinence'] <=> $a['totalPertinence'];
-    });
-
-    // Fermeture de la connexion
     $requete->close();
     $connexion->close();
 
     return $resultats;
 }
-
 
 
 
