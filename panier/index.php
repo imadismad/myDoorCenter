@@ -74,7 +74,7 @@ define('BASE_DIR_STATIC', getProjectPath());
         </div>
         <label>Code promo : <input type="text" name="codePromo"></label><br />
 
-        <a role="button" class="btn btn-primary" href="panier/commande.php">Commander</a>
+        <a role="button" class="btn btn-primary" href="<?php echo BASE_DIR_STATIC."panier/commande.php"; ?>">Commander</a>
     </main>
 
     <!-- JS Import -->
