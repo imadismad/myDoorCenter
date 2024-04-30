@@ -1,3 +1,5 @@
+import { checkPhone } from "./lib/dataChecker";
+
 function verifMajeur() {
   const inputNaissance = document.getElementById("naissance");
   const anneeNaissance = parseInt(inputNaissance.value.split("-")[0], 10);
@@ -5,7 +7,7 @@ function verifMajeur() {
   const jourNaissance = parseInt(inputNaissance.value.split("-")[2], 10);
 
   const messageAge = document.getElementById("messageError");
-  
+
 
   const dateActuelle = new Date();
   const anneeActuelle = dateActuelle.getFullYear();
@@ -28,19 +30,20 @@ function verifMajeur() {
 }
 
 function verifierPaysNumeroTelephone(numeroTelephone, pays) {
-  const prefixesPays = {
-    "France": "+33",
-    "États-Unis": "+1",
-    "Royaume-Uni": "+44",
-    "Allemagne": "+49",
-    "Espagne": "+34",
-    "Italie": "+39",
-    "Canada": "+1",
-    "Australie": "+61",
-    "Japon": "+81",
-    "Brésil": "+55"
-  };
-  return numeroTelephone.startsWith(prefixesPays[pays]);
+  // const prefixesPays = {
+  //   "France": "+33",
+  //   "États-Unis": "+1",
+  //   "Royaume-Uni": "+44",
+  //   "Allemagne": "+49",
+  //   "Espagne": "+34",
+  //   "Italie": "+39",
+  //   "Canada": "+1",
+  //   "Australie": "+61",
+  //   "Japon": "+81",
+  //   "Brésil": "+55"
+  // };
+  // return numeroTelephone.startsWith(prefixesPays[pays]);
+  return checkPhone(numeroTelephone);
 }
 
 function confirmationMDP(mdp, confirmation) {
@@ -53,14 +56,14 @@ function verifFormat(event) {
     messageAge.textContent = "Vous devez avoir au moins 18 ans !";
     event.preventDefault();
   }
-
+  
   // numéro téléphone
   const telephone = document.getElementById("tel").value;
   const pays = document.getElementById('pays').value;
   console.log(telephone, pays);
   if (!verifierPaysNumeroTelephone(telephone, pays)) {
     const messageErrorTel = document.getElementById('messageErrorTel');
-    messageErrorTel.style.color="red";
+    messageErrorTel.style.color = "red";
     messageErrorTel.textContent = "Le numéro de téléphone n'est pas compatible avec le pays spécifié.";
     event.preventDefault();
   }

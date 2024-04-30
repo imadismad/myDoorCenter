@@ -33,7 +33,7 @@
         <button id="sidebarToggleButton" title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
       </div>
       <div class="col-8 px-1">
-        <img src="<?php echo BASE_DIR_STATIC."images/logo.png"; ?>" alt="Logo" height="100"> <!-- Taille du logo ajustée -->
+          <a href="<?php echo BASE_DIR_STATIC?>"><img src="<?php echo BASE_DIR_STATIC."images/logo.png"; ?>" alt="Logo" height="100"></a><!-- Taille du logo ajustée -->
       </div>
     </div>
     

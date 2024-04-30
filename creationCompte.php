@@ -22,7 +22,6 @@ define('BASE_DIR_STATIC', getProjectPath());
 <!-- Head with automatic css imports -->
 <?php include BASE_DIR.'pageTemplate/head.php'; ?>
 
-
     <body>
 
     <!-- Header import -->
@@ -37,7 +36,6 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <div class="container"></div>
                 <div class="col-md-12 content text-center">
                     <h1 class="welcome-title border rounded display-1"><b>Création compte</b></h1>
-
         <div class="container">
             <div class="d-flex align-items-center justify-content-center">
                 <div class="w-50 p-3">
