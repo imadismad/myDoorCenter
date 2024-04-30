@@ -1,21 +1,26 @@
 <?php
 require_once "php/Redirect.php";
+
+function getProjectPath() {
+    $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
+            substr($scriptPath, 0, strpos($lower, $projectFolder) + strlen($projectFolder)) :
+            '/';
+    return rtrim($path, '/') . '/';
+}
+
+function getAbsoluteMyDoorCenterPath() {
+  $path = __DIR__;
+  foreach (['mydoorcenter', 'wwwroot'] as $folder) {
+      if (($pos = strpos(strtolower($path), $folder)) !== false) return substr($path, 0, $pos + strlen($folder));
+  }
+  return $path;
+}
+
+define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
+define('BASE_DIR_STATIC', getProjectPath());
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de connexion</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Css spécifique -->
-    <link href="css/index/style.css" rel="stylesheet">
-</head>
+<!-- Head with automatic css imports -->
+<?php include BASE_DIR.'pageTemplate/head.php'; ?>
 
     <body>
 
