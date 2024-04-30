@@ -8,8 +8,8 @@ if (!isset($_GET["id"]) || $product === null ) {
     exit;
 }
 
-$productQuantity = $product -> getQuantityInStock();
-error_log("Product quantity: ".$productQuantity);
+// $productQuantity = $product -> getQuantityInStock();
+// error_log("Product quantity: ".$productQuantity);
 
 function getProjectPath() {
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
