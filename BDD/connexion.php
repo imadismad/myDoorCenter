@@ -58,6 +58,6 @@ try {
     error_log($e->getMessage());
     header("Location: /creationCompte.php");
 }
-exit();
 ob_end_flush();
+exit();
 ?>
