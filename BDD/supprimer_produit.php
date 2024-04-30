@@ -1,5 +1,4 @@
 <?php
-    include_once "../php/checkDefine.php";
     session_start();
     include("config.php");
     include("functionsSQL.php");

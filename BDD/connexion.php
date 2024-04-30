@@ -3,7 +3,6 @@
 /*
  * THIS PHP USE ONLY Client TABLE
  */
-include_once "../php/checkDefine.php";
 include_once "config.php";
 require_once "functionsSQL.php";
 $serveur = SQL_SERVER;

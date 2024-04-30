@@ -1,7 +1,6 @@
 <?php
 
 // Inclure le fichier contenant les fonctions SQL
-include_once "../php/checkDefine.php";
 require_once 'functionsSQL.php';
 
 function quantitePortesEnStockParEntrepot($referenceProduit) {

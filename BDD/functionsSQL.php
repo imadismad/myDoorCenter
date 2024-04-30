@@ -1,5 +1,4 @@
 <?php
-include_once "../php/checkDefine.php";
 include_once "config.php";
 
 function connexionBDD(): mysqli {

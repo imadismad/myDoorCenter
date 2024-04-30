@@ -1,5 +1,4 @@
 <?php
-include_once "checkDefine.php";
 require_once __DIR__."/../BDD/interactionBDD.php";
 require_once __DIR__."/../BDD/interBDDProduit.php";
 
