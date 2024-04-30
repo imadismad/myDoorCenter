@@ -3,7 +3,7 @@ require_once "DBObject.php";
 require_once "Material.php";
 require_once "Option.php";
 require_once "Redirect.php";
-require_once "../BDD/interactionBDD.php";
+require_once __DIR__."/../BDD/interactionBDD.php";
 class Product extends DBObject {
     // Prduct table
     private const TABLE_NAME            = "Produit";
@@ -12,7 +12,7 @@ class Product extends DBObject {
     private const UNITARY_PRICE_DB_NAME = "prixUnitaire";
     private const DESCRIPTION_DB_NAME   = "description";
     private const IMAGE_NAME_DB_NAME    = "nomImage";
-    private const IN_CATALOGUE_DB_NAME    = "estAuCatalogue";
+    private const IN_CATALOGUE_DB_NAME  = "estAuCatalogue";
 
     // Compose table (for product and materials association)
     private const COMPOSE_TABLE_NAME           = "Composer";
