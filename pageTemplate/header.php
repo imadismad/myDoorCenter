@@ -42,10 +42,10 @@
     <!-- Barre de recherche pour grands écrans -->
     <div class="d-none d-md-block col-md-4 px-md-2">
       <div class="input-group">
-        <div class="input-group-prepend">
-          <button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;"></button>
-        </div>
-        <form method="get" action="<?php echo BASE_DIR_STATIC."research.php"; ?>">
+      <form method="get" action="<?php echo BASE_DIR_STATIC."research.php"; ?>">
+          <div class="input-group-prepend">
+            <button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;" type="submit"></button>
+          </div>
           <input type="text" name="search" class="form-control" placeholder="Recherche..." style="width: 100%;">
         </form>
       </div>
