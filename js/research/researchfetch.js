@@ -5,15 +5,17 @@ document.addEventListener('DOMContentLoaded', function() {
     var priceRangeMax = document.getElementById('priceRangeMax');
     var priceNumberMax = document.getElementById('priceNumberMax');
     var priceValueMax = document.getElementById('priceValueMax');
+    var researchDiv = document.getElementById('research');
 
+    var research = researchDiv.value.replace(/\s/g, '+');
     var minPrice = 0;
     var maxPrice = 5000;
 
     updateResult();
 
     function updateDisplays() {
-        priceValueMin.textContent = priceRangeMin.value + '€';
-        priceValueMax.textContent = priceRangeMax.value + '€';
+        priceValueMin.textContent = priceRangeMin.value;
+        priceValueMax.textContent = priceRangeMax.value;
         updateResult();
     }
 
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('minPrice', minPrice);
         formData.append('maxPrice', maxPrice);
 
-        fetch("../../pageTemplate/productTemplate.php?research=porte", {
+        fetch("../../pageTemplate/productTemplate.php?research="+research, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: formData
@@ -73,9 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
         updateResult();
     }
 
+    function handleResearchChange() {
+        research = researchDiv.value.replace(/\s/g, '+');
+        updateResult();
+    }
+
     // Écouteurs d'événements pour les changements de curseurs
     priceRangeMin.addEventListener('input', handleMinChange);
     priceNumberMin.addEventListener('change', handleMinChange);
     priceRangeMax.addEventListener('input', handleMaxChange);
     priceNumberMax.addEventListener('change', handleMaxChange);
+    researchDiv.addEventListener('change', handleResearchChange);
 });
