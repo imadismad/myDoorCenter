@@ -6,67 +6,76 @@ document.addEventListener('DOMContentLoaded', function() {
     var priceNumberMax = document.getElementById('priceNumberMax');
     var priceValueMax = document.getElementById('priceValueMax');
 
-    function updateResult() {
-        fetch("../../pageTemplate/productTemplate.php?research=porte").then(async (response) => {
-            if(response.ok){
-                const data = await response.text();
-                document.getElementById('productResults').innerHTML = data;
-            }
-        })
-    }
+    var minPrice = 0;
+    var maxPrice = 5000;
 
-    function handleRangeMinChange() {
-        var currentValue = parseInt(priceRangeMin.value, 10);
-        priceNumberMin.value = currentValue;
-        priceValueMin.textContent = currentValue + '€';
-        if (currentValue > parseInt(priceRangeMax.value, 10)) {
-            priceRangeMax.value = currentValue;
-            priceNumberMax.value = currentValue;
-            priceValueMax.textContent = currentValue + '€';
-        }
-        console.log('Valeur minimale ajustée : ' + currentValue);
+    updateResult();
+
+    function updateDisplays() {
+        priceValueMin.textContent = priceRangeMin.value + '€';
+        priceValueMax.textContent = priceRangeMax.value + '€';
         updateResult();
     }
 
-    function handleNumberMinChange() {
-        var currentValue = parseInt(priceNumberMin.value, 10);
-        priceRangeMin.value = currentValue;
-        priceValueMin.textContent = currentValue + '€'; 
-        if (currentValue > parseInt(priceNumberMax.value, 10)) {
-            priceNumberMax.value = currentValue;
-            priceRangeMax.value = currentValue;
-            priceValueMax.textContent = currentValue + '€';
-        }
-        console.log('Valeur minimale ajustée : ' + currentValue);
+    function updateResult() {
+
+        var formData = new URLSearchParams();
+        formData.append('minPrice', minPrice);
+        formData.append('maxPrice', maxPrice);
+
+        fetch("../../pageTemplate/productTemplate.php?research=porte", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: formData
+        
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Réseau ou réponse non valide');
+            }
+            return response.text();
+        })
+        .then(html => {
+            document.getElementById('productResults').innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Erreur lors de la recherche:', error);
+            alert('Erreur lors de la recherche: ' + error.message);
+        });
     }
 
-    function handleRangeMaxChange() {
-        var currentValue = parseInt(priceRangeMax.value, 10);
-        priceNumberMax.value = currentValue;
-        priceValueMax.textContent = currentValue + '€';
-        if (currentValue < parseInt(priceRangeMin.value, 10)) {
-            priceRangeMin.value = currentValue;
-            priceNumberMin.value = currentValue;
-            priceValueMin.textContent = currentValue + '€';
+
+    function handleMinChange() {
+        // Synchroniser la valeur du champ numérique avec le curseur
+        priceNumberMin.value = priceRangeMin.value;
+        // Assurer que le min ne dépasse pas le max
+        if (parseInt(priceRangeMin.value) > parseInt(priceRangeMax.value)) {
+            priceRangeMax.value = priceRangeMin.value;
+            priceNumberMax.value = priceRangeMax.value;
         }
-        console.log('Valeur maximale ajustée : ' + currentValue);
+        minPrice = priceRangeMin.value;
+        maxPrice = priceNumberMax.value;
+        updateDisplays();
+        updateResult();
     }
 
-    function handleNumberMaxChange() {
-        var currentValue = parseInt(priceNumberMax.value, 10);
-        priceRangeMax.value = currentValue;
-        priceValueMax.textContent = currentValue + '€';
-        if (currentValue < parseInt(priceNumberMin.value, 10)) {
-            priceNumberMin.value = currentValue;
-            priceRangeMin.value = currentValue;
-            priceValueMin.textContent = currentValue + '€';
+    function handleMaxChange() {
+        // Synchroniser la valeur du champ numérique avec le curseur
+        priceNumberMax.value = priceRangeMax.value;
+        // Assurer que le max ne tombe pas en dessous du min
+        if (parseInt(priceRangeMax.value) < parseInt(priceRangeMin.value)) {
+            priceRangeMin.value = priceRangeMax.value;
+            priceNumberMin.value = priceRangeMin.value;
         }
-        console.log('Valeur maximale ajustée : ' + currentValue);
+        minPrice = priceRangeMin.value;
+        maxPrice = priceNumberMax.value;
+        updateDisplays();
+        updateResult();
     }
 
-    // Ajoutez des écouteurs d'événements pour chaque input
-    priceRangeMin.addEventListener('input', handleRangeMinChange);
-    priceNumberMin.addEventListener('input', handleNumberMinChange);
-    priceRangeMax.addEventListener('input', handleRangeMaxChange);
-    priceNumberMax.addEventListener('input', handleNumberMaxChange);
+    // Écouteurs d'événements pour les changements de curseurs
+    priceRangeMin.addEventListener('input', handleMinChange);
+    priceNumberMin.addEventListener('change', handleMinChange);
+    priceRangeMax.addEventListener('input', handleMaxChange);
+    priceNumberMax.addEventListener('change', handleMaxChange);
 });

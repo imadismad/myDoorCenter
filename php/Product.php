@@ -279,8 +279,8 @@ class Product extends DBObject {
         return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
     }
 
-    public static function searchProduct($search = null, $type = null, $tri = 'nom', $prixMin = null, $prixMax = null, $triNote = false): array  {
-        $arrayResult = rechercherProduits($search, $type, $tri, $prixMin, $prixMax, $triNote);
+    public static function searchProduct($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false): array  {
+        $arrayResult = rechercherProduits($search, $type, $prixMin, $prixMax, $triNote);
         $arrayProduct = array();
 
         foreach ($arrayResult as $value) {

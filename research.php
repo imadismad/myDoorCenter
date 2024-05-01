@@ -132,8 +132,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                             </div>
                         </div>
                         <div id="productResults" class="row">
-                        <?php include BASE_DIR.'pageTemplate/productTemplate.php'; ?>
-
+                            <!-- PRODUCTS HERE -->
                         </div>
                     </div>
                     

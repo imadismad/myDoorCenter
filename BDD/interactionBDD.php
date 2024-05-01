@@ -264,7 +264,7 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
             $row['pertinenceDescription'] = $pertinenceDescription;
             $row['totalPertinence'] = $totalPertinence;
             $resultats[] = $row;
-            echo "ID : ".$row['id']." Pertinence : ".$totalPertinence."\n";
+            // echo "ID : ".$row['id']." Pertinence : ".$totalPertinence."\n";
         }
     }
 
