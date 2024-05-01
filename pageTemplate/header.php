@@ -45,13 +45,15 @@
         <div class="input-group-prepend">
           <button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;"></button>
         </div>
-        <input type="text" name="search" class="form-control" placeholder="Recherche...">
+        <form method="get" action="<?php echo BASE_DIR_STATIC."research.php"; ?>">
+          <input type="text" name="search" class="form-control" placeholder="Recherche..." style="width: 100%;">
+        </form>
       </div>
     </div>
     
     <!-- Numéro de téléphone et icônes Espace Client -->
     <div class="col-6 col-md-4 d-flex justify-content-end align-items-center px-2">
-      <div class="col-6">
+      <div class="col-6" style="padding-left: 5%;">
         <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
       </div>
       <div class="col-6 d-flex justify-content-between">

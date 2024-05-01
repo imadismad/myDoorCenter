@@ -3,7 +3,9 @@
 require_once __DIR__."/../php/Product.php";
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-$products = Product::searchProduct("porte");
+$research = $_GET["research"];
+
+$products = Product::searchProduct($research);
 
 
 foreach ($products as $produit => $value) {
@@ -29,8 +31,6 @@ foreach ($products as $produit => $value) {
             $article.= '</div>';
         $article.= '</a>';
     $article.= '</div>';
-
-
 
 
     echo $article;
