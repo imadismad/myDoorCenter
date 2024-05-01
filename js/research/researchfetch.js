@@ -4,7 +4,16 @@ document.addEventListener('DOMContentLoaded', function() {
     var priceValueMin = document.getElementById('priceValueMin'); 
     var priceRangeMax = document.getElementById('priceRangeMax');
     var priceNumberMax = document.getElementById('priceNumberMax');
-    var priceValueMax = document.getElementById('priceValueMax'); 
+    var priceValueMax = document.getElementById('priceValueMax');
+
+    function updateResult() {
+        fetch("../../pageTemplate/productTemplate.php?research=porte").then(async (response) => {
+            if(response.ok){
+                const data = await response.text();
+                document.getElementById('productResults').innerHTML = data;
+            }
+        })
+    }
 
     function handleRangeMinChange() {
         var currentValue = parseInt(priceRangeMin.value, 10);
@@ -16,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             priceValueMax.textContent = currentValue + '€';
         }
         console.log('Valeur minimale ajustée : ' + currentValue);
+        updateResult();
     }
 
     function handleNumberMinChange() {
