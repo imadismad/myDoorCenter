@@ -153,48 +153,7 @@ define('BASE_DIR_STATIC', getProjectPath());
 
                       <div class="row">
 
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title"><b>Porte 1</b></h5>
-                              </div>
-                              <img src="images/porte.png" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <p class="card-text">
-                                    Une belle porte
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title"><b>Porte 2</b></h5>
-                              </div>
-                              <img src="images/porte.png" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <p class="card-text">
-                                    Une porte
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          
-
-                          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title"><b>Porte 3</b></h5>
-                              </div>
-                              <img src="images/porte.png" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <p class="card-text">
-                                    Une porte pas chere
-                                </p>
-                              </div>
-                            </div>
-                          </div>
+                      <?php include BASE_DIR.'pageTemplate/productTemplate.php'; ?>
 
                     </div>
                   </div>
