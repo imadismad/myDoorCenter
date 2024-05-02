@@ -45,7 +45,7 @@ define('BASE_DIR_STATIC', getProjectPath());
 
     <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
         <h1>Information de commande</h1>
-        <form action="<?php echo BASE_DIR_STATIC."api/cart/purchase.php" ?>" method="post">
+        <form action="<?php echo BASE_DIR_STATIC."api/cart/purchase.php" ?>" method="post" id="buying-form">
              <?php
                 if(isset($_GET['error'])) {
                     echo '

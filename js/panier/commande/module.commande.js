@@ -201,7 +201,7 @@ document.getElementById("order-next-step").addEventListener("click", (event) => 
     }
     
     if (valide)
-        document.getElementsByTagName("form")[0].submit();
+        document.getElementById("buying-form").submit();
 });
 
 // autocomplete adress
