@@ -1,6 +1,6 @@
 <?php
 
-require_once "../BDD/interBDDUser.php";
+require_once __DIR__."/../BDD/interBDDUser.php";
 
 class UserUtils {
     private const COOKIE_NAME = "prenom";
