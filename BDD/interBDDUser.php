@@ -1,6 +1,6 @@
 <?php
-require_once "../BDD/config.php";
-require_once "../BDD/functionsSQL.php";
+require_once __DIR__."/../BDD/config.php";
+require_once __DIR__."/../BDD/functionsSQL.php";
 
 /**
  * Vérifie si un utilisateur existe et si sont mot de passe est correct.

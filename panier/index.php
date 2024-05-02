@@ -4,7 +4,6 @@ require_once __DIR__."/../php/Cart.php";
 define("PATH_BASE", "../");
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-
 function getProjectPath() {
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
             substr($scriptPath, 0, strpos($lower, $projectFolder) + strlen($projectFolder)) :

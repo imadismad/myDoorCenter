@@ -8,9 +8,9 @@
 -- SET GLOBAL validate_password.special_char_count = 0;
 -- SET GLOBAL validate_password.mixed_case_count = 0;
 -- SET GLOBAL validate_password.length = 0;
-DROP USER IF EXISTS 'TestBDD'@'localhost';
-CREATE USER 'TestBDD'@'localhost' IDENTIFIED BY '';
-GRANT ALL PRIVILEGES ON DW.* TO 'TestBDD'@'localhost';
+DROP USER IF EXISTS 'TestBDD'@'%';
+CREATE USER 'TestBDD'@'%' IDENTIFIED BY '';
+GRANT ALL PRIVILEGES ON DW.* TO 'TestBDD'@'%';
 FLUSH PRIVILEGES;
 
 DROP DATABASE IF EXISTS DW; -- Crée table si elle n'existe pas
@@ -177,5 +177,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-
