@@ -13,15 +13,32 @@ let currentActive; // To know wich relai point is active
 document.getElementById("bill-info").querySelectorAll("input").forEach((input) => {
     const id = input.id;
     const deliveryInput = document.getElementById(id.replace("-bill", ""));
+    const firstNameShop = document.querySelector(`#point-relay > input[name='${id.replace("-bill", "")}']`);
 
-    if (deliveryInput !== null)
-        input.addEventListener("input", (event) => {
-            if (document.getElementById("same-as-bill").checked)
-                deliveryInput.value = event.target.value;
-        });
+    if (deliveryInput !== null) {
+        if (id === "firstname-bill" || id === "lastname-bill") {
+            firstNameShop.value = input.value;
+            input.addEventListener("input", (event) => {
+                if (document.getElementById("same-as-bill").checked)
+                    deliveryInput.value = event.target.value;
+                firstNameShop.value = event.target.value;
+            });
+        } else
+            input.addEventListener("input", (event) => {
+                if (document.getElementById("same-as-bill").checked)
+                    deliveryInput.value = event.target.value;
+            });
+    }
 });
 
+const updateHome = () => {
+    document.querySelectorAll(".home > div:not(#sameAsFactInp) > input").forEach((child) => {
+        child.readOnly = document.getElementById("same-as-bill").checked;
+    });
+}
+
 document.getElementById("same-as-bill").addEventListener("change", (event) => {
+    updateHome();
     if (event.target.checked) {
         document.getElementById("homeDelivery").querySelectorAll("input").forEach((input) => {
             if (input.type === "text") {
@@ -34,6 +51,8 @@ document.getElementById("same-as-bill").addEventListener("change", (event) => {
         });
     }
 });
+updateHome();
+
 
 // Adding event
 ptRelay.addEventListener("input", limite(async () => {
@@ -70,38 +89,48 @@ ptRelay.addEventListener("input", limite(async () => {
     }
 }, 500));
 
-const updateHome = () => {
-    document.querySelectorAll(".home > div:not(#sameAsFactInp) > input").forEach((child) => {
-        child.disabled = document.getElementById("same-as-bill").checked;
-    });
-}
-document.getElementById("same-as-bill").addEventListener("change", updateHome);
-updateHome();
-
-
 document.getElementById("ptRelayInput").addEventListener("change", (event) => {
     document.querySelector("#point-relay").hidden = !event.target.checked;
     document.querySelector(".home").hidden = event.target.checked;
+
+    document.querySelectorAll("#point-relay > input[type='text' ]").forEach((input) => {
+        input.disabled = false;
+    });
+    document.querySelectorAll("#homeDelivery input[type='text' ]").forEach((input) => {
+        input.disabled = true;
+    });
 });
 
 document.getElementById("domicilInput").addEventListener("change", (event) => {
     document.querySelector(".home").hidden = !event.target.checked;
     document.querySelector("#point-relay").hidden = event.target.checked;
+
+    document.querySelectorAll("#point-relay > input[type='text' ]").forEach((input) => {
+        input.disabled = true;
+    });
+    document.querySelectorAll("#homeDelivery input[type='text' ]").forEach((input) => {
+        input.disabled = false;
+    });
 });
 
 document.querySelector("#point-relay").hidden = !document.getElementById("ptRelayInput").checked;
 document.querySelector(".home").hidden = !document.getElementById("domicilInput").checked;
 
 // Check form content
-document.getElementById("order-next-step").addEventListener("click", () => {
+document.getElementById("order-next-step").addEventListener("click", (event) => {
+    event.preventDefault();
+    let valide = true;
+
     // Check if the user has filled the form
     const billInput = document.getElementById("bill-info").querySelectorAll("input");
     const shopDelivery = document.getElementById("ptRelayInput").checked;
-    
+
     for (const input of billInput) {
         if (input.value.trim() === "") {
-            if (!input.classList.contains("is-invalid"))
+            if (!input.classList.contains("is-invalid")) {
                 input.classList.add("is-invalid");
+                valide = false;
+            }
         } else if (input.classList.contains("is-invalid"))
             input.classList.remove("is-invalid");
     }
@@ -110,53 +139,69 @@ document.getElementById("order-next-step").addEventListener("click", () => {
         const parent = document.getElementById("point-relay").querySelector("div.autocomplet-input");
         const input = parent.querySelector("input");
 
-        if (pickUpShopResultUl.querySelector("li.active") === null)
+        if (pickUpShopResultUl.querySelector("li.active") === null) {
             input.classList.add("is-invalid");
+            valide = false;
+        }
         else if (input.classList.contains("is-invalid"))
             input.classList.remove("is-invalid");
     } else
         for (const input of document.getElementById("homeDelivery").querySelectorAll("input[type='text']")) {
             if (input.value.trim() === "") {
-                if (!input.classList.contains("is-invalid"))
+                if (!input.classList.contains("is-invalid")) {
                     input.classList.add("is-invalid");
+                    valide = false;
+                }
             } else if (input.classList.contains("is-invalid"))
                 input.classList.remove("is-invalid");
         }
     
     for (const input of document.getElementById("creditCardInfo").querySelectorAll("input")) {
         if (input.value.trim() === "") {
-            if (!input.classList.contains("is-invalid"))
+            if (!input.classList.contains("is-invalid")) {
                 input.classList.add("is-invalid");
+                valide = false;
+            }
         } else if (input.classList.contains("is-invalid"))
             input.classList.remove("is-invalid");
     }
 
-    // Check if phone mail and credit card are valid
+    // Check if phone post code and credit card are valid
     const phone = document.getElementById("phone");
-    if (!checkPhone(phone.value) && !phone.classList.contains("is-invalid"))
+    if (!checkPhone(phone.value) && !phone.classList.contains("is-invalid")) {
         phone.classList.add("is-invalid");
+        valide = false;
+    }
 
     const cardNumber = document.getElementById("cardNumber");
     if (
         !checkVisa(cardNumber.value) &&
         !checkMasterCard(cardNumber.value) &&
         !cardNumber.classList.contains("is-invalid")
-    )
+    ) {
         cardNumber.classList.add("is-invalid");
+        valide = false;
+    }
 
     const cardCVV = document.getElementById("cardCVV");
-    if (cardCVV.value.trim().length !== 3 && !cardCVV.classList.contains("is-invalid"))
+    if (!/^\d{3}$/.test(cardCVV.value.trim()) && !cardCVV.classList.contains("is-invalid")) {
         cardCVV.classList.add("is-invalid");
+        valide = false;
+    }
 
     const cardExpiryDate = document.getElementById("cardExpiryDate");
     const date = new Date("01/"+cardExpiryDate.value);
+    date.setMonth(date.getMonth() + 1);
     if (
         (date.toString() === "Invalid Date" || date < new Date())&&
         !cardExpiryDate.classList.contains("is-invalid")
-    )
+    ) {
         cardExpiryDate.classList.add("is-invalid");
+        valide = false;
+    }
     
-
+    if (valide)
+        document.getElementsByTagName("form")[0].submit();
 });
 
 // autocomplete adress
@@ -216,6 +261,12 @@ function searchPickUpStore(Lon, Lat) {
 
                     li.classList.add("active");
                     currentActive = index;
+
+                    console.log(store);
+                    // Set hidden input
+                    document.querySelector("#point-relay > input[name='address']").value = store.address.toLowerCase();
+                    document.querySelector("#point-relay > input[name='postal-code']").value = store.postCode;
+                    document.querySelector("#point-relay > input[name='city']").value = store.city.toLowerCase();
 
                     centerMapOn(store.lon, store.lat);
                 });

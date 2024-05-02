@@ -52,14 +52,16 @@ function setRedirect(string $url, string $redirect, bool $hasOtherOption = false
 }
 
 /**
- * Go to $url with $redirect set in parameters
+ * Go to $url with $redirect set in parameters if specify
  * @param string $url The page to go
  * @param string $redirect The redirect url
  * @param bool $hasOtherOption If $url already has get option
  * @param bool $prepend If prepend is true, prepend BASE_DIR_STATIC if needed
  */
-function goToURL(string $url, string $redirect, bool $hasOtherOption = false, bool $prepend = true) {
-    if ($prepend)
+function goToURL(string $url, string $redirect = "", bool $hasOtherOption = false, bool $prepend = true) {
+    if ($redirect === "")
+        header("Location: ".prependStaticDirIfNeed($url));
+    else if ($prepend)
         header("Location: ".prependStaticDirIfNeed(setRedirect($url, $redirect, $hasOtherOption)));
     else
         header("Location: ".setRedirect($url, $redirect, $hasOtherOption));

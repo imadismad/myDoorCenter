@@ -63,7 +63,7 @@ function getMaterialsByProduct(int $id): array {
     } catch (Exception $e) {
         // En cas d'erreur, annuler la transaction
         $connexion->rollback();
-        fwrite(STDERR, "Erreur lors de la création de la commande : " . $e->getMessage());
+        error_log("Erreur lors de la création de la commande : " . $e->getMessage());
         throw $e;
     }
 
