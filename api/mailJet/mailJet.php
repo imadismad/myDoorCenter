@@ -10,4 +10,7 @@ define('MAILJET_TEMPLATE_ID', 5929442);
 // Template welcome
 define('MAILJET_TEMPLATE_ID_2', 5930449);
 
+// Template invoice
+define('MAILJET_TEMPLATE_ID_3', 5932079);
+
 ?>
