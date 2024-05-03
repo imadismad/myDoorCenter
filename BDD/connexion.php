@@ -31,7 +31,7 @@ function sendEmail($clientName,$clientfirstName, $clientEmail) {
                 ],
                 'TemplateID' => MAILJET_TEMPLATE_ID_2,
                 'TemplateLanguage' => true,
-                'Subject' => "Welcome to MyDoorCenter ! ",
+                'Subject' => "Welcome $clientfirstNameto to MyDoorCenter ! ",
                 'Variables' => [
                     'name' => $clientName,
                     'firstname' => $clientfirstName
