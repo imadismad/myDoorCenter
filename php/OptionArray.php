@@ -126,4 +126,16 @@ class OptionArray {
         }
         return $str;
     }
+
+    /**
+     * Return the ids of the option in the array
+     * @return array the ids of the option in the array
+     */
+    public function getIds(): array {
+        $ids = [];
+        foreach ($this -> array as $option) {
+            array_push($ids, $option -> getId());
+        }
+        return $ids;
+    }
 }

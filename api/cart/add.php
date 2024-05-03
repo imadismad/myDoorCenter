@@ -1,10 +1,25 @@
 <?php
+/*
+ * Add a product to the cart
+ * Response if ok (200):
+ * Response if error (400):
+ * - Type: application/json
+ * - Content:
+ *   - If action is ok : {"status": "ok"}
+ *   - If Error Missing PARameters : {"status": "EMPAR"}
+ *   - If Error Product Not Found : {"status": "EPNF"}
+ *   - If Error Option Not Found : {"status": "EONF"}
+ *   - If Error Quantity NUL : {"status": "EQNUL"}
+ *   - If Error Not Enought In Stock : {"status": "ENOEIS"}
+ */
 require_once __DIR__."/../../php/Cart.php";
 require_once __DIR__."/../../php/Product.php";
 require_once __DIR__."/../../php/OptionArray.php";
 
 if (!isset($_GET["productId"]) || !isset($_GET["quantity"]) || is_array($_GET["optionsId"])) {
     http_response_code(400);
+    header("Content-Type: application/json");
+    echo json_encode(["status" => "EMPAR"]);
     exit;
 }
 $productId = intval($_GET["productId"]);
@@ -19,16 +34,38 @@ if (count($rawOption) !== 1 || $rawOption[0] !== "") {
     
         if($optionObj === null) {
             http_response_code(400);
+            header("Content-Type: application/json");
+            echo json_encode(["status" => "EONF"]);
             exit;
         }
         $optionArray -> append($optionObj);
     }
 }
 
-if ($productId == 0 || $quantity == 0) {
+
+if ($quantity == 0) {
     http_response_code(400);
+    header("Content-Type: application/json");
+    echo json_encode(["status" => "EQNUL"]);
+    exit;
+}
+
+$product = Product::constructFromId($productId);
+
+if ($product === null) {
+    http_response_code(400);
+    header("Content-Type: application/json");
+    echo json_encode(["status" => "EPNF"]);
+    exit;
+}
+
+if (Product::hasEnoughtInStockFromId($productId, $quantity) !== true) {
+    http_response_code(400);
+    echo json_encode(["status" => "ENOEIS"]);
     exit;
 }
 
 $cart = Cart::getUserCart();
-$cart-> addIntoCart(Product::constructFromId($productId), $quantity, $optionArray);
+$cart-> addIntoCart($product, $quantity, $optionArray);
+echo json_encode(["status" => "ok"]);
+exit();

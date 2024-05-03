@@ -13,8 +13,7 @@ if ($product === null ) {
     http_response_code(404);
     exit;
 }
-// $productQuantity = $product -> getQuantityInStock();
-// error_log("Product quantity: ".$productQuantity);
+$productQuantity = $product -> getQuantityInStock();
 
 function getProjectPath() {
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
@@ -144,7 +143,14 @@ define('BASE_DIR_STATIC', getProjectPath());
 
                         <div class="mb-3">
                             <label for="quantity-select" class="form-label">Quantité</label>
-                            <input type="number" class="form-control" id="quantity-select" name="quantity" value="1" min="1"
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="quantity-select"
+                                name="quantity"
+                                value="1"
+                                min="1"
+                                max="<?php echo $productQuantity?>"
                                 onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
                         </div>
 
@@ -165,16 +171,29 @@ define('BASE_DIR_STATIC', getProjectPath());
                         </div>
 
                         <?php
-                        echo '
-                        <button
-                            type="button"
-                            class="btn btn-light"
-                            id="ajoutPanier"
-                            onclick="addProduct('.$product->getId().')"
-                        >
-                            Ajouter au panier
-                        </button>
-                        ';
+                        if ($productQuantity > 0)
+                            echo '
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                id="ajoutPanier"
+                                onclick="addProduct('.$product->getId().')"
+                            >
+                                Ajouter au panier
+                            </button>
+                            ';
+                        else
+                            echo '
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                id="ajoutPanier"
+                                onclick="addProduct('.$product->getId().')"
+                                disabled
+                            >
+                                Le produit n\'est pas en stock
+                            </button>
+                            ';
                         ?>
                     </div>
                 </div>
