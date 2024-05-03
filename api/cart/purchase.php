@@ -113,22 +113,23 @@ if ($cart -> isEmpty()) {
 
 // Thank's Imad, you can send your mail right here, right now
 
-
+// Here comes the invoice email ! Thanks to you Théo ! 
 
 // Function to send email
-// function sendEmailInvoice($cart, $clientName,$clientfirstName, $clientEmail) {
-// Assuming cart has user data, or fetch from session/user context
-// $clientEmail = $_SESSION['user_email']; // Example: Fetching from session
-// $clientName = $_SESSION['user_name'];
-
-
 function sendEmailInvoice($cart, $notEmptyKeys) {
+    // Initialize client and email details
     $clientEmail = $_SESSION['mail'] ?? 'default-email@example.com';
     $clientName = $_SESSION['nom'] ?? 'No Name';
     $clientFirstName = $_SESSION['prenom'] ?? 'No First Name';
-    $logoUrl = "https://mydoorcenter.com/images/logo.png"; // Adjust this to the actual URL of your logo
+    $logoUrl = "https://mydoorcenter.com/images/logo.png"; // Ensure the URL points to the correct logo location
 
-    // Start HTML email body preparation with inline styles for better email client compatibility
+    // Extract billing and shipping information directly from POST data
+    $billingInfo = [];
+    foreach ($notEmptyKeys as $key) {
+        $billingInfo[$key] = $_POST[$key] ?? "Not provided";
+    }
+
+    // Prepare the HTML content of the email
     $htmlContent = <<<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -137,25 +138,30 @@ function sendEmailInvoice($cart, $notEmptyKeys) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Invoice</title>
 <style>
-    body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
-    .email-container { max-width: 600px; background: #fff; margin: 20px auto; padding: 20px; border: 1px solid #ddd; }
-    .header { background-color: #437e80; color: #ffffff; padding: 10px 20px; text-align: center; }
-    .header img { max-width: 180px; margin-bottom: 10px; }
-    .content { padding: 20px; font-size: 16px; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 10px; border: 1px solid #ddd; }
-    th { background-color: #437e80; color: #ffffff; }
-    .footer { text-align: center; font-size: 14px; color: #777; padding: 10px 20px; }
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+    .email-container { max-width: 100%; margin: auto; background: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .header { background-color: #437e80; color: #fff; padding: 20px; text-align: center; }
+    .header img { height: 100px; } /* Increased logo size */
+    .content { padding: 20px; font-size: 16px; line-height: 1.5; }
+    a.center {display: block;text-align: center;}
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background-color: #437e80; color: #fff; }
+    .footer { text-align: center; padding: 20px; font-size: 14px; color: #666; }
+    @media only screen and (max-width: 620px) {
+        .email-container, .header, .content, .footer { padding: 10px; }
+    }
 </style>
 </head>
 <body>
 <div class="email-container">
     <div class="header">
         <img src="$logoUrl" alt="Company Logo">
+        <h1>Thank you $clientFirstName $clientName for your order  ! </h1>
         <h1>Invoice Details</h1>
     </div>
     <div class="content">
-        <p>Invoice to: $clientFirstName $clientName ($clientEmail)</p>
+        <p>Invoice to: $clientFirstName $clientName</p>
         <table>
             <thead>
                 <tr>
@@ -163,39 +169,53 @@ function sendEmailInvoice($cart, $notEmptyKeys) {
                     <th>Options</th>
                     <th>Quantity</th>
                     <th>Unit Price</th>
+                    <th>VAT (20%)</th>
                     <th>Total Price</th>
                 </tr>
             </thead>
             <tbody>
 HTML;
 
+    $vatRate = 0.20; // 20% VAT rate
     foreach ($cart as $item) {
         $product = $item["product"];
         $quantity = $item["quantity"];
         $unitPrice = $product->getUnitaryPrice();
-        $totalPrice = $quantity * $unitPrice;
+        $optionTotalPrice = 0;
         $optionsHtml = '';
+        
         foreach ($item["optionArray"]->toRegularArray() as $option) {
             $optionPrice = $option->getPrice();
-            $optionsHtml .= htmlspecialchars($option->getLibele()) . " (€" . $optionPrice . ")<br>";
+            $optionTotalPrice += $optionPrice;
+            $optionsHtml .= htmlspecialchars($option->getLibele()) . " (". $optionPrice . " €" . ")<br>";
         }
+        
+        $effectiveUnitPrice = $unitPrice + $optionTotalPrice;
+        $totalPriceBeforeVAT = $quantity * $effectiveUnitPrice;
+        $vatAmount = $totalPriceBeforeVAT * $vatRate;
+        $totalPrice = $totalPriceBeforeVAT + $vatAmount;
 
-        $htmlContent .= "<tr><td>{$product->getName()}</td><td>$optionsHtml</td><td>$quantity</td><td>€$unitPrice</td><td>€$totalPrice</td></tr>";
+        $htmlContent .= "<tr><td>{$product->getName()}</td><td>$optionsHtml</td><td>$quantity</td><td>$unitPrice €</td><td>$vatAmount €</td><td>$totalPrice €</td></tr>";
     }
 
     $htmlContent .= <<<HTML
             </tbody>
         </table>
+        <h2>Shipping Information</h2>
+        <p>Delivery Method: {$billingInfo['delivery-mode']}<br>
+        Address: {$billingInfo['address']}<br>
+        Postal Code: {$billingInfo['postal-code']}<br>
+        City: {$billingInfo['city']}<br>
+        Phone: {$billingInfo['phone']}</p>
     </div>
-    <div class="footer">
-        <p>If you have any questions about this invoice, please contact us.</p>
-    </div>
+    <div class='footer'>Thank you for your order !</div>
+    <a href="https://mydoorcenter.com/contact.php" class="center">Contact us if you have a question</a>
 </div>
 </body>
 </html>
 HTML;
 
-    // API endpoint for Mailjet
+    // Setup API call
     $url = 'https://api.mailjet.com/v3.1/send';
     $data = json_encode([
         'Messages' => [
@@ -219,6 +239,7 @@ HTML;
     $response = curl_exec($ch);
     if (!$response) {
         error_log('Mailjet Error: ' . curl_error($ch) . ' - Code: ' . curl_errno($ch));
+        curl_close($ch);
         return false;
     }
 
@@ -226,6 +247,9 @@ HTML;
     error_log('Mailjet Response: ' . $response);
     return true;
 }
+
+
+
 
 
 
