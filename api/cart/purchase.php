@@ -1,9 +1,9 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) session_start();
-
 require_once __DIR__."/../../php/Redirect.php";
 require_once __DIR__."/../../php/UserUtils.php";
 require_once __DIR__."/../../php/Cart.php";
+if (session_status() === PHP_SESSION_NONE) session_start();
+include('../mailJet/mailJet.php'); // Adjust the path as necessary to where your mailJet.php file is located.
 
 if (!UserUtils::isConnect()) 
     goToURL("/connexion.php", "/panier/commande.php");
@@ -112,3 +112,129 @@ if ($cart -> isEmpty()) {
 // Everything should be good, we can now purchase the cart content
 
 // Thank's Imad, you can send your mail right here, right now
+
+
+
+// Function to send email
+// function sendEmailInvoice($cart, $clientName,$clientfirstName, $clientEmail) {
+// Assuming cart has user data, or fetch from session/user context
+// $clientEmail = $_SESSION['user_email']; // Example: Fetching from session
+// $clientName = $_SESSION['user_name'];
+
+
+function sendEmailInvoice($cart, $notEmptyKeys) {
+    $clientEmail = $_SESSION['mail'] ?? 'default-email@example.com';
+    $clientName = $_SESSION['nom'] ?? 'No Name';
+    $clientFirstName = $_SESSION['prenom'] ?? 'No First Name';
+    $logoUrl = "https://mydoorcenter.com/images/logo.png"; // Adjust this to the actual URL of your logo
+
+    // Start HTML email body preparation with inline styles for better email client compatibility
+    $htmlContent = <<<HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice</title>
+<style>
+    body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+    .email-container { max-width: 600px; background: #fff; margin: 20px auto; padding: 20px; border: 1px solid #ddd; }
+    .header { background-color: #437e80; color: #ffffff; padding: 10px 20px; text-align: center; }
+    .header img { max-width: 180px; margin-bottom: 10px; }
+    .content { padding: 20px; font-size: 16px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; border: 1px solid #ddd; }
+    th { background-color: #437e80; color: #ffffff; }
+    .footer { text-align: center; font-size: 14px; color: #777; padding: 10px 20px; }
+</style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <img src="$logoUrl" alt="Company Logo">
+        <h1>Invoice Details</h1>
+    </div>
+    <div class="content">
+        <p>Invoice to: $clientFirstName $clientName ($clientEmail)</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Options</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+HTML;
+
+    foreach ($cart as $item) {
+        $product = $item["product"];
+        $quantity = $item["quantity"];
+        $unitPrice = $product->getUnitaryPrice();
+        $totalPrice = $quantity * $unitPrice;
+        $optionsHtml = '';
+        foreach ($item["optionArray"]->toRegularArray() as $option) {
+            $optionPrice = $option->getPrice();
+            $optionsHtml .= htmlspecialchars($option->getLibele()) . " (€" . $optionPrice . ")<br>";
+        }
+
+        $htmlContent .= "<tr><td>{$product->getName()}</td><td>$optionsHtml</td><td>$quantity</td><td>€$unitPrice</td><td>€$totalPrice</td></tr>";
+    }
+
+    $htmlContent .= <<<HTML
+            </tbody>
+        </table>
+    </div>
+    <div class="footer">
+        <p>If you have any questions about this invoice, please contact us.</p>
+    </div>
+</div>
+</body>
+</html>
+HTML;
+
+    // API endpoint for Mailjet
+    $url = 'https://api.mailjet.com/v3.1/send';
+    $data = json_encode([
+        'Messages' => [
+            [
+                'From' => ['Email' => "no-reply@mydoorcenter.com", 'Name' => "No-reply MyDoorCenter"],
+                'To' => [['Email' => $clientEmail, 'Name' => $clientName]],
+                'Subject' => "Your Invoice from MyDoorCenter",
+                'HTMLPart' => $htmlContent
+            ]
+        ]
+    ]);
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($ch, CURLOPT_USERPWD, MAILJET_API_KEY . ":" . MAILJET_SECRET_KEY);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+
+    $response = curl_exec($ch);
+    if (!$response) {
+        error_log('Mailjet Error: ' . curl_error($ch) . ' - Code: ' . curl_errno($ch));
+        return false;
+    }
+
+    curl_close($ch);
+    error_log('Mailjet Response: ' . $response);
+    return true;
+}
+
+
+
+
+
+
+// Function to send email
+// sendEmail($clientName,$clientfirstName, $clientEmail);
+sendEmailInvoice($cart, $notEmptyKeys)
+
+
+?>
