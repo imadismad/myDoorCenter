@@ -14,6 +14,9 @@ if ($product === null) {
     echo "Product not found";
     exit;
 }
+if ($product->getImageName() == null){
+    $product->setImageName("No Image");
+}
 
 // Encode the product details as a JSON object
 $productDetails = json_encode([
