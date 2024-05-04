@@ -124,8 +124,13 @@ if ($cart -> isPurchasable() === false) {
     goToURL("/panier/commande.php?error=Some+product+are+out+of+stock");
 }
 
-// Everything should be good, we can now purchase the cart content
-$cart -> purchase(UserUtils::getId(), "CB");
+try {
+    // Everything should be good, we can now purchase the cart content
+    $cart -> purchase(UserUtils::getId(), "CB");
+} catch (e) {
+    goToURL("/panier/erreurCommande.php");
+}
+
 
 // Thank's Imad, you can send your mail right here, right now
 
@@ -274,7 +279,8 @@ HTML;
 
 // Function to send email
 // sendEmail($clientName,$clientfirstName, $clientEmail);
-sendEmailInvoice($cart, $notEmptyKeys)
+sendEmailInvoice($cart, $notEmptyKeys);
+goToURL("/panier/commandeValide.php");
 
 
 ?>
