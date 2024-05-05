@@ -199,11 +199,12 @@ define('BASE_DIR_STATIC', getProjectPath());
                         <div id="map"></div>
                     </div>
 
-                    <input type="text" name="firstname"   hidden>
-                    <input type="text" name="lastname"    hidden>
-                    <input type="text" name="address"     hidden>
-                    <input type="text" name="postal-code" hidden>
-                    <input type="text" name="city"        hidden>
+                    <input type="text" name="firstname"              hidden>
+                    <input type="text" name="lastname"               hidden>
+                    <input type="text" name="address"                hidden>
+                    <input type="text" name="postal-code"            hidden>
+                    <input type="text" name="city"                   hidden>
+                    <input type="text" name="country" value="France" hidden>
                     
                 </div>
                 <div id="homeDelivery" class="home mb-5" hidden>

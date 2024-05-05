@@ -108,6 +108,15 @@ class Cart implements Iterator {
     }
 
     /**
+     * This function remove all product from the cart
+     */
+    public function emptyCart(): void {
+        $this->products = array();
+        $this->productsQuantity = array();
+        $this->productOption = array();
+    }
+
+    /**
      * Check if the cart is purchasable
      * In other word, this methods check if all the product in the cart are in stock (depend of the quantity in the cart)
      * @return bool false if at least one product isn't in stock, true if all the product are in stock

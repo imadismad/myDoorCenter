@@ -51,6 +51,7 @@ $notEmptyKeys = [
     "address",
     "postal-code",
     "city",
+    "country",
     "delivery-mode",
     "cardNumber",
     "cardholderName",
@@ -302,7 +303,8 @@ HTML;
 
 // Function to send email
 // sendEmail($clientName,$clientfirstName, $clientEmail);
-// sendEmailInvoice($cart, $notEmptyKeys);
+sendEmailInvoice($cart, $notEmptyKeys);
+$cart -> emptyCart();
 goToURL("/panier/commandeValide.php");
 
 
