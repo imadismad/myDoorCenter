@@ -313,6 +313,7 @@ class Product extends DBObject {
      * Return true if the product given by the id has enough in stock, else return the quantity missing
      * @param int $id the id of the product
      * @param int $quantity the quantity to check
+     * @return bool|int true if enough in stock, else the quantity missing
      */
     public static function hasEnoughtInStockFromId(int $id, int $quantity): bool | int {
         $quantityInStock = Product::getQuantityInStockFromId($id);

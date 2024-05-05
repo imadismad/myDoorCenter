@@ -63,6 +63,7 @@ class Cart implements Iterator {
      * Search a product in the cart, if option are specify check also the option
      * @param Product $product The product
      * @param OptionArray $option The option of the product, if null dont check them
+     * @return int|false The position of the product in the cart, false if the product isn't in the cart
      */
     public function searchProduct(Product $product, OptionArray $option = null): int|false {
         $i = 0;
@@ -156,5 +157,18 @@ class Cart implements Iterator {
 
         // Everything should be good, we can now purchase the cart content
         creerCommande($idClient, $paymentMode, $produitQuantite, $produitOption);
+    }
+
+    /**
+     * This function return the quantity of a product in the cart
+     * @param Product $product The product
+     * @param OptionArray $option The option of the product
+     * @return int The quantity of the product in the cart
+     */
+    public function getQuantity(Product $product, OptionArray $option): int {
+        $pos = $this -> searchProduct($product, $option);
+        if ($pos === false)
+            return 0;
+        return $this -> productsQuantity[$pos];
     }
 }

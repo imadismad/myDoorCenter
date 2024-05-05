@@ -10,7 +10,7 @@
  *   - If Error Product Not Found : {"status": "EPNF"}
  *   - If Error Option Not Found : {"status": "EONF"}
  *   - If Error Quantity NUL : {"status": "EQNUL"}
- *   - If Error Not Enought In Stock : {"status": "ENOEIS"}
+ *   - If Error Not Enought In Stock : {"status": "ENOEIS", maxTotal=number}
  */
 require_once __DIR__."/../../php/Cart.php";
 require_once __DIR__."/../../php/Product.php";
@@ -43,7 +43,7 @@ if (count($rawOption) !== 1 || $rawOption[0] !== "") {
 }
 
 
-if ($quantity == 0) {
+if ($quantity === 0) {
     http_response_code(400);
     header("Content-Type: application/json");
     echo json_encode(["status" => "EQNUL"]);
@@ -51,6 +51,7 @@ if ($quantity == 0) {
 }
 
 $product = Product::constructFromId($productId);
+$cart = Cart::getUserCart();
 
 if ($product === null) {
     http_response_code(400);
@@ -59,13 +60,14 @@ if ($product === null) {
     exit;
 }
 
-if (Product::hasEnoughtInStockFromId($productId, $quantity) !== true) {
+$stock = $product->getQuantityInStock();
+$total = $quantity + $cart -> getQuantity($product, $optionArray);
+if ($stock === false || $stock < $total) {
     http_response_code(400);
-    echo json_encode(["status" => "ENOEIS"]);
+    echo json_encode(["status" => "ENOEIS", "maxTotal" => $stock]);
     exit;
 }
 
-$cart = Cart::getUserCart();
 $cart-> addIntoCart($product, $quantity, $optionArray);
 echo json_encode(["status" => "ok"]);
 exit();
