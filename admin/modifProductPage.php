@@ -40,8 +40,24 @@
                     <textarea id="product-description" name="description" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
+                    <label for="product-imageMod">Ajouter une image au produit:</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="30000">
-                    <input type="file" class="form-control" id="product-imageMod" name="product-imageMod" required>
+                    <input type="file" class="form-control" id="product-imageMod" name="product-imageMod" accept="image/webp, image/jpeg, image/png, image/jpg">
+                </div>
+                <div class="form-group">
+                    <label for="delete-image">Supprimer une image:</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+                    <input type="file" class="form-control" id="delete-image" name="delete-image" accept="image/webp, image/jpeg, image/png, image/jpg">
+                </div>
+                <div class="form-group">
+                    <label for="delete-image">Ajouter une minature:</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+                    <input type="file" class="form-control" id="miniature-add" name="miniature-add" accept="image/webp, image/jpeg, image/png, image/jpg">
+                </div>
+                <div class="form-group">
+                    <label for="delete-image">Supprimer une miniature:</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+                    <input type="file" class="form-control" id="miniature-delete" name="miniature-delete" accept="image/webp, image/jpeg, image/png, image/jpg">
                 </div>
                 <div class="form-group">
                     <label for="product-catalog">In Catalog:</label>

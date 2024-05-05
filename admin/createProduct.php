@@ -36,7 +36,7 @@ if (!isset($_SESSION['admin'])) {
             </div>
             <div class="form-group">
                 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
-                <input type="file" class="form-control" id="product-image" name="product-image" required>
+                <input type="file" class="form-control" id="product-image" name="product-image" accept="image/webp, image/jpeg, image/png, image/jpg" multiple="multiple" required>
                 <!-- <input type="text" class="form-control" id="product-image" name="product-image" required> -->
             </div>
             <div class="form-group">
