@@ -5,8 +5,17 @@ require_once __DIR__."/../../php/Cart.php";
 if (session_status() === PHP_SESSION_NONE) session_start();
 include('../mailJet/mailJet.php'); // Adjust the path as necessary to where your mailJet.php file is located.
 
+if (session_status() === PHP_SESSION_NONE) session_start();
+
 if (!UserUtils::isConnect()) 
     goToURL("/connexion.php", "/panier/commande.php");
+
+/*
+ * Buy the cart content and empty it
+ * Response if ok (30x)
+ * Response if error (30x)
+ * This api send a redirect. If a user wan't to know if the request is sucess, check the body respons
+ */
 
 /*
  * Param need :
@@ -51,6 +60,7 @@ $notEmptyKeys = [
 
 foreach ($notEmptyKeys as $key) {
     if (!isset($_POST[$key])) {
+        
         goToURL("/panier/commande.php?error=Missing+key+$key");
     }
 
@@ -109,7 +119,18 @@ if ($cart -> isEmpty()) {
     goToURL("/panier/commande.php?error=Cart+is+empty");
 }
 
-// Everything should be good, we can now purchase the cart content
+// Checking if the cart content has enought in stock
+if ($cart -> isPurchasable() === false) {
+    goToURL("/panier/commande.php?error=Some+product+are+out+of+stock");
+}
+
+try {
+    // Everything should be good, we can now purchase the cart content
+    $cart -> purchase(UserUtils::getId(), "CB");
+} catch (e) {
+    goToURL("/panier/erreurCommande.php");
+}
+
 
 // Thank's Imad, you can send your mail right here, right now
 
@@ -258,7 +279,8 @@ HTML;
 
 // Function to send email
 // sendEmail($clientName,$clientfirstName, $clientEmail);
-sendEmailInvoice($cart, $notEmptyKeys)
+sendEmailInvoice($cart, $notEmptyKeys);
+goToURL("/panier/commandeValide.php");
 
 
 ?>

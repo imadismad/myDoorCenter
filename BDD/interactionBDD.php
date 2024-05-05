@@ -37,7 +37,6 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
     } else {
         // Affichage des quantités de portes par entrepôt
         while ($row = $resultat->fetch_assoc()) {
-            error_log(print_r($row, true));
             $idEntrepot = $row["idEntrepot"];
             $quantite = $row["quantite"];
             array_push($arrayResult, array("idEntrepot" => $idEntrepot, "quantite" => $quantite));
@@ -50,7 +49,7 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
     return $arrayResult;
 }
 
-function creerCommande($idClient, $modePaiement, $produitsQuantites) {
+function creerCommande($idClient, $modePaiement, $produitsQuantites, $productOption=[]) {
     // Informations de connexion à la base de données
     $serveur = SQL_SERVER;
     $utilisateur = SQL_USER;
@@ -116,6 +115,23 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
                 $requeteDeplacement->bind_param("i", $idPorte);
                 $requeteDeplacement->execute();
                 $requeteDeplacement->close();
+
+                // Ajouter la porte a la commande
+                $requeteConcerner = $connexion->prepare("INSERT INTO Concerner (idProduit, idCommande) VALUES (?, ?)");
+                $requeteConcerner->bind_param("ii", $idProduit, $idCommande);
+                $requeteConcerner->execute();
+                $idConcerner = $requeteConcerner->insert_id;
+                $requeteConcerner->close();
+
+                //Ajouter les options du produit si existant
+                if (isset($productOption[$idProduit]) && count($productOption[$idProduit]) > 0) {
+                    foreach ($productOption[$idProduit] as $optionId) {
+                        $requeteOption = $connexion->prepare("INSERT INTO AOption (idConcerner, idOption) VALUES (?, ?)");
+                        $requeteOption->bind_param("ii", $idConcerner, $optionId);
+                        $requeteOption->execute();
+                        $requeteOption->close();
+                    }
+                }
 
                 // Créer une livraison pour la porte
                 $requeteLivraison = $connexion->prepare("INSERT INTO Livraison (arriveeEstimee, distance, nbPointsArrets, idCommande, idClient, idPorte) VALUES (?, ?, ?, ?, ?, ?)");

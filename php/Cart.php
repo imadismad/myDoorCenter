@@ -63,6 +63,7 @@ class Cart implements Iterator {
      * Search a product in the cart, if option are specify check also the option
      * @param Product $product The product
      * @param OptionArray $option The option of the product, if null dont check them
+     * @return int|false The position of the product in the cart, false if the product isn't in the cart
      */
     public function searchProduct(Product $product, OptionArray $option = null): int|false {
         $i = 0;
@@ -104,5 +105,70 @@ class Cart implements Iterator {
 
     public function isEmpty(): bool {
         return $this -> count() === 0;
+    }
+
+    /**
+     * Check if the cart is purchasable
+     * In other word, this methods check if all the product in the cart are in stock (depend of the quantity in the cart)
+     * @return bool false if at least one product isn't in stock, true if all the product are in stock
+     */
+    public function isPurchasable(): bool {
+        foreach ($this as $product) {
+            if ($product["product"]->getQuantityInStock() < $product["quantity"])
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * This function return the total price of the cart
+     * @return float The total price of the cart
+     */
+    public function getTotalPrice(): float {
+        $total = 0;
+        foreach ($this as $product) {
+            $optionCost = 0;
+            foreach ($product["optionArray"] as $option) {
+                $optionCost += $option->getPrice();
+            }
+            $total += ($product["product"]->getPrice() + $optionCost) * $product["quantity"];
+        }
+        return $total;
+    }
+
+    /**
+     * This function is use to purchase the cart
+     * This function will check if the cart is valid
+     * @param int $idClient The client id
+     */
+    public function purchase(int $idClient, string $paymentMode) {
+        if ($this -> isEmpty())
+            throw new Exception("Cart is empty");
+
+        if ($this -> isPurchasable() === false)
+            throw new Exception("Some product are out of stock");
+
+        $produitQuantite = array();
+        $produitOption = array();
+        foreach ($this as $product) {
+            $produitQuantite[$product["product"]->getId()] = $product["quantity"];
+            $produitOption[$product["product"]->getId()] = $product["optionArray"] -> getIds();
+        }
+
+        // Everything should be good, we can now purchase the cart content
+        creerCommande($idClient, $paymentMode, $produitQuantite, $produitOption);
+    }
+
+    /**
+     * This function return the quantity of a product in the cart
+     * @param Product $product The product
+     * @param OptionArray $option The option of the product
+     * @return int The quantity of the product in the cart
+     */
+    public function getQuantity(Product $product, OptionArray $option): int {
+        $pos = $this -> searchProduct($product, $option);
+        if ($pos === false)
+            return 0;
+        return $this -> productsQuantity[$pos];
     }
 }

@@ -126,5 +126,9 @@ class UserUtils {
         return $_SESSION["pays"];
     }
 
-
+    public static function getId(): int {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["id"];
+    }
 }
