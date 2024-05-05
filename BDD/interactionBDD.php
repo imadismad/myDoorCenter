@@ -1,6 +1,7 @@
 <?php
 // Inclure le fichier contenant les fonctions SQL
 require_once 'functionsSQL.php';
+require_once __DIR__."/../php/LocationSearch.php";
 
 function quantitePortesEnStockParEntrepot($referenceProduit) {
     // Informations de connexion à la base de données
@@ -49,7 +50,18 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
     return $arrayResult;
 }
 
-function creerCommande($idClient, $modePaiement, $produitsQuantites, $productOption=[]) {
+/**
+ * Créer une commande pour un client avec les produits et quantités spécifiés.
+ * infoFacturation et infoLivraison sont des tableaux associatifs contenant les informations de facturation et de livraison.
+ * nom       infoFacturation et infoLivraison
+ * prenom    infoFacturation et infoLivraison
+ * rue       infoFacturation et infoLivraison
+ * CP        infoFacturation et infoLivraison
+ * ville     infoFacturation et infoLivraison
+ * pays      infoFacturation et infoLivraison
+ * telephone infoFacturation
+ */
+function creerCommande($idClient, $modePaiement, $produitsQuantites, $infoFacturation, $infoLivraison, $livraisonCoord, $productOption=[]) {
     // Informations de connexion à la base de données
     $serveur = SQL_SERVER;
     $utilisateur = SQL_USER;
@@ -78,8 +90,17 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites, $productOpt
     try {
         // Insérer la commande
         $date = date("Y-m-d");
-        $requeteCommande = $connexion->prepare("INSERT INTO Commande (date, modePaiement, idClient) VALUES (?, ?, ?)");
-        $requeteCommande->bind_param("sss", $date, $modePaiement, $idClient);
+        $requeteCommande = $connexion->prepare("
+            INSERT INTO Commande (date, modePaiement, idClient,
+            nom, prenom, rue, CP, ville, pays, telephone,
+            nomLivraison, prenomLivraison, rueLivraison, CPLivraison, villeLivraison, paysLivraison)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        ");
+        $requeteCommande->bind_param("ssssssssssssssss",
+            $date, $modePaiement, $idClient,
+            $infoFacturation["nom"], $infoFacturation["prenom"], $infoFacturation["rue"], $infoFacturation["CP"], $infoFacturation["ville"], $infoFacturation["pays"], $infoFacturation["telephone"],
+            $infoLivraison["nom"], $infoLivraison["prenom"], $infoLivraison["rue"], $infoLivraison["CP"], $infoLivraison["ville"], $infoLivraison["pays"]
+        );
         $requeteCommande->execute();
         $idCommande = $requeteCommande->insert_id; // Récupérer l'ID de la commande insérée
         $requeteCommande->close();
@@ -116,6 +137,13 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites, $productOpt
                 $requeteDeplacement->execute();
                 $requeteDeplacement->close();
 
+                // Récupération des coordonées de l'entrepot
+                $requeteCoord = $connexion->prepare("SELECT latitude, longitude FROM Entrepot WHERE id = ?");
+                $requeteCoord->bind_param("i", $idEntrepot);
+                $requeteCoord->execute();
+                $resultatCoord = $requeteCoord->get_result();
+                $rowCoord = $resultatCoord->fetch_assoc();
+
                 // Ajouter la porte a la commande
                 $requeteConcerner = $connexion->prepare("INSERT INTO Concerner (idProduit, idCommande) VALUES (?, ?)");
                 $requeteConcerner->bind_param("ii", $idProduit, $idCommande);
@@ -136,7 +164,7 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites, $productOpt
                 // Créer une livraison pour la porte
                 $requeteLivraison = $connexion->prepare("INSERT INTO Livraison (arriveeEstimee, distance, nbPointsArrets, idCommande, idClient, idPorte) VALUES (?, ?, ?, ?, ?, ?)");
                 $arriveeEstimee = date("Y-m-d H:i:s", strtotime("+1 week")); // Exemple de date d'arrivée estimée
-                $distance = 100.0; // Exemple de distance
+                $distance = vincentyGreatCircleDistance($livraisonCoord["lat"], $livraisonCoord["lon"], $rowCoord["latitude"], $rowCoord["longitude"]); // Exemple de distance
                 $nbPointsArrets = 0; // Exemple de nombre de points d'arrêt
                 $requeteLivraison->bind_param("siiiii", $arriveeEstimee, $distance, $nbPointsArrets, $idCommande, $idClient, $idPorte);
                 $requeteLivraison->execute();
@@ -150,7 +178,8 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites, $productOpt
     } catch (Exception $e) {
         // En cas d'erreur, annuler la transaction
         $connexion->rollback();
-        error_log(STDERR, "Erreur lors de la création de la commande : " . $e->getMessage());
+        error_log("Erreur lors de la création de la commande : " . $e->getMessage());
+        error_log(print_r($e, true));
     }
 
     // Fermeture de la connexion

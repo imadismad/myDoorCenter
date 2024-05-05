@@ -48,6 +48,21 @@ CREATE TABLE Commande (
     modePaiement VARCHAR(100),
     numFacture VARCHAR(50),
     idClient INT,
+    -- Information de facturation
+    nom VARCHAR(100),
+    prenom VARCHAR(100),
+    rue VARCHAR(255),
+    CP VARCHAR(10),
+    ville VARCHAR(100),
+    pays VARCHAR(100),
+    telephone VARCHAR(20),
+    -- Information de livraison
+    nomLivraison VARCHAR(100),
+    prenomLivraison VARCHAR(100),
+    rueLivraison VARCHAR(255),
+    CPLivraison VARCHAR(10),
+    villeLivraison VARCHAR(100),
+    paysLivraison VARCHAR(100),
     FOREIGN KEY (idClient) REFERENCES Client(id)
 );
 

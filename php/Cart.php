@@ -141,7 +141,7 @@ class Cart implements Iterator {
      * This function will check if the cart is valid
      * @param int $idClient The client id
      */
-    public function purchase(int $idClient, string $paymentMode) {
+    public function purchase(int $idClient, string $paymentMode, array $infoFacturation, array $infoLivraison, array $livraisonCoord) {
         if ($this -> isEmpty())
             throw new Exception("Cart is empty");
 
@@ -156,7 +156,7 @@ class Cart implements Iterator {
         }
 
         // Everything should be good, we can now purchase the cart content
-        creerCommande($idClient, $paymentMode, $produitQuantite, $produitOption);
+        creerCommande($idClient, $paymentMode, $produitQuantite, $infoFacturation, $infoLivraison, $livraisonCoord, $produitOption);
     }
 
     /**
