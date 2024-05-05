@@ -244,7 +244,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                         </div>
                     </div>
 
-                    <div class="form-floating mb-3">
+                    <div class="form-floating mb-3 autocomplet-input">
                         <input
                             class="form-control"
                             type="text"
@@ -254,6 +254,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                             disabled
                         >
                         <label for="address">Adresse</label>
+                        <div id="address-search-ul" class="list-group border position-absolute top-100"></div>
                         <div class="invalid-feedback">
                             Veuillez entrer une adresse valide.
                         </div>

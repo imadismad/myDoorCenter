@@ -204,6 +204,15 @@ document.getElementById("order-next-step").addEventListener("click", (event) => 
         document.getElementById("buying-form").submit();
 });
 
+document.getElementById("address").addEventListener("input", limite(async (event) => {
+    autoCompleteAddress(
+        event.target,
+        document.getElementById("address-search-ul"),
+        document.getElementById("postal-code"),
+        document.getElementById("city")
+    );
+}, 500));
+
 // autocomplete adress
 document.getElementById("address-bill").addEventListener("input", limite(async (event) => {
     autoCompleteAddress(
@@ -391,9 +400,10 @@ async function autoCompleteAddress(inputStreet, divResult, HTMLinputPostCode, HT
     const data = await response.json();
     const result = data.features; // Array
 
-    const ul = inputStreet; 
+    const ul = divResult; 
 
     while (ul.firstChild) ul.removeChild(ul.lastChild);
+    console.log(ul);
 
     result.forEach((element) => {
         const pte = element.properties;
@@ -403,8 +413,8 @@ async function autoCompleteAddress(inputStreet, divResult, HTMLinputPostCode, HT
         button.textContent = `${pte.name}, ${pte.postcode} ${pte.city}`;
         button.addEventListener("click", () => {
             inputStreet.value = pte.name;
-            document.getElementById("postal-code-bill").value = pte.postcode;
-            document.getElementById("city-bill").value = pte.city;
+            HTMLinputPostCode.value = pte.postcode;
+            HTMLinputCity.value = pte.city;
             while (ul.firstChild) ul.removeChild(ul.lastChild);
         });
 
