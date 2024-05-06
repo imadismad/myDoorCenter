@@ -47,11 +47,11 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <div class="row">
                     <div class="col-md-3 bg-light rounded">
                         <label class="filterCategory rounded">Trier par
-                            <select name="material">
-                                <option value="">Prix : Ordre croissant</option>
-                                <option value="bois">Prix : Ordre décroissant</option>
-                                <option value="acier">Mise en avant</option>
-                                <option value="verre">Moyenne des commentaires</option>
+                            <select id="sortList" name="material">
+                                <option value="priceUp">Prix : Ordre croissant</option>
+                                <option value="priceDown">Prix : Ordre décroissant</option>
+                                <option value="suggestion">Mise en avant</option>
+                                <option value="comments">Moyenne des commentaires</option>
                             </select>
                         </label>
                         <h3>Catégories</h3>

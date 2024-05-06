@@ -1,28 +1,4 @@
 <header class="container-fluid fixed-top" id="mainHeader">
-  <!-- <div class="overlay"></div>
-  <div class="row header-top align-items-center">
-    <div class="col-2 col-md-1 sidebar-small">
-      <button id="sidebarToggleButton" title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
-    </div>
-    <div class="col-4 col-md-3">
-      <img src="images/logo.png" alt="Logo" height="100">
-    </div>
-    <div class="col-12 col-md-4 d-flex">
-      <label title="Rechercher" for="search"><button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;"></button></label>
-      <input type="text" name="search" class="form-control" placeholder="Recherche...">
-    </div>
-    <div class="col-3 col-md-1">
-      <span><b>01 23 45 67 89 <i class="bi bi-telephone"></i></b></span>
-    </div>
-    <div class="col-3 col-md-2 row">
-      <div class="col-6">
-        <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-cart3" style="font-size: 2rem;"></button></a>
-      </div>
-      <div class="col-6">
-        <a href="espaceClient.php"><button title="Espace client" class="btn btn-light bi bi-person-circle blue-button" style="font-size: 2rem;"></button></a>
-      </div>
-    </div>
-  </div> -->
 
   <div class="overlay"></div>
   <div class="row header-top align-items-center">

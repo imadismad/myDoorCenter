@@ -6,10 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var priceNumberMax = document.getElementById('priceNumberMax');
     var priceValueMax = document.getElementById('priceValueMax');
     var researchDiv = document.getElementById('research');
+    var sortSelect = document.getElementById('sortList');
+
 
     var research = researchDiv.value.replace(/\s/g, '+');
     var minPrice = 0;
     var maxPrice = 5000;
+    var sort = sortSelect.value;
 
     updateResult();
 
