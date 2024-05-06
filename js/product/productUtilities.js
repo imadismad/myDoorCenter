@@ -13,9 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function updatePrice(element, basePrice) {
-  var quantity = element.value;
-  var totalPrice = quantity * basePrice;
-  document.getElementById('price').innerText = totalPrice.toFixed(2) + '€';
+    // Check if the value is above the max
+    if (Number.parseInt(element.value) > Number.parseInt(element.max))
+        element.value = element.max
+
+    const quantity = element.value;
+    const totalPrice = quantity * basePrice;
+    document.getElementById('price').innerText = totalPrice.toFixed(2) + '€';
 }
 
 function addProduct(productId) {

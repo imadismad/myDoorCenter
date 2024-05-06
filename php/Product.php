@@ -247,11 +247,23 @@ class Product extends DBObject {
 
     /**
      * Return the current stock of the product for each warehouse
-     * @return array the current stock of the product for each warehouse
+     * If the product is not in stock, return false
+     * @return array|false the current stock of the product for each warehouse, false if not in stock
      */
-    public function getCurrentStock(): array {
+    public function getCurrentStock(): array|false {
         $stock = quantitePortesEnStockParEntrepot($this -> getId());
-        if ($stock === null || $stock === false) throw new Exception("Error while getting stock");
+        if ($stock === null) throw new Exception("Error while getting stock");
+        return $stock;
+    }
+
+    /**
+     * Return the total quantity in stock for the product given by the id
+     * @param int $id the id of the product
+     * @return array|false the current stock of the product for each warehouse, false if not in stock
+     */
+    public static function getCurrentStockFromId(int $id): array|false {
+        $stock = quantitePortesEnStockParEntrepot($id);
+        if ($stock === null) throw new Exception("Error while getting stock");
         return $stock;
     }
 
@@ -261,6 +273,24 @@ class Product extends DBObject {
      */
     public function getQuantityInStock(): int {
         $stock = $this -> getCurrentStock();
+        if ($stock === false) return 0;
+
+        $total = 0;
+        foreach ($stock as $entrepot) {
+            $total += $entrepot["quantite"];
+        }
+
+        return $total;
+    }
+
+    /**
+     * Return the total quantity in stock for the product given by the id
+     * @param int $id the id of the product
+     */
+    public static function getQuantityInStockFromId(int $id): int {
+        $stock = Product::getCurrentStockFromId($id);
+        if ($stock === false) return 0;
+
         $total = 0;
         foreach ($stock as $entrepot) {
             $total += $entrepot["quantite"];
@@ -276,6 +306,17 @@ class Product extends DBObject {
      */
     public function hasEnoughInStock(int $quantity): bool | int {
         $quantityInStock = $this -> getQuantityInStock();
+        return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
+    }
+
+    /**
+     * Return true if the product given by the id has enough in stock, else return the quantity missing
+     * @param int $id the id of the product
+     * @param int $quantity the quantity to check
+     * @return bool|int true if enough in stock, else the quantity missing
+     */
+    public static function hasEnoughtInStockFromId(int $id, int $quantity): bool | int {
+        $quantityInStock = Product::getQuantityInStockFromId($id);
         return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
     }
 
