@@ -2,8 +2,8 @@
 require_once __DIR__ ."/php/Product.php";
 
 if (!isset($_GET["id"])) {
-    include __DIR__."/pageTemplate/404Product.html";
     http_response_code(404);
+    include __DIR__."/pageTemplate/404Product.html";
     exit;
 }
 

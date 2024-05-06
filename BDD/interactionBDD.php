@@ -61,7 +61,7 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
  * pays      infoFacturation et infoLivraison
  * telephone infoFacturation
  */
-function creerCommande($idClient, $modePaiement, $produitsQuantites, $infoFacturation, $infoLivraison, $livraisonCoord, $productOption=[]) {
+function creerCommande($idClient, $modePaiement, $produistId, $produitsQuantites, $infoFacturation, $infoLivraison, $livraisonCoord, $productOption=[]) {
     // Informations de connexion à la base de données
     $serveur = SQL_SERVER;
     $utilisateur = SQL_USER;
@@ -77,7 +77,8 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites, $infoFactur
     }
 
     // Vérifier le stock pour tous les produits d'abord
-    foreach ($produitsQuantites as $idProduit => $quantite) {
+    foreach ($produitsQuantites as $index => $idProduit) {
+        $quantite = $produitsQuantites[$index];
         if (quantitePortesEnStockParEntrepot($idProduit) < $quantite) {
             $connexion->close();
             die("Le produit avec l'ID $idProduit n'est pas en stock en quantité suffisante.");
@@ -106,7 +107,9 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites, $infoFactur
         $requeteCommande->close();
 
         // Pour chaque produit et quantité dans la commande
-        foreach ($produitsQuantites as $idProduit => $quantite) {
+        foreach ($produistId as $index => $idProduit) {
+            $quantite = $produitsQuantites[$index];
+
             for ($i = 0; $i < $quantite; $i++) {
                 // Récupérer l'ID de l'entrepôt correspondant à la porte retirée
                 $requeteEntrepot = $connexion->prepare("SELECT id, idEntrepot FROM Porte WHERE idProduit = ? AND idEntrepot <> 1000 LIMIT 1");
@@ -144,23 +147,6 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites, $infoFactur
                 $resultatCoord = $requeteCoord->get_result();
                 $rowCoord = $resultatCoord->fetch_assoc();
 
-                // Ajouter la porte a la commande
-                $requeteConcerner = $connexion->prepare("INSERT INTO Concerner (idProduit, idCommande) VALUES (?, ?)");
-                $requeteConcerner->bind_param("ii", $idProduit, $idCommande);
-                $requeteConcerner->execute();
-                $idConcerner = $requeteConcerner->insert_id;
-                $requeteConcerner->close();
-
-                //Ajouter les options du produit si existant
-                if (isset($productOption[$idProduit]) && count($productOption[$idProduit]) > 0) {
-                    foreach ($productOption[$idProduit] as $optionId) {
-                        $requeteOption = $connexion->prepare("INSERT INTO AOption (idConcerner, idOption) VALUES (?, ?)");
-                        $requeteOption->bind_param("ii", $idConcerner, $optionId);
-                        $requeteOption->execute();
-                        $requeteOption->close();
-                    }
-                }
-
                 // Créer une livraison pour la porte
                 $requeteLivraison = $connexion->prepare("INSERT INTO Livraison (arriveeEstimee, distance, nbPointsArrets, idCommande, idClient, idPorte) VALUES (?, ?, ?, ?, ?, ?)");
                 $arriveeEstimee = date("Y-m-d H:i:s", strtotime("+1 week")); // Exemple de date d'arrivée estimée
@@ -169,6 +155,23 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites, $infoFactur
                 $requeteLivraison->bind_param("siiiii", $arriveeEstimee, $distance, $nbPointsArrets, $idCommande, $idClient, $idPorte);
                 $requeteLivraison->execute();
                 $requeteLivraison->close();
+            }
+
+            // Ajouter la porte a la commande
+            $requeteConcerner = $connexion->prepare("INSERT INTO Concerner (idProduit, idCommande, quantite) VALUES (?, ?, ?)");
+            $requeteConcerner->bind_param("iii", $idProduit, $idCommande, $quantite);
+            $requeteConcerner->execute();
+            $idConcerner = $requeteConcerner->insert_id;
+            $requeteConcerner->close();
+
+            //Ajouter les options du produit si existant
+            if (isset($productOption[$index]) && count($productOption[$index]) > 0) {
+                foreach ($productOption[$index] as $optionId) {
+                    $requeteOption = $connexion->prepare("INSERT INTO AOption (idConcerner, idOption) VALUES (?, ?)");
+                    $requeteOption->bind_param("ii", $idConcerner, $optionId);
+                    $requeteOption->execute();
+                    $requeteOption->close();
+                }
             }
         }
 

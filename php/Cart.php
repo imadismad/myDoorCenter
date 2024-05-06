@@ -157,15 +157,17 @@ class Cart implements Iterator {
         if ($this -> isPurchasable() === false)
             throw new Exception("Some product are out of stock");
 
+        $produitId = array();
         $produitQuantite = array();
         $produitOption = array();
         foreach ($this as $product) {
-            $produitQuantite[$product["product"]->getId()] = $product["quantity"];
-            $produitOption[$product["product"]->getId()] = $product["optionArray"] -> getIds();
+            array_push($produitId, $product["product"]->getId());
+            array_push($produitQuantite, $product["quantity"]);
+            array_push($produitOption, $product["optionArray"]->getIds());
         }
 
         // Everything should be good, we can now purchase the cart content
-        creerCommande($idClient, $paymentMode, $produitQuantite, $infoFacturation, $infoLivraison, $livraisonCoord, $produitOption);
+        creerCommande($idClient, $paymentMode, $produitId, $produitQuantite, $infoFacturation, $infoLivraison, $livraisonCoord, $produitOption);
     }
 
     /**
