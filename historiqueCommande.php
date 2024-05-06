@@ -28,7 +28,6 @@ if (!UserUtils::isConnect()) {
 }
 
 $historique = UserUtils::getHistoryOrder();
-print_r($historique);
 ?>
 
 <!-- Head with automatic css imports -->
