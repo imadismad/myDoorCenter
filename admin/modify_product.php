@@ -11,23 +11,23 @@ $unitaryPrice = $_POST['price'];
 $description = $_POST['description'];
 $estAuCatalogue = $_POST['catalog'];
 if (isset($_FILES['delete-image'])){
-    $deletePath = "../images/".$id."/".$_FILES['delete-image']['name'];
+    $deletePath = "../img/".$id."/".$_FILES['delete-image']['name'];
     unlink($deletePath);
 }
 
 if (isset($_FILES['product-imageMod']) && is_uploaded_file($_FILES['product-imageMod']['tmp_name'])){
     $origine = $_FILES['product-imageMod']['tmp_name'];
-    $destination = "../images/".$id."/".$_FILES['product-imageMod']['name'];
+    $destination = "../img/".$id."/".$_FILES['product-imageMod']['name'];
     move_uploaded_file($origine,$destination);
 }
 
 if (isset($_FILES['miniature-add']) && is_uploaded_file($_FILES['miniature-add']['tmp_name'])){
     $origine = $_FILES['miniature-add']['tmp_name'];
-    $miniaturePath = "../images/miniature/".$_FILES['miniature-add']['name'];
+    $miniaturePath = "../img/miniature/".$_FILES['miniature-add']['name'];
     move_uploaded_file($origine,$miniaturePath);
 }
 if (isset($_FILES['miniature-delete'])){
-    $deleteMiniaturePath = "../images/miniature/".$_FILES['miniature-delete']['name'];
+    $deleteMiniaturePath = "../img/miniature/".$_FILES['miniature-delete']['name'];
     unlink($deleteMiniaturePath);
 }
 

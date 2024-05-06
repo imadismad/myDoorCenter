@@ -166,7 +166,7 @@ function sendEmailInvoice($cart, $notEmptyKeys) {
     $clientEmail = $_SESSION['mail'] ?? 'default-email@example.com';
     $clientName = $_SESSION['nom'] ?? 'No Name';
     $clientFirstName = $_SESSION['prenom'] ?? 'No First Name';
-    $logoUrl = "https://mydoorcenter.com/images/logo.png"; // Ensure the URL points to the correct logo location
+    $logoUrl = "https://mydoorcenter.com/img/logo.png"; // Ensure the URL points to the correct logo location
 
     // Extract billing and shipping information directly from POST data
     $billingInfo = [];
