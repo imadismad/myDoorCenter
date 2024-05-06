@@ -134,7 +134,7 @@ function getAbsoluteMyDoorCenterPath() {
 
                                 <div class="col-md-6">
                                     <input type="password" class="form-control" aria-label="Username"
-                                        aria-describedby="basic-addon1" name="password" id="password"
+                                        aria-describedby="basic-addon1" name="password" id="confirmation"
                                         placeholder="Confirmation Mot de passe" required>
                                 </div>
 

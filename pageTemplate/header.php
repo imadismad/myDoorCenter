@@ -5,7 +5,7 @@
       <button id="sidebarToggleButton" title="Menu" class="btn btn-light bi bi-list blue-button" style="font-size: 2rem;"></button>
     </div>
     <div class="col-4 col-md-3">
-      <img src="images/logo.png" alt="Logo" height="100">
+      <img src="img/logo.png" alt="Logo" height="100">
     </div>
     <div class="col-12 col-md-4 d-flex">
       <label title="Rechercher" for="search"><button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;"></button></label>
@@ -33,7 +33,7 @@
       </div>
       <div class="col-8 px-1">
         <a href="<?php echo BASE_DIR_STATIC; ?>">
-          <img src="<?php echo BASE_DIR_STATIC . "images/logo.png"; ?>" alt="Logo" height="100"> <!-- Taille du logo ajustée -->
+          <img src="<?php echo BASE_DIR_STATIC . "img/logo.png"; ?>" alt="Logo" height="100"> <!-- Taille du logo ajustée -->
         </a>
       </div>
     </div>

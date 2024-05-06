@@ -8,9 +8,9 @@
 -- SET GLOBAL validate_password.special_char_count = 0;
 -- SET GLOBAL validate_password.mixed_case_count = 0;
 -- SET GLOBAL validate_password.length = 0;
-DROP USER IF EXISTS 'TestBDD'@'localhost';
-CREATE USER 'TestBDD'@'localhost' IDENTIFIED BY '';
-GRANT ALL PRIVILEGES ON DW.* TO 'TestBDD'@'localhost';
+DROP USER IF EXISTS 'TestBDD'@'%';
+CREATE USER 'TestBDD'@'%' IDENTIFIED BY '';
+GRANT ALL PRIVILEGES ON DW.* TO 'TestBDD'@'%';
 FLUSH PRIVILEGES;
 
 DROP DATABASE IF EXISTS DW; -- Crée table si elle n'existe pas
@@ -48,6 +48,21 @@ CREATE TABLE Commande (
     modePaiement VARCHAR(100),
     numFacture VARCHAR(50),
     idClient INT,
+    -- Information de facturation
+    nom VARCHAR(100),
+    prenom VARCHAR(100),
+    rue VARCHAR(255),
+    CP VARCHAR(10),
+    ville VARCHAR(100),
+    pays VARCHAR(100),
+    telephone VARCHAR(20),
+    -- Information de livraison
+    nomLivraison VARCHAR(100),
+    prenomLivraison VARCHAR(100),
+    rueLivraison VARCHAR(255),
+    CPLivraison VARCHAR(10),
+    villeLivraison VARCHAR(100),
+    paysLivraison VARCHAR(100),
     FOREIGN KEY (idClient) REFERENCES Client(id)
 );
 
@@ -177,5 +192,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-
