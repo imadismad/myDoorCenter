@@ -25,10 +25,10 @@ $query = "ALTER TABLE Produit AUTO_INCREMENT = $id";
 
 $mysqli->query($query);
 
-mkdir("../images/".$id, 0777, true);
+mkdir("../img/".$id, 0777, true);
 if (isset($_FILES['product-image']) && is_uploaded_file($_FILES['product-image']['tmp_name'])){
     $origine = $_FILES['product-image']['tmp_name'];
-    $image = "../images/".$id."/".$_FILES['product-image']['name'];
+    $image = "../img/".$id."/".$_FILES['product-image']['name'];
     move_uploaded_file($origine,$image);
 }
 

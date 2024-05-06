@@ -42,7 +42,7 @@ if(empty($products)) {
         echo '<h5 class="card-title"><b>'.$value->getName().'</b></h5>';
         echo '</div>';
         echo '<div class="container" style="height: 200px;">';
-        echo '<img src="'.BASE_DIR_STATIC.'images/miniature/'.$value->getImageName().'" class="card-img-top" alt="'.$value->getImageName().'" style="object-fit: contain;">';
+        echo '<img src="'.BASE_DIR_STATIC.'img/miniature/'.$value->getImageName().'" class="card-img-top" alt="'.$value->getImageName().'" style="object-fit: contain;">';
         echo '</div>';
         echo '<div class="card-body">';
         echo '<p class="card-text"><h3>'.$value->getUnitaryPrice().' €</h3>';

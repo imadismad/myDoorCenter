@@ -199,11 +199,12 @@ define('BASE_DIR_STATIC', getProjectPath());
                         <div id="map"></div>
                     </div>
 
-                    <input type="text" name="firstname"   hidden>
-                    <input type="text" name="lastname"    hidden>
-                    <input type="text" name="address"     hidden>
-                    <input type="text" name="postal-code" hidden>
-                    <input type="text" name="city"        hidden>
+                    <input type="text" name="firstname"              hidden>
+                    <input type="text" name="lastname"               hidden>
+                    <input type="text" name="address"                hidden>
+                    <input type="text" name="postal-code"            hidden>
+                    <input type="text" name="city"                   hidden>
+                    <input type="text" name="country" value="France" hidden>
                     
                 </div>
                 <div id="homeDelivery" class="home mb-5" hidden>
@@ -244,7 +245,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                         </div>
                     </div>
 
-                    <div class="form-floating mb-3">
+                    <div class="form-floating mb-3 autocomplet-input">
                         <input
                             class="form-control"
                             type="text"
@@ -254,6 +255,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                             disabled
                         >
                         <label for="address">Adresse</label>
+                        <div id="address-search-ul" class="list-group border position-absolute top-100"></div>
                         <div class="invalid-feedback">
                             Veuillez entrer une adresse valide.
                         </div>

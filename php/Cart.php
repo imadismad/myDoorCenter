@@ -108,6 +108,15 @@ class Cart implements Iterator {
     }
 
     /**
+     * This function remove all product from the cart
+     */
+    public function emptyCart(): void {
+        $this->products = array();
+        $this->productsQuantity = array();
+        $this->productOption = array();
+    }
+
+    /**
      * Check if the cart is purchasable
      * In other word, this methods check if all the product in the cart are in stock (depend of the quantity in the cart)
      * @return bool false if at least one product isn't in stock, true if all the product are in stock
@@ -141,22 +150,24 @@ class Cart implements Iterator {
      * This function will check if the cart is valid
      * @param int $idClient The client id
      */
-    public function purchase(int $idClient, string $paymentMode) {
+    public function purchase(int $idClient, string $paymentMode, array $infoFacturation, array $infoLivraison, array $livraisonCoord) {
         if ($this -> isEmpty())
             throw new Exception("Cart is empty");
 
         if ($this -> isPurchasable() === false)
             throw new Exception("Some product are out of stock");
 
+        $produitId = array();
         $produitQuantite = array();
         $produitOption = array();
         foreach ($this as $product) {
-            $produitQuantite[$product["product"]->getId()] = $product["quantity"];
-            $produitOption[$product["product"]->getId()] = $product["optionArray"] -> getIds();
+            array_push($produitId, $product["product"]->getId());
+            array_push($produitQuantite, $product["quantity"]);
+            array_push($produitOption, $product["optionArray"]->getIds());
         }
 
         // Everything should be good, we can now purchase the cart content
-        creerCommande($idClient, $paymentMode, $produitQuantite, $produitOption);
+        creerCommande($idClient, $paymentMode, $produitId, $produitQuantite, $infoFacturation, $infoLivraison, $livraisonCoord, $produitOption);
     }
 
     /**

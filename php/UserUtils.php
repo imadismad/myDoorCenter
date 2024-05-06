@@ -131,4 +131,16 @@ class UserUtils {
             throw new Exception("The user is not connected");
         return $_SESSION["id"];
     }
+
+    public static function getHistoryOrder(): array {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return recupererHistoriqueCommande(UserUtils::getId());
+    }
+
+    public static function getOrder(int $id): array {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return recupererHistoriqueCommande(UserUtils::getId(), $id);
+    }
 }
