@@ -9,8 +9,8 @@ if (!isset($_GET["id"])) {
 
 $product = Product::constructFromId(intval($_GET["id"]));
 if ($product === null ) {
-    include __DIR__."/pageTemplate/404Product.html";
     http_response_code(404);
+    include __DIR__."/pageTemplate/404Product.html";
     exit;
 }
 $productQuantity = $product -> getQuantityInStock();
