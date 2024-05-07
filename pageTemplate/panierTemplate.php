@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 $cart = Cart::getUserCart();
 ?>
 
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Nom</th>

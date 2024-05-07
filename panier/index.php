@@ -50,7 +50,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 Voulez-vous vraiment retirer cette article de votre panier ?.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="hideModal(false, 'RA)">Non</button>
+                <button type="button" class="btn btn-secondary" onclick="hideModal(false, 'RA')">Non</button>
                 <button type="button" class="btn btn-danger" onclick="hideModal(true, 'RA')">Oui</button>
             </div>
             </div>
@@ -128,9 +128,9 @@ define('BASE_DIR_STATIC', getProjectPath());
         <div id="templatePanier">
             <?php include BASE_DIR."pageTemplate/panierTemplate.php"?>
         </div>
-        <label>Code promo : <input type="text" name="codePromo"></label><br />
+        <label style="margin-bottom: 1%;">Code promo : <input type="text" name="codePromo"></label><br />
 
-        <a role="button" class="btn btn-primary" href="<?php echo BASE_DIR_STATIC."panier/commande.php"; ?>">Commander</a>
+        <a style="margin-bottom: 1%;" role="button" class="btn btn-primary" href="<?php echo BASE_DIR_STATIC."panier/commande.php"; ?>">Commander</a>
     </main>
 
     <!-- JS Import -->

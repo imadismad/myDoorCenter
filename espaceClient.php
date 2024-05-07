@@ -45,13 +45,13 @@ define('BASE_DIR_STATIC', getProjectPath());
             <div class="col-12">
                 <ul class="nav justify-content-center nav-pills gap-3 mb-4">
                     <li class="nav-item">
-                        <a class="nav-link active" href="majClient.php">Modifiez les informations</a>
+                        <a class="nav-link active" href="majClient.php">Modifier <i class="bi bi-pen"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Vos commandes</a>
+                        <a class="nav-link" href="#">Vos commandes <i class="bi bi-list-check"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Vos dernier achat</a>
+                        <a class="nav-link" href="#">Vos derniers achats <i class="bi bi-shop"></i></a>
                     </li>
                 </ul>
             </div>
@@ -80,9 +80,9 @@ define('BASE_DIR_STATIC', getProjectPath());
             <!-- Liens additionnels en dessous des informations -->
             <div class="col-12" style="margin-bottom: 10%;">
                 <ul class="nav justify-content-center nav-pills gap-3">
-                    <li class="nav-item"><a class="nav-link" href="<?php echo BASE_DIR_STATIC.'index.php'; ?>">Aller à la page principale</a></li>
-                    <li class="nav-item"><a class="nav-link" href="api/disconnect.php">Se déconnecter</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Assistance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo BASE_DIR_STATIC.'index.php'; ?>">Aller à la page principale <i class="bi bi-house"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="api/disconnect.php">Se déconnecter <i class="bi bi-box-arrow-right"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Assistance <i class="bi bi-tools"></i></a></li>
                 </ul>
             </div>
             
