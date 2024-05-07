@@ -35,15 +35,15 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 
     <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
-        <div class="col-md-12 content text-center">
-            <h1 class="welcome-title border rounded display-1"><b>Connexion</b></h1>
+        <div class="col-md-12 content text-center" style="background-color: inherit">
+            <h1 class="welcome-title border rounded display-1 bg-light"><b>Connexion</b></h1>
         </div>
 
 
         <!-- Page de connexion -->
         <div class="container justify-content-center">
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="w-50 p-3">
+            <div class="col-sm align-items-center justify-content-center">
+                <div class="w-100 p-3">
                     <div class="text-bg-light p-3">
                         <h2>Connexion</h2>
                         <?php
@@ -78,7 +78,14 @@ define('BASE_DIR_STATIC', getProjectPath());
                     </div>
                 </div>
             </div>
-
+            <div class="col-sm">
+                <div class="w-100 p-3">
+                    <div class="text-bg-light p-3 text-center">
+                        <h3 class="mb-3">Pas encore de compte ?</h3>
+                        <a href="creationCompte.php" class="btn btn-primary">Créer un compte</a>
+                    </div>
+                </div>
+            </div>
 
         </div>
 </body>
