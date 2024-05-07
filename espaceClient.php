@@ -79,7 +79,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <ul class="nav justify-content-center nav-pills gap-3">
                     <li class="nav-item"><a class="nav-link" href="<?php echo BASE_DIR_STATIC.'index.php'; ?>">Aller à la page principale <i class="bi bi-house"></i></a></li>
                     <li class="nav-item"><a class="nav-link" href="api/disconnect.php">Se déconnecter <i class="bi bi-box-arrow-right"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Assistance <i class="bi bi-tools"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo BASE_DIR_STATIC.'contact.php'; ?>">Assistance <i class="bi bi-tools"></i></a></li>
                 </ul>
             </div>
             
