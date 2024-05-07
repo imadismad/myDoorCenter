@@ -48,10 +48,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                         <a class="nav-link active" href="majClient.php">Modifier <i class="bi bi-pen"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Vos commandes <i class="bi bi-list-check"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Vos derniers achats <i class="bi bi-shop"></i></a>
+                        <a class="nav-link" href="historiqueCommande.php">Vos commandes <i class="bi bi-list-check"></i></a>
                     </li>
                 </ul>
             </div>

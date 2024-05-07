@@ -51,6 +51,7 @@ $notEmptyKeys = [
     "address",
     "postal-code",
     "city",
+    "country",
     "delivery-mode",
     "cardNumber",
     "cardholderName",
@@ -126,7 +127,30 @@ if ($cart -> isPurchasable() === false) {
 
 try {
     // Everything should be good, we can now purchase the cart content
-    $cart -> purchase(UserUtils::getId(), "CB");
+    $infoLivraison = [
+        "nom" => $_POST["firstname"],
+        "prenom" => $_POST["lastname"],
+        "rue" => $_POST["address"],
+        "CP" => $_POST["postal-code"],
+        "ville" => $_POST["city"],
+        "pays" => $_POST["country"],
+    ];
+    $infoFacturation = [
+        "nom" => $_POST["firstname-bill"],
+        "prenom" => $_POST["lastname-bill"],
+        "rue" => $_POST["address-bill"],
+        "CP" => $_POST["postal-code-bill"],
+        "ville" => $_POST["city-bill"],
+        "pays" => $_POST["country-bill"],
+        "telephone" => $_POST["phone"]
+    ];
+    $coord = searchCoord($_POST["address"], $_POST["postal-code"]);
+    $livraisonCoord = [
+        "lat" => $coord[1],
+        "lon" => $coord[0]
+    ];
+
+    $cart -> purchase(UserUtils::getId(), "CB", $infoFacturation, $infoLivraison, $livraisonCoord);
 } catch (e) {
     goToURL("/panier/erreurCommande.php");
 }
@@ -142,7 +166,7 @@ function sendEmailInvoice($cart, $notEmptyKeys) {
     $clientEmail = $_SESSION['mail'] ?? 'default-email@example.com';
     $clientName = $_SESSION['nom'] ?? 'No Name';
     $clientFirstName = $_SESSION['prenom'] ?? 'No First Name';
-    $logoUrl = "https://mydoorcenter.com/images/logo.png"; // Ensure the URL points to the correct logo location
+    $logoUrl = "https://mydoorcenter.com/img/logo.png"; // Ensure the URL points to the correct logo location
 
     // Extract billing and shipping information directly from POST data
     $billingInfo = [];
@@ -280,6 +304,7 @@ HTML;
 // Function to send email
 // sendEmail($clientName,$clientfirstName, $clientEmail);
 sendEmailInvoice($cart, $notEmptyKeys);
+$cart -> emptyCart();
 goToURL("/panier/commandeValide.php");
 
 

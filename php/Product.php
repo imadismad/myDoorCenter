@@ -97,14 +97,14 @@ class Product extends DBObject {
      * Return the path to the miniature of the product
      */
     public function getMiniaturePath(): string {
-        return "/images/miniature/".$this->getImageName();
+        return "/img/miniature/".$this->getImageName();
     }
 
     public function getImagesPath(): Array {
         $images = [];
-        foreach (new DirectoryIterator('./images/'.$this->getId()) as $file) {
+        foreach (new DirectoryIterator('./img/'.$this->getId()) as $file) {
             if($file->isDot()) continue;
-            array_push($images, '/images/'.$this->getId()."/".$file->getFilename());
+            array_push($images, '/img/'.$this->getId()."/".$file->getFilename());
         }
         array_multisort($images);
         return $images;

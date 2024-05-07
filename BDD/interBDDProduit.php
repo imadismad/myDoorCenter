@@ -12,7 +12,7 @@ function getBasicProductData(int $id) : array|null {
     if(!is_int($id)) throw new InvalidArgumentException("\$id need to be an integer");
 
     $result = recupererDonneesParValeur("Produit", "id", $id);
-    if ($result[0] === false) return null;
+    if (count($result) === 0) return null;
     return $result[0];
 }
 

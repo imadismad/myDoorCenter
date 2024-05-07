@@ -2,15 +2,15 @@
 require_once __DIR__ ."/php/Product.php";
 
 if (!isset($_GET["id"])) {
-    include __DIR__."/pageTemplate/404Product.html";
     http_response_code(404);
+    include __DIR__."/pageTemplate/404Product.html";
     exit;
 }
 
 $product = Product::constructFromId(intval($_GET["id"]));
 if ($product === null ) {
-    include __DIR__."/pageTemplate/404Product.html";
     http_response_code(404);
+    include __DIR__."/pageTemplate/404Product.html";
     exit;
 }
 $productQuantity = $product -> getQuantityInStock();
@@ -231,7 +231,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                         <h3>Produits similaires</h3>
                         <div class="card-group">
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">C'est une porte</p>
@@ -239,7 +239,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 2">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 2">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 2</h5>
                                     <p class="card-text">Ça aussi</p>
@@ -247,7 +247,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">Ça aussi</p>
@@ -255,7 +255,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">Ça aussi</p>
@@ -263,7 +263,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">Ça aussi</p>
@@ -271,7 +271,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">Ça non. Si en fait j'ai menti</p>

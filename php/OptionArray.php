@@ -138,4 +138,16 @@ class OptionArray {
         }
         return $ids;
     }
+
+    /**
+     * This function return the sum of the price of all the option in the array
+     * @return int the sum of the price of all the option in the array
+     */
+    public function getPrice(): int {
+        $price = 0;
+        foreach ($this -> array as $option) {
+            $price += $option -> getPrice();
+        }
+        return $price;
+    }
 }

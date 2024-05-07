@@ -9,7 +9,7 @@
       </div>
       <div class="col-8 px-1">
         <a href="<?php echo BASE_DIR_STATIC; ?>">
-          <img src="<?php echo BASE_DIR_STATIC . "images/logo.png"; ?>" alt="Logo" height="100"> <!-- Taille du logo ajustée -->
+          <img src="<?php echo BASE_DIR_STATIC . "img/logo.png"; ?>" alt="Logo" height="100"> <!-- Taille du logo ajustée -->
         </a>
       </div>
     </div>
