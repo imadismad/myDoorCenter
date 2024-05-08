@@ -27,7 +27,7 @@ creerCommande($idClient, $modePaiement, $produitsQuantites);
 
 */
 
-$resultats = rechercherProduits("porte", null,null,500,0);
+$resultats = rechercherProduits("Porte-fenêtre en PVC", null,null,null,null,2);
 //function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false) {
 
 

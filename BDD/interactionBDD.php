@@ -142,7 +142,7 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
 }
 
 
-function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false) {
+function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false, $typetri = false) {
 
 /**
  * Recherche des produits dans la base de données en fonction des critères spécifiés.
@@ -156,6 +156,7 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
  * @param float|null  $prixMin  Le prix minimum des produits à rechercher.
  * @param float|null  $prixMax  Le prix maximum des produits à rechercher.
  * @param int|bool    $triNote  Le mode de tri des résultats par note moyenne (0 pour décroissant, 6 pour croissant, false pour ne pas trier par note, et entre 1 et 5 pour la moyenne correspondante).
+ * @param int|null    $typetri  Le mode de tri des résultats par prix
  *
  * @return array              Un tableau associatif contenant les produits correspondant aux critères de recherche, triés par pertinence.
  */
@@ -245,15 +246,27 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
         // Calcul de la pertinence avec la distance de Levenshtein
 
         $pertinenceTitre = 0;
-        foreach (explode(" ",$row["nom"]) as $word) {
-            $pertinenceInter = 10 - damerauLevenshteinDistance($word,$search);
-            $pertinenceTitre += $pertinenceInter < 0 ? 0 : $pertinenceInter;
+        foreach (explode(" ",$search) as $mot) {
+            if (strlen($mot) > 2) {
+                foreach (explode(" ",$row["nom"]) as $word) {
+                    if (strlen($word) > 2) {
+                        $pertinenceInter = 5 - damerauLevenshteinDistance($word,$mot);
+                        $pertinenceTitre += $pertinenceInter < 0 ? 0 : $pertinenceInter;
+                    }
+                }
+            }
         }
 
         $pertinenceDescription = 0;
-        foreach (explode(" ",$row["description"]) as $word) {
-            $pertinenceInter = 10 - damerauLevenshteinDistance($word,$search);
-            $pertinenceDescription += $pertinenceInter < 0 ? 0 : $pertinenceInter;
+        foreach (explode(" ",$search) as $mot) {
+            if (strlen($mot) > 2) {
+                foreach (explode(" ",$row["description"]) as $word) {
+                    if (strlen($word) > 2) {
+                        $pertinenceInter = 5 - damerauLevenshteinDistance($word,$mot);
+                        $pertinenceDescription += $pertinenceInter < 0 ? 0 : $pertinenceInter;
+                    }
+                }
+            }
         }
 
         $totalPertinence = $pertinenceTitre * 5 + $pertinenceDescription;
@@ -272,6 +285,19 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
     usort($resultats, function($a, $b) {
         return $b['totalPertinence'] <=> $a['totalPertinence'];
     });
+
+    // Tri supplémentaire par prix si $typetri est défini
+    if ($typetri !== null) {
+        if ($typetri == 1) {
+            usort($resultats, function($a, $b) {
+                return $a['prixUnitaire'] <=> $b['prixUnitaire']; // Tri croissant
+            });
+        } elseif ($typetri == 2) {
+            usort($resultats, function($a, $b) {
+                return $b['prixUnitaire'] <=> $a['prixUnitaire']; // Tri décroissant
+            });
+        }
+    }
 
     // Fermeture de la connexion
     $requete->close();
