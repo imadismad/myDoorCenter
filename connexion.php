@@ -1,34 +1,37 @@
 <?php
 require_once "php/Redirect.php";
 
-function getProjectPath() {
+function getProjectPath()
+{
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
-            substr($scriptPath, 0, strpos($lower, $projectFolder) + strlen($projectFolder)) :
-            '/';
+        substr($scriptPath, 0, strpos($lower, $projectFolder) + strlen($projectFolder)) :
+        '/';
     return rtrim($path, '/') . '/';
 }
 
-function getAbsoluteMyDoorCenterPath() {
-  $path = __DIR__;
-  foreach (['mydoorcenter', 'wwwroot'] as $folder) {
-      if (($pos = strpos(strtolower($path), $folder)) !== false) return substr($path, 0, $pos + strlen($folder));
-  }
-  return $path;
+function getAbsoluteMyDoorCenterPath()
+{
+    $path = __DIR__;
+    foreach (['mydoorcenter', 'wwwroot'] as $folder) {
+        if (($pos = strpos(strtolower($path), $folder)) !== false)
+            return substr($path, 0, $pos + strlen($folder));
+    }
+    return $path;
 }
 
-define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
+define('BASE_DIR', getAbsoluteMyDoorCenterPath() . '/');
 define('BASE_DIR_STATIC', getProjectPath());
 ?>
 <!-- Head with automatic css imports -->
-<?php include BASE_DIR.'pageTemplate/head.php'; ?>
+<?php include BASE_DIR . 'pageTemplate/head.php'; ?>
 
-    <body>
+<body>
 
     <!-- Header import -->
-    <?php include BASE_DIR.'pageTemplate/header.php'; ?>
+    <?php include BASE_DIR . 'pageTemplate/header.php'; ?>
 
     <!-- Sidebar import -->
-    <?php include BASE_DIR.'pageTemplate/sidebar.php'; ?>
+    <?php include BASE_DIR . 'pageTemplate/sidebar.php'; ?>
 
 
     <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
@@ -44,20 +47,22 @@ define('BASE_DIR_STATIC', getProjectPath());
                     <div class="text-bg-light p-3">
                         <h2>Connexion</h2>
                         <?php
-                            if(isset($_GET['error']) && $_GET['error'] == "true") {
-                                echo '
+                        if (isset($_GET['error']) && $_GET['error'] == "true") {
+                            echo '
                                 <div class="alert alert-danger" role="alert">
                                     Nom d\'utilisateur ou mot de passe incorrect
                                 </div>
                                 ';
-                            }
+                        }
                         ?>
-                        <form action=<?php echo getUrlWithSaveRedirect("/api/connect.php"); ?> method="post" class="row g-4">
+                        <form action=<?php echo getUrlWithSaveRedirect("/api/connect.php"); ?> method="post"
+                            class="row g-4">
 
                             <div class="input-group input-group-lg">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">@</span>
                                 <input type="email" id="mail" name="mail" class="form-control"
-                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Email">
+                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+                                    placeholder="Email">
                             </div>
 
                             <div class="input-group input-group-lg">
@@ -75,7 +80,7 @@ define('BASE_DIR_STATIC', getProjectPath());
             </div>
 
 
-    </div>
+        </div>
 </body>
 
 </html>

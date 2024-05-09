@@ -102,7 +102,7 @@ class Product extends DBObject {
 
     public function getImagesPath(): Array {
         $images = [];
-        foreach (new DirectoryIterator('./img/'.$this->getId()) as $file) {
+        foreach (new DirectoryIterator('./img/'.$this->getId().'/') as $file) {
             if($file->isDot()) continue;
             array_push($images, '/img/'.$this->getId()."/".$file->getFilename());
         }
