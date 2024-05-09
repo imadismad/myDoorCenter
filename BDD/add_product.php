@@ -1,6 +1,7 @@
 <?php
 include_once "config.php";
 require_once "interBDDProduit.php";
+include_once "../php/Product.php";
 // Connect to the database using MySQLi
 $mysqli = new mysqli(SQL_SERVER, SQL_USER, SQL_PASSWORD, SQL_BDD_NAME);
 
@@ -12,7 +13,7 @@ if ($mysqli->connect_error) {
 // Get form data
 $name = $mysqli->real_escape_string($_POST["product-name"]);
 $type = $mysqli->real_escape_string($_POST["product-type"]);
-$price = $mysqli->real_escape_string($_POST["product-price"]);
+$price = abs($mysqli->real_escape_string($_POST["product-price"]));
 $description = $mysqli->real_escape_string($_POST["product-description"]);
 $catalog = ($_POST['product-catalog'] == 'Yes') ? 'b\'1\'': 'b\'0\'';
 
@@ -25,11 +26,13 @@ $query = "ALTER TABLE Produit AUTO_INCREMENT = $id";
 
 $mysqli->query($query);
 
-mkdir("../images/".$id, 0777, true);
+mkdir("../img/".$id, 0777, true);
 if (isset($_FILES['product-image']) && is_uploaded_file($_FILES['product-image']['tmp_name'])){
     $origine = $_FILES['product-image']['tmp_name'];
-    $image = "../images/".$id."/".$_FILES['product-image']['name'];
+    $image = "../img/".$id."/".$_FILES['product-image']['name'];
     move_uploaded_file($origine,$image);
+}else{
+    $image = "NoImage";
 }
 
 $query = "INSERT INTO Produit (nom, type, prixUnitaire, description, nomImage , estAuCatalogue) VALUES ('$name', '$type', '$price', '$description','$image', $catalog)";

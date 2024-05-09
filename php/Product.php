@@ -39,15 +39,16 @@ class Product extends DBObject {
         if ($type === "") throw new Exception("Product type can't be empty");
         if ($catalogue !== 0 && $catalogue !== 1) throw new Exception("Product catalogue must be 0 or 1");
 
-        $this->name = $name;
-        $this->unitaryPrice = $unitaryPrice;
-        $this->type = $type;
-        $this->description = $description;
-        $this->imageName = $imageName;
-        $this->catalogue = $catalogue;
-        $this->materials = array();
-        $this->newMaterials = array();
-        $this->oldMaterials = array();
+        $this -> setName($name);
+        $this -> setUnitaryPrice($unitaryPrice);
+        $this -> setType($type);
+        $this -> setDescription($description);
+        $this -> setImageName($imageName);
+        $this -> setCatalogue($catalogue);
+        
+        $this -> materials = array();
+        $this -> newMaterials = array();
+        $this -> oldMaterials = array();
     }        
 
     public static function constructFromId(int $id): Product | null {
@@ -96,14 +97,14 @@ class Product extends DBObject {
      * Return the path to the miniature of the product
      */
     public function getMiniaturePath(): string {
-        return "/images/miniature/".$this->getImageName();
+        return "/img/miniature/".$this->getImageName();
     }
 
     public function getImagesPath(): Array {
         $images = [];
-        foreach (new DirectoryIterator('./images/'.$this->getId()) as $file) {
+        foreach (new DirectoryIterator('./img/'.$this->getId().'/') as $file) {
             if($file->isDot()) continue;
-            array_push($images, '/images/'.$this->getId()."/".$file->getFilename());
+            array_push($images, '/img/'.$this->getId()."/".$file->getFilename());
         }
         array_multisort($images);
         return $images;
@@ -246,11 +247,23 @@ class Product extends DBObject {
 
     /**
      * Return the current stock of the product for each warehouse
-     * @return array the current stock of the product for each warehouse
+     * If the product is not in stock, return false
+     * @return array|false the current stock of the product for each warehouse, false if not in stock
      */
-    public function getCurrentStock(): array {
+    public function getCurrentStock(): array|false {
         $stock = quantitePortesEnStockParEntrepot($this -> getId());
-        if ($stock === null || $stock === false) throw new Exception("Error while getting stock");
+        if ($stock === null) throw new Exception("Error while getting stock");
+        return $stock;
+    }
+
+    /**
+     * Return the total quantity in stock for the product given by the id
+     * @param int $id the id of the product
+     * @return array|false the current stock of the product for each warehouse, false if not in stock
+     */
+    public static function getCurrentStockFromId(int $id): array|false {
+        $stock = quantitePortesEnStockParEntrepot($id);
+        if ($stock === null) throw new Exception("Error while getting stock");
         return $stock;
     }
 
@@ -260,6 +273,24 @@ class Product extends DBObject {
      */
     public function getQuantityInStock(): int {
         $stock = $this -> getCurrentStock();
+        if ($stock === false) return 0;
+
+        $total = 0;
+        foreach ($stock as $entrepot) {
+            $total += $entrepot["quantite"];
+        }
+
+        return $total;
+    }
+
+    /**
+     * Return the total quantity in stock for the product given by the id
+     * @param int $id the id of the product
+     */
+    public static function getQuantityInStockFromId(int $id): int {
+        $stock = Product::getCurrentStockFromId($id);
+        if ($stock === false) return 0;
+
         $total = 0;
         foreach ($stock as $entrepot) {
             $total += $entrepot["quantite"];
@@ -276,5 +307,38 @@ class Product extends DBObject {
     public function hasEnoughInStock(int $quantity): bool | int {
         $quantityInStock = $this -> getQuantityInStock();
         return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
+    }
+
+    /**
+     * Return true if the product given by the id has enough in stock, else return the quantity missing
+     * @param int $id the id of the product
+     * @param int $quantity the quantity to check
+     * @return bool|int true if enough in stock, else the quantity missing
+     */
+    public static function hasEnoughtInStockFromId(int $id, int $quantity): bool | int {
+        $quantityInStock = Product::getQuantityInStockFromId($id);
+        return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
+    }
+
+    public static function searchProduct($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false): array  {
+        $arrayResult = rechercherProduits($search, $type, $prixMin, $prixMax, $triNote);
+        $arrayProduct = array();
+
+        foreach ($arrayResult as $value) {
+            $product = new Product(
+                $value[Product::NAME_DB_NAME],
+                floatval($value[Product::UNITARY_PRICE_DB_NAME]),
+                $value[Product::TYPE_DB_NAME],
+                $value[Product::DESCRIPTION_DB_NAME],
+                $value[Product::IMAGE_NAME_DB_NAME],
+                $value[Product::IN_CATALOGUE_DB_NAME]
+            );
+            $product -> setId($value["id"]);
+            $product -> materials = Material::constructAllFromProduct($product -> getId());
+
+            array_push($arrayProduct, $product);
+        }
+
+        return $arrayProduct;
     }
 }
