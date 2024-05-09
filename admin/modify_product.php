@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
     $estAuCatalogue = $_POST['catalog'];
     $product = Product::constructFromId($id);
     if (isset($_FILES['delete-image']) && is_uploaded_file($_FILES['delete-image']['tmp_name'])) {
-        $$deletePath = "../img/" . $id . "/" . $_FILES['delete-image']['name'];
+        $deletePath = "../img/" . $id . "/" . $_FILES['delete-image']['name'];
         if (is_file($deletePath)) {
             unlink($deletePath);
         }

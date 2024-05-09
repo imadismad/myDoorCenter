@@ -1,12 +1,19 @@
 <?php
 require_once __DIR__ ."/php/Product.php";
 
-$product = Product::constructFromId(intval($_GET["id"]));
-if (!isset($_GET["id"]) || $product === null ) {
-    include __DIR__."/pageTemplate/404Product.html";
+if (!isset($_GET["id"])) {
     http_response_code(404);
+    include __DIR__."/pageTemplate/404Product.html";
     exit;
 }
+
+$product = Product::constructFromId(intval($_GET["id"]));
+if ($product === null ) {
+    http_response_code(404);
+    include __DIR__."/pageTemplate/404Product.html";
+    exit;
+}
+$productQuantity = $product -> getQuantityInStock();
 
 function getProjectPath() {
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
@@ -26,9 +33,6 @@ function getAbsoluteMyDoorCenterPath() {
 define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
 define('BASE_DIR_STATIC', getProjectPath());
 ?>
-<!-- Info manquante dans la BDD pour la page du produit : Reference du produit, dimension disponibles, couleurs dispo -->
-
-<!-- Head with automatic css imports -->
 <?php include BASE_DIR.'pageTemplate/head.php'; ?>
 
 
@@ -139,7 +143,14 @@ define('BASE_DIR_STATIC', getProjectPath());
 
                         <div class="mb-3">
                             <label for="quantity-select" class="form-label">Quantité</label>
-                            <input type="number" class="form-control" id="quantity-select" name="quantity" value="1" min="1"
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="quantity-select"
+                                name="quantity"
+                                value="1"
+                                min="1"
+                                max="<?php echo $productQuantity?>"
                                 onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
                         </div>
 
@@ -159,14 +170,31 @@ define('BASE_DIR_STATIC', getProjectPath());
                             </ul>
                         </div>
 
-                        <button
-                            type="button"
-                            class="btn btn-light"
-                            id="ajoutPanier"
-                            onclick=<?php echo "addProduct(".$product->getId().")" ?>
-                        >
-                            Ajouter au panier
-                        </button>
+                        <?php
+                        if ($productQuantity > 0)
+                            echo '
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                id="ajoutPanier"
+                                onclick="addProduct('.$product->getId().')"
+                            >
+                                Ajouter au panier
+                            </button>
+                            ';
+                        else
+                            echo '
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                id="ajoutPanier"
+                                onclick="addProduct('.$product->getId().')"
+                                disabled
+                            >
+                                Le produit n\'est pas en stock
+                            </button>
+                            ';
+                        ?>
                     </div>
                 </div>
                 <hr>
@@ -203,7 +231,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                         <h3>Produits similaires</h3>
                         <div class="card-group">
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">C'est une porte</p>
@@ -211,7 +239,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 2">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 2">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 2</h5>
                                     <p class="card-text">Ça aussi</p>
@@ -219,7 +247,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">Ça aussi</p>
@@ -227,7 +255,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">Ça aussi</p>
@@ -235,7 +263,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">Ça aussi</p>
@@ -243,7 +271,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 </div>
                             </div>
                             <div class="card">
-                                <img src="images/porte.png" class="card-img-top" alt="Produit similaire 1">
+                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
                                 <div class="card-body">
                                     <h5 class="card-title">Produit 1</h5>
                                     <p class="card-text">Ça non. Si en fait j'ai menti</p>

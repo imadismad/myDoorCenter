@@ -22,11 +22,6 @@ class Result {
     }
 }
 
-// https://www.mondialrelay.fr/api/parcelshop?country=FR&postcode=95200&city=Sarcelles&services=&excludeSat=false&naturesAllowed=1,A,E,F,D,J,T,S,C
-
-// https://service.relaiscolis.com/wslisterelaisproches/RelaisProches/Liste?key=RC202306281026CCRC
-// {"Lon":2.0619429,"Lat":49.035898,"EnsCode":"5","RelaisMax":"","RelaisSmart":"","RelaisActifouTF":"1","RelaisCodeCountry":"","RayonRecherche":100000,"Delailogistique":0,"AdresseSaisie":"","NbRelais":30,"Activity":""}
-
 if (!isset($_GET) || !isset($_GET["Lon"]) || !isset($_GET["Lat"])) {
     http_response_code(400);
     exit();

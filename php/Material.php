@@ -16,10 +16,10 @@ class Material extends DBObject{
     public function __construct(string $name, float $relativeDensity, float $density, string $type) {
         parent::__construct(null, Material::TABLE_NAME);
 
-        $this->name = $name;
-        $this->relativeDensity = $relativeDensity;
-        $this->density = $density;
-        $this->type = $type;
+        $this -> setName($name);
+        $this -> setRelativeDensity($relativeDensity);
+        $this -> setDensity($density);
+        $this -> setType($type);
     }
 
     public static function constructFromId(int $id): Material|null {
@@ -111,7 +111,7 @@ class Material extends DBObject{
         $this -> density = $density;
     }
 
-    public function setType(float $type) {
+    public function setType(string $type) {
         $this -> addModification(Material::TYPE_DB_NAME, $type);
         $this -> type = $type;
     }

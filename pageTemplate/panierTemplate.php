@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 $cart = Cart::getUserCart();
 ?>
 
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Nom</th>
@@ -41,7 +41,7 @@ $cart = Cart::getUserCart();
                     }
                     
                     echo "</ul></td>"
-                    ."<td><input type=\"number\" value=\"".$quantity."\" name=\"".$product->getId()."\" data-option-ids=\"".$optionArray -> toIdsRequete()."\" ></td>"
+                    .'<td><input type="number" value="'.$quantity.'" name="'.$product->getId().'" data-option-ids="'.$optionArray -> toIdsRequete().'" max="'.$product -> getQuantityInStock().'"></td>'
                     ."<td>".$product->getUnitaryPrice()."</td>"
                     ."<td>".$totTVA."</td>"
                     ."<td>".($totTTC + $totOption * $quantity)."</td>"

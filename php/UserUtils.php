@@ -1,6 +1,6 @@
 <?php
 
-require_once "../BDD/interBDDUser.php";
+require_once __DIR__."/../BDD/interBDDUser.php";
 
 class UserUtils {
     private const COOKIE_NAME = "prenom";
@@ -126,5 +126,21 @@ class UserUtils {
         return $_SESSION["pays"];
     }
 
+    public static function getId(): int {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return $_SESSION["id"];
+    }
 
+    public static function getHistoryOrder(): array {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return recupererHistoriqueCommande(UserUtils::getId());
+    }
+
+    public static function getOrder(int $id): array {
+        if (!UserUtils::isConnect())
+            throw new Exception("The user is not connected");
+        return recupererHistoriqueCommande(UserUtils::getId(), $id);
+    }
 }

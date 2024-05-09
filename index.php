@@ -23,8 +23,6 @@ define('BASE_DIR_STATIC', getProjectPath());
 
 
 <body>
-  <?php echo BASE_DIR ?>
-  <?php echo BASE_DIR_STATIC ?>
   <!-- Header import -->
   <?php include BASE_DIR.'pageTemplate/header.php'; ?>
 
@@ -40,7 +38,7 @@ define('BASE_DIR_STATIC', getProjectPath());
         <h1 class="welcome-title border rounded display-1"><b>Bienvenue sur MyDoorCenter</b></h1>
         <div class="pt-title-xs pt-title-sm pt-title-md pt-title-lg pt-title-xl"></div>
         <div class="position-relative text-center">
-          <img src="images/fresqueworker.png" alt="Logo" width="100%">
+          <img src="img/fresqueworker.png" alt="Logo" width="100%">
           <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent">
             <h6 class="display-6"><b>Vous avez frappé <br>à la bonne porte !</b></h6>
           </div>
@@ -56,7 +54,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                   <a href="research.html">
                     <div class="card">
-                      <img src="images/porte.png" class="card-img-top" alt="...">
+                      <img src="img/porte.png" class="card-img-top" alt="...">
                       <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent-dark">
                         <h6 class="display-6"><b>Produits</b></h6>
                       </div>
@@ -67,7 +65,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                   <a href="">
                     <div class="card">
-                      <img src="images/blocporte.png" class="card-img-top" alt="...">
+                      <img src="img/blocporte.png" class="card-img-top" alt="...">
                       <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent-dark">
                         <h6 class="display-6"><b>Installation</b></h6>
                       </div>
@@ -78,7 +76,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                   <a href="">
                     <div class="card">
-                      <img src="images/poignee.png" class="card-img-top" alt="...">
+                      <img src="img/poignee.png" class="card-img-top" alt="...">
                       <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent-dark">
                         <h6 class="display-6"><b>Configurateur</b></h6>
                       </div>
@@ -89,7 +87,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                   <a href="">
                     <div class="card">
-                      <img src="images/accessoire.png" class="card-img-top" alt="...">
+                      <img src="img/accessoire.png" class="card-img-top" alt="...">
                       <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent-dark">
                         <h6 class="display-6"><b>FAQ</b></h6>
                       </div>
@@ -112,7 +110,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                     <div class="card-body">
                       <h5 class="card-title"><b>Portes ouvertes</b></h5>
                     </div>
-                    <img src="images/magasin.png" class="card-img-top" alt="...">
+                    <img src="img/magasin.png" class="card-img-top" alt="...">
                     <div class="card-body">
                       <p class="card-text">
                         Venez visiter la boutique MyDoorCenter et profiter de
@@ -128,7 +126,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                     <div class="card-body">
                       <h5 class="card-title"><b>Semaine Mystère de la porte</b></h5>
                     </div>
-                    <img src="images/porteinterro.png" class="card-img-top" alt="...">
+                    <img src="img/porteinterro.png" class="card-img-top" alt="...">
                     <div class="card-body">
                       <p class="card-text">
                         Découvrez le frisson de l'inattendu avec notre <b>Semaine Mystère de la Porte</b> du 20 au 27
@@ -145,7 +143,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                     <div class="card-body">
                       <h5 class="card-title"><b>Portes fermées</b></h5>
                     </div>
-                    <img src="images/porte.png" class="card-img-top" alt="...">
+                    <img src="img/porte.png" class="card-img-top" alt="...">
                     <div class="card-body">
                       <p class="card-text">
                         Tous les week-ends et la semaine de 18h à 8h,

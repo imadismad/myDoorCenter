@@ -1,6 +1,7 @@
 <?php
 // Inclure le fichier contenant les fonctions SQL
 require_once 'functionsSQL.php';
+require_once __DIR__."/../php/LocationSearch.php";
 
 function quantitePortesEnStockParEntrepot($referenceProduit) {
     // Informations de connexion à la base de données
@@ -32,7 +33,7 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
 
     // Affichage des quantités de portes par entrepôt
     if ($resultat->num_rows === 0) {
-        fwrite(STDERR, "La référence n'est pas en stock.");
+        error_log("La référence n'est pas en stock.");
         return false;
     } else {
         // Affichage des quantités de portes par entrepôt
@@ -40,7 +41,6 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
             $idEntrepot = $row["idEntrepot"];
             $quantite = $row["quantite"];
             array_push($arrayResult, array("idEntrepot" => $idEntrepot, "quantite" => $quantite));
-            fwrite(STDOUT, "Entrepôt ID: $idEntrepot, Quantité: $quantite\n");
         }
     }
 
@@ -50,7 +50,18 @@ function quantitePortesEnStockParEntrepot($referenceProduit) {
     return $arrayResult;
 }
 
-function creerCommande($idClient, $modePaiement, $produitsQuantites) {
+/**
+ * Créer une commande pour un client avec les produits et quantités spécifiés.
+ * infoFacturation et infoLivraison sont des tableaux associatifs contenant les informations de facturation et de livraison.
+ * nom       infoFacturation et infoLivraison
+ * prenom    infoFacturation et infoLivraison
+ * rue       infoFacturation et infoLivraison
+ * CP        infoFacturation et infoLivraison
+ * ville     infoFacturation et infoLivraison
+ * pays      infoFacturation et infoLivraison
+ * telephone infoFacturation
+ */
+function creerCommande($idClient, $modePaiement, $produistId, $produitsQuantites, $infoFacturation, $infoLivraison, $livraisonCoord, $productOption=[]) {
     // Informations de connexion à la base de données
     $serveur = SQL_SERVER;
     $utilisateur = SQL_USER;
@@ -66,7 +77,8 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
     }
 
     // Vérifier le stock pour tous les produits d'abord
-    foreach ($produitsQuantites as $idProduit => $quantite) {
+    foreach ($produitsQuantites as $index => $idProduit) {
+        $quantite = $produitsQuantites[$index];
         if (quantitePortesEnStockParEntrepot($idProduit) < $quantite) {
             $connexion->close();
             die("Le produit avec l'ID $idProduit n'est pas en stock en quantité suffisante.");
@@ -79,14 +91,25 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
     try {
         // Insérer la commande
         $date = date("Y-m-d");
-        $requeteCommande = $connexion->prepare("INSERT INTO Commande (date, modePaiement, idClient) VALUES (?, ?, ?)");
-        $requeteCommande->bind_param("sss", $date, $modePaiement, $idClient);
+        $requeteCommande = $connexion->prepare("
+            INSERT INTO Commande (date, modePaiement, idClient,
+            nom, prenom, rue, CP, ville, pays, telephone,
+            nomLivraison, prenomLivraison, rueLivraison, CPLivraison, villeLivraison, paysLivraison)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        ");
+        $requeteCommande->bind_param("ssssssssssssssss",
+            $date, $modePaiement, $idClient,
+            $infoFacturation["nom"], $infoFacturation["prenom"], $infoFacturation["rue"], $infoFacturation["CP"], $infoFacturation["ville"], $infoFacturation["pays"], $infoFacturation["telephone"],
+            $infoLivraison["nom"], $infoLivraison["prenom"], $infoLivraison["rue"], $infoLivraison["CP"], $infoLivraison["ville"], $infoLivraison["pays"]
+        );
         $requeteCommande->execute();
         $idCommande = $requeteCommande->insert_id; // Récupérer l'ID de la commande insérée
         $requeteCommande->close();
 
         // Pour chaque produit et quantité dans la commande
-        foreach ($produitsQuantites as $idProduit => $quantite) {
+        foreach ($produistId as $index => $idProduit) {
+            $quantite = $produitsQuantites[$index];
+
             for ($i = 0; $i < $quantite; $i++) {
                 // Récupérer l'ID de l'entrepôt correspondant à la porte retirée
                 $requeteEntrepot = $connexion->prepare("SELECT id, idEntrepot FROM Porte WHERE idProduit = ? AND idEntrepot <> 1000 LIMIT 1");
@@ -117,25 +140,49 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
                 $requeteDeplacement->execute();
                 $requeteDeplacement->close();
 
+                // Récupération des coordonées de l'entrepot
+                $requeteCoord = $connexion->prepare("SELECT latitude, longitude FROM Entrepot WHERE id = ?");
+                $requeteCoord->bind_param("i", $idEntrepot);
+                $requeteCoord->execute();
+                $resultatCoord = $requeteCoord->get_result();
+                $rowCoord = $resultatCoord->fetch_assoc();
+
                 // Créer une livraison pour la porte
                 $requeteLivraison = $connexion->prepare("INSERT INTO Livraison (arriveeEstimee, distance, nbPointsArrets, idCommande, idClient, idPorte) VALUES (?, ?, ?, ?, ?, ?)");
                 $arriveeEstimee = date("Y-m-d H:i:s", strtotime("+1 week")); // Exemple de date d'arrivée estimée
-                $distance = 100.0; // Exemple de distance
+                $distance = vincentyGreatCircleDistance($livraisonCoord["lat"], $livraisonCoord["lon"], $rowCoord["latitude"], $rowCoord["longitude"]); // Exemple de distance
                 $nbPointsArrets = 0; // Exemple de nombre de points d'arrêt
                 $requeteLivraison->bind_param("siiiii", $arriveeEstimee, $distance, $nbPointsArrets, $idCommande, $idClient, $idPorte);
                 $requeteLivraison->execute();
                 $requeteLivraison->close();
+            }
+
+            // Ajouter la porte a la commande
+            $requeteConcerner = $connexion->prepare("INSERT INTO Concerner (idProduit, idCommande, quantite) VALUES (?, ?, ?)");
+            $requeteConcerner->bind_param("iii", $idProduit, $idCommande, $quantite);
+            $requeteConcerner->execute();
+            $idConcerner = $requeteConcerner->insert_id;
+            $requeteConcerner->close();
+
+            //Ajouter les options du produit si existant
+            if (isset($productOption[$index]) && count($productOption[$index]) > 0) {
+                foreach ($productOption[$index] as $optionId) {
+                    $requeteOption = $connexion->prepare("INSERT INTO AOption (idConcerner, idOption) VALUES (?, ?)");
+                    $requeteOption->bind_param("ii", $idConcerner, $optionId);
+                    $requeteOption->execute();
+                    $requeteOption->close();
+                }
             }
         }
 
         // Valider la transaction
         $connexion->commit();
 
-        fwrite(STDOUT, "La commande a été créée avec succès.");
     } catch (Exception $e) {
         // En cas d'erreur, annuler la transaction
         $connexion->rollback();
-        fwrite(STDERR, "Erreur lors de la création de la commande : " . $e->getMessage());
+        error_log("Erreur lors de la création de la commande : " . $e->getMessage());
+        error_log(print_r($e, true));
     }
 
     // Fermeture de la connexion
@@ -143,8 +190,26 @@ function creerCommande($idClient, $modePaiement, $produitsQuantites) {
 }
 
 
+function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false, $typetri = false) {
 
-function rechercherProduits($search = null, $type = null, $tri = 'nom', $prixMin = null, $prixMax = null, $triNote = false) {
+/**
+ * Recherche des produits dans la base de données en fonction des critères spécifiés.
+ * 
+ * ATTENTION : le tri par mots-clés est fait en dernier, ce qui implique que le tri
+ * par note croissante ou décroissante est mélangée si une recherche par mots-clés
+ * est faite en plus.
+ *
+ * @param string|null $search   La chaîne de recherche pour filtrer les résultats par pertinence.
+ * @param string|null $type     Le type de produit à rechercher.
+ * @param float|null  $prixMin  Le prix minimum des produits à rechercher.
+ * @param float|null  $prixMax  Le prix maximum des produits à rechercher.
+ * @param int|bool    $triNote  Le mode de tri des résultats par note moyenne (0 pour décroissant, 6 pour croissant, false pour ne pas trier par note, et entre 1 et 5 pour la moyenne correspondante).
+ * @param int|null    $typetri  Le mode de tri des résultats par prix
+ *
+ * @return array              Un tableau associatif contenant les produits correspondant aux critères de recherche, triés par pertinence.
+ */
+
+    
     // Informations de connexion à la base de données
     $serveur = SQL_SERVER;
     $utilisateur = SQL_USER;
@@ -163,17 +228,11 @@ function rechercherProduits($search = null, $type = null, $tri = 'nom', $prixMin
     $bind_types = "";
     $bind_values = [];
 
-
     // Construction de la requête SQL
-    $sql = "SELECT p.*, AVG(n.note) as noteMoyenne, 
-            (CASE WHEN p.nom LIKE ? THEN 5 ELSE 0 END) AS pertinenceTitre,
-            (CASE WHEN p.description LIKE ? THEN 1 ELSE 0 END) AS pertinenceDescription 
+    $sql = "SELECT p.*, AVG(n.note) as noteMoyenne 
             FROM Produit p 
             LEFT JOIN Noter n ON p.id = n.idProduit";
-    $bind_types .= "ss";
-    $bind_values[] = "%" . $search . "%";
-    $bind_values[] = "%" . $search . "%";
-
+    
     // Traitement du filtre par type
     if ($type !== null && !empty($type)) {
         $where[] = "p.type = ?";
@@ -198,36 +257,23 @@ function rechercherProduits($search = null, $type = null, $tri = 'nom', $prixMin
         $sql .= " WHERE " . implode(" AND ", $where);
     }
 
-    $sql .= " GROUP BY p.id";
-
-    // Calcul de la distance de Levenshtein
-    if ($search !== null && !empty($search)) {
-        $sql .= " HAVING (pertinenceTitre + pertinenceDescription - LEAST(5, LEVENSHTEIN(p.nom, ?))) > 0";
-        $bind_types .= "s";
-        $bind_values[] = $search;
-    }
-
-    // Traitement du tri
+    // Traitement du tri par la note
     if ($triNote !== false && is_numeric($triNote)) {
         if ($triNote == 0) {
-            $sql .= " ORDER BY noteMoyenne DESC";
+            $sql .= " GROUP BY p.id ORDER BY noteMoyenne DESC";
         } elseif ($triNote == 6) {
-            $sql .= " ORDER BY noteMoyenne ASC";
+            $sql .= " GROUP BY p.id ORDER BY noteMoyenne ASC";
         } else {
-            $sql .= " HAVING noteMoyenne >= ? AND noteMoyenne < ?";
+            $sql .= " GROUP BY p.id HAVING noteMoyenne >= ? AND noteMoyenne < ?";
             $bind_types .= "dd";
             $bind_values[] = $triNote;
             $bind_values[] = $triNote + 1;
         }
     } else {
-        $sql .= " ORDER BY p.nom";
+        $sql .= " GROUP BY p.id ORDER BY p.nom";
     }
 
-    print($sql);
-    echo "\nbind_types: " . $bind_types . "\n";
-    echo "bind_values: ";
-    print_r($bind_values);
-    // Exécution de la requête
+    // Exécution de la requête pour récupérer tous les produits
     $requete = $connexion->prepare($sql);
     if (!empty($bind_values)) {
         $requete->bind_param($bind_types, ...$bind_values);
@@ -235,17 +281,79 @@ function rechercherProduits($search = null, $type = null, $tri = 'nom', $prixMin
     $requete->execute();
     $resultat = $requete->get_result();
 
+    if($search==null){
+        // Fermeture de la connexion
+        $requete->close();
+        $connexion->close();
+        return $resultat;
+    }
+
     // Création du tableau associatif pour les résultats
     $resultats = [];
     while ($row = $resultat->fetch_assoc()) {
-        $resultats[] = $row;
+        // Calcul de la pertinence avec la distance de Levenshtein
+
+        $pertinenceTitre = 0;
+        foreach (explode(" ",$search) as $mot) {
+            if (strlen($mot) > 2) {
+                foreach (explode(" ",$row["nom"]) as $word) {
+                    if (strlen($word) > 2) {
+                        $pertinenceInter = 5 - damerauLevenshteinDistance($word,$mot);
+                        $pertinenceTitre += $pertinenceInter < 0 ? 0 : $pertinenceInter;
+                    }
+                }
+            }
+        }
+
+        $pertinenceDescription = 0;
+        foreach (explode(" ",$search) as $mot) {
+            if (strlen($mot) > 2) {
+                foreach (explode(" ",$row["description"]) as $word) {
+                    if (strlen($word) > 2) {
+                        $pertinenceInter = 5 - damerauLevenshteinDistance($word,$mot);
+                        $pertinenceDescription += $pertinenceInter < 0 ? 0 : $pertinenceInter;
+                    }
+                }
+            }
+        }
+
+        $totalPertinence = $pertinenceTitre * 5 + $pertinenceDescription;
+
+        // Filtrage des résultats ayant une pertinence suffisante
+        if ($totalPertinence > 0) {
+            $row['pertinenceTitre'] = $pertinenceTitre;
+            $row['pertinenceDescription'] = $pertinenceDescription;
+            $row['totalPertinence'] = $totalPertinence;
+            $resultats[] = $row;
+            // echo "ID : ".$row['id']." Pertinence : ".$totalPertinence."\n";
+        }
     }
 
+    // Tri des résultats par pertinence
+    usort($resultats, function($a, $b) {
+        return $b['totalPertinence'] <=> $a['totalPertinence'];
+    });
+
+    // Tri supplémentaire par prix si $typetri est défini
+    if ($typetri !== null) {
+        if ($typetri == 1) {
+            usort($resultats, function($a, $b) {
+                return $a['prixUnitaire'] <=> $b['prixUnitaire']; // Tri croissant
+            });
+        } elseif ($typetri == 2) {
+            usort($resultats, function($a, $b) {
+                return $b['prixUnitaire'] <=> $a['prixUnitaire']; // Tri décroissant
+            });
+        }
+    }
+
+    // Fermeture de la connexion
     $requete->close();
     $connexion->close();
 
     return $resultats;
 }
+
 
 
 

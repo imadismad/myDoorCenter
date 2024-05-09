@@ -73,7 +73,7 @@ abstract class DBObject {
      */
     public function setId(int|null $id): void {
         if ($this->getId() !== null) 
-            fwrite(STDERR, "WARNING in DBObject::setId : id is already set, this function should not be call !\n");
+            error_log("WARNING in DBObject::setId : id is already set, this function should not be call !\n");
         else
             // Reset because it means that the product load from DB, otherwise id couldn't be set
             $this->editedValue = [];

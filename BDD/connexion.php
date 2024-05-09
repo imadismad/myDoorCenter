@@ -3,11 +3,66 @@
  * THIS PHP USE ONLY Client TABLE
  */
 ob_start();
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 
 require_once "config.php";
 require_once "functionsSQL.php";
+
+// Include Mailjet configuration
+include('../api/mailJet/mailJet.php'); // Adjust the path as necessary to where your mailJet.php file is located.
+
+// Function to send email
+function sendEmail($clientName,$clientfirstName, $clientEmail) {
+    $url = 'https://api.mailjet.com/v3.1/send';
+
+    // Prepare data for the email
+    $data = json_encode([
+        'Messages' => [
+            [
+                // Email to the client
+                'From' => [
+                    'Email' => "no-reply@mydoorcenter.com",
+                    'Name' => "No-reply MyDoorCenter"
+                ],
+                'To' => [
+                    [
+                        'Email' => $clientEmail,
+                        'Name' => $clientName
+                    ]
+                ],
+                'TemplateID' => MAILJET_TEMPLATE_ID_2,
+                'TemplateLanguage' => true,
+                'Subject' => "Welcome $clientfirstNameto to MyDoorCenter ! ",
+                'Variables' => [
+                    'name' => $clientName,
+                    'firstname' => $clientfirstName
+
+                ]
+            ]
+        ]
+    ]);
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($ch, CURLOPT_USERPWD, MAILJET_API_KEY . ":" . MAILJET_SECRET_KEY);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json'
+    ]);
+
+    $response = curl_exec($ch);
+    if (!$response) {
+        error_log('Mailjet Error: ' . curl_error($ch) . ' - Code: ' . curl_errno($ch));
+        return false;
+    } else {
+        error_log('Mailjet Response: ' . $response);
+        return true;
+    }
+
+    curl_close($ch);
+}
+
 
 // Check if the form was submitted
 if (!isset($_POST["submit"])) {
@@ -51,6 +106,8 @@ try {
     if (!insererDonnees("Client", $donnees)) {
         throw new Exception("Failed to insert data.");
     }
+
+    sendEmail($_POST['nom'], $_POST['prenom'], $_POST['mail']);
 
     header("Location: /connexion.php");
     exit();

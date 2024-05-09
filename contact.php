@@ -41,7 +41,7 @@ define('BASE_DIR_STATIC', getProjectPath());
             
                 <div class="">
                     <h2>Contactez-nous</h2>
-                    <form onsubmit="return sendEmail(this);">
+                    <form action="php/contactmail.php" method="post">
                         <div class="form-group">
                             <label for="clientName">Votre nom</label>
                             <input type="text" class="form-control" id="clientName" name="clientName" required>
