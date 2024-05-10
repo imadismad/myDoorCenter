@@ -82,7 +82,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 <div class="w-100 p-3">
                     <div class="text-bg-light p-3 text-center">
                         <h3 class="mb-3">Pas encore de compte ?</h3>
-                        <a href="creationCompte.php" class="btn btn-primary">Créer un compte</a>
+                        <a href="<?php echo getUrlWithSaveRedirect("creationCompte.php"); ?>" class="btn btn-primary">Créer un compte</a>
                     </div>
                 </div>
             </div>

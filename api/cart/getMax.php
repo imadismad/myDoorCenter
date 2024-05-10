@@ -1,6 +1,6 @@
 <?php
 /*
- * Get product max quantiity
+ * Get product max quantity that can be added to the cart
  * Response if ok (200):
  * Response if error (400):
  * - Type: application/json
@@ -10,6 +10,9 @@
  *   - If Error Product Not Found : {"status": "EPNF"}
  */
 require_once __DIR__."/../../php/Product.php";
+require_once __DIR__."/../../php/Cart.php";
+
+$cart = Cart::getUserCart();
 
 if (!isset($_GET["productId"])) {
     http_response_code(400);
@@ -28,5 +31,8 @@ if ($product === null) {
     exit;
 }
 
+$stock = $product -> getQuantityInStock();
+$maxQuantity = $stock - $cart -> getQuantityById($product -> getId());
+
 header("Content-Type: application/json");
-echo json_encode(["status" => "ok", "max" => $product->getQuantityInStock()]);
+echo json_encode(["status" => "ok", "max" => $maxQuantity]);

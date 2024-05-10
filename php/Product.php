@@ -4,9 +4,10 @@ require_once "Material.php";
 require_once "Option.php";
 require_once "Redirect.php";
 require_once __DIR__."/../BDD/interactionBDD.php";
+
 class Product extends DBObject {
     // Prduct table
-    private const TABLE_NAME            = "Produit";
+        private const TABLE_NAME            = "Produit";
     private const NAME_DB_NAME          = "nom";
     private const TYPE_DB_NAME          = "type";
     private const UNITARY_PRICE_DB_NAME = "prixUnitaire";

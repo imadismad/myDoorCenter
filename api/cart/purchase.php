@@ -3,7 +3,7 @@ require_once __DIR__."/../../php/Redirect.php";
 require_once __DIR__."/../../php/UserUtils.php";
 require_once __DIR__."/../../php/Cart.php";
 if (session_status() === PHP_SESSION_NONE) session_start();
-include('../mailJet/mailJet.php'); // Adjust the path as necessary to where your mailJet.php file is located.
+include_once('../mailJet/mailJet.php'); // Adjust the path as necessary to where your mailJet.php file is located.
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 

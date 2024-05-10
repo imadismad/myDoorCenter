@@ -154,7 +154,7 @@ function getAbsoluteMyDoorCenterPath() {
                 <div class="w-100 p-3">
                     <div class="text-bg-light p-3 text-center">
                         <h3 class="mb-3 ">Déjà un compte ?</h3>
-                        <a href="connexion.php" class="btn btn-primary">Se connecter</a>
+                        <a href="<?php echo getUrlWithSaveRedirect('connexion.php'); ?>" class="btn btn-primary">Se connecter</a>
                     </div>
                 </div>
             </div>
