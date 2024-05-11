@@ -42,6 +42,7 @@ foreach ($resultats as $produit) {
     echo "Note Moyenne : " . $produit['noteMoyenne'] . "\n";
     // Affichez d'autres informations selon vos besoins
     echo "\n";
+    echo "<hr>";
 }
 
 
