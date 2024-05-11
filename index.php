@@ -51,7 +51,7 @@ define('BASE_DIR_STATIC', getProjectPath());
             <div class="container">
               <div class="row">
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                   <a href="research.html">
                     <div class="card">
                       <img src="img/porte.png" class="card-img-top" alt="...">
@@ -62,7 +62,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                   </a>
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                   <a href="">
                     <div class="card">
                       <img src="img/blocporte.png" class="card-img-top" alt="...">
@@ -73,18 +73,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                   </a>
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                  <a href="">
-                    <div class="card">
-                      <img src="img/poignee.png" class="card-img-top" alt="...">
-                      <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent-dark">
-                        <h6 class="display-6"><b>Configurateur</b></h6>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                   <a href="">
                     <div class="card">
                       <img src="img/accessoire.png" class="card-img-top" alt="...">
@@ -105,7 +94,7 @@ define('BASE_DIR_STATIC', getProjectPath());
             <div class="container">
               <div class="row">
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title"><b>Portes ouvertes</b></h5>
@@ -121,7 +110,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                   </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title"><b>Semaine Mystère de la porte</b></h5>
@@ -138,7 +127,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 </div>
 
 
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title"><b>Portes fermées</b></h5>

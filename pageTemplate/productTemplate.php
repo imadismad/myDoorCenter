@@ -21,13 +21,34 @@ define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
 define('BASE_DIR_STATIC', getProjectPath());
 
 $research = isset($_GET["research"]) ? $_GET["research"] : 'porte';
+$porte = isset($_GET["porte"]) ? $_GET["porte"] : 'false';
+$poignee = isset($_GET["poignee"]) ? $_GET["poignee"] : 'false';
+$accessoire = isset($_GET["accessoire"]) ? $_GET["accessoire"] : 'false';
 $minPrice = isset($_POST['minPrice']) ? floatval($_POST['minPrice']) : 0.0;
 $maxPrice = isset($_POST['maxPrice']) ? floatval($_POST['maxPrice']) : 5000.0;
+$sort = isset($_POST['sort']) ? $_POST['sort'] : 'suggestion';
 // $research = "porte";
 // $minPrice = 0;
 // $maxPrice = 5000;
 
-$products = Product::searchProduct($research, null, $minPrice, $maxPrice, false);
+// public static function searchProduct($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false, $typetri = false): array  {
+if($porte == 'true') {
+    $products = Product::searchProduct($research, 'Porte', $minPrice, $maxPrice, false, $sort);
+}
+else if($poignee == 'true') {
+    $products = Product::searchProduct($research, 'Poignée', $minPrice, $maxPrice, false, $sort);
+}
+else if ($accessoire == 'true') {
+    $products = Product::searchProduct($research, null, $minPrice, $maxPrice, false, $sort);
+    // Filtrer les produits pour exclure les types "Porte" et "Poignée".
+    $products = array_filter($products, function($product) {
+        return $product->getType() !== 'Porte' && $product->getType() !== 'Poignée';
+    });
+}
+else {
+    $products = Product::searchProduct($research, null, $minPrice, $maxPrice, false, $sort);
+}
+// $products = Product::searchProduct($research, null, $minPrice, $maxPrice, false, $sort);
 // $products = Product::searchProduct($research, null, floatval(0), floatval(300), floatval(0), false);
 // ($search = null, $type = null, $tri = 'nom', $prixMin = null, $prixMax = null, $triNote = false)
 

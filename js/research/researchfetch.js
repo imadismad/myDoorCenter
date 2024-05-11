@@ -7,12 +7,30 @@ document.addEventListener('DOMContentLoaded', function() {
     var priceValueMax = document.getElementById('priceValueMax');
     var researchDiv = document.getElementById('research');
     var sortSelect = document.getElementById('sortList');
+    var porteField = document.getElementById('porteField');
+    var poigneeField = document.getElementById('poigneeField');
+    var accessoireField = document.getElementById('accessoireField');
+    var allField = document.getElementById('allField');
 
 
     var research = researchDiv.value.replace(/\s/g, '+');
     var minPrice = 0;
     var maxPrice = 5000;
     var sort = sortSelect.value;
+    
+    if (porteField.checked) {
+        type = '&porte=true';
+    }
+    if (poigneeField.checked) {
+        type = '&poignee=true';
+    }
+    if (accessoireField.checked) {
+        type = '&accessoire=true';
+    }
+    if (allField.checked) {
+        type = '';
+    }
+
 
     updateResult();
 
@@ -27,8 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var formData = new URLSearchParams();
         formData.append('minPrice', minPrice);
         formData.append('maxPrice', maxPrice);
+        formData.append('sort', sort);
 
-        fetch("../../pageTemplate/productTemplate.php?research="+research, {
+        fetch("../../pageTemplate/productTemplate.php?research="+research+type, {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: formData
@@ -89,4 +108,32 @@ document.addEventListener('DOMContentLoaded', function() {
     priceRangeMax.addEventListener('input', handleMaxChange);
     priceNumberMax.addEventListener('change', handleMaxChange);
     researchDiv.addEventListener('change', handleResearchChange);
+    sortSelect.addEventListener('change', function() {
+        sort = sortSelect.value;
+        updateResult();
+    });
+    porteField.addEventListener('change', function() {
+        if (porteField.checked) {
+            type = '&porte=true';
+        }
+        updateResult();
+    });
+    poigneeField.addEventListener('change', function() {
+        if (poigneeField.checked) {
+            type = '&poignee=true';
+        }
+        updateResult();
+    });
+    accessoireField.addEventListener('change', function() {
+        if (accessoireField.checked) {
+            type = '&accessoire=true';
+        }
+        updateResult();
+    });
+    allField.addEventListener('change', function() {
+        if (allField.checked) {
+            type = '';
+        }
+        updateResult();
+    });
 });

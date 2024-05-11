@@ -319,9 +319,9 @@ class Product extends DBObject {
         $quantityInStock = Product::getQuantityInStockFromId($id);
         return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
     }
-
-    public static function searchProduct($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false): array  {
-        $arrayResult = rechercherProduits($search, $type, $prixMin, $prixMax, $triNote);
+    // function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false, $typetri = false) 
+    public static function searchProduct($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false, $typetri = false): array  {
+        $arrayResult = rechercherProduits($search, $type, $prixMin, $prixMax, $triNote, $typetri);
         $arrayProduct = array();
 
         foreach ($arrayResult as $value) {

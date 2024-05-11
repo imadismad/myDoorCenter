@@ -59,30 +59,17 @@
             Portes
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Blindées</a>
-            <a class="dropdown-item" href="#">Intérieures</a>
-            <a class="dropdown-item" href="#">Extérieures</a>
-            <a class="dropdown-item" href="#">Porte-fenêtres</a>
-            <a class="dropdown-item" href="#">Personnalisées</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-link-top dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Blocs
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Blindés</a>
-            <a class="dropdown-item" href="#">Intérieurs</a>
-            <a class="dropdown-item" href="#">Extérieurs</a>
-            <a class="dropdown-item" href="#">Porte-fenêtres</a>
-            <a class="dropdown-item" href="#">Personnalisés</a>
+            <a class="dropdown-item" href="<?php echo BASE_DIR_STATIC . 'research.php?search=porte+blindée&porte=true'; ?>">Blindées</a>
+            <a class="dropdown-item" href="<?php echo BASE_DIR_STATIC . 'research.php?search=porte+intérieure&porte=true'; ?>">Intérieures</a>
+            <a class="dropdown-item" href="<?php echo BASE_DIR_STATIC . 'research.php?search=porte+extérieure&porte=true'; ?>">Extérieures</a>
+            <a class="dropdown-item" href="<?php echo BASE_DIR_STATIC . 'research.php?search=porte-fenêtre&porte=true'; ?>">Porte-fenêtres</a>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-link-top" href="#">Poignées</a>
+          <a class="nav-link nav-link-top" href="<?php echo BASE_DIR_STATIC . 'research.php?poignee=true'; ?>">Poignées</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-link-top" href="#">Accessoires</a>
+          <a class="nav-link nav-link-top" href="<?php echo BASE_DIR_STATIC . 'research.php?accessoire=true'; ?>">Accessoires</a>
         </li>
       </ul>
     </div>

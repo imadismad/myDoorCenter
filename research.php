@@ -48,30 +48,34 @@ define('BASE_DIR_STATIC', getProjectPath());
                     <div class="col-md-3 bg-light rounded">
                         <label class="filterCategory rounded">Trier par
                             <select id="sortList" name="material">
-                                <option value="priceUp">Prix : Ordre croissant</option>
-                                <option value="priceDown">Prix : Ordre décroissant</option>
-                                <option value="suggestion">Mise en avant</option>
-                                <option value="comments">Moyenne des commentaires</option>
+                                <option value="0">Mise en avant</option>
+                                <option value="1">Prix : Ordre croissant</option>
+                                <option value="2">Prix : Ordre décroissant</option>
                             </select>
                         </label>
                         <h3>Catégories</h3>
                         <div class="form-check">
-                            <label><input type="checkbox" name="category" value="porte_blindée"> Portes blindées</label>
+                            <label>
+                                <input id="allField" type="radio" name="category" value="porte" <?php if ($_GET["porte"] == null && $_GET["poignee"] == null && $_GET["accessoire"] == null) echo 'checked'; ?>>
+                                Tout
+                            </label>
                             <br>
-                            <label><input type="checkbox" name="category" value="porte_intérieure"> Portes intérieurs</label>
+                            <label>
+                                <input id="porteField" type="radio" name="category" value="porte" <?php if ($_GET["porte"] == "true") echo 'checked'; ?>>
+                                Porte
+                            </label>
                             <br>
-                            <label><input type="checkbox" name="category" value="porte_extérieure"> Portes extérieurs</label>
+                            <label>
+                                <input id="poigneeField" type="radio" name="category" value="poignee" <?php if ($_GET["poignee"] == "true") echo 'checked'; ?>>
+                                Poignée
+                            </label>
                             <br>
-                            <label><input type="checkbox" name="category" value="porte_fenêtre"> Portes fenêtres</label>
-                            <br>
-                            <label><input type="checkbox" name="category" value="porte_personnalisée"> Porte personnalisable</label>
-                            <br>
-                            <label><input type="checkbox" name="category" value="poignée"> Poignées</label>
-                            <br>
-                            <label><input type="checkbox" name="category" value="canon"> Canon</label>
-                            <br>
-                            <label><input type="checkbox" name="category" value="bloque_complet"> Bloque complet</label>
+                            <label>
+                                <input id="accessoireField" type="radio" name="category" value="accessoire" <?php if ($_GET["accessoire"] == "true") echo 'checked'; ?>>
+                                Accessoire
+                            </label>
                         </div>
+
         
                         <h3>Plus de Filtres</h3>
                         <div class="form-group">
@@ -85,37 +89,6 @@ define('BASE_DIR_STATIC', getProjectPath());
                             <input type="range" name="price" id="priceRangeMax" min="0" max="5000" value="5000">
                             <input type="number" id="priceNumberMax" min="0" max="5000" value="5000">
                             <span id="priceValueMax">5000</span>€
-                            </label>
-                            <br>
-                            <label class="filterCategory rounded">Matériaux
-                                <select name="material">
-                                    <option value="">Sélectionner</option>
-                                    <option value="bois">Bois</option>
-                                    <option value="acier">Acier</option>
-                                    <option value="verre">Verre</option>
-                                </select>
-                            </label>
-                            <br>
-                            <label class="filterCategory rounded"><input type="checkbox" name="recent_article"> Article récent</label>
-                            <br>
-                            <label class="filterCategory rounded">Note des clients
-                                <select name="rating">
-                                    <option value="">Sélectionner</option>
-                                    <option value="1">★☆☆☆☆</option>
-                                    <option value="2">★★☆☆☆</option>
-                                    <option value="3">★★★☆☆</option>
-                                    <option value="4">★★★★☆</option>
-                                    <option value="5">★★★★★</option>
-                                </select>
-                            </label>
-                            <br>
-                            <label class="filterCategory rounded">Couleurs disponibles
-                                <select name="color">
-                                    <option value="">Sélectionner</option>
-                                    <option value="blanc">Blanc</option>
-                                    <option value="noir">Noir</option>
-                                    <option value="rouge">Rouge</option>
-                                </select>
                             </label>
                         </div>
                         <hr>
