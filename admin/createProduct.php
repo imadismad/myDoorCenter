@@ -35,8 +35,10 @@ if (!isset($_SESSION['admin'])) {
                 <textarea class="form-control" id="product-description" name="product-description" required></textarea>
             </div>
             <div class="form-group">
+                <label for="product-image">Ajouter une image au produit:</label>
                 <input type="hidden" name="MAX_FILE_SIZE" value="30000">
-                <input type="file" class="form-control" id="product-image" name="product-image" accept="image/webp, image/jpeg, image/png, image/jpg" multiple="multiple" required>
+                <input type="file" class="form-control" id="product-image" name="product-image"
+                    accept="image/webp, image/jpeg, image/png, image/jpg" multiple="multiple">
                 <!-- <input type="text" class="form-control" id="product-image" name="product-image" required> -->
             </div>
             <div class="form-group">
@@ -46,7 +48,7 @@ if (!isset($_SESSION['admin'])) {
                     <option value="No">No</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary", name="submit">Ajouter le produit</button>
+            <button type="submit" class="btn btn-primary" , name="submit">Ajouter le produit</button>
         </form>
     </div>
 </body>

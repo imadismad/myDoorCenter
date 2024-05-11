@@ -61,8 +61,8 @@ if ($product === null) {
 }
 
 $stock = $product->getQuantityInStock();
-$total = $quantity + $cart -> getQuantity($product, $optionArray);
-if ($stock === false || $stock < $total) {
+$total = $quantity + $cart -> getQuantityById($product -> getId());
+if ($stock === false || $stock  < $total) {
     http_response_code(400);
     echo json_encode(["status" => "ENOEIS", "maxTotal" => $stock]);
     exit;

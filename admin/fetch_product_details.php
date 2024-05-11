@@ -1,5 +1,5 @@
 <?php
-require_once '../php/ProductHadj.php';
+require_once '../php/Product.php';
 
 // Get the product ID from the query string
 $id = $_GET['id'];
@@ -27,7 +27,8 @@ $productDetails = json_encode([
     'description' => $product->getDescription(),
     'nomImage' => $product->getImageName(),
     'estAuCatalogue' => $product->getCatalogue(),   
-    'materials' => $product->getMaterialsName()
+    'materials' => $product->getMaterialsName(),
+    'numberStockage' => $product->getQuantityInStock()
 ]);
 
 // Output the JSON object

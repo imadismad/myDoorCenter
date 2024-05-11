@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__."/../BDD/interactionBDD.php";
 require_once __DIR__."/../BDD/interBDDProduit.php";
-
+if(!defined('STDIN'))  define('STDIN',  fopen('php://stdin',  'rb'));
+if(!defined('STDOUT')) define('STDOUT', fopen('php://stdout', 'wb'));
+if(!defined('STDERR')) define('STDERR', fopen('php://stderr', 'wb'));
 /**
  * This class allow representation abstraction for DB object representation
  */
@@ -69,7 +71,7 @@ abstract class DBObject {
      * The objective of this class is to setId when they create themself in another place than __construct
      * And can't define in constructor id
      */
-    protected function setId(int|null $id): void {
+    public function setId(int|null $id): void {
         if ($this->getId() !== null) 
             error_log("WARNING in DBObject::setId : id is already set, this function should not be call !\n");
         else

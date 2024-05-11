@@ -21,6 +21,9 @@ $cart = Cart::getUserCart();
                 $quantity = $value["quantity"];
                 $optionArray = $value["optionArray"];
 
+                $stock = $product -> getQuantityInStock();
+                $maxQuantity = $stock - $cart -> getQuantityById($product -> getId()) + $quantity;
+
                 $totHT = $quantity * $product->getUnitaryPrice();
                 $totTVA = $totHT * 0.2;
                 $totTTC = $totHT + $totTVA;
@@ -41,7 +44,7 @@ $cart = Cart::getUserCart();
                     }
                     
                     echo "</ul></td>"
-                    .'<td><input type="number" value="'.$quantity.'" name="'.$product->getId().'" data-option-ids="'.$optionArray -> toIdsRequete().'" max="'.$product -> getQuantityInStock().'"></td>'
+                    .'<td><input type="number" value="'.$quantity.'" name="'.$product->getId().'" data-option-ids="'.$optionArray -> toIdsRequete().'" max="'.$maxQuantity.'" data-stock="'.$stock.'"></td>'
                     ."<td>".$product->getUnitaryPrice()."</td>"
                     ."<td>".$totTVA."</td>"
                     ."<td>".($totTTC + $totOption * $quantity)."</td>"

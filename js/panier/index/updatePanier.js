@@ -18,16 +18,15 @@ const promise = {
     CAM: null,
 };
 
-async function updateVue(id, initialValue, input) {
-    if (input.max !== "0" && Number.parseInt(input.value) >= Number.parseInt(input.max)) {
-        console.log('input.value');
+let modalOpen = false;
 
-        console.log(input.value);
-        console.log(input.max);
+async function updateVue(id, initialValue, input, skipCheck = false) {
+    if (!skipCheck && input.max !== "0" && Number.parseInt(input.value) >= Number.parseInt(input.max)) {
         // Checking the new quantity
         const response = await fetch(`/api/cart/getMax.php?productId=${id}`);
         if (response.status === 200) {
             const data = await response.json();
+            data.max += Number.parseInt(initialValue);
             input.max = data.max;
 
             if (data.max === 0) {
@@ -72,21 +71,35 @@ async function updateVue(id, initialValue, input) {
 
 function init() {
     let messageModifPanier = false;
-    emplacement.querySelectorAll("input[type='number']").forEach((input) => {
+    const elements = emplacement.querySelectorAll("input[type='number']")
+    for (let i = 0; i < elements.length; i++) {
+        const input = elements[i];
         const initialValue = input.value;
         console.log(input.max);
 
         input.addEventListener("change", () => { updateVue(input.name, initialValue, input); });
-
-        if (input.max === "0") {
+        
+        if (Number.parseInt(input.max) <= 0 &&  input.dataset.stock !== input.max) {
+            // Cas pas assez de stock et plusieur produit même ID avec opt !=
+            if (input.value !== "1") {
+                input.value = Math.max(1, Number.parseInt(input.max));
+                updateVue(input.name, initialValue, input, true);
+                
+                if (input.value === "1")
+                    displayModal("CC");
+                return;
+            }
+            
+        }else if (input.max === "0") {
             input.value = 0;
             updateVue(input.name, initialValue, input);
         } else  if (Number.parseInt(input.max) < Number.parseInt(input.value)) {
             messageModifPanier = true;
             input.value = input.max;
             updateVue(input.name, initialValue, input);
+            return;
         }
-    });
+    }
 
     if (messageModifPanier)
         displayModal("CC");
@@ -99,7 +112,10 @@ function init() {
  * @returns 
  */
 function displayModal(type, ...args) {
-    console.log(type);
+    if (modalOpen)
+        return;
+
+    modalOpen = true;
     if (promise[type] === undefined)
         throw new Error("The type of modal is not defined");
 
@@ -116,6 +132,7 @@ function displayModal(type, ...args) {
 
 function hideModal(update, type) {
     modal[type].hide();
+    modalOpen = false;
     promise[type](update);
 }
 

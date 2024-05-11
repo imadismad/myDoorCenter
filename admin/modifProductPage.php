@@ -50,7 +50,7 @@
                     <input type="file" class="form-control" id="delete-image" name="delete-image" accept="image/webp, image/jpeg, image/png, image/jpg">
                 </div>
                 <div class="form-group">
-                    <label for="delete-image">Ajouter une minature:</label>
+                    <label for="delete-image">Ajouter une miniature:</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                     <input type="file" class="form-control" id="miniature-add" name="miniature-add" accept="image/webp, image/jpeg, image/png, image/jpg">
                 </div>
@@ -58,6 +58,10 @@
                     <label for="delete-image">Supprimer une miniature:</label>
                     <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                     <input type="file" class="form-control" id="miniature-delete" name="miniature-delete" accept="image/webp, image/jpeg, image/png, image/jpg">
+                </div>
+                <div class="form-group">
+                    <label for="modify-stock">Régler votre stock:</label>
+                    <input type="number" name="modify-stock" id="modify-stock" min="0" max="30">
                 </div>
                 <div class="form-group">
                     <label for="product-catalog">In Catalog:</label>
@@ -84,6 +88,7 @@
                     $('#product-description').val(data.description);
                     $('#product-image').val(data.nomImage);
                     $('#product-catalog').val(data.estAuCatalogue);
+                    $('modify-stock').val(data.numberStockage);
                 });
             });
         </script>
