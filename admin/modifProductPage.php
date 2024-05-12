@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="product-price">Price:</label>
-                    <input type="number" name="price" id="product-price" class="form-control" min="0">
+                    <input type="text" name="price" id="product-price" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="product-description">Description:</label>
@@ -41,42 +41,27 @@
                 </div>
                 <div class="form-group">
                     <label for="product-imageMod">Ajouter une image au produit:</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                     <input type="file" class="form-control" id="product-imageMod" name="product-imageMod" accept="image/webp, image/jpeg, image/png, image/jpg">
                 </div>
                 <div class="form-group">
                     <label for="delete-image">Supprimer une image:</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                     <input type="file" class="form-control" id="delete-image" name="delete-image" accept="image/webp, image/jpeg, image/png, image/jpg">
                 </div>
                 <div class="form-group">
-                    <label for="miniature-add">Ajouter une miniature:</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+                    <label for="delete-image">Ajouter une miniature:</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                     <input type="file" class="form-control" id="miniature-add" name="miniature-add" accept="image/webp, image/jpeg, image/png, image/jpg">
                 </div>
                 <div class="form-group">
-                    <label for="miniature-delete">Supprimer une miniature:</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="2000000"> 
+                    <label for="delete-image">Supprimer une miniature:</label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="30000">
                     <input type="file" class="form-control" id="miniature-delete" name="miniature-delete" accept="image/webp, image/jpeg, image/png, image/jpg">
                 </div>
                 <div class="form-group">
-                    <label for="modify-stock">Régler votre stock (0-500):</label>
-                    <input type="number" name="modify-stock" id="modify-stock" min="0" max="500" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="entrepot">Sélectionnez l'entrepot que vous voulez modifier:</label><br>
-                    <select name="entrepot" id="entrepot" class="form-select">
-                        <option value="1">Entrepôt Paris</option>
-                        <option value="2">Entrepôt Lyon</option>
-                        <option value="3">Entrepôt Marseille</option>
-                        <option value="4">Entrepôt Bordeaux</option>
-                        <option value="5">Entrepôt Lille</option>
-                        <option value="6">Entrepôt Nantes</option>
-                        <option value="7">Entrepôt Toulouse</option>
-                        <option value="8">Entrepôt Strasbourg</option>
-                        <option value="9">Entrepôt Nice</option>
-                        <option value="10">Entrepôt Rennes</option>
-                    </select>
+                    <label for="modify-stock">Régler votre stock:</label>
+                    <input type="number" name="modify-stock" id="modify-stock" min="0" max="30">
                 </div>
                 <div class="form-group">
                     <label for="product-catalog">In Catalog:</label>
