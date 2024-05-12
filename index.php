@@ -52,7 +52,7 @@ define('BASE_DIR_STATIC', getProjectPath());
               <div class="row">
 
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                  <a href="research.html">
+                  <a href="<?php echo BASE_DIR_STATIC . 'research.php'; ?>">
                     <div class="card">
                       <img src="img/porte.png" class="card-img-top" alt="...">
                       <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent-dark">
@@ -63,7 +63,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                  <a href="">
+                  <a href="<?php echo BASE_DIR_STATIC . 'contact.php'; ?>">
                     <div class="card">
                       <img src="img/blocporte.png" class="card-img-top" alt="...">
                       <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent-dark">
@@ -74,7 +74,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                  <a href="">
+                  <a href="<?php echo BASE_DIR_STATIC . 'faq.php'; ?>">
                     <div class="card">
                       <img src="img/accessoire.png" class="card-img-top" alt="...">
                       <div class="rounded position-absolute top-50 start-50 translate-middle div-transparent-dark">
