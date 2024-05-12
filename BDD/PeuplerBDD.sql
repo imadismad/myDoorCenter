@@ -18,7 +18,27 @@ INSERT INTO Produit (id, nom, type, prixUnitaire, description, nomImage) VALUES
 (6, 'Poignée de porte en acier inoxydable', 'Poignée', 29.99, 'Poignée de porte en acier inoxydable brossé, design moderne. Enfin une poignée qui ne rougira pas face au temps, elle restera impassible face à la rouille.', ''),
 (7, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'Poignée de porte traditionnelle en laiton poli. Vous pourrez enfin vous regardez ailleur que dans votre sale de bain.', ''),
 (11, 'Poignée de porte design en acrylique', 'Poignée', 49.99, "Poignée de porte moderne en acrylique transparent. Avec cette poignée, voir vos doigt de l'autre coté de la poigné sera un jeu d'enfant", '')
+(13, 'Porte coulissante en verre trempé', 'Porte', 499.99, 'Porte coulissante en verre trempé, idéale pour les séparations de pièces tout en conservant une sensation d’espace ouvert. Élégante et moderne, elle permet une utilisation fluide et silencieuse.', '')
+(14, 'Porte acoustique en bois composite', 'Porte', 755.00, 'Porte acoustique spécialement conçue pour réduire les bruits extérieurs, fabriquée en bois composite. Parfaite pour les bureaux ou les studios d’enregistrement cherchant à isoler le son.', '')
+(15, 'Porte blindée de sécurité', 'Porte', 1200.00, 'Porte blindée haute sécurité avec serrure multipoints. Assurez la sécurité de votre domicile contre les intrusions avec une résistance maximale.', '')
+(16, 'Poignée tactile biométrique', 'Poignée', 199.99, 'Poignée de porte avec scanner biométrique intégré. Offre un accès sécurisé et personnalisable, parfaite pour les bureaux ou les maisons modernes.', '')
+(17, 'Poignée de porte en céramique', 'Poignée', 34.99, 'Poignée de porte en céramique avec motif floral, apportant une touche d’élégance classique à votre intérieur.', '')
+(18, 'Poignée de porte rustique en fer forgé', 'Poignée', 45.99, 'Poignée de porte en fer forgé, finition rustique. Idéale pour ajouter un caractère ancien et robuste à vos portes.', '')
+(19, 'Seuil de porte en aluminium', 'Accessoire', 25.99, 'Seuil de porte en aluminium, aide à maintenir l’étanchéité et l’isolation des portes extérieures. Résistant et durable, il supporte bien les variations climatiques.', '')
+(20, 'Judas numérique écran LCD', 'Accessoire', 75.00, 'Judas de porte avec écran LCD pour une sécurité accrue. Permet de visualiser les visiteurs sans ouvrir la porte, idéal pour les personnes souhaitant une sécurité supplémentaire.', '')
+(21, 'Ferme-porte automatique', 'Accessoire', 59.99, 'Ferme-porte automatique, assure une fermeture douce et silencieuse de la porte. Convient aux environnements nécessitant de maintenir les portes fermées, comme les hôpitaux et les écoles.', '')
+(22, 'Porte pliante en bambou', 'Porte', 320.99, 'Porte pliante légère en bambou, parfaite pour les petits espaces ou comme séparateur de pièce. Offre une touche naturelle et écologique.', '')
+(23, 'Porte en chêne massif', 'Porte', 850.00, 'Porte en chêne massif avec finition vernie. Robuste et élégante, elle ajoute une note de luxe et de durabilité à votre intérieur.', '')
+(24, 'Porte vitrée à motifs', 'Porte', 415.50, 'Porte vitrée avec motifs gravés pour plus d’intimité tout en laissant passer la lumière. Parfaite pour les entrées ou les salles de bains.', '')
+(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintage ou classiques. Apporte un cachet indéniable à toute porte.', '')
+(26, 'Poignée pivotante minimaliste', 'Poignée', 29.99, 'Poignée pivotante au design minimaliste en acier inoxydable. Parfait pour un intérieur moderne et épuré.', '')
+(27, 'Poignée coquille pour tiroir', 'Poignée', 12.99, 'Poignée coquille classique pour tiroir, en métal avec finition matte. Facile à installer et polyvalente pour tous types de meubles.', '')
+(28, 'Charnières invisibles', 'Accessoire', 18.99, 'Charnières invisibles pour une finition de porte sans interruption visuelle. Idéales pour les designs modernes et minimalistes.', '')
+(29, 'Butoir de porte magnétique', 'Accessoire', 16.99, 'Butoir de porte magnétique qui maintient votre porte ouverte sans la bloquer. Installation facile et efficace.', '')
+(30, 'Kit d’isolation pour porte', 'Accessoire', 34.99, 'Kit d’isolation acoustique et thermique pour portes. Comprend des joints d’étanchéité et des bandes isolantes pour réduire les courants d’air et le bruit.', '')
 ;
+
+
 
 INSERT INTO Client (id, genre, nom, prenom, rue, CP, ville, pays, mail, telephone, mdp, naissance) VALUES
 -- MDP pour Jean : mdpclient1

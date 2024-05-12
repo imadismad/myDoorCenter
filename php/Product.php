@@ -4,9 +4,10 @@ require_once "Material.php";
 require_once "Option.php";
 require_once "Redirect.php";
 require_once __DIR__."/../BDD/interactionBDD.php";
+
 class Product extends DBObject {
     // Prduct table
-    private const TABLE_NAME            = "Produit";
+        private const TABLE_NAME            = "Produit";
     private const NAME_DB_NAME          = "nom";
     private const TYPE_DB_NAME          = "type";
     private const UNITARY_PRICE_DB_NAME = "prixUnitaire";
@@ -102,7 +103,7 @@ class Product extends DBObject {
 
     public function getImagesPath(): Array {
         $images = [];
-        foreach (new DirectoryIterator('./img/'.$this->getId()) as $file) {
+        foreach (new DirectoryIterator('./img/'.$this->getId().'/') as $file) {
             if($file->isDot()) continue;
             array_push($images, '/img/'.$this->getId()."/".$file->getFilename());
         }
@@ -319,9 +320,9 @@ class Product extends DBObject {
         $quantityInStock = Product::getQuantityInStockFromId($id);
         return $quantityInStock >= $quantity ? true : $quantity - $quantityInStock;
     }
-
-    public static function searchProduct($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false): array  {
-        $arrayResult = rechercherProduits($search, $type, $prixMin, $prixMax, $triNote);
+    // function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false, $typetri = false) 
+    public static function searchProduct($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false, $typetri = false): array  {
+        $arrayResult = rechercherProduits($search, $type, $prixMin, $prixMax, $triNote, $typetri);
         $arrayProduct = array();
 
         foreach ($arrayResult as $value) {

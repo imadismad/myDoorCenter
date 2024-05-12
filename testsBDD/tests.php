@@ -29,7 +29,7 @@ creerCommande($idClient, $modePaiement, $produitsQuantites);
 
 */
 
-$resultats = rechercherProduits("porte", null,0,300,0);
+$resultats = rechercherProduits("Porte-fenêtre en PVC", null,null,null,null,2);
 //function rechercherProduits($search = null, $type = null, $prixMin = null, $prixMax = null, $triNote = false) {
 
 
@@ -42,6 +42,7 @@ foreach ($resultats as $produit) {
     echo "Note Moyenne : " . $produit['noteMoyenne'] . "\n";
     // Affichez d'autres informations selon vos besoins
     echo "\n";
+    echo "<hr>";
 }
 
 

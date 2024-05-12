@@ -34,13 +34,12 @@ function getAbsoluteMyDoorCenterPath() {
     <?php include BASE_DIR.'pageTemplate/sidebar.php'; ?>
     <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
 
-                <div class="container"></div>
-                <div class="col-md-12 content text-center">
-                    <h1 class="welcome-title border rounded display-1"><b>Création compte</b></h1>
-
+        <div class="col-md-12 content text-center" style="background-color: inherit">
+            <h1 class="welcome-title border rounded display-1 bg-light"><b>Création compte</b></h1>
+        </div>
         <div class="container">
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="w-50 p-3">
+            <div class="col-sm align-items-center justify-content-center">
+                <div class="w-100 p-3">
                     <div class="text-bg-light p-3">
                         <form action="BDD/connexion.php" method="post" class="row g-3">
 
@@ -146,22 +145,19 @@ function getAbsoluteMyDoorCenterPath() {
                                         compte</button>
                                     <!-- <script src="js/module.creationCompte.js"></script> -->
                                 </div>
-                                <div class="col-12">
-                                    <input class="btn btn-primary" type="button" value="Connexion"
-                                        onclick=<?php echo "window.location='".getUrlWithSaveRedirect(BASE_DIR_STATIC.'connexion.php')."';"?>>
-                                </div>
-                                <br>
                             </div>
+                        </form>
                     </div>
                 </div>
             </div>
-
-
-            </form>
-
-        </div>
-        </div>
-
+            <div class="col-sm">
+                <div class="w-100 p-3">
+                    <div class="text-bg-light p-3 text-center">
+                        <h3 class="mb-3 ">Déjà un compte ?</h3>
+                        <a href="<?php echo getUrlWithSaveRedirect('connexion.php'); ?>" class="btn btn-primary">Se connecter</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 

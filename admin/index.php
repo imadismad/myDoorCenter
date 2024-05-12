@@ -63,6 +63,7 @@ if (!isset($_SESSION["admin"])) {
                 } else {
                     row.append('<td id=catalogue' + product.id + '>No</td>');
                 }
+                //row.append('<td>' + product.numberStockage + '</td>');
                 row.append('<td><button class="delete-button" data-id="' + product.id + '">Delete</button> <button class="modify-button" data-id="' + product.id + '">Modify</button></td>');
                 tableBody.append(row);
             });

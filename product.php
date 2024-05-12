@@ -1,19 +1,6 @@
 <?php
 require_once __DIR__ ."/php/Product.php";
-
-if (!isset($_GET["id"])) {
-    http_response_code(404);
-    include __DIR__."/pageTemplate/404Product.html";
-    exit;
-}
-
-$product = Product::constructFromId(intval($_GET["id"]));
-if ($product === null ) {
-    http_response_code(404);
-    include __DIR__."/pageTemplate/404Product.html";
-    exit;
-}
-$productQuantity = $product -> getQuantityInStock();
+require_once __DIR__ ."/php/Cart.php";
 
 function getProjectPath() {
     $path = strpos($lower = strtolower($scriptPath = $_SERVER['SCRIPT_NAME']), $projectFolder = 'mydoorcenter') !== false ?
@@ -32,6 +19,22 @@ function getAbsoluteMyDoorCenterPath() {
 
 define('BASE_DIR', getAbsoluteMyDoorCenterPath().'/');
 define('BASE_DIR_STATIC', getProjectPath());
+
+if (!isset($_GET["id"])) {
+    http_response_code(404);
+    include __DIR__."/pageTemplate/404Product.html";
+    exit;
+}
+
+$cart = Cart::getUserCart();
+$product = Product::constructFromId(intval($_GET["id"]));
+if ($product === null ) {
+    http_response_code(404);
+    include __DIR__."/pageTemplate/404Product.html";
+    exit;
+}
+$stock = $product -> getQuantityInStock();
+$maxQuantity = $stock - $cart -> getQuantityById($product -> getId());
 ?>
 <?php include BASE_DIR.'pageTemplate/head.php'; ?>
 
@@ -100,18 +103,6 @@ define('BASE_DIR_STATIC', getProjectPath());
                     </div>
 
                     <div class="col-md-4">
-                        Référence: BDD78 (static comme la liste en dessous)
-                        <ul>
-                            <li>Revêtement laminé premium texturé</li>
-                            <li>Épaisseur de 44mm</li>
-                            <li>Bords entièrement finis</li>
-                            <li>Panneau de 16mm</li>
-                            <li>Verre trempé de 4mm EN12150</li>
-                            <li>Porte entière et matérielle</li>
-                            <li>Noyau Homalight unique pour une stabilité accrue</li>
-                            <li>Lisière en bois massif de 38mm</li>
-                            <li>Usage interne</li>
-                        </ul>
                         <p>
                             <?php echo $product -> getDescription()?>
                         </p>
@@ -150,7 +141,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                                 name="quantity"
                                 value="1"
                                 min="1"
-                                max="<?php echo $productQuantity?>"
+                                max="<?php echo $maxQuantity?>"
                                 onchange="updatePrice(this, <?php echo $product -> getUnitaryPrice() ?>)">
                         </div>
 
@@ -171,7 +162,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                         </div>
 
                         <?php
-                        if ($productQuantity > 0)
+                        if ($maxQuantity > 0)
                             echo '
                             <button
                                 type="button"

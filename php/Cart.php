@@ -1,7 +1,6 @@
 <?php
-require_once "Product.php";
-require_once "OptionArray.php";
-
+require_once __DIR__."/Product.php";
+require_once __DIR__."/OptionArray.php";
 
 class Cart implements Iterator {
     private Array $products;
@@ -123,7 +122,7 @@ class Cart implements Iterator {
      */
     public function isPurchasable(): bool {
         foreach ($this as $product) {
-            if ($product["product"]->getQuantityInStock() < $product["quantity"])
+            if ($product["product"]->getQuantityInStock() < $this -> getQuantityById($product["product"] -> getid()))
                 return false;
         }
         return true;
@@ -181,5 +180,22 @@ class Cart implements Iterator {
         if ($pos === false)
             return 0;
         return $this -> productsQuantity[$pos];
+    }
+
+    /**
+     * This function return the quantity of a product in the cart regardless of his options
+     * If the cart have multiple time a same product with different option, return the sum of all the option
+     * @param int $id The id of the product
+     * @return int The quantity of the product in the cart
+     */
+    public function getQuantityById(int $id): int {
+        $i = 0;
+        $quantity = 0;
+        while ($i < count($this -> products)) {
+            if ($this -> products[$i] -> getId() == $id)
+                $quantity += $this -> productsQuantity[$i];
+            $i++;
+        }
+        return $quantity;
     }
 }
