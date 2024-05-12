@@ -36,9 +36,9 @@ if (!isset($_SESSION['admin'])) {
             </div>
             <div class="form-group">
                 <label for="product-image">Ajouter une image au produit:</label>
-                <input type="hidden" name="MAX_FILE_SIZE" value="30000">
+                <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
                 <input type="file" class="form-control" id="product-image" name="product-image"
-                    accept="image/webp, image/jpeg, image/png, image/jpg" multiple="multiple">
+                    accept="img/webp, image/jpeg, image/png, image/jpg">
                 <!-- <input type="text" class="form-control" id="product-image" name="product-image" required> -->
             </div>
             <div class="form-group">
