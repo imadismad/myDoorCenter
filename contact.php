@@ -72,18 +72,6 @@ define('BASE_DIR_STATIC', getProjectPath());
                         <br>
                         <button type="submit" class="btn btn-primary">Envoyer</button>
                     </form>
-                    
-                    <hr>
-                    <h3 class="mt-4">Vos derniers articles commandés</h3>
-            
-                    <ul class="list-group">
-            
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Porte blindée Modèle A
-                            <span><a href="#" class="btn btn-outline-primary btn-sm">Problème de réception</a> <a href="#" class="btn btn-outline-secondary btn-sm">Article endommagé</a></span>
-                        </li>
-            
-                    </ul>
                     <br>
                 </div>
 
