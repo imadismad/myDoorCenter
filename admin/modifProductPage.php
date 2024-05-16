@@ -61,7 +61,7 @@
                 </div>
                 <div class="form-group">
                     <label for="modify-stock">Régler votre stock (0-500):</label>
-                    <input type="number" name="modify-stock" id="modify-stock" min="0" max="500" class="form-control">
+                    <input type="number" name="modify-stock" id="modify-stock" min="0" max="500" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="entrepot">Sélectionnez l'entrepot que vous voulez modifier:</label><br>

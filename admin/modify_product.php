@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
     $row = $result->fetch_assoc();
     $stockTheorique = $row["stockTheorique"];
     $stockActuel = $row["stockActuel"];
-
+    
     if ($quantite + $stockActuel > $stockTheorique) {
         echo "The new stock value cannot be greater than the theoretical stock value.";
     } else {
