@@ -34,13 +34,13 @@ INSERT INTO Produit (id, nom, type, prixUnitaire, description, nomImage) VALUES
 
 -- Accessoire
 -- /!\\ Pas d'image
-(19, 'Seuil de porte en aluminium', 'Accessoire', 25.99, 'Seuil de porte en aluminium, aide à maintenir l’étanchéité et l’isolation des portes extérieures. Résistant et durable, il supporte bien les variations climatiques.', ''),
-(20, 'Judas numérique écran LCD', 'Accessoire', 75.00, 'Judas de porte avec écran LCD pour une sécurité accrue. Permet de visualiser les visiteurs sans ouvrir la porte, idéal pour les personnes souhaitant une sécurité supplémentaire.', ''),
-(21, 'Ferme-porte automatique', 'Accessoire', 59.99, 'Ferme-porte automatique, assure une fermeture douce et silencieuse de la porte. Convient aux environnements nécessitant de maintenir les portes fermées, comme les hôpitaux et les écoles.', ''),
-(28, 'Charnières invisibles', 'Accessoire', 18.99, 'Charnières invisibles pour une finition de porte sans interruption visuelle. Idéales pour les designs modernes et minimalistes.', ''),
-(29, 'Butoir de porte magnétique', 'Accessoire', 16.99, 'Butoir de porte magnétique qui maintient votre porte ouverte sans la bloquer. Installation facile et efficace.', ''),
-(30, 'Kit d’isolation pour porte', 'Accessoire', 34.99, 'Kit d’isolation acoustique et thermique pour portes. Comprend des joints d’étanchéité et des bandes isolantes pour réduire les courants d’air et le bruit.', ''),
-(32, "Chati pour kitty", "Accessoire", 45.00, "Permet à votre Hello Kitty de rentrer et sortir de sa maison (et non pas la vôtre). Avec son option de vérouillage de la trape, vous pourrez redevenir maître de céans.", "")
+(19, 'Seuil de porte en aluminium', 'Accessoire', 25.99, 'Seuil de porte en aluminium, aide à maintenir l’étanchéité et l’isolation des portes extérieures. Résistant et durable, il supporte bien les variations climatiques.', '51Mwzm41tSL._AC_SL1500.jpg'),
+(20, 'Judas numérique écran LCD', 'Accessoire', 75.00, 'Judas de porte avec écran LCD pour une sécurité accrue. Permet de visualiser les visiteurs sans ouvrir la porte, idéal pour les personnes souhaitant une sécurité supplémentaire.', '51Q7lT0WxEL._AC_SL1500_.jpg'),
+(21, 'Ferme-porte automatique', 'Accessoire', 59.99, 'Ferme-porte automatique, assure une fermeture douce et silencieuse de la porte. Convient aux environnements nécessitant de maintenir les portes fermées, comme les hôpitaux et les écoles.', '51RJV3xt+4L._AC_SL1000_.jpg'),
+(28, 'Charnières invisibles', 'Accessoire', 18.99, 'Charnières invisibles pour une finition de porte sans interruption visuelle. Idéales pour les designs modernes et minimalistes.', '81VrN+Cyq6L._AC_SL1500_.jpg'),
+(29, 'Butoir de porte magnétique', 'Accessoire', 16.99, 'Butoir de porte magnétique qui maintient votre porte ouverte sans la bloquer. Installation facile et efficace.', '61lnjHEzolL._AC_SL1100_.jpg'),
+(30, 'Kit d’isolation pour porte', 'Accessoire', 34.99, 'Kit d’isolation acoustique et thermique pour portes. Comprend des joints d’étanchéité et des bandes isolantes pour réduire les courants d’air et le bruit.', '51y99-NXsnL._AC_SL1000_.jpg'),
+(32, "Chati pour kitty", "Accessoire", 45.00, "Permet à votre Hello Kitty de rentrer et sortir de sa maison (et non pas la vôtre). Avec son option de vérouillage de la trape, vous pourrez redevenir maître de céans.", "51C72P3QcYL._AC_.jpg")
 ;
 
 
