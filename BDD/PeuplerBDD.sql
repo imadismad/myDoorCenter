@@ -23,12 +23,12 @@ INSERT INTO Produit (id, nom, type, prixUnitaire, description, nomImage) VALUES
 -- Poignée
 -- /!\\ Pas d'image
 (6, 'Poignée de porte en acier inoxydable', 'Poignée', 29.99, 'Poignée de porte en acier inoxydable brossé, design moderne. Enfin une poignée qui ne rougira pas face au temps, elle restera impassible face à la rouille.', 'q50ZBgrnrRFlZ1mtBxnI7z5IpuKlM5QQ.webp'),
-(7, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'Poignée de porte traditionnelle en laiton poli. Vous pourrez enfin vous regardez ailleur que dans votre sale de bain.', '8Dc7O6Mypjxa37Bqze6MaZSkIB6QKMmp.webp'),
-(11, 'Poignée de porte design en acrylique', 'Poignée', 49.99, "Poignée de porte moderne en acrylique transparent. Avec cette poignée, voir vos doigt de l'autre coté de la poigné sera un jeu d'enfant", 'yHgCYNB28evigmAw1BN34DAFRaBLNsTu.jpg'),
+(7, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'Poignée de porte traditionnelle en laiton poli. Vous pourrez enfin vous regarder ailleurs que dans votre salle de bain.', '8Dc7O6Mypjxa37Bqze6MaZSkIB6QKMmp.webp'),
+(11, 'Poignée de porte design en acrylique', 'Poignée', 49.99, "Poignée de porte moderne en acrylique transparent. Avec cette poignée, voir vos doigts de l'autre coté de la poignée sera un jeu d'enfant", 'yHgCYNB28evigmAw1BN34DAFRaBLNsTu.jpg'),
 (16, 'Poignée tactile biométrique', 'Poignée', 199.99, 'Poignée de porte avec scanner biométrique intégré. Offre un accès sécurisé et personnalisable, parfaite pour les bureaux ou les maisons modernes.', 'ruoGoSOruM2esNIFKBz0uhqeCljbWpKv.jpg'),
 (17, 'Poignée de porte en céramique', 'Poignée', 34.99, 'Poignée de porte en céramique avec motif floral, apportant une touche d’élégance classique à votre intérieur.', 'PNSrTZWmct69r7blFOqtM8CutUcAqsex.webp'),
 (18, 'Poignée de porte rustique en fer forgé', 'Poignée', 45.99, 'Poignée de porte en fer forgé, finition rustique. Idéale pour ajouter un caractère ancien et robuste à vos portes.', ''),
-(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintage ou classiques. Apporte un cachet indéniable à toute porte.', ''),
+(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintages ou classiques. Apporte un cachet indéniable à toute porte.', ''),
 (26, 'Poignée pivotante minimaliste', 'Poignée', 29.99, 'Poignée pivotante au design minimaliste en acier inoxydable. Parfait pour un intérieur moderne et épuré.', ''),
 (27, 'Poignée coquille pour tiroir', 'Poignée', 12.99, 'Poignée coquille classique pour tiroir, en métal avec finition matte. Facile à installer et polyvalente pour tous types de meubles.', ''),
 
