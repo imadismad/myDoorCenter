@@ -54,14 +54,16 @@
                     <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
                     <input type="file" class="form-control" id="miniature-add" name="miniature-add" accept="image/webp, image/jpeg, image/png, image/jpg">
                 </div>
+                 <div class="form-group">
+                    <label for="miniature-delete">Supprimer la miniature:</label>
+                    <select name="supprimer" id="supprimer">
+                        <option value="non">Non</option>
+                        <option value = "oui">Oui</option>
+                    </select>
+                </div> 
                 <div class="form-group">
-                    <label for="miniature-delete">Supprimer une miniature:</label>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="2000000"> 
-                    <input type="file" class="form-control" id="miniature-delete" name="miniature-delete" accept="image/webp, image/jpeg, image/png, image/jpg">
-                </div>
-                <div class="form-group">
-                    <label for="modify-stock">Régler votre stock (0-500):</label>
-                    <input type="number" name="modify-stock" id="modify-stock" min="0" max="500" class="form-control" required>
+                    <label for="modify-stock">Régler votre stock (-500 à 500):</label>
+                    <input type="number" name="modify-stock" id="modify-stock" min="-500" max="500" class="form-control" value="0" required>
                 </div>
                 <div class="form-group">
                     <label for="entrepot">Sélectionnez l'entrepot que vous voulez modifier:</label><br>
@@ -88,6 +90,7 @@
                 <button name="submit" type="submit" class="btn btn-primary">Save Changes</button>
             </form>
         </div>
+        
         <script>
             $(document).ready(function () {
                 // Get the product ID from the query string
