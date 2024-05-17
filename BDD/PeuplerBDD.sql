@@ -27,10 +27,10 @@ INSERT INTO Produit (id, nom, type, prixUnitaire, description, nomImage) VALUES
 (11, 'Poignée de porte design en acrylique', 'Poignée', 49.99, "Poignée de porte moderne en acrylique transparent. Avec cette poignée, voir vos doigt de l'autre coté de la poigné sera un jeu d'enfant", 'yHgCYNB28evigmAw1BN34DAFRaBLNsTu.jpg'),
 (16, 'Poignée tactile biométrique', 'Poignée', 199.99, 'Poignée de porte avec scanner biométrique intégré. Offre un accès sécurisé et personnalisable, parfaite pour les bureaux ou les maisons modernes.', 'ruoGoSOruM2esNIFKBz0uhqeCljbWpKv.jpg'),
 (17, 'Poignée de porte en céramique', 'Poignée', 34.99, 'Poignée de porte en céramique avec motif floral, apportant une touche d’élégance classique à votre intérieur.', 'PNSrTZWmct69r7blFOqtM8CutUcAqsex.webp'),
-(18, 'Poignée de porte rustique en fer forgé', 'Poignée', 45.99, 'Poignée de porte en fer forgé, finition rustique. Idéale pour ajouter un caractère ancien et robuste à vos portes.', ''),
-(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintage ou classiques. Apporte un cachet indéniable à toute porte.', ''),
-(26, 'Poignée pivotante minimaliste', 'Poignée', 29.99, 'Poignée pivotante au design minimaliste en acier inoxydable. Parfait pour un intérieur moderne et épuré.', ''),
-(27, 'Poignée coquille pour tiroir', 'Poignée', 12.99, 'Poignée coquille classique pour tiroir, en métal avec finition matte. Facile à installer et polyvalente pour tous types de meubles.', ''),
+(18, 'Poignée de porte rustique en fer forgé', 'Poignée', 45.99, 'Poignée de porte en fer forgé, finition rustique. Idéale pour ajouter un caractère ancien et robuste à vos portes.', 'todrKWeT5nZmvbxmMGyeR3MmBLUZ0jMb.jpg'),
+(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintage ou classiques. Apporte un cachet indéniable à toute porte.', 'z3kh2NpCIb51qm6N2Xhmv4SOBf7yoN03.webp'),
+(26, 'Poignée pivotante minimaliste', 'Poignée', 29.99, 'Poignée pivotante au design minimaliste en acier inoxydable. Parfait pour un intérieur moderne et épuré.', 'JGrwlpsJ5XjWlknOA5KAk0hykyWxwd7l.png'),
+(27, 'Poignée coquille pour tiroir', 'Poignée', 12.99, 'Poignée coquille classique pour tiroir, en métal avec finition matte. Facile à installer et polyvalente pour tous types de meubles.', 'aflUrWS1JkoSTgbgwScBDYIIoDR2CR9U.jpeg'),
 
 -- Accessoire
 -- /!\\ Pas d'image

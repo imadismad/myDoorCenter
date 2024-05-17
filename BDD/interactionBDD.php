@@ -208,7 +208,6 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
  *
  * @return array              Un tableau associatif contenant les produits correspondant aux critères de recherche, triés par pertinence.
  */
-
     
     // Informations de connexion à la base de données
     $serveur = SQL_SERVER;
@@ -272,27 +271,29 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
     } else {
         $sql .= " GROUP BY p.id ORDER BY p.nom";
     }
-
+    error_log($sql);
     // Exécution de la requête pour récupérer tous les produits
     $requete = $connexion->prepare($sql);
     if (!empty($bind_values)) {
         $requete->bind_param($bind_types, ...$bind_values);
     }
     $requete->execute();
-    $resultat = $requete->get_result();
 
     if($search==null){
         // Fermeture de la connexion
+        $resultats = reponseVersArray($requete);
         $requete->close();
         $connexion->close();
-        return $resultat;
+        //return $resultat;
+        error_log(print_r($resultats, true));
+        return $resultats;
     }
 
     // Création du tableau associatif pour les résultats
+    $resultat = $requete->get_result();
     $resultats = [];
     while ($row = $resultat->fetch_assoc()) {
         // Calcul de la pertinence avec la distance de Levenshtein
-
         $pertinenceTitre = 0;
         foreach (explode(" ",$search) as $mot) {
             if (strlen($mot) > 2) {

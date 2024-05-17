@@ -37,7 +37,7 @@ define('BASE_DIR_STATIC', getProjectPath());
             <div class="row">
                 
                     <div class="input-group" style="margin: 2%;">
-                        <input id="research" name="research" type="text" class="form-control" placeholder="Rechercher des portes..." value="<?php echo $_GET["search"] ?>">
+                        <input id="research" name="research" type="text" class="form-control" placeholder="Rechercher des portes..." value="<?php echo isset($_GET["search"]) ? $_GET["search"] : "" ?>">
                         <div class="input-group-append">
                             <button class="btn btn-light bi bi-search blue-button" style="font-size: 1rem;" type="submit"></button>
                         </div>
@@ -56,22 +56,39 @@ define('BASE_DIR_STATIC', getProjectPath());
                         <h3>Catégories</h3>
                         <div class="form-check">
                             <label>
-                                <input id="allField" type="radio" name="category" value="porte" <?php if ($_GET["porte"] == null && $_GET["poignee"] == null && $_GET["accessoire"] == null) echo 'checked'; ?>>
+                                <input id="allField" type="radio" name="category" value="porte"
+                                <?php
+                                    if (isset($_GET["porte"]) && isset($_GET["poignee"]) && isset($_GET["poignee"]))
+                                        echo 'checked';
+                                ?>
+                                >
                                 Tout
                             </label>
                             <br>
                             <label>
-                                <input id="porteField" type="radio" name="category" value="porte" <?php if ($_GET["porte"] == "true") echo 'checked'; ?>>
+                                <input id="porteField" type="radio" name="category" value="porte"
+                                <?php
+                                    if (isset($_GET["porte"]) && $_GET["porte"] == "true") echo 'checked'; 
+                                ?>
+                                >
                                 Porte
                             </label>
                             <br>
                             <label>
-                                <input id="poigneeField" type="radio" name="category" value="poignee" <?php if ($_GET["poignee"] == "true") echo 'checked'; ?>>
+                                <input id="poigneeField" type="radio" name="category" value="poignee"
+                                <?php
+                                    if (isset($_GET["poignee"]) && $_GET["poignee"] == "true") echo 'checked'; 
+                                ?>
+                                >
                                 Poignée
                             </label>
                             <br>
                             <label>
-                                <input id="accessoireField" type="radio" name="category" value="accessoire" <?php if ($_GET["accessoire"] == "true") echo 'checked'; ?>>
+                                <input id="accessoireField" type="radio" name="category" value="accessoire"
+                                <?php
+                                    if (isset($_GET["accessoire"]) && $_GET["accessoire"] == "true") echo 'checked';
+                                ?>
+                                >
                                 Accessoire
                             </label>
                         </div>
