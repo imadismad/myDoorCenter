@@ -23,24 +23,24 @@ INSERT INTO Produit (id, nom, type, prixUnitaire, description, nomImage) VALUES
 -- Poignée
 -- /!\\ Pas d'image
 (6, 'Poignée de porte en acier inoxydable', 'Poignée', 29.99, 'Poignée de porte en acier inoxydable brossé, design moderne. Enfin une poignée qui ne rougira pas face au temps, elle restera impassible face à la rouille.', 'q50ZBgrnrRFlZ1mtBxnI7z5IpuKlM5QQ.webp'),
-(7, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'Poignée de porte traditionnelle en laiton poli. Vous pourrez enfin vous regardez ailleur que dans votre sale de bain.', '8Dc7O6Mypjxa37Bqze6MaZSkIB6QKMmp.webp'),
-(11, 'Poignée de porte design en acrylique', 'Poignée', 49.99, "Poignée de porte moderne en acrylique transparent. Avec cette poignée, voir vos doigt de l'autre coté de la poigné sera un jeu d'enfant", 'yHgCYNB28evigmAw1BN34DAFRaBLNsTu.jpg'),
+(7, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'Poignée de porte traditionnelle en laiton poli. Vous pourrez enfin vous regarder ailleurs que dans votre salle de bain.', '8Dc7O6Mypjxa37Bqze6MaZSkIB6QKMmp.webp'),
+(11, 'Poignée de porte design en acrylique', 'Poignée', 49.99, "Poignée de porte moderne en acrylique transparent. Avec cette poignée, voir vos doigts de l'autre coté de la poignée sera un jeu d'enfant", 'yHgCYNB28evigmAw1BN34DAFRaBLNsTu.jpg'),
 (16, 'Poignée tactile biométrique', 'Poignée', 199.99, 'Poignée de porte avec scanner biométrique intégré. Offre un accès sécurisé et personnalisable, parfaite pour les bureaux ou les maisons modernes.', 'ruoGoSOruM2esNIFKBz0uhqeCljbWpKv.jpg'),
 (17, 'Poignée de porte en céramique', 'Poignée', 34.99, 'Poignée de porte en céramique avec motif floral, apportant une touche d’élégance classique à votre intérieur.', 'PNSrTZWmct69r7blFOqtM8CutUcAqsex.webp'),
 (18, 'Poignée de porte rustique en fer forgé', 'Poignée', 45.99, 'Poignée de porte en fer forgé, finition rustique. Idéale pour ajouter un caractère ancien et robuste à vos portes.', 'todrKWeT5nZmvbxmMGyeR3MmBLUZ0jMb.jpg'),
-(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintage ou classiques. Apporte un cachet indéniable à toute porte.', 'z3kh2NpCIb51qm6N2Xhmv4SOBf7yoN03.webp'),
+(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintages ou classiques. Apporte un cachet indéniable à toute porte.', 'z3kh2NpCIb51qm6N2Xhmv4SOBf7yoN03.webp'),
 (26, 'Poignée pivotante minimaliste', 'Poignée', 29.99, 'Poignée pivotante au design minimaliste en acier inoxydable. Parfait pour un intérieur moderne et épuré.', 'JGrwlpsJ5XjWlknOA5KAk0hykyWxwd7l.png'),
 (27, 'Poignée coquille pour tiroir', 'Poignée', 12.99, 'Poignée coquille classique pour tiroir, en métal avec finition matte. Facile à installer et polyvalente pour tous types de meubles.', 'aflUrWS1JkoSTgbgwScBDYIIoDR2CR9U.jpeg'),
 
 -- Accessoire
 -- /!\\ Pas d'image
-(19, 'Seuil de porte en aluminium', 'Accessoire', 25.99, 'Seuil de porte en aluminium, aide à maintenir l’étanchéité et l’isolation des portes extérieures. Résistant et durable, il supporte bien les variations climatiques.', ''),
-(20, 'Judas numérique écran LCD', 'Accessoire', 75.00, 'Judas de porte avec écran LCD pour une sécurité accrue. Permet de visualiser les visiteurs sans ouvrir la porte, idéal pour les personnes souhaitant une sécurité supplémentaire.', ''),
-(21, 'Ferme-porte automatique', 'Accessoire', 59.99, 'Ferme-porte automatique, assure une fermeture douce et silencieuse de la porte. Convient aux environnements nécessitant de maintenir les portes fermées, comme les hôpitaux et les écoles.', ''),
-(28, 'Charnières invisibles', 'Accessoire', 18.99, 'Charnières invisibles pour une finition de porte sans interruption visuelle. Idéales pour les designs modernes et minimalistes.', ''),
-(29, 'Butoir de porte magnétique', 'Accessoire', 16.99, 'Butoir de porte magnétique qui maintient votre porte ouverte sans la bloquer. Installation facile et efficace.', ''),
-(30, 'Kit d’isolation pour porte', 'Accessoire', 34.99, 'Kit d’isolation acoustique et thermique pour portes. Comprend des joints d’étanchéité et des bandes isolantes pour réduire les courants d’air et le bruit.', ''),
-(32, "Chati pour kitty", "Accessoire", 45.00, "Permet à votre Hello Kitty de rentrer et sortir de sa maison (et non pas la vôtre). Avec son option de vérouillage de la trape, vous pourrez redevenir maître de céans.", "")
+(19, 'Seuil de porte en aluminium', 'Accessoire', 25.99, 'Seuil de porte en aluminium, aide à maintenir l’étanchéité et l’isolation des portes extérieures. Résistant et durable, il supporte bien les variations climatiques.', '51Mwzm41tSL._AC_SL1500.jpg'),
+(20, 'Judas numérique écran LCD', 'Accessoire', 75.00, 'Judas de porte avec écran LCD pour une sécurité accrue. Permet de visualiser les visiteurs sans ouvrir la porte, idéal pour les personnes souhaitant une sécurité supplémentaire.', '51Q7lT0WxEL._AC_SL1500_.jpg'),
+(21, 'Ferme-porte automatique', 'Accessoire', 59.99, 'Ferme-porte automatique, assure une fermeture douce et silencieuse de la porte. Convient aux environnements nécessitant de maintenir les portes fermées, comme les hôpitaux et les écoles.', '51RJV3xt+4L._AC_SL1000_.jpg'),
+(28, 'Charnières invisibles', 'Accessoire', 18.99, 'Charnières invisibles pour une finition de porte sans interruption visuelle. Idéales pour les designs modernes et minimalistes.', '81VrN+Cyq6L._AC_SL1500_.jpg'),
+(29, 'Butoir de porte magnétique', 'Accessoire', 16.99, 'Butoir de porte magnétique qui maintient votre porte ouverte sans la bloquer. Installation facile et efficace.', '61lnjHEzolL._AC_SL1100_.jpg'),
+(30, 'Kit d’isolation pour porte', 'Accessoire', 34.99, 'Kit d’isolation acoustique et thermique pour portes. Comprend des joints d’étanchéité et des bandes isolantes pour réduire les courants d’air et le bruit.', '51y99-NXsnL._AC_SL1000_.jpg'),
+(32, "Chati pour kitty", "Accessoire", 45.00, "Permet à votre Hello Kitty de rentrer et sortir de sa maison (et non pas la vôtre). Avec son option de vérouillage de la trape, vous pourrez redevenir maître de céans.", "51C72P3QcYL._AC_.jpg")
 ;
 
 
