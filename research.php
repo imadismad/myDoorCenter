@@ -58,7 +58,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                             <label>
                                 <input id="allField" type="radio" name="category" value="porte"
                                 <?php
-                                    if (isset($_GET["porte"]) && isset($_GET["poignee"]) && isset($_GET["poignee"]))
+                                    if (!isset($_GET["porte"]) && !isset($_GET["poignee"]) && !isset($_GET["poignee"]))
                                         echo 'checked';
                                 ?>
                                 >

@@ -285,7 +285,6 @@ function rechercherProduits($search = null, $type = null, $prixMin = null, $prix
         $requete->close();
         $connexion->close();
         //return $resultat;
-        error_log(print_r($resultats, true));
         return $resultats;
     }
 
