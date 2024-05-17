@@ -52,9 +52,9 @@ INSERT INTO Client (id, genre, nom, prenom, rue, CP, ville, pays, mail, telephon
 -- MDP pour Julie : mdpclient5
 (5, "Femme", 'Moreau', 'Julie', '20 Rue des Tulipes', '59000', 'Lille', 'France', 'julie.moreau@example.com', '0567891234', '$2y$10$BrfQ6ts3VmDfNghZ1GcUd.QdpI3HqU1hso05Hxq/7CnfGGAVw.lxO', "1998-05-26"),
 -- MDP pour Louis : Live before your head fall
-(DEFAULT, "Homme", "Le Grand", "Louis", "7 Rue du Chateau", 78000, "Versaille", "France", "louis.le-grand@whitout-head.fr", "06 666 666 66", "$2y$10$zHid668AuTyWDCsSIyh.I.AezPjR7zCPSRrGdIiB8nIMlMCjdcvAK", "1754-08-23"),
+(DEFAULT, "Homme", "Le Grand", "Louis", "7 Rue du Chateau", '78000', "Versailles", "France", "louis.le-grand@whitout-head.fr", "0666666666", "$2y$10$zHid668AuTyWDCsSIyh.I.AezPjR7zCPSRrGdIiB8nIMlMCjdcvAK", "1754-08-23"),
 -- MDP Marie : I'm radioactive
-(DEFAULT, "Femme", "Curie", "Marie", "21 rue de l'école de médecine", 75006, "Paris", "France", "marie.curie@radio-gaga.com", "02 235 66 239", "$2y$10$AfLrBllEiCcqeBNwnJEp5O5Lom8PMy8LoBcOcSLrqHKImdrFoN0Ia", "1867-11-07")
+(DEFAULT, "Femme", "Curie", "Marie", "21 rue de l'école de médecine", '75006', "Paris", "France", "marie.curie@radio-gaga.com", "0223566239", "$2y$10$AfLrBllEiCcqeBNwnJEp5O5Lom8PMy8LoBcOcSLrqHKImdrFoN0Ia", "1867-11-07")
 ;
 
 INSERT INTO Commande (id, date, modePaiement, numFacture, idClient) VALUES
