@@ -57,7 +57,7 @@ if (!isset($_SESSION["admin"])) {
                 row.append('<td>' + product.type + '</td>');
                 row.append('<td>' + product.prixUnitaire + '</td>');
                 row.append('<td>' + product.description + '</td>');
-                row.append('<td><img id="image" src="../img/miniature/' + product.nomImage + '" alt="' + product.nom + '"></td>');
+                row.append('<td><img width = "200" height = "200" id="image" src="../img/miniature/' + product.nomImage + '" alt="' + product.nom + '" ></td>');
                 if (product.estAuCatalogue == 1) {
                     row.append('<td id=catalogue' + product.id + '>Yes</td>');
                 } else {
