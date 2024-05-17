@@ -216,65 +216,6 @@ $maxQuantity = $stock - $cart -> getQuantityById($product -> getId());
                 </div>
                 <br style="margin: 5%;">
 
-                <!-- Produits similaires en bas -->
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <h3>Produits similaires</h3>
-                        <div class="card-group">
-                            <div class="card">
-                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Produit 1</h5>
-                                    <p class="card-text">C'est une porte</p>
-                                    <a href="#" class="btn btn-primary">Voir plus</a>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Produit 2</h5>
-                                    <p class="card-text">Ça aussi</p>
-                                    <a href="#" class="btn btn-primary">Voir plus</a>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Produit 1</h5>
-                                    <p class="card-text">Ça aussi</p>
-                                    <a href="#" class="btn btn-primary">Voir plus</a>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Produit 1</h5>
-                                    <p class="card-text">Ça aussi</p>
-                                    <a href="#" class="btn btn-primary">Voir plus</a>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Produit 1</h5>
-                                    <p class="card-text">Ça aussi</p>
-                                    <a href="#" class="btn btn-primary">Voir plus</a>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="img/porte.png" class="card-img-top" alt="Produit similaire 1">
-                                <div class="card-body">
-                                    <h5 class="card-title">Produit 1</h5>
-                                    <p class="card-text">Ça non. Si en fait j'ai menti</p>
-                                    <a href="#" class="btn btn-primary">Voir plus</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <br style="margin: 5%;">
-
             </div>
 
         </div>

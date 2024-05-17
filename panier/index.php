@@ -128,8 +128,6 @@ define('BASE_DIR_STATIC', getProjectPath());
         <div id="templatePanier">
             <?php include BASE_DIR."pageTemplate/panierTemplate.php"?>
         </div>
-        <label style="margin-bottom: 1%;">Code promo : <input type="text" name="codePromo"></label><br />
-
         <a style="margin-bottom: 1%;" role="button" class="btn btn-primary" href="<?php echo BASE_DIR_STATIC."panier/commande.php"; ?>">Commander</a>
     </main>
 

@@ -1,41 +1,46 @@
 USE DW;
 
 INSERT INTO Produit (id, nom, type, prixUnitaire, description, nomImage) VALUES 
-(1, "Porte blindée en fer forgé", "Porte", 1999.98, "Porte ferme avec un design élégant, son acier protégé contre la rouille gardera sa splendeur tout au long de sa vie. Ses quelque 748 kilos vous protégeront des intrusions, tire d'arme à feu, bélier et même explosif posé à proximité. Cette porte survivra à votre maison et restera le témoin de sa présence jusqu'a la fin des temps (ne protège pas des radiations).", "937dfe65a4522ed19262e70e3b179549.webp"),
-(2, "Porte PVC pour jardin", "Porte", 137.23, "Porte légère et résistant à l'usure, le plastique dans toute sa splendeur. Redécouvrez à l'heure de l'écologie la porte de jardin PVC verte, conçu pour résister au changement climatique (sécheresse, tornade, tsunami, ...) cette porte conçue à partir du pétrole de Total vous suivra long moment.", "e1d777ab7e3eede2e184122b004fba64.webp"),
-(3, "Porte en bois massif", "Porte", 479.87, "Porte imposante faite de bois massif s'intègre parfaitement dans le style rustique de votre maison. Fini le whisky au goût fade, avec cette porte, vos boissons alcooliser prendront une autre dimension. Avec cette porte votre maison gagnera en profondeur, sera plus imposante, et vos feux de cheminer deviendront plus lumineux. Nous précisons que cette porte n'a pas pour objectif de servir de combustible pour votre feu, et qu’elle peut bruler.", "ee1cea3113416700cf49597102afe43a.webp"),
-(4, "Porte vitrée", "Porte", 549.01, "Cette porte d'exception s'intègre parfaitement dans tout type d'intérieur, apportant une touche d'élégance et de modernité. Fini les soirées sans rigoler. Idéale pour les rigolos qui veulent voir leur ami se manger un mur invisible, votre espace de vie sera transformé. Cet objet de confort s'adresse à tous ceux et celle qui souhaitent pouvoir entrer dans une pièce, ainsi qu'en ressortir, tout en bloquant ses invités.", "19c9a011fbb5af034227ddc7382c31c3.webp"),
+(1, "Porte blindée en fer forgé", "Porte", 1999.98, "Porte ferme avec un design élégant, son acier protégé contre la rouille gardera sa splendeur tout au long de sa vie. Ses quelques 748 kilos vous protégeront des intrusions, tire d'armes à feu, bélierss et même explosif posé à proximité. Cette porte survivra à votre maison et restera le témoin de sa présence jusqu'à la fin des temps (ne protège pas des radiations).", "937dfe65a4522ed19262e70e3b179549.webp"),
+(2, "Porte PVC pour jardin", "Porte", 137.23, "Porte légère et résistante à l'usure, le plastique dans toute sa splendeur. Redécouvrez, à l'heure de l'écologie, la porte de jardin PVC verte, conçue pour résister aux changements climatiques (sécheresses, tornades, tsunamis, ...) cette porte conçue à partir du pétrole Total vous suivra un long moment.", "e1d777ab7e3eede2e184122b004fba64.webp"),
+(3, "Porte en bois massif", "Porte", 479.87, "Porte imposante constituée de bois massif, s'intègre parfaitement dans le style rustique de votre maison. Fini le whisky au goût fade, avec cette porte, vos boissons alcoolisées prendront une autre dimension. Avec cette porte votre maison gagnera en profondeur, sera plus imposante, et vos feux de cheminée deviendront plus lumineux. Nous précisons que cette porte n'a pas pour objectif de servir de combustible pour votre feu, bien qu’elle puisse brûler.", "ee1cea3113416700cf49597102afe43a.webp"),
+(4, "Porte vitrée", "Porte", 549.01, "Cette porte d'exception s'intègre parfaitement dans tout type d'intérieur, apportant une touche d'élégance et de modernité. Fini les soirées sans rigoler. Idéal pour les rigolos qui veulent voir leurs amis se manger un mur invisible, votre espace de vie sera transformé. Cet objet de confort s'adresse à tous ceux et celles qui souhaitent pouvoir entrer dans une pièce, ainsi qu'en ressortir, tout en bloquant ses invités.", "19c9a011fbb5af034227ddc7382c31c3.webp"),
 (5, "Porte coulissante en aluminium", "Porte", 499.01, "Cette porte d'exception s'intègre parfaitement dans tout type d'intérieur, apportant une touche d'élégance et de modernité. Fini les pièces sans ouverture pour y pénétrer. Idéale pour les amateurs de design, elle saura mettre en valeur votre espace de vie. Cet objet de confort s'adresse à tous ceux qui souhaitent pouvoir entrer dans une pièce, ainsi qu'en ressortir.", "4cb65f46159d95e4188b8f384041806b.webp"),
 
 -- /!\\ Pas d'image
-(8, 'Porte intérieur en pin', 'Porte', 199.99, "Porte intérieure en pin massif avec panneaux moulés. Vous retrouverez l'odeur des forets dans votre intérieur, vous permetant de vous détendre au travail, au lit, et même au toilette. Attention il peut rester de la résine sur la porte à sa reception.", ''),
+(8, 'Porte intérieur en pin', 'Porte', 199.99, "Porte intérieure en pin massif avec panneaux moulés. Vous retrouverez l'odeur des forêts dans votre intérieur, vous permettant de vous détendre au travail, au lit, et même aux toilettes. Attention il peut rester de la résine sur la porte à sa réception.", ''),
 (9, 'Porte coupe-feu certifiée', 'Porte', 875.67, 'Porte coupe-feu résistante aux flammes avec isolation thermique', 'porte_coupe_feu.jpg'),
 (10, 'Porte de garage sectionnelle', 'Porte', 899.99, 'Porte de garage automatique à panneaux sectionnels en acier. Vous pourrez enfin ranger votre voiture dans un garage, et ne plus la laisser dehors. Attention, la porte ne protège pas des voleurs, ni des intempéries.', ""),
-(12, 'Porte-fenêtre en PVC', 'Porte', 349.99, "Porte-fenêtre en PVC blanc avec double vitrage isolant. Le classique, l'indémodable qui vous acompagne de déménagement en déménagement. Avec son traitement anti jaunissement, vous pourrez la garder un bon moment.", ''),
+(12, 'Porte-fenêtre en PVC', 'Porte', 349.99, "Porte-fenêtre en PVC blanc avec double vitrage isolant. Le classique, l'indémodable qui vous accompagne de déménagement en déménagement. Avec son traitement anti-jaunissement, vous pourrez la garder un bon moment.", ''),
+(22, 'Porte pliante en bambou', 'Porte', 320.99, 'Porte pliante légère en bambou, parfaite pour les petits espaces ou comme séparateur de pièce. Offre une touche naturelle et écologique.', ''),
+(23, 'Porte en chêne massif', 'Porte', 850.00, 'Porte en chêne massif avec finition vernie. Robuste et élégante, elle ajoute une note de luxe et de durabilité à votre intérieur.', ''),
+(24, 'Porte vitrée à motifs', 'Porte', 415.50, 'Porte vitrée avec motifs gravés pour plus d’intimité tout en laissant passer la lumière. Parfaite pour les entrées ou les salles de bains.', ''),
+(13, 'Porte coulissante en verre trempé', 'Porte', 499.99, 'Porte coulissante en verre trempé, idéale pour les séparations de pièces tout en conservant une sensation d’espace ouvert. Élégante et moderne, elle permet une utilisation fluide et silencieuse.', ''),
+(14, 'Porte acoustique en bois composite', 'Porte', 755.00, 'Porte acoustique spécialement conçue pour réduire les bruits extérieurs, fabriquée en bois composite. Parfaite pour les bureaux ou les studios d’enregistrement cherchant à isoler le son.', ''),
+(15, 'Porte blindée de sécurité', 'Porte', 1200.00, 'Porte blindée haute sécurité avec serrure multipoints. Assurez la sécurité de votre domicile contre les intrusions avec une résistance maximale.', ''),
+(31, "Porte de soirée bois", "Porte", 8651.00, "Porte semblant classique, mais ayant survécu à de nombreuses épreuves intenses. Pour des raisons de confidentialité, nous ne pouvons en dire plus, mais son histoire est inquiétante.", ""),
 
 -- Poignée
 -- /!\\ Pas d'image
-(6, 'Poignée de porte en acier inoxydable', 'Poignée', 29.99, 'Poignée de porte en acier inoxydable brossé, design moderne. Enfin une poignée qui ne rougira pas face au temps, elle restera impassible face à la rouille.', ''),
-(7, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'Poignée de porte traditionnelle en laiton poli. Vous pourrez enfin vous regardez ailleur que dans votre sale de bain.', ''),
-(11, 'Poignée de porte design en acrylique', 'Poignée', 49.99, "Poignée de porte moderne en acrylique transparent. Avec cette poignée, voir vos doigt de l'autre coté de la poigné sera un jeu d'enfant", '')
-(13, 'Porte coulissante en verre trempé', 'Porte', 499.99, 'Porte coulissante en verre trempé, idéale pour les séparations de pièces tout en conservant une sensation d’espace ouvert. Élégante et moderne, elle permet une utilisation fluide et silencieuse.', '')
-(14, 'Porte acoustique en bois composite', 'Porte', 755.00, 'Porte acoustique spécialement conçue pour réduire les bruits extérieurs, fabriquée en bois composite. Parfaite pour les bureaux ou les studios d’enregistrement cherchant à isoler le son.', '')
-(15, 'Porte blindée de sécurité', 'Porte', 1200.00, 'Porte blindée haute sécurité avec serrure multipoints. Assurez la sécurité de votre domicile contre les intrusions avec une résistance maximale.', '')
-(16, 'Poignée tactile biométrique', 'Poignée', 199.99, 'Poignée de porte avec scanner biométrique intégré. Offre un accès sécurisé et personnalisable, parfaite pour les bureaux ou les maisons modernes.', '')
-(17, 'Poignée de porte en céramique', 'Poignée', 34.99, 'Poignée de porte en céramique avec motif floral, apportant une touche d’élégance classique à votre intérieur.', '')
-(18, 'Poignée de porte rustique en fer forgé', 'Poignée', 45.99, 'Poignée de porte en fer forgé, finition rustique. Idéale pour ajouter un caractère ancien et robuste à vos portes.', '')
-(19, 'Seuil de porte en aluminium', 'Accessoire', 25.99, 'Seuil de porte en aluminium, aide à maintenir l’étanchéité et l’isolation des portes extérieures. Résistant et durable, il supporte bien les variations climatiques.', '')
-(20, 'Judas numérique écran LCD', 'Accessoire', 75.00, 'Judas de porte avec écran LCD pour une sécurité accrue. Permet de visualiser les visiteurs sans ouvrir la porte, idéal pour les personnes souhaitant une sécurité supplémentaire.', '')
-(21, 'Ferme-porte automatique', 'Accessoire', 59.99, 'Ferme-porte automatique, assure une fermeture douce et silencieuse de la porte. Convient aux environnements nécessitant de maintenir les portes fermées, comme les hôpitaux et les écoles.', '')
-(22, 'Porte pliante en bambou', 'Porte', 320.99, 'Porte pliante légère en bambou, parfaite pour les petits espaces ou comme séparateur de pièce. Offre une touche naturelle et écologique.', '')
-(23, 'Porte en chêne massif', 'Porte', 850.00, 'Porte en chêne massif avec finition vernie. Robuste et élégante, elle ajoute une note de luxe et de durabilité à votre intérieur.', '')
-(24, 'Porte vitrée à motifs', 'Porte', 415.50, 'Porte vitrée avec motifs gravés pour plus d’intimité tout en laissant passer la lumière. Parfaite pour les entrées ou les salles de bains.', '')
-(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintage ou classiques. Apporte un cachet indéniable à toute porte.', '')
-(26, 'Poignée pivotante minimaliste', 'Poignée', 29.99, 'Poignée pivotante au design minimaliste en acier inoxydable. Parfait pour un intérieur moderne et épuré.', '')
-(27, 'Poignée coquille pour tiroir', 'Poignée', 12.99, 'Poignée coquille classique pour tiroir, en métal avec finition matte. Facile à installer et polyvalente pour tous types de meubles.', '')
-(28, 'Charnières invisibles', 'Accessoire', 18.99, 'Charnières invisibles pour une finition de porte sans interruption visuelle. Idéales pour les designs modernes et minimalistes.', '')
-(29, 'Butoir de porte magnétique', 'Accessoire', 16.99, 'Butoir de porte magnétique qui maintient votre porte ouverte sans la bloquer. Installation facile et efficace.', '')
-(30, 'Kit d’isolation pour porte', 'Accessoire', 34.99, 'Kit d’isolation acoustique et thermique pour portes. Comprend des joints d’étanchéité et des bandes isolantes pour réduire les courants d’air et le bruit.', '')
+(6, 'Poignée de porte en acier inoxydable', 'Poignée', 29.99, 'Poignée de porte en acier inoxydable brossé, design moderne. Enfin une poignée qui ne rougira pas face au temps, elle restera impassible face à la rouille.', 'q50ZBgrnrRFlZ1mtBxnI7z5IpuKlM5QQ.webp'),
+(7, 'Poignée de porte classique en laiton', 'Poignée', 19.99, 'Poignée de porte traditionnelle en laiton poli. Vous pourrez enfin vous regarder ailleurs que dans votre salle de bain.', '8Dc7O6Mypjxa37Bqze6MaZSkIB6QKMmp.webp'),
+(11, 'Poignée de porte design en acrylique', 'Poignée', 49.99, "Poignée de porte moderne en acrylique transparent. Avec cette poignée, voir vos doigts de l'autre coté de la poignée sera un jeu d'enfant", 'yHgCYNB28evigmAw1BN34DAFRaBLNsTu.jpg'),
+(16, 'Poignée tactile biométrique', 'Poignée', 199.99, 'Poignée de porte avec scanner biométrique intégré. Offre un accès sécurisé et personnalisable, parfaite pour les bureaux ou les maisons modernes.', 'ruoGoSOruM2esNIFKBz0uhqeCljbWpKv.jpg'),
+(17, 'Poignée de porte en céramique', 'Poignée', 34.99, 'Poignée de porte en céramique avec motif floral, apportant une touche d’élégance classique à votre intérieur.', 'PNSrTZWmct69r7blFOqtM8CutUcAqsex.webp'),
+(18, 'Poignée de porte rustique en fer forgé', 'Poignée', 45.99, 'Poignée de porte en fer forgé, finition rustique. Idéale pour ajouter un caractère ancien et robuste à vos portes.', 'todrKWeT5nZmvbxmMGyeR3MmBLUZ0jMb.jpg'),
+(25, 'Poignée en bronze vieilli', 'Poignée', 39.99, 'Poignée de porte en bronze vieilli, idéale pour les aménagements vintages ou classiques. Apporte un cachet indéniable à toute porte.', 'z3kh2NpCIb51qm6N2Xhmv4SOBf7yoN03.webp'),
+(26, 'Poignée pivotante minimaliste', 'Poignée', 29.99, 'Poignée pivotante au design minimaliste en acier inoxydable. Parfait pour un intérieur moderne et épuré.', 'JGrwlpsJ5XjWlknOA5KAk0hykyWxwd7l.png'),
+(27, 'Poignée coquille pour tiroir', 'Poignée', 12.99, 'Poignée coquille classique pour tiroir, en métal avec finition matte. Facile à installer et polyvalente pour tous types de meubles.', 'aflUrWS1JkoSTgbgwScBDYIIoDR2CR9U.jpeg'),
+
+-- Accessoire
+-- /!\\ Pas d'image
+(19, 'Seuil de porte en aluminium', 'Accessoire', 25.99, 'Seuil de porte en aluminium, aide à maintenir l’étanchéité et l’isolation des portes extérieures. Résistant et durable, il supporte bien les variations climatiques.', '51Mwzm41tSL._AC_SL1500.jpg'),
+(20, 'Judas numérique écran LCD', 'Accessoire', 75.00, 'Judas de porte avec écran LCD pour une sécurité accrue. Permet de visualiser les visiteurs sans ouvrir la porte, idéal pour les personnes souhaitant une sécurité supplémentaire.', '51Q7lT0WxEL._AC_SL1500_.jpg'),
+(21, 'Ferme-porte automatique', 'Accessoire', 59.99, 'Ferme-porte automatique, assure une fermeture douce et silencieuse de la porte. Convient aux environnements nécessitant de maintenir les portes fermées, comme les hôpitaux et les écoles.', '51RJV3xt+4L._AC_SL1000_.jpg'),
+(28, 'Charnières invisibles', 'Accessoire', 18.99, 'Charnières invisibles pour une finition de porte sans interruption visuelle. Idéales pour les designs modernes et minimalistes.', '81VrN+Cyq6L._AC_SL1500_.jpg'),
+(29, 'Butoir de porte magnétique', 'Accessoire', 16.99, 'Butoir de porte magnétique qui maintient votre porte ouverte sans la bloquer. Installation facile et efficace.', '61lnjHEzolL._AC_SL1100_.jpg'),
+(30, 'Kit d’isolation pour porte', 'Accessoire', 34.99, 'Kit d’isolation acoustique et thermique pour portes. Comprend des joints d’étanchéité et des bandes isolantes pour réduire les courants d’air et le bruit.', '51y99-NXsnL._AC_SL1000_.jpg'),
+(32, "Chati pour kitty", "Accessoire", 45.00, "Permet à votre Hello Kitty de rentrer et sortir de sa maison (et non pas la vôtre). Avec son option de vérouillage de la trape, vous pourrez redevenir maître de céans.", "51C72P3QcYL._AC_.jpg")
 ;
 
 
@@ -52,9 +57,9 @@ INSERT INTO Client (id, genre, nom, prenom, rue, CP, ville, pays, mail, telephon
 -- MDP pour Julie : mdpclient5
 (5, "Femme", 'Moreau', 'Julie', '20 Rue des Tulipes', '59000', 'Lille', 'France', 'julie.moreau@example.com', '0567891234', '$2y$10$BrfQ6ts3VmDfNghZ1GcUd.QdpI3HqU1hso05Hxq/7CnfGGAVw.lxO', "1998-05-26"),
 -- MDP pour Louis : Live before your head fall
-(DEFAULT, "Homme", "Le Grand", "Louis", "7 Rue du Chateau", 78000, "Versaille", "France", "louis.le-grand@whitout-head.fr", "06 666 666 66", "$2y$10$zHid668AuTyWDCsSIyh.I.AezPjR7zCPSRrGdIiB8nIMlMCjdcvAK", "1754-08-23"),
+(DEFAULT, "Homme", "Le Grand", "Louis", "7 Rue du Chateau", '78000', "Versailles", "France", "louis.le-grand@whitout-head.fr", "0666666666", "$2y$10$zHid668AuTyWDCsSIyh.I.AezPjR7zCPSRrGdIiB8nIMlMCjdcvAK", "1754-08-23"),
 -- MDP Marie : I'm radioactive
-(DEFAULT, "Femme", "Curie", "Marie", "21 rue de l'école de médecine", 75006, "Paris", "France", "marie.curie@radio-gaga.com", "02 235 66 239", "$2y$10$AfLrBllEiCcqeBNwnJEp5O5Lom8PMy8LoBcOcSLrqHKImdrFoN0Ia", "1867-11-07")
+(DEFAULT, "Femme", "Curie", "Marie", "21 rue de l'école de médecine", '75006', "Paris", "France", "marie.curie@radio-gaga.com", "0223566239", "$2y$10$AfLrBllEiCcqeBNwnJEp5O5Lom8PMy8LoBcOcSLrqHKImdrFoN0Ia", "1867-11-07")
 ;
 
 INSERT INTO Commande (id, date, modePaiement, numFacture, idClient) VALUES
@@ -87,7 +92,15 @@ INSERT INTO Materiau (id, nom, densite, masseVolumique, type) VALUES
 (14, "Air", 1.00, 1.20, "Gaz"),
 (15, "PVC", 1.38, 1380, "Plastique"),
 (16, "Laiton", 8.56, 8560, "Métal"),
-(17, "Pin", 0.50, 500, "Pin")
+(17, "Pin", 0.50, 500, "Bois"),
+(18, "MDF", 0.60, 600, "Bois"),
+(19, "Ceramique", 0.60, 600, "Ceramique"),
+(20, "LED", 0.05, 50, "Electronique"),
+(21, "Mini-Moteur", 1.7, 1700, "Electronique"),
+(22, "Bambou", 1.15, 1150, "Bois"),
+(23, "Bronze", 8.73, 8730, "Metal"),
+(24, "Polypropylène", 0.89, 890, "Plastique"),
+(25, "Pastis", 0.51, 510, "Alcool")
 ;
 
 INSERT INTO Composer (idProduit, idMateriau) VALUES
@@ -102,7 +115,27 @@ INSERT INTO Composer (idProduit, idMateriau) VALUES
 (9, 6),(9, 13),(9, 14),
 (10, 10),(10, 12),(10, 15),
 (11, 12),
-(12, 12),(12, 14),(12, 15)
+(12, 12),(12, 14),(12, 15),
+(13, 12),(13, 13),(13,16),(13,14),
+(14, 18),
+(15, 9),(15, 6),(15, 8),(15, 14),
+(16, 9),(16, 12),(16, 14),
+(17, 19),(17, 8),
+(18, 9),(18, 13),
+(19, 10),
+(20, 7), (20, 20),
+(21, 9), (21, 7), (21, 21),
+(22, 22), (22, 14),
+(23,  1), (23, 14), (23, 13),
+(24, 12), (24, 11), (24, 14),
+(25, 23),
+(26, 8),
+(27, 9),
+(28, 14), (28, 10),
+(29, 9), (29, 15),
+(30, 24),
+(31, 18), (31, 25),
+(32, 18), (32, 14)
 ;
 
 INSERT INTO OptionAchat (id, libele, cout, typeProduit, active) VALUES
@@ -183,6 +216,90 @@ INSERT INTO Porte (idProduit, idEntrepot) VALUES
 -- Produit 12
 (12, 4),(12, 4),(12, 4),(12, 4),(12, 4),(12, 4),(12, 4),(12, 4),(12, 4),(12, 4),(12, 4),
 (12, 6),(12, 6),(12, 6),(12, 6),(12, 6),(12, 6),(12, 6),
-(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10)
+(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),(12, 10),
 
+-- Produit 13
+(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),(13, 1),
+(13, 10),(13, 10),(13, 10),(13, 10),
+
+-- Produit 14
+(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),(14, 6),
+(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),(14, 8),
+
+-- Produit 15
+(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),(15, 9),
+(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),(15, 7),
+
+-- Produit 16
+(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),
+(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),(16, 5),
+(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),(16, 2),
+
+-- Product 17
+(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),(17, 3),
+(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),(17, 10),
+
+-- Produit 18
+(18, 4),(18, 4),(18, 4),(18, 4),(18, 4),(18, 4),(18, 4),(18, 4),(18, 4),(18, 4),(18, 4),
+(18, 6),(18, 6),(18, 6),(18, 6),(18, 6),(18, 6),(18, 6),
+(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),(18, 10),
+
+-- Produit 19
+(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),(19, 1),
+(19, 10),(19, 10),(19, 10),(19, 10),
+
+-- Produit 20
+(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),(20, 6),
+(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),(20, 8),
+
+-- Produit 21
+(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),(21, 9),
+(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),(21, 7),
+
+-- Produit 22
+(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),
+(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),(22, 5),
+(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),(22, 2),
+
+-- Product 23
+(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),(23, 3),
+(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),(23, 10),
+
+-- Produit 24
+(24, 4),(24, 4),(24, 4),(24, 4),(24, 4),(24, 4),(24, 4),(24, 4),(24, 4),(24, 4),(24, 4),
+(24, 6),(24, 6),(24, 6),(24, 6),(24, 6),(24, 6),(24, 6),
+(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),(24, 10),
+
+-- Produit 25
+(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),(25, 1),
+(25, 10),(25, 10),(25, 10),(25, 10),
+
+-- Produit 26
+(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),(26, 6),
+(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),(26, 8),
+
+-- Produit 27
+(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),(27, 9),
+(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),(27, 7),
+
+-- Produit 28
+(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),
+(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),(28, 5),
+(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),(28, 2),
+
+-- Product 29
+(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),(29, 3),
+(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),(29, 10),
+
+-- Produit 30
+(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),(30, 1),
+(30, 10),(30, 10),(30, 10),(30, 10),
+
+-- Produit 31
+(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),(31, 6),
+(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),(31, 8),
+
+-- Produit 32
+(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),(32, 9),
+(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7),(32, 7)
 ;

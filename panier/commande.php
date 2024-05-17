@@ -169,7 +169,7 @@ define('BASE_DIR_STATIC', getProjectPath());
                             value="shopDelivery"
                             checked
                         >
-                        <label class="form-check-label" for="ptRelayInput">Livraison en point relaie</label>
+                        <label class="form-check-label" for="ptRelayInput">Livraison en point relai</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input
