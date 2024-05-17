@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
     $estAuCatalogue = $_POST['catalog'];
     $quantite = $_POST['modify-stock'];
     $idEntrepot = $_POST['entrepot'];
-
+    $supprimer = $_POST['supprimer'];
     $conn = new mysqli(SQL_SERVER, SQL_USER, SQL_PASSWORD, SQL_BDD_NAME);
 
 
@@ -31,7 +31,7 @@ if (isset($_POST["submit"])) {
     $row = $result->fetch_assoc();
     $stockTheorique = $row["stockTheorique"];
     $stockActuel = $row["stockActuel"];
-
+    
     if ($quantite + $stockActuel > $stockTheorique) {
         echo "The new stock value cannot be greater than the theoretical stock value.";
     } else {
@@ -74,8 +74,9 @@ if (isset($_POST["submit"])) {
         } else {
             $miniaturePath = $product->getImageName();
         }
-        if (isset($_FILES['miniature-delete']) && is_uploaded_file($_FILES['miniature-delete']['tmp_name'])) {
-            $deleteMiniaturePath = "../img/miniature/" . $_FILES['miniature-delete']['name'];
+        if (isset($supprimer) && $supprimer == 'oui') {
+            $deleteMiniaturePath = "../img/miniature/" . $product->getImageName();
+            $product->setImageName("No_image.png");
             if (is_file($deleteMiniaturePath)) {
                 $miniaturePath = $product->getImageName();
                 unlink($deleteMiniaturePath);
