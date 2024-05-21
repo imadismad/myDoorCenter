@@ -285,6 +285,11 @@ function searchPickUpStore(Lon, Lat) {
                     if (currentActive !== undefined)
                         pickUpShopResultUl.querySelector("li.active").classList.remove("active");
 
+                    // Set hidden input
+                    document.querySelector("#point-relay > input[name='address']").value = store.address.toLowerCase();
+                    document.querySelector("#point-relay > input[name='postal-code']").value = store.postCode;
+                    document.querySelector("#point-relay > input[name='city']").value = store.city.toLowerCase();
+                    
                     li.classList.add("active");
                     li.scrollIntoView();
                     centerMapOn(store.lon, store.lat);
