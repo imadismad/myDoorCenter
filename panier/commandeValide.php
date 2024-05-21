@@ -35,8 +35,8 @@ define('BASE_DIR_STATIC', getProjectPath());
     <main class="container-fluid pt-header-xs pt-header-sm pt-header-md pt-header-lg pt-header-xl">
 
             <div class="col-12 text-center">
-                <h1 class="mb-3">Commande validé</h1>
-                <p class="mb-3">Votre commande à bien été validé, elle sera expédiée de nos entrepôts dans les plus brefs délais</p>
+                <h1 class="mb-3">Commande validée</h1>
+                <p class="mb-3">Votre commande a bien été validée, elle sera expédiée de nos entrepôts dans les plus brefs délais</p>
                 <a class="btn btn-primary" href="<?php echo prependStaticDirIfNeed("/") ?>">Retour à l'accueil</a>
             </div>
     </main>
